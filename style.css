@@ -1,22 +1,32 @@
-/* Base */
+/* =====================
+   Base
+===================== */
+
 body {
-  font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
   background: #ffffff;
   color: #111;
-  line-height: 1.7;
+  line-height: 1.65;
   margin: 0;
   padding: 0;
 }
 
-/* Top navigation */
+/* =====================
+   Top Navigation
+===================== */
+
 .top-nav {
   max-width: 760px;
-  margin: 40px auto 10px auto;
+  margin: 48px auto 24px auto;
   padding: 0 20px;
+
   display: flex;
-  gap: 22px;
+  gap: 28px;
+
+  font-size: 0.85rem;
   font-variant: small-caps;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
 
 .top-nav a {
@@ -28,56 +38,115 @@ body {
   text-decoration: underline;
 }
 
-/* Main container */
+/* =====================
+   Layout
+===================== */
+
 .container {
   max-width: 760px;
-  margin: 40px auto 80px auto;
+  margin: 40px auto 96px auto;
   padding: 0 20px;
 }
 
-/* Header */
+/* =====================
+   Header (Name + Photo)
+===================== */
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 48px;
 }
 
 .name {
-  font-size: 2.6em;
+  font-size: 2.4rem;
+  font-weight: 600;
   margin: 0;
+
   font-variant: small-caps;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
 }
 
 .subtitle {
   margin-top: 6px;
-  color: #444;
-  font-size: 1.05em;
+  font-size: 0.95rem;
+  color: #555;
 }
 
-/* Profile image */
+/* Profile Image */
+
 .profile-pic {
-  width: 110px;
-  height: 110px;
+  width: 104px;
+  height: 104px;
   object-fit: cover;
   border-radius: 50%;
 }
 
-/* Section headings */
-h2 {
-  font-size: 1.3em;
-  margin-top: 3em;
-  margin-bottom: 0.6em;
+/* =====================
+   Page Titles
+===================== */
+
+.page-title {
+  font-size: 1.8rem;
   font-weight: 500;
+  margin-bottom: 2rem;
 }
 
-/* Lists */
+/* =====================
+   Sections
+===================== */
+
+h2 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-top: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1.4rem;
+}
+
+/* =====================
+   Lists
+===================== */
+
 ul {
-  padding-left: 22px;
+  padding-left: 20px;
+  margin-bottom: 1.6rem;
 }
 
-/* Links */
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* =====================
+   Entry / Project Blocks
+===================== */
+
+.entry {
+  margin-bottom: 3rem;
+}
+
+.entry-date {
+  font-size: 0.8rem;
+  color: #666;
+  margin-right: 10px;
+}
+
+.entry-tag {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f2f2f2;
+  color: #444;
+}
+
+/* =====================
+   Links
+===================== */
+
 a {
   color: #0645ad;
   text-decoration: none;
@@ -85,11 +154,6 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-.page-title {
-  font-size: 2em;
-  margin-bottom: 1.5em;
 }
 
 

@@ -201,4 +201,31 @@ body {
   color: #245bdb;
 }
 
+/* Inline Tech Stack */
+.tech-line {
+  margin-top: 1.6rem;
+  font-size: 0.9rem;
+}
+
+.tech-line .label {
+  margin-right: 6px;
+  color: #555;
+}
+
+.t {
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+/* Colors */
+.python { color: #f97316; }        /* orange */
+.pytorch { color: #ef4444; }       /* red */
+.tensorflow { color: #3b82f6; }    /* blue */
+.cnn { color: #22c55e; }           /* green */
+.rnn { color: #8b5cf6; }           /* purple */
+.transformer { color: #0f766e; }   /* teal */
+.shap { color: #7c2d12; }          /* brown */
+.sql { color: #374151; }           /* gray */
+.streamlit { color: #e11d48; }     /* rose */
+.java { color: #b45309; }          /* amber */
 

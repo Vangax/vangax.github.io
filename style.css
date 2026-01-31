@@ -13,18 +13,16 @@ body {
 }
 
 /* =====================
-   Top Navigation
+   Navigation
 ===================== */
 
 .top-nav {
   max-width: 760px;
   margin: 48px auto 24px auto;
   padding: 0 20px;
-
   display: flex;
   gap: 28px;
-
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-variant: small-caps;
   letter-spacing: 0.08em;
 }
@@ -44,12 +42,12 @@ body {
 
 .container {
   max-width: 760px;
-  margin: 40px auto 96px auto;
+  margin: 40px auto 120px auto;
   padding: 0 20px;
 }
 
 /* =====================
-   Header (Name + Photo)
+   Header
 ===================== */
 
 .header {
@@ -63,7 +61,6 @@ body {
   font-size: 2.4rem;
   font-weight: 600;
   margin: 0;
-
   font-variant: small-caps;
   letter-spacing: 0.06em;
 }
@@ -74,86 +71,134 @@ body {
   color: #555;
 }
 
-/* Profile Image */
-
 .profile-pic {
   width: 104px;
   height: 104px;
+  border-radius: 50%;
   object-fit: cover;
+}
+
+/* =====================
+   Bio
+===================== */
+
+.home-bio {
+  max-width: 600px;
+  margin-bottom: 4rem;
+}
+
+/* =====================
+   Timeline
+===================== */
+
+.timeline {
+  margin-top: 3rem;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.timeline-left {
+  position: relative;
+  width: 140px;
+  text-align: right;
+  font-size: 0.8rem;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.timeline-date {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 32px;
+  right: -6px;
+  width: 10px;
+  height: 10px;
+  background: #bbb;
   border-radius: 50%;
 }
 
-/* =====================
-   Page Titles
-===================== */
-
-.page-title {
-  font-size: 1.8rem;
-  font-weight: 500;
-  margin-bottom: 2rem;
+.timeline-line {
+  position: absolute;
+  top: 44px;
+  right: -1px;
+  width: 2px;
+  height: calc(100% + 3rem);
+  background: #e6e6e6;
 }
 
 /* =====================
-   Sections
+   Glass Card
 ===================== */
 
-h2 {
-  font-size: 1.15rem;
-  font-weight: 500;
-  margin-top: 3.5rem;
-  margin-bottom: 1rem;
+.timeline-card {
+  flex: 1;
+  padding: 2rem 2.2rem;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-p {
-  margin-bottom: 1.4rem;
+.timeline-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 /* =====================
-   Lists
+   Entry Content
 ===================== */
 
-ul {
-  padding-left: 20px;
-  margin-bottom: 1.6rem;
+.entry-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 1rem 0 0.8rem 0;
 }
 
-li {
-  margin-bottom: 0.5rem;
+.entry-desc {
+  font-size: 0.95rem;
+  color: #444;
+  max-width: 560px;
 }
 
 /* =====================
-   Entry / Project Blocks
+   Tags
 ===================== */
-
-.entry {
-  margin-bottom: 3rem;
-}
-
-.entry-date {
-  font-size: 0.8rem;
-  color: #666;
-  margin-right: 10px;
-}
 
 .entry-tag {
-  font-size: 0.75rem;
-  padding: 2px 8px;
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 4px 10px;
   border-radius: 999px;
-  background: #f2f2f2;
-  color: #444;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
-/* =====================
-   Links
-===================== */
-
-a {
-  color: #0645ad;
-  text-decoration: none;
+.tag-green {
+  background: #e6f8ee;
+  color: #1f7a4d;
 }
 
-a:hover {
-  text-decoration: underline;
+.tag-purple {
+  background: #efe9ff;
+  color: #5a3ec8;
+}
+
+.tag-blue {
+  background: #e7f1ff;
+  color: #245bdb;
 }
 
 

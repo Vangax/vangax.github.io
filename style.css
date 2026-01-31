@@ -87,3 +87,9 @@ a:hover {
   text-decoration: underline;
 }
 
+.page-title {
+  font-size: 2em;
+  margin-bottom: 1.5em;
+}
+
+

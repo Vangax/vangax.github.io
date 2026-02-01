@@ -311,4 +311,56 @@ body {
   color: #333;
 }
 
+/* =====================
+   timeline card tags
+===================== */
+
+.card-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.tag-project {
+  background: #e6f8ee;
+  color: #1f7a4d;
+}
+
+.tag-system {
+  background: #efe9ff;
+  color: #5a3ec8;
+}
+
+.tag-interaction {
+  background: #e7f1ff;
+  color: #245bdb;
+}
+
+.tag-research {
+  background: #fff3e6;
+  color: #b45309;
+}
+
+/* =====================
+   colored titles
+===================== */
+
+.title-red { color: #b91c1c; }
+.title-purple { color: #6d28d9; }
+.title-blue { color: #1d4ed8; }
+.title-green { color: #065f46; }
+
+/* =====================
+   keyword highlights
+===================== */
+
+.kw {
+  color: #7c2d12;
+  font-weight: 500;
+}
+
 

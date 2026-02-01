@@ -21,16 +21,13 @@
 
   <h1 class="page-title">research interests</h1>
 
-  <!-- interest selector -->
   <div class="research-tabs">
     <button class="tab active" onclick="showSection('ml')">autonomous ai systems & intelligent agents</button>
     <button class="tab" onclick="showSection('dl')">discovery systems</button>
     <button class="tab" onclick="showSection('astro')">my love for astrophysics</button>
   </div>
 
-  <!-- autonomous ai -->
   <section id="ml" class="research-section active">
-
     <h2>building tars: a short timeline</h2>
 
     <section class="timeline timeline-large">
@@ -48,18 +45,20 @@
           <h3 class="title-red">the idea becomes real</h3>
 
           <p>
-            for a long time, ever since i watched the movie interstellar,
-            the idea of tars lived only in my head. in february 2025,
-            i decided to stop thinking and actually try building something.
-            i wanted a small assistant that worked on my own machine and felt
-            <span class="kw">personal</span>.
+            for a long time, ever since i watched the movie interstellar the idea of tars
+            (an ai robot that helped humans) lived only in my head. in february 2025,
+            i decided to stop thinking about it and actually try building something.
+            there was no plan, no roadmap, and no research goal at this stage. i just
+            wanted to see if i could create a small assistant that worked on my own
+            machine and felt <span class="kw">personal</span>.
           </p>
 
           <p>
-            i installed a <span class="kw">large language model</span> locally
-            using <span class="kw">ollama</span>. keeping everything
-            <span class="kw">offline</span> was intentional so i could understand
-            how an ai system behaves without shortcuts.
+            i started by installing a <span class="kw">large language model</span> locally using
+            <span class="kw">ollama</span>. the decision to keep everything
+            <span class="kw">offline</span> was intentional. i wanted to understand
+            what an ai system feels like when it has no internet, no cloud support, and
+            no shortcuts.
           </p>
         </div>
       </div>
@@ -77,17 +76,17 @@
           <h3 class="title-purple">giving the system a personality</h3>
 
           <p>
-            once the system was stable, i focused on <span class="kw">behavior</span>.
-            i added adjustable settings for humor, joke frequency, and seriousness
-            to control how the system responds during conversations.
+            once the system was running locally, i started thinking less about answers
+            and more about <span class="kw">behavior</span>. i experimented with ways to control how the system
+            responds, adding adjustable settings for humor, joke frequency, and overall
+            seriousness during conversations.
           </p>
 
           <p>
-            i added a trigger phrase,
-            <span class="kw">"hey its serious now tars"</span>,
-            which switches the assistant into a
-            <span class="kw">focused mode</span>
-            where it only concentrates on solving the task.
+            one feature that felt especially important to me was control. i added a
+            trigger phrase, <span class="kw">"hey its serious now tars"</span>, which switches the system into
+            a <span class="kw">focused mode</span>. in this state, the assistant(tars) ignores casual language and
+            concentrates only on solving the problem i give it.
           </p>
         </div>
       </div>
@@ -105,16 +104,16 @@
           <h3 class="title-blue">learning how humans talk to machines</h3>
 
           <p>
-            typing began to feel limiting, so i integrated a
-            <span class="kw">speech recognition</span> pipeline and started
-            interacting with tars using my voice.
+            as i used the system more, typing started to feel limiting. i wanted the
+            interaction to feel closer to how humans naturally communicate. i integrated
+            a <span class="kw">speech recognition system</span> so i could talk to him directly.
           </p>
 
           <p>
-            i tuned the voice to stay calm and controlled.
-            in non focused mode, tars would sometimes make jokes,
-            which made the system feel <span class="kw">human</span>
-            and enjoyable to use.
+            i also spent time adjusting his voice same as tars from the movie. this made
+            the assistant feel more dependable and less like a toy and it was really
+            fun sometimes because when it was in non focused mode, tars would make
+            funny or unfunny jokes during the work.
           </p>
         </div>
       </div>
@@ -131,73 +130,24 @@
           <h3 class="title-green">from experiment to research interest</h3>
 
           <p>
-            by march 2025, this was no longer just an experiment.
-            using the system daily changed how i see
-            <span class="kw">autonomous ai systems</span>
-            as tools that can help humans when connectivity is unreliable.
+            by march 2025, this project was no longer just something i played with.
+            using the system daily, completely offline, changed how i think about ai
+            i started seeing <span class="kw">intelligent agents</span> as tools that could genuinely support
+            humans in environments where connectivity is unreliable or unavailable
+            i started to think about if there's an major outbreak these ai systems
+            can help humans in a way never imagined before.
           </p>
 
           <p>
-            this made me want to explore these systems at a
-            <span class="kw">research level</span>, focusing on control,
-            reliability, and real-world usefulness.
+            this experience made me want to take this idea further at a research level.
+            i became interested in how <span class="kw">autonomous ai systems</span> can be designed to be
+            controllable, reliable, and helpful, while still remaining flexible enough
+            to adapt to different situations and users.
           </p>
         </div>
       </div>
 
     </section>
-  </section>
-
-  <!-- discovery systems -->
-  <section id="dl" class="research-section">
-    <p>
-      my interest in discovery systems focuses on using
-      <span class="kw">anomaly detection</span> and data-driven methods
-      to surface rare or unexpected patterns in complex datasets.
-    </p>
-
-    <p>
-      i am especially interested in how these systems can assist
-      <span class="kw">scientific discovery</span> by guiding human attention
-      rather than replacing human judgment.
-    </p>
-  </section>
-
-  <!-- astrophysics -->
-  <section id="astro" class="research-section">
-
-    <p>
-      i am deeply interested in applying machine learning and deep learning
-      to <span class="kw">astrophysical data</span>, especially where noise
-      and scale make traditional analysis difficult.
-    </p>
-
-    <div class="research-image">
-      <img src="assets/images/astro/planet-detection-1.png" alt="planet detection">
-      <p class="image-caption">
-        early experimentation on exoplanet detection using machine learning
-      </p>
-    </div>
-
-    <p>
-      my work includes <span class="kw">time-series analysis</span>,
-      weak signal detection, and anomaly discovery in astronomical data.
-    </p>
-
-    <div class="research-image">
-      <img src="assets/images/astro/lightcurve-analysis.png" alt="light curves">
-      <p class="image-caption">
-        exploratory analysis of astronomical light curves
-      </p>
-    </div>
-
-    <div class="research-image">
-      <img src="assets/images/astro/exoplanet-work.png" alt="exoplanet work">
-      <p class="image-caption">
-        exploratory work on exoplanet datasets and observational patterns
-      </p>
-    </div>
-
   </section>
 
 </div>

@@ -2,33 +2,130 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Research | Devang Verma</title>
+  <title>research | devang verma</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav class="top-nav">
-  <a href="index.html">Home</a>
-  <a href="research.html">Research</a>
-  <a href="projects.html">Projects</a>
-  <a href="assets/cv.pdf">CV</a>
-  <a href="contact.html">Contact</a>
+  <a href="index.html">home</a>
+  <a href="research.html">research</a>
+  <a href="projects.html">projects</a>
+  <a href="assets/cv.pdf">cv</a>
+  <a href="contact.html">contact</a>
 </nav>
 
 <div class="container">
 
-  <h1 class="page-title">Research Interests</h1>
+  <h1 class="page-title">research interests</h1>
 
-  <ul>
-    <li>Statistical Learning and Predictive Modeling</li>
-    <li>Time Series Analysis and Forecasting</li>
-    <li>Machine Learning Systems</li>
-    <li>Explainable and Responsible AI</li>
-  </ul>
+  <!-- interest selector -->
+  <div class="research-tabs">
+    <button class="tab active" onclick="showSection('ml')">applied ml</button>
+    <button class="tab" onclick="showSection('dl')">deep learning</button>
+    <button class="tab" onclick="showSection('astro')">ml for astrophysics</button>
+  </div>
+
+  <!-- applied ml -->
+  <section id="ml" class="research-section active">
+    <p>
+      my interests in applied machine learning focus on building
+      end-to-end pipelines for structured data, with emphasis on
+      feature engineering, model selection, and evaluation.
+    </p>
+
+    <p>
+      i am particularly interested in understanding model behavior
+      through careful error analysis and interpretability techniques,
+      and in comparing classical machine learning methods with more
+      complex models under controlled settings.
+    </p>
+  </section>
+
+  <!-- deep learning -->
+  <section id="dl" class="research-section">
+    <p>
+      my deep learning interests include convolutional and recurrent
+      neural networks for image and sequential data, as well as
+      modern representation learning techniques.
+    </p>
+
+    <p>
+      i am interested in training dynamics, overfitting control,
+      and understanding the trade-offs between model complexity
+      and generalization, especially in data-limited scenarios.
+    </p>
+  </section>
+
+  <!-- astrophysics -->
+  <section id="astro" class="research-section">
+
+    <p>
+      i am strongly interested in applying machine learning and deep
+      learning techniques to astrophysical and planetary science data.
+      this interest is motivated by the scale, noise, and complexity
+      of observational datasets.
+    </p>
+
+    <!-- image 1 -->
+    <div class="research-image">
+      <img src="assets/images/astro/planet-detection-1.png"
+           alt="planet detection using machine learning">
+      <p class="image-caption">
+        early experimentation on planet detection and astrophysical signal analysis
+      </p>
+    </div>
+
+    <p>
+      specific areas of interest include time-series analysis of
+      astronomical observations, detection of weak transit signals,
+      and anomaly detection in noisy light curve data.
+    </p>
+
+    <!-- image 2 -->
+    <div class="research-image">
+      <img src="assets/images/astro/lightcurve-analysis.png"
+           alt="light curve analysis">
+      <p class="image-caption">
+        exploratory analysis of astronomical light curves and signal patterns
+      </p>
+    </div>
+
+    <p>
+      i am particularly interested in how data-driven approaches
+      can complement physics-based models by highlighting patterns
+      and hypotheses worth further investigation.
+    </p>
+
+    <!-- image 3 -->
+    <div class="research-image">
+      <img src="assets/images/astro/exoplanet-work.png"
+           alt="exoplanet exploratory work">
+      <p class="image-caption">
+        exploratory work related to exoplanet data and observational characteristics
+      </p>
+    </div>
+
+  </section>
 
 </div>
+
+<!-- tiny script -->
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.research-section').forEach(sec => {
+      sec.classList.remove('active');
+    });
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
 
 </body>
 </html>

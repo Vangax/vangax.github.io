@@ -229,3 +229,44 @@ body {
 .streamlit { color: #e11d48; }     /* rose */
 .java { color: #b45309; }          /* amber */
 
+/* =====================
+   research tabs
+===================== */
+
+.research-tabs {
+  display: flex;
+  gap: 14px;
+  margin: 2rem 0 3rem 0;
+}
+
+.tab {
+  background: none;
+  border: 1px solid rgba(0,0,0,0.15);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  cursor: pointer;
+  color: #444;
+}
+
+.tab.active {
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.25);
+  color: #111;
+}
+
+/* =====================
+   research sections
+===================== */
+
+.research-section {
+  display: none;
+}
+
+.research-section.active {
+  display: block;
+}
+
+

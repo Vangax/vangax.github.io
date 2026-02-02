@@ -23,9 +23,13 @@
 
   <div class="research-tabs">
     <button class="tab active" onclick="showSection('ml')">autonomous ai systems & intelligent agents</button>
-    <button class="tab" onclick="showSection('dl')">discovery systems</button>
+    <button class="tab" onclick="showSection('uncertainty')">uncertainty-aware systems</button>
     <button class="tab" onclick="showSection('astro')">my love for astrophysics</button>
   </div>
+
+  <!-- ================================================= -->
+  <!-- autonomous ai systems (UNCHANGED – YOUR CONTENT) -->
+  <!-- ================================================= -->
 
   <section id="ml" class="research-section active">
     <h2>building tars: a short timeline</h2>
@@ -150,6 +154,98 @@
     </section>
   </section>
 
+  <!-- ================================= -->
+  <!-- uncertainty-aware systems (NEW) -->
+  <!-- ================================= -->
+
+  <section id="uncertainty" class="research-section">
+    <h2>learning to trust models: a short timeline</h2>
+
+    <section class="timeline timeline-large">
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <span class="timeline-date">early ml projects</span>
+          <span class="timeline-dot"></span>
+          <span class="timeline-line"></span>
+        </div>
+
+        <div class="timeline-card">
+          <span class="card-tag tag-project">observation</span>
+          <h3 class="title-blue">accuracy was not enough</h3>
+
+          <p>
+            while working on different machine learning and deep learning projects,
+            i noticed that models could perform well on paper but still behave
+            unpredictably on real data. sometimes predictions looked confident,
+            even when they were wrong.
+          </p>
+
+          <p>
+            this made me start questioning how much trust we should place in model
+            outputs, especially when results are used to guide decisions.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <span class="timeline-date">working with noisy data</span>
+          <span class="timeline-dot"></span>
+          <span class="timeline-line"></span>
+        </div>
+
+        <div class="timeline-card">
+          <span class="card-tag tag-system">model behavior</span>
+          <h3 class="title-purple">confidence without understanding</h3>
+
+          <p>
+            this became more clear while working on noisy and real-world datasets,
+            including <span class="kw">anomaly detection</span> and
+            <span class="kw">scientific data</span>, where false positives and
+            false negatives can change how results are interpreted.
+          </p>
+
+          <p>
+            i realized that knowing <span class="kw">how certain</span> a model is
+            can sometimes be more important than the prediction itself.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <span class="timeline-date">research interest</span>
+          <span class="timeline-dot"></span>
+        </div>
+
+        <div class="timeline-card">
+          <span class="card-tag tag-research">future direction</span>
+          <h3 class="title-green">why uncertainty matters</h3>
+
+          <p>
+            this led me to develop a strong interest in
+            <span class="kw">uncertainty-aware machine learning</span>.
+            i am interested in how models can express confidence and limitations
+            instead of giving overconfident answers.
+          </p>
+
+          <p>
+            during my master’s studies, i want to explore how uncertainty estimates
+            can support <span class="kw">scientific decision-making</span> and help
+            humans make better, more informed choices.
+          </p>
+        </div>
+      </div>
+
+    </section>
+  </section>
+
+  <!-- astrophysics -->
+  <section id="astro" class="research-section">
+    <!-- your astrophysics section stays unchanged -->
+  </section>
+
 </div>
 
 <script>
@@ -163,4 +259,5 @@
 
 </body>
 </html>
+
 

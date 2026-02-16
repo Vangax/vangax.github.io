@@ -404,67 +404,45 @@ hr {
 
 }
 
-/* ===== glass flagship page ===== */
-
 .glass-card {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255,255,255,0.65);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-radius: 22px;
+  border-radius: 24px;
   padding: 60px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
   margin-top: 40px;
   margin-bottom: 60px;
 }
 
-/* soften headings */
-
-.glass-card h1 {
-  font-size: 2.4rem;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-.glass-card h2 {
-  margin-top: 50px;
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-
-.glass-card h3 {
-  margin-top: 30px;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #444;
-}
-
-.glass-card p {
-  line-height: 1.8;
-  color: #444;
-}
-
-.glass-card ul {
-  margin-top: 15px;
-  margin-bottom: 20px;
-  padding-left: 20px;
-  color: #444;
-}
-
-.glass-card li {
-  margin-bottom: 8px;
-}
-
-/* badge styling like timeline */
-
-.project-meta {
+.project-badge {
   display: inline-block;
   background: #e8efff;
   color: #3b5bcc;
-  padding: 6px 14px;
+  padding: 6px 16px;
   border-radius: 999px;
-  font-size: 0.8rem;
-  letter-spacing: 0.6px;
-  margin-bottom: 20px;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.project-submeta {
+  color: #777;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+}
+
+.project-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+}
+
+.image-caption {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 8px;
 }
 
 

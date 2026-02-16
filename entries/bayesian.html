@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>bayesian counterfactual early-warning system | devang verma</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="../index.html">home</a>
+  <a href="../research.html">research</a>
+  <a href="../projects.html">projects</a>
+  <a href="../assets/cv.pdf">cv</a>
+  <a href="../contact.html">contact</a>
+</nav>
+
+<div class="container">
+
+  <h1>bayesian counterfactual early-warning system for icu deterioration</h1>
+
+  <p class="project-meta">
+    mimic-iv · gru-d · uncertainty estimation · counterfactual simulation · clinical time series
+  </p>
+
+  <hr>
+
+  <!-- =========================== -->
+  <!-- problem -->
+  <!-- =========================== -->
+
+  <h2>1. why i worked on this</h2>
+
+  <p>
+    in icu settings, patient deterioration rarely happens instantly. it usually develops
+    through subtle, time-evolving changes in vital signs and laboratory measurements.
+    however, most early-warning systems still rely on fixed thresholds applied to
+    static snapshots of patient data.
+  </p>
+
+  <p>
+    while studying this space, i realized three major problems:
+  </p>
+
+  <ul>
+    <li>most systems ignore temporal patient trajectories</li>
+    <li>missing values are treated as noise instead of informative signals</li>
+    <li>risk scores are deterministic and do not communicate uncertainty</li>
+  </ul>
+
+  <p>
+    in a high-stakes environment like the icu, giving a number without explaining
+    how confident the model is felt incomplete. this project started from that discomfort.
+  </p>
+
+  <!-- =========================== -->
+  <!-- overview -->
+  <!-- =========================== -->
+
+  <h2>2. project overview</h2>
+
+  <p>
+    instead of treating icu risk prediction as a static classification task,
+    i framed it as a continuous, time-dependent monitoring problem.
+  </p>
+
+  <p>
+    the system integrates:
+  </p>
+
+  <ul>
+    <li>temporal modeling of irregular icu time series</li>
+    <li>explicit handling of informative missingness</li>
+    <li>bayesian uncertainty estimation</li>
+    <li>model-implied counterfactual risk simulation</li>
+  </ul>
+
+  <p>
+    rather than outputting a single alert score, the model produces:
+  </p>
+
+  <ul>
+    <li>a dynamic risk trajectory over time</li>
+    <li>time-varying predictive uncertainty</li>
+    <li>counterfactual trajectories under hypothetical early intervention</li>
+  </ul>
+
+  <p>
+    the goal was not just prediction accuracy, but structured decision support.
+  </p>
+
+  <!-- =========================== -->
+  <!-- technical approach -->
+  <!-- =========================== -->
+
+  <h2>3. technical approach</h2>
+
+  <h3>data representation</h3>
+
+  <p>
+    icu time series are irregular and asynchronously sampled.
+    instead of naive imputation, each time step was represented as:
+  </p>
+
+  <ul>
+    <li>observed value (xₜ,d)</li>
+    <li>observation mask (mₜ,d)</li>
+    <li>time since last measurement (Δtₜ,d)</li>
+  </ul>
+
+  <p>
+    this allows the model to distinguish between true physiological stability
+    and missing data due to clinical decision-making.
+  </p>
+
+  <h3>missingness-aware modeling (gru-d)</h3>
+
+  <p>
+    the model is built on gru-d, which introduces learnable decay mechanisms
+    for stale variables and hidden states. instead of filling missing values
+    blindly, the network learns how information fades over time.
+  </p>
+
+  <h3>uncertainty estimation</h3>
+
+  <p>
+    to quantify epistemic uncertainty, monte carlo dropout was retained
+    during inference. multiple stochastic forward passes generate:
+  </p>
+
+  <ul>
+    <li>mean predicted risk trajectory</li>
+    <li>time-dependent predictive variance</li>
+  </ul>
+
+  <p>
+    uncertainty increases during sparse or unstable periods,
+    which aligns well with intuitive clinical reasoning.
+  </p>
+
+  <h3>counterfactual simulation</h3>
+
+  <p>
+    beyond prediction, i implemented model-implied counterfactual analysis.
+    after selecting an intervention time t₀, trajectories are perturbed
+    to simulate early stabilization. the model then generates both
+    observed and counterfactual risk paths.
+  </p>
+
+  <p>
+    this is not a fully causal framework, but it enables structured
+    “what-if” exploration within the learned model space.
+  </p>
+
+  <!-- =========================== -->
+  <!-- experiments -->
+  <!-- =========================== -->
+
+  <h2>4. experimental setup</h2>
+
+  <ul>
+    <li>dataset: mimic-iv demo icu cohort</li>
+    <li>patient-level train / validation / test split</li>
+    <li>temporal hold-out evaluation</li>
+    <li>z-score normalization using training statistics only</li>
+    <li>gradient clipping for stability</li>
+    <li>evaluation beyond accuracy (calibration + uncertainty alignment)</li>
+  </ul>
+
+  <!-- =========================== -->
+  <!-- results -->
+  <!-- =========================== -->
+
+  <h2>5. key results</h2>
+
+  <h3>predictive performance</h3>
+
+  <ul>
+    <li>auroc: 0.955</li>
+    <li>auprc: 0.845</li>
+    <li>brier score: 0.149</li>
+  </ul>
+
+  <p>
+    performance remained strong despite dataset limitations,
+    while calibration and uncertainty alignment remained stable.
+  </p>
+
+  <h3>behavioral findings</h3>
+
+  <ul>
+    <li>risk trajectories evolved smoothly over time</li>
+    <li>uncertainty increased during sparse periods</li>
+    <li>strong alignment between uncertainty and absolute error</li>
+    <li>counterfactual simulations reduced predicted risk under stabilization</li>
+  </ul>
+
+  <!-- =========================== -->
+  <!-- results images -->
+  <!-- =========================== -->
+
+  <h2>6. result visualizations</h2>
+
+  <div class="project-image">
+    <img src="../assets/images/icu/risk-trajectory.png" alt="risk trajectory plot">
+    <p class="image-caption">example dynamic risk trajectory with uncertainty bands</p>
+  </div>
+
+  <div class="project-image">
+    <img src="../assets/images/icu/calibration-curve.png" alt="calibration curve">
+    <p class="image-caption">calibration analysis across predicted probability bins</p>
+  </div>
+
+  <div class="project-image">
+    <img src="../assets/images/icu/counterfactual.png" alt="counterfactual simulation">
+    <p class="image-caption">observed vs counterfactual risk trajectory</p>
+  </div>
+
+  <!-- =========================== -->
+  <!-- limitations -->
+  <!-- =========================== -->
+
+  <h2>7. limitations</h2>
+
+  <ul>
+    <li>evaluation limited to mimic-iv demo dataset</li>
+    <li>counterfactuals are model-implied, not causally identified</li>
+    <li>monte carlo dropout provides approximate bayesian inference</li>
+    <li>limited benchmarking against all possible baselines</li>
+  </ul>
+
+  <!-- =========================== -->
+  <!-- future work -->
+  <!-- =========================== -->
+
+  <h2>8. future directions</h2>
+
+  <ul>
+    <li>validation on full-scale icu cohorts</li>
+    <li>explicit treatment modeling and causal extensions</li>
+    <li>reinforcement learning for sequential decision optimization</li>
+    <li>real-time deployment with human-in-the-loop evaluation</li>
+    <li>robust uncertainty calibration under distribution shift</li>
+  </ul>
+
+  <!-- =========================== -->
+  <!-- personal contribution -->
+  <!-- =========================== -->
+
+  <h2>9. my contribution</h2>
+
+  <p>
+    this project was developed independently, including:
+  </p>
+
+  <ul>
+    <li>literature synthesis and theoretical framing</li>
+    <li>data preprocessing and temporal representation design</li>
+    <li>gru-d implementation and optimization</li>
+    <li>bayesian uncertainty integration</li>
+    <li>counterfactual simulation framework</li>
+    <li>evaluation and manuscript structuring</li>
+  </ul>
+
+  <hr>
+
+  <p>
+    overall, this project reflects my interest in combining deep learning,
+    probabilistic modeling, and structured decision-support systems,
+    especially in high-stakes environments.
+  </p>
+
+</div>
+
+</body>
+</html>

@@ -338,3 +338,25 @@ body {
   color: #7c2d12;
   font-weight: 500;
 }
+
+.project-meta {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.project-image {
+  margin: 30px 0;
+}
+
+.project-image img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.image-caption {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 8px;
+}
+

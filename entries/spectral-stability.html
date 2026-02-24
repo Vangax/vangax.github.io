@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>spectral drift–diffusion stability criterion | devang verma</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<nav class="top-nav">
+  <a href="../index.html">home</a>
+  <a href="../research.html">research</a>
+  <a href="../projects.html">projects</a>
+  <a href="../assets/cv.pdf">cv</a>
+  <a href="../contact.html">contact</a>
+</nav>
+
+<div class="container">
+
+  <div class="glass-card">
+
+    <span class="entry-tag tag-blue">research paper</span>
+
+    <h1>a spectral drift–diffusion stability criterion for linear stochastic dynamical systems</h1>
+
+    <p class="project-meta">
+      stochastic differential equations · mean-square exponential stability · spectral theory · lyapunov analysis · neural odes
+    </p>
+
+    <hr>
+
+    <!-- ============================== -->
+    <!-- motivation -->
+    <!-- ============================== -->
+
+    <h2>1. motivation and conceptual foundation</h2>
+
+    <p>
+      continuous-time neural dynamical systems and stochastic differential equations
+      are increasingly used to model representation flows, physical systems,
+      biological processes, and uncertainty-aware neural architectures.
+      however, stability analysis under multiplicative stochastic perturbations
+      is often treated using scalar contraction–diffusion inequalities.
+    </p>
+
+    <p>
+      while studying classical stochastic stability theory, i observed that
+      many widely cited sufficient conditions bound drift and diffusion
+      isotropically. that is, contraction strength and diffusion magnitude
+      are compared as scalar quantities, without accounting for directional
+      interaction between the two operators.
+    </p>
+
+    <p>
+      this raised a fundamental question:
+    </p>
+
+    <p>
+      can stability of multiplicative stochastic systems be characterized
+      directly through the spectral structure of the combined drift–diffusion operator,
+      rather than through separate scalar bounds?
+    </p>
+
+    <p>
+      the objective of this work was to derive a closed-form,
+      computationally interpretable spectral sufficient condition
+      for mean-square exponential stability that refines
+      classical contraction–diffusion inequalities.
+    </p>
+
+    <!-- ============================== -->
+    <!-- problem formulation -->
+    <!-- ============================== -->
+
+    <h2>2. problem formulation</h2>
+
+    <p>
+      consider the linear multiplicative stochastic differential equation
+    </p>
+
+    <p class="math-block">
+      dz(t) = A z(t) dt + ∑ Bᵢ z(t) dWᵢ(t)
+    </p>
+
+    <p>
+      where A and Bᵢ are real matrices and Wᵢ(t) are independent Brownian motions.
+    </p>
+
+    <p>
+      the equilibrium at z = 0 is said to be mean-square exponentially stable if
+    </p>
+
+    <p class="math-block">
+      E‖z(t)‖² ≤ C e^{-βt} ‖z(0)‖²
+    </p>
+
+    <p>
+      for some constants C > 0 and β > 0.
+    </p>
+
+    <p>
+      classical analysis uses quadratic lyapunov functions and
+      matrix inequalities of the form:
+    </p>
+
+    <p class="math-block">
+      AᵀP + P A + ∑ Bᵢᵀ P Bᵢ ≺ 0
+    </p>
+
+    <p>
+      which requires solving a semidefinite program.
+      the goal was to derive a condition that:
+    </p>
+
+    <ul>
+      <li>admits closed-form eigenvalue characterization</li>
+      <li>avoids full lmi computation</li>
+      <li>improves upon scalar contraction bounds</li>
+      <li>extends to nonlinear neural odes</li>
+    </ul>
+
+    <!-- ============================== -->
+    <!-- main theorem -->
+    <!-- ============================== -->
+
+    <h2>3. central spectral stability theorem</h2>
+
+    <p>
+      defining the symmetric drift–diffusion matrix
+    </p>
+
+    <p class="math-block">
+      M = A + Aᵀ + ∑ Bᵢᵀ Bᵢ
+    </p>
+
+    <p>
+      i proved the following result:
+    </p>
+
+    <div class="theorem-box">
+      <h3>theorem (spectral drift–diffusion stability)</h3>
+
+      <p>
+        if the maximal eigenvalue satisfies
+      </p>
+
+      <p class="math-block">
+        λₘₐₓ(M) &lt; 0
+      </p>
+
+      <p>
+        then the equilibrium z = 0 is mean-square exponentially stable,
+        and the decay rate of the second moment is governed explicitly by λₘₐₓ(M).
+      </p>
+    </div>
+
+    <p>
+      the proof follows from:
+    </p>
+
+    <ul>
+      <li>application of ito’s formula to V(z) = ‖z‖²</li>
+      <li>derivation of the infinitesimal generator</li>
+      <li>bounding quadratic forms using spectral extremal properties</li>
+      <li>application of gronwall’s inequality</li>
+    </ul>
+
+    <p>
+      the resulting bound is sharp in the sense that
+      λₘₐₓ(M) directly controls the exponential growth rate
+      of the second moment.
+    </p>
+
+    <!-- ============================== -->
+    <!-- strict improvement -->
+    <!-- ============================== -->
+
+    <h2>4. strict generalization of scalar contraction–diffusion bounds</h2>
+
+    <p>
+      i formally established that the classical scalar contraction condition
+      implies the spectral condition, but the converse does not hold.
+    </p>
+
+    <p>
+      to demonstrate strict improvement, i constructed an explicit
+      two-dimensional counterexample in which:
+    </p>
+
+    <ul>
+      <li>the spectral condition certifies stability</li>
+      <li>the scalar contraction–diffusion inequality fails</li>
+    </ul>
+
+    <p>
+      this example highlights the geometric advantage of the spectral test:
+      diffusion acting in strongly contracting directions
+      does not necessarily destabilize the system.
+    </p>
+
+    <p>
+      the scalar condition cannot detect this anisotropic interaction,
+      whereas the spectral condition directly evaluates
+      the combined operator eigenstructure.
+    </p>
+
+    <!-- ============================== -->
+    <!-- nonlinear extension -->
+    <!-- ============================== -->
+
+    <h2>5. extension to nonlinear stochastic neural odes</h2>
+
+    <p>
+      the framework was extended to nonlinear stochastic systems of the form
+    </p>
+
+    <p class="math-block">
+      dz = f(z) dt + ∑ gᵢ(z) dWᵢ(t)
+    </p>
+
+    <p>
+      using jacobian linearization around equilibrium.
+    </p>
+
+    <p>
+      defining
+    </p>
+
+    <p class="math-block">
+      M(z) = Jf(z) + Jf(z)ᵀ + ∑ Jgᵢ(z)ᵀ Jgᵢ(z)
+    </p>
+
+    <p>
+      local mean-square exponential stability holds if
+    </p>
+
+    <p class="math-block">
+      sup λₘₐₓ(M(z)) &lt; 0
+    </p>
+
+    <p>
+      this yields a practical spectral stability test
+      for stochastic neural dynamical systems,
+      connecting jacobian eigenstructure directly
+      to second-moment decay behavior.
+    </p>
+
+    <!-- ============================== -->
+    <!-- implications -->
+    <!-- ============================== -->
+
+    <h2>6. implications for neural dynamical systems</h2>
+
+    <p>
+      the results suggest principled design guidelines:
+    </p>
+
+    <ul>
+      <li>promote contraction in the symmetric drift jacobian</li>
+      <li>control diffusion jacobian magnitude and structure</li>
+      <li>regularize maximal eigenvalues of combined operators during training</li>
+    </ul>
+
+    <p>
+      in neural ode training pipelines,
+      jacobians are already computed during backpropagation,
+      making spectral stability penalties computationally feasible.
+    </p>
+
+    <!-- ============================== -->
+    <!-- personal contribution -->
+    <!-- ============================== -->
+
+    <h2>7. personal contribution</h2>
+
+    <ul>
+      <li>derived the spectral inequality rigorously from generator analysis</li>
+      <li>proved exponential decay via sharp eigenvalue bounds</li>
+      <li>constructed counterexample demonstrating strict improvement</li>
+      <li>analyzed kronecker representation of covariance dynamics</li>
+      <li>extended theory to nonlinear stochastic neural odes</li>
+      <li>wrote full mathematical manuscript independently</li>
+    </ul>
+
+    <hr>
+
+    <p>
+      this work reflects my interest in stochastic stability theory,
+      spectral operator analysis, and mathematically grounded neural system design.
+      it represents an attempt to bridge control-theoretic reasoning
+      with modern continuous-time machine learning models.
+    </p>
+
+  </div>
+
+</div>
+
+</body>
+</html>

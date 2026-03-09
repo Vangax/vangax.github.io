@@ -130,6 +130,18 @@ document.querySelectorAll(".stack span").forEach(el=>{
 });
 </script>
 
+  <script>
+document.querySelectorAll(".stack span").forEach(el => {
+
+  const hue = Math.floor(Math.random()*360);
+  const saturation = 60 + Math.random()*20;
+  const lightness = 40 + Math.random()*15;
+
+  el.style.color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+
+});
+</script>
+
 .links{
 margin-top:8px;
 }

@@ -1,35 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Projects | Devang Verma</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Projects | Devang Verma</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<nav class="top-nav">
-  <a href="index.html">Home</a>
-  <a href="research.html">Research</a>
-  <a href="projects.html">Projects</a>
-  <a href="assets/cv.pdf">CV</a>
-  <a href="contact.html">Contact</a>
+<nav>
+<a href="index.html">Home</a>
+<a href="research.html">Research</a>
+<a href="projects.html">Projects</a>
+<a href="cv.html">CV</a>
+<a href="contact.html">Contact</a>
 </nav>
 
 <div class="container">
 
-  <h1 class="page-title">Projects</h1>
+<h1>Projects</h1>
+<p class="subtitle">selected systems and research implementations</p>
 
-  <p>
-    <strong>A Bayesian Counterfactual Early-Warning System for ICU
-            Deterioration Using Irregular Clinical Time Series</strong><br>
-    Developed a complete machine learning pipeline including preprocessing,
-    feature engineering, model comparison, and interpretability analysis.
-    <br>
-    <a href="projects/credit-risk.html">Details</a> ·
-    <a href="https://github.com/yourusername/credit-risk-model">GitHub</a>
-  </p>
+
+<div class="projects-grid">
+
+<!-- Bayesian ICU -->
+<div class="project-card">
+<h3>Bayesian Counterfactual Early-Warning System</h3>
+
+<p>
+Machine learning pipeline for predicting ICU deterioration from irregular clinical
+time-series using Bayesian reasoning and interpretability analysis.
+</p>
+
+<p class="stack">
+Python • PyTorch • Bayesian Models • SHAP
+</p>
+
+<div class="links">
+<a href="entries/bayesian.html">details</a>
+<a href="#">github</a>
+</div>
+</div>
+
+
+
+<!-- NeuroReactor -->
+<div class="project-card">
+<h3>NeuroReactor: Real-Time Neural State Interface</h3>
+
+<p>
+Experimental system exploring real-time neural state monitoring and reactive
+interfaces inspired by brain–machine interaction concepts.
+</p>
+
+<p class="stack">
+Python • Neural Systems • Signal Processing
+</p>
+
+<div class="links">
+<a href="entries/neuroreactor.html">details</a>
+<a href="#">github</a>
+</div>
+</div>
+
+
+
+<!-- Spectral Stability -->
+<div class="project-card">
+<h3>Spectral Drift–Diffusion Stability Criterion</h3>
+
+<p>
+Derived a closed-form spectral stability condition for linear stochastic
+dynamical systems and extended the framework toward neural ODE models.
+</p>
+
+<p class="stack">
+Stochastic Systems • Linear Algebra • Dynamical Systems
+</p>
+
+<div class="links">
+<a href="entries/spectral-stability.html">details</a>
+<a href="#">github</a>
+</div>
+</div>
+
+
+
+<!-- Vision Transformer Capstone -->
+<div class="project-card">
+<h3>Vision Transformer AI Capstone Project</h3>
+
+<p>
+Deep learning system using Vision Transformers for visual recognition tasks,
+including training, evaluation, and interpretability analysis.
+</p>
+
+<p class="stack">
+Python • Vision Transformers • Deep Learning
+</p>
+
+<div class="links">
+<a href="entries/vit-capstone.html">details</a>
+<a href="#">github</a>
+</div>
+</div>
+
+
+</div>
 
 </div>
 

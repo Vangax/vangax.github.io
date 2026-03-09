@@ -1,35 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Devang Verma</title>
+<meta charset="UTF-8">
+<title>projects | devang verma</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* PAGE TITLE */
+
+.page-title{
+font-size:48px;
+font-weight:700;
+margin-bottom:8px;
+}
+
+.subtitle{
+color:#6b7280;
+margin-bottom:40px;
+}
+
+
+/* PROJECT LIST */
+
+.projects{
+margin-top:30px;
+}
+
+
+/* ROW */
+
+.project-row{
+display:grid;
+grid-template-columns:120px 1fr;
+gap:20px;
+padding:28px 0;
+border-bottom:1px solid #eee;
+transition:all 0.25s ease;
+}
+
+.project-row:hover{
+background:rgba(0,0,0,0.02);
+padding-left:10px;
+}
+
+
+/* LEFT META */
+
+.project-meta{
+display:flex;
+align-items:flex-start;
+padding-top:4px;
+}
+
+
+/* BADGES */
+
+.badge{
+font-size:12px;
+padding:6px 12px;
+border-radius:20px;
+font-weight:500;
+}
+
+.research{
+background:#e6f4ea;
+color:#1e7a44;
+}
+
+.system{
+background:#e8f0fe;
+color:#2b5bd7;
+}
+
+.project{
+background:#fff4e5;
+color:#b45309;
+}
+
+
+/* TITLE */
+
+.project-content h3{
+font-size:20px;
+margin-bottom:6px;
+}
+
+
+/* DESCRIPTION */
+
+.project-content p{
+color:#555;
+line-height:1.6;
+margin-bottom:10px;
+max-width:700px;
+}
+
+
+/* TECH STACK */
+
+.stack span{
+margin-right:12px;
+font-size:14px;
+font-weight:500;
+}
+
+
+/* AUTO COLOR STACK */
+
+.stack span:nth-child(1){color:#e67e22;}
+.stack span:nth-child(2){color:#e74c3c;}
+.stack span:nth-child(3){color:#3b82f6;}
+.stack span:nth-child(4){color:#10b981;}
+.stack span:nth-child(5){color:#8b5cf6;}
+.stack span:nth-child(6){color:#f59e0b;}
+
+
+/* LINKS */
+
+.links{
+margin-top:8px;
+}
+
+.links a{
+text-decoration:none;
+font-size:14px;
+margin-right:16px;
+padding:5px 10px;
+border-radius:6px;
+transition:all 0.25s ease;
+}
+
+.links a:first-child{
+color:#2563eb;
+background:rgba(37,99,235,0.08);
+}
+
+.links a:last-child{
+color:#059669;
+background:rgba(16,185,129,0.08);
+}
+
+.links a:hover{
+transform:translateY(-2px);
+background:rgba(37,99,235,0.18);
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+.project-row{
+grid-template-columns:1fr;
+}
+
+.project-meta{
+margin-bottom:6px;
+}
+
+}
+
+</style>
 </head>
+
+
 <body>
 
-<!-- NAV -->
 <nav class="top-nav">
-  <a href="index.html">Home</a>
-  <a href="research.html">Research</a>
-  <a href="projects.html">Projects</a>
-  <a href="assets/cv.pdf">CV</a>
-  <a href="contact.html">Contact</a>
+<a href="index.html">Home</a>
+<a href="research.html">Research</a>
+<a href="projects.html">Projects</a>
+<a href="assets/cv.pdf">CV</a>
+<a href="contact.html">Contact</a>
 </nav>
+
 <div class="container">
 
-  <h1 class="page-title">projects</h1>
-  <p class="subtitle">some of the projects ive done over time</p>
+<h1 class="page-title">projects</h1>
+<p class="subtitle">selected systems and research implementations</p>
 
 
-<div class="projects-grid">
+<div class="projects">
 
+<!-- PROJECT 1 -->
 
-<!-- Bayesian -->
-<div class="project-card">
+<div class="project-row">
 
+<div class="project-meta">
 <span class="badge research">research</span>
+</div>
+
+<div class="project-content">
 
 <h3>Bayesian Counterfactual Early-Warning System</h3>
 
@@ -39,10 +203,10 @@ clinical time-series using Bayesian reasoning and interpretability analysis.
 </p>
 
 <div class="stack">
-<span class="python">python</span>
-<span class="pytorch">pytorch</span>
-<span class="bayesian">bayesian</span>
-<span class="shap">shap</span>
+<span>python</span>
+<span>pytorch</span>
+<span>bayesian</span>
+<span>shap</span>
 </div>
 
 <div class="links">
@@ -52,11 +216,19 @@ clinical time-series using Bayesian reasoning and interpretability analysis.
 
 </div>
 
+</div>
 
-<!-- NeuroReactor -->
-<div class="project-card">
 
+
+<!-- PROJECT 2 -->
+
+<div class="project-row">
+
+<div class="project-meta">
 <span class="badge system">system</span>
+</div>
+
+<div class="project-content">
 
 <h3>NeuroReactor: Real-Time Neural State Interface</h3>
 
@@ -66,35 +238,43 @@ interfaces inspired by brain–machine interaction concepts.
 </p>
 
 <div class="stack">
-<span class="python">python</span>
-<span class="neural">neural systems</span>
-<span class="signal">signal processing</span>
+<span>python</span>
+<span>signal processing</span>
+<span>deep learning</span>
 </div>
 
 <div class="links">
-<a href="entries/neuroreactor.html">details</a>
+<a href="entries/neuro.html">details</a>
 <a href="#">github</a>
 </div>
 
 </div>
 
+</div>
 
-<!-- Spectral Stability -->
-<div class="project-card">
 
+
+<!-- PROJECT 3 -->
+
+<div class="project-row">
+
+<div class="project-meta">
 <span class="badge research">research</span>
+</div>
+
+<div class="project-content">
 
 <h3>Spectral Drift–Diffusion Stability Criterion</h3>
 
 <p>
 Derived a closed-form spectral stability condition for linear stochastic
-dynamical systems and extended the framework toward neural ODE models.
+dynamical systems with applications to neural ODE architectures.
 </p>
 
 <div class="stack">
-<span class="math">stochastic systems</span>
-<span class="math">linear algebra</span>
-<span class="math">dynamical systems</span>
+<span>python</span>
+<span>stochastic systems</span>
+<span>dynamical systems</span>
 </div>
 
 <div class="links">
@@ -104,34 +284,49 @@ dynamical systems and extended the framework toward neural ODE models.
 
 </div>
 
+</div>
 
-<!-- Vision Transformer -->
-<div class="project-card">
 
+
+<!-- PROJECT 4 -->
+
+<div class="project-row">
+
+<div class="project-meta">
 <span class="badge project">project</span>
+</div>
 
-<h3>Vision Transformer AI Capstone Project</h3>
+<div class="project-content">
+
+<h3>Vision Transformer AI Capstone</h3>
 
 <p>
-Deep learning system using Vision Transformers for visual recognition tasks
-including training, evaluation, and model interpretability.
+Deep learning system using Vision Transformers for image classification and
+interpretability analysis.
 </p>
 
 <div class="stack">
-<span class="python">python</span>
-<span class="transformers">transformers</span>
-<span class="deep">deep learning</span>
+<span>python</span>
+<span>transformers</span>
+<span>deep learning</span>
 </div>
 
 <div class="links">
-<a href="entries/vit-capstone.html">details</a>
+<a href="#">details</a>
 <a href="#">github</a>
 </div>
 
 </div>
 
+</div>
+
 
 </div>
+
+</div>
+
+</body>
+</html>
 
 </div>
 

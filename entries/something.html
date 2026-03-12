@@ -1,50 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>End-to-End Credit Risk Modeling</title>
+<meta charset="UTF-8">
+<title>neuro reactor – neural state decoding system</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
 
 <nav class="top-nav">
-  <a href="../index.html">Home</a>
-  <a href="../research.html">Research</a>
-  <a href="../projects.html">Projects</a>
-  <a href="../assets/cv.pdf">CV</a>
-  <a href="../contact.html">Contact</a>
+<a href="../index.html">home</a>
+<a href="../research.html">research</a>
+<a href="../projects.html">projects</a>
+<a href="../assets/cv.pdf">cv</a>
+<a href="../contact.html">contact</a>
 </nav>
 
 <div class="container">
 
-  <h1 class="page-title">End-to-End Credit Risk Modeling</h1>
+<div class="glass-card">
 
-  <p>
-    This project explores the problem of credit default prediction
-    under class imbalance and interpretability constraints. The goal
-    was to compare statistical and machine learning models in a
-    controlled, reproducible setting.
-  </p>
+<span class="entry-tag tag-green">research system</span>
 
-  <h2>Problem Formulation</h2>
-  <p>Explain the problem clearly.</p>
+<h1>neuro reactor: a neural state decoding and visualization system for eeg-based motor imagery</h1>
 
-  <h2>Methodology</h2>
-  <p>Models, features, evaluation.</p>
+<p class="project-meta">
+brain–computer interfaces · eeg signal processing · neural representation learning · real-time neural systems
+</p>
 
-  <h2>Experiments & Results</h2>
-  <p>What worked, what didn’t.</p>
+<hr>
 
-  <h2>What I Learned</h2>
-  <p>Insights gained.</p>
+<h2>1. original motivation</h2>
 
-  <h2>Future Work</h2>
-  <p>Extensions and ideas.</p>
+<p>
+the initial inspiration behind this project came from speculative ideas about brain-driven experiences,
+where neural signals could theoretically be translated into interactive perceptual outputs.
+concepts like “braindance” in science fiction imagine a direct mapping between neural activity and
+experiential playback.
+</p>
+
+<p>
+while those ideas remain largely speculative, they raised a scientific question that is actively studied
+in neuroscience and machine learning:
+</p>
+
+<p>
+can neural activity recorded from the brain be decoded into structured, interpretable representations?
+</p>
+
+<p>
+rather than attempting unrealistic goals such as thought reading, the goal of this project was to build
+a practical brain–computer interface prototype capable of decoding and modeling neural signals produced
+during motor imagery tasks.
+</p>
+
+<p>
+the project therefore evolved into a complete system for decoding eeg signals, learning neural embeddings,
+and visualizing dynamic neural state behavior in real time.
+</p>
+
+<hr>
+
+<h2>2. research domain</h2>
+
+<p>
+the project lies at the intersection of several research fields:
+</p>
+
+<ul>
+<li>brain–computer interfaces (bci)</li>
+<li>machine learning for neural signals</li>
+<li>eeg signal processing</li>
+<li>neural representation learning</li>
+<li>interactive real-time systems</li>
+</ul>
+
+<p>
+brain–computer interfaces aim to translate patterns of neural activity into machine-interpretable signals.
+one common paradigm used in bci research is motor imagery, where participants imagine performing
+specific body movements.
+</p>
+
+<p>
+imagining movement produces measurable changes in oscillatory activity in the sensorimotor cortex.
+these patterns can be detected in eeg recordings and classified using machine learning.
+</p>
+
+<hr>
+
+<h2>3. dataset</h2>
+
+<p>
+the system uses the widely studied <strong>bci competition iv dataset 2a</strong>, a benchmark dataset
+for motor imagery classification research.
+</p>
+
+<ul>
+<li>subjects: 9</li>
+<li>eeg channels: 22 electrodes</li>
+<li>sampling rate: 250 hz</li>
+</ul>
+
+<p>
+each subject performs trials corresponding to four motor imagery tasks:
+</p>
+
+<ul>
+<li>left hand imagery</li>
+<li>right hand imagery</li>
+<li>feet imagery</li>
+<li>tongue imagery</li>
+</ul>
+
+<p>
+during each trial the subject imagines performing the movement while eeg signals are recorded.
+the dataset provides carefully controlled experimental trials and has become a standard benchmark
+for evaluating bci decoding algorithms.
+</p>
+
+<hr>
+
+<h2>4. signal processing pipeline</h2>
+
+<p>
+raw eeg signals cannot be directly used by machine learning models because they are noisy,
+high dimensional, and contain irrelevant frequency components.
+</p>
+
+<p>
+therefore the first stage of the system focuses on signal preprocessing and feature extraction.
+</p>
+
+<h3>band-pass filtering</h3>
+
+<p>
+motor imagery activity is primarily expressed within the mu and beta frequency bands.
+to isolate relevant oscillatory patterns, the eeg signals were decomposed using
+a filter bank of band-pass filters.
+</p>
+
+<p>
+frequency bands included:
+</p>
+
+<ul>
+<li>8–12 hz</li>
+<li>12–16 hz</li>
+<li>16–20 hz</li>
+<li>20–24 hz</li>
+<li>24–30 hz</li>
+</ul>
+
+<p>
+this multi-band decomposition enables the system to capture discriminative neural
+patterns across several spectral regions.
+</p>
+
+<h3>epoch segmentation</h3>
+
+<p>
+continuous eeg signals were segmented into epochs corresponding to motor imagery trials.
+each epoch represents the neural activity during a specific imagined movement.
+</p>
+
+<hr>
+
+<h2>5. feature extraction using fbcsp</h2>
+
+<p>
+the primary feature extraction method used in this project was
+<strong>filter bank common spatial patterns (fbcsp)</strong>.
+</p>
+
+<p>
+common spatial patterns is a classical algorithm used in motor imagery bci research.
+it identifies spatial filters that maximize variance differences between classes.
+</p>
+
+<p>
+intuitively, the algorithm discovers linear combinations of eeg electrodes
+that best separate different mental tasks.
+</p>
+
+<p>
+fbcsp extends this idea by applying csp to multiple frequency bands,
+capturing both spatial and spectral information simultaneously.
+</p>
+
+<p>
+this approach is well suited for motor imagery decoding because imagined movements
+produce localized oscillatory power changes in specific cortical regions.
+</p>
+
+<hr>
+
+<h2>6. feature vector construction</h2>
+
+<p>
+after applying spatial filters to each frequency band, the variance of the filtered signals
+was computed to produce discriminative features.
+</p>
+
+<p>
+these features were concatenated across bands to form a compact representation.
+</p>
+
+<p>
+each trial therefore produced a feature vector of approximately
+<strong>30 dimensions</strong>, summarizing the neural signal in a structured format
+that could be used as input to machine learning models.
+</p>
+
+<hr>
+
+<h2>7. neural embedding model</h2>
+
+<p>
+instead of using classical classifiers such as support vector machines or linear discriminant analysis,
+this project introduced a neural embedding model.
+</p>
+
+<p>
+the goal was not only classification but also learning a latent representation
+of neural activity patterns.
+</p>
+
+<p>
+model architecture:
+</p>
+
+<ul>
+<li>input: 30-dimensional fbcsp feature vector</li>
+<li>layer 1: linear layer (30 → 256)</li>
+<li>activation: relu</li>
+<li>dropout regularization</li>
+<li>layer 2: linear layer (256 → 128)</li>
+<li>embedding representation: 128 dimensions</li>
+<li>classifier layer: 128 → 4 outputs</li>
+</ul>
+
+<p>
+softmax activation produces probabilities for the four motor imagery classes.
+</p>
+
+<hr>
+
+<h2>8. neural embedding representation</h2>
+
+<p>
+the embedding layer creates a latent representation of neural activity.
+</p>
+
+<p>
+instead of directly mapping signals to labels, the model learns a
+<strong>neural state space</strong>.
+</p>
+
+<p>
+within this space:
+</p>
+
+<ul>
+<li>similar mental states produce nearby embeddings</li>
+<li>different motor imagery tasks form separable clusters</li>
+<li>neural dynamics can be analyzed geometrically</li>
+</ul>
+
+<p>
+this allows the system to study representation structure rather than performing
+pure classification.
+</p>
+
+<hr>
+
+<h2>9. model training</h2>
+
+<p>
+the model was trained using supervised learning with cross-entropy loss.
+</p>
+
+<p>
+evaluation metrics included:
+</p>
+
+<ul>
+<li>training accuracy</li>
+<li>test accuracy</li>
+<li>cross-validation performance</li>
+</ul>
+
+<p>
+single-subject classification accuracy reached approximately
+<strong>80% or higher</strong>, which is considered strong performance
+for motor imagery eeg decoding.
+</p>
+
+<p>
+cross-subject performance was lower due to inter-subject variability,
+a well-known challenge in bci research.
+</p>
+
+<hr>
+
+<h2>10. continuous neural state modeling</h2>
+
+<p>
+traditional bci pipelines treat each trial independently.
+this project explored a different idea:
+</p>
+
+<p>
+represent neural decoding as a continuous evolving state.
+</p>
+
+<p>
+instead of only predicting class labels, the system derived several
+metrics from model outputs.
+</p>
+
+<p>
+these included:
+</p>
+
+<ul>
+<li>prediction confidence</li>
+<li>entropy (uncertainty)</li>
+<li>volatility of class probabilities</li>
+<li>focus index</li>
+<li>state stability over time</li>
+</ul>
+
+<p>
+these metrics allow the system to interpret neural decoding
+as a dynamic process rather than a static classification task.
+</p>
+
+<hr>
+
+<h2>11. real-time neural streaming</h2>
+
+<p>
+a backend server was developed to simulate real-time neural streaming.
+</p>
+
+<p>
+the server performs:
+</p>
+
+<ul>
+<li>eeg trial loading</li>
+<li>feature extraction</li>
+<li>model inference</li>
+<li>neural metric computation</li>
+<li>websocket data streaming</li>
+</ul>
+
+<p>
+example streamed data structure:
+</p>
+
+<pre>
+{
+ intensity: 0.83,
+ class_probs: [0.1,0.8,0.05,0.05],
+ dominant_class: 1,
+ entropy: 0.34,
+ volatility: 0.12,
+ focus: 0.64
+}
+</pre>
+
+<p>
+this produces a live neural state stream.
+</p>
+
+<hr>
+
+<h2>12. interactive visualization interface</h2>
+
+<p>
+the frontend interface was built using react and three.js.
+</p>
+
+<p>
+the interface functions as a neural monitoring console displaying:
+</p>
+
+<ul>
+<li>3d neural core visualization</li>
+<li>probability bars for mental states</li>
+<li>entropy and volatility indicators</li>
+<li>timeline of state transitions</li>
+<li>neural drift radar plots</li>
+<li>confidence waveforms</li>
+</ul>
+
+<p>
+the interface updates continuously as neural state data arrives.
+</p>
+
+<hr>
+
+<h2>13. system architecture</h2>
+
+<p>
+the overall system pipeline:
+</p>
+
+<p>
+eeg dataset → signal processing → fbcsp features → neural embedding model → neural metrics → websocket streaming → interactive visualization
+</p>
+
+<hr>
+
+<h2>14. project significance</h2>
+
+<p>
+although the system is a prototype, it demonstrates several concepts
+relevant to active research areas:
+</p>
+
+<ul>
+<li>continuous neural state modeling</li>
+<li>embedding-based neural representation learning</li>
+<li>real-time brain-computer interface visualization</li>
+<li>uncertainty-aware neural decoding</li>
+</ul>
+
+<hr>
+
+<h2>15. final outcome</h2>
+
+<p>
+the final result is an end-to-end neural decoding system capable of:
+</p>
+
+<ul>
+<li>decoding motor imagery eeg signals</li>
+<li>learning neural state embeddings</li>
+<li>tracking neural state dynamics</li>
+<li>streaming neural metrics in real time</li>
+<li>visualizing neural activity interactively</li>
+</ul>
+
+<p>
+the project represents an integrated exploration of brain–computer interface design,
+neural signal processing, and machine learning-based neural representation modeling.
+</p>
+
+</div>
 
 </div>
 
 </body>
 </html>
-

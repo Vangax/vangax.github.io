@@ -1305,6 +1305,130 @@ color:#b91c1c;
 
 /* experimental tag */
 
+/* ========================= */
+/* PROJECT MAP */
+/* ========================= */
+
+.project-map{
+position:relative;
+height:820px;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-top:120px;
+}
+
+/* ========================= */
+/* BASE CIRCLE */
+/* ========================= */
+
+.project-circle{
+position:absolute;
+background:white;
+border-radius:50%;
+width:170px;
+height:170px;
+padding:25px;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+
+border:1px solid rgba(0,0,0,0.06);
+transition:transform .25s ease, box-shadow .25s ease;
+text-decoration:none;
+color:#222;
+
+z-index:1;
+}
+
+/* hover */
+
+.project-circle:hover{
+transform:scale(1.08);
+z-index:5;
+box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* ========================= */
+/* CENTER PROJECT */
+/* ========================= */
+
+.project-circle.main{
+width:260px;
+height:260px;
+z-index:2;
+
+box-shadow:
+0 0 0 6px rgba(124,58,237,0.05),
+0 0 40px rgba(124,58,237,0.15);
+}
+
+/* ========================= */
+/* RING POSITIONING */
+/* ========================= */
+
+.item{
+left:50%;
+top:50%;
+}
+
+/* radius = 300px */
+
+.i1{ transform:translate(-50%, -50%) rotate(0deg) translate(300px) rotate(0deg); }
+.i2{ transform:translate(-50%, -50%) rotate(72deg) translate(300px) rotate(-72deg); }
+.i3{ transform:translate(-50%, -50%) rotate(144deg) translate(300px) rotate(-144deg); }
+.i4{ transform:translate(-50%, -50%) rotate(216deg) translate(300px) rotate(-216deg); }
+.i5{ transform:translate(-50%, -50%) rotate(288deg) translate(300px) rotate(-288deg); }
+
+/* ========================= */
+/* TEXT */
+/* ========================= */
+
+.project-circle h3{
+margin:0;
+font-size:17px;
+font-weight:600;
+}
+
+.project-circle p{
+margin-top:6px;
+font-size:12px;
+color:#666;
+}
+
+/* ========================= */
+/* TAGS */
+/* ========================= */
+
+.project-tag{
+position:absolute;
+top:18px;
+font-size:11px;
+padding:5px 10px;
+border-radius:12px;
+font-weight:500;
+}
+
+/* colors */
+
+.tag-research{
+background:#e0f2ff;
+color:#2563eb;
+}
+
+.tag-project{
+background:#ffe9e9;
+color:#b91c1c;
+}
+
+.tag-experiment{
+background:#f3ede3;
+color:#8b5e34;
+}
+
 .tag-experiment{
 background:#f3ede3;
 color:#8b5e34;

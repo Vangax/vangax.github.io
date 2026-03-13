@@ -1,8 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>projects | devang verma</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* page */
+
+body{
+font-family:Inter, sans-serif;
+background:#f5f5f5;
+margin:0;
+}
+
+/* nav */
+
+.top-nav{
+display:flex;
+gap:30px;
+justify-content:center;
+padding:20px;
+font-size:14px;
+}
+
+.top-nav a{
+text-decoration:none;
+color:#333;
+}
+
+/* container */
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:40px;
+text-align:center;
+}
+
+/* title */
+
+.page-title{
+font-size:36px;
+margin-bottom:60px;
+}
+
+/* universe */
+
+.project-universe{
+position:relative;
+width:700px;
+height:700px;
+margin:auto;
+}
+
+/* circles */
+
+.circle{
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+/* main */
+
+.big{
+width:220px;
+height:220px;
+background:white;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* smaller */
+
+.small{
+width:120px;
+height:120px;
+background:white;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* hover */
+
+.circle:hover{
+transform:scale(1.15);
+box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+
+/* center */
+
+.project-center{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+}
+
+/* orbit positions */
+
+.orbit{
+position:absolute;
+}
+
+.orbit1{top:0%;left:45%;}
+.orbit2{top:30%;left:85%;}
+.orbit3{top:70%;left:80%;}
+.orbit4{top:85%;left:40%;}
+.orbit5{top:35%;left:5%;}
+
+a{
+text-decoration:none;
+color:#222;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="top-nav">
+<a href="index.html">home</a>
+<a href="research.html">research</a>
+<a href="projects.html">projects</a>
+<a href="assets/cv.pdf">cv</a>
+<a href="contact.html">contact</a>
+</nav>
+
+<div class="container">
+
+<h1 class="page-title">projects</h1>
+
 <section class="project-universe">
 
 <div class="project-center">
 <a href="entries/bayesian.html">
-<div class="circle big">MAIN</div>
+<div class="circle big">
+Bayesian ICU
+</div>
 </a>
 </div>
 
@@ -27,3 +167,8 @@
 </a>
 
 </section>
+
+</div>
+
+</body>
+</html>

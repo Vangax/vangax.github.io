@@ -902,3 +902,114 @@ position:absolute;
 .orbit3{top:70%;left:80%;}
 .orbit4{top:85%;left:40%;}
 .orbit5{top:35%;left:5%;}
+
+/* ========================= */
+/* PROJECT CIRCLE GLOW */
+/* ========================= */
+
+.circle{
+position:relative;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:500;
+text-align:center;
+cursor:pointer;
+transition:all 0.35s ease;
+color:#222;
+background:rgba(255,255,255,0.6);
+backdrop-filter:blur(12px);
+}
+
+/* soft glass border */
+
+.circle::before{
+content:"";
+position:absolute;
+inset:-3px;
+border-radius:50%;
+z-index:-1;
+filter:blur(12px);
+opacity:0.6;
+transition:0.4s;
+}
+
+/* hover animation */
+
+.circle:hover{
+transform:scale(1.12);
+box-shadow:0 15px 40px rgba(0,0,0,0.18);
+}
+
+/* glow intensifies on hover */
+
+.circle:hover::before{
+opacity:1;
+filter:blur(18px);
+}
+
+/* ========================= */
+/* DIFFERENT PROJECT COLORS */
+/* ========================= */
+
+/* MAIN PROJECT */
+
+.big::before{
+background:linear-gradient(
+135deg,
+#4f46e5,
+#9333ea,
+#ec4899
+);
+}
+
+/* BCI */
+
+.orbit1 .circle::before{
+background:linear-gradient(
+135deg,
+#06b6d4,
+#3b82f6
+);
+}
+
+/* SPECTRAL */
+
+.orbit2 .circle::before{
+background:linear-gradient(
+135deg,
+#22c55e,
+#16a34a
+);
+}
+
+/* ANOMALY */
+
+.orbit3 .circle::before{
+background:linear-gradient(
+135deg,
+#f59e0b,
+#ef4444
+);
+}
+
+/* EXOPLANETS */
+
+.orbit4 .circle::before{
+background:linear-gradient(
+135deg,
+#a855f7,
+#6366f1
+);
+}
+
+/* TARS */
+
+.orbit5 .circle::before{
+background:linear-gradient(
+135deg,
+#14b8a6,
+#06b6d4
+);
+}

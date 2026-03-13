@@ -1165,84 +1165,153 @@ align-items:center;
 margin-top:120px;
 }
 
+/* orbit ring */
+
+.orbit-ring{
+position:absolute;
+width:720px;
+height:720px;
+border-radius:50%;
+border:1px dashed rgba(0,0,0,0.08);
+}
+
 /* ========================= */
-/* BASE CIRCLE */
+/* CIRCLE POSITION CONTAINER */
 /* ========================= */
 
 .project-circle{
-
 position:absolute;
+text-decoration:none;
+color:#222;
+z-index:1;
+}
 
-background:white;
-border-radius:50%;
+/* ========================= */
+/* INNER CIRCLE */
+/* ========================= */
+
+.circle-inner{
 
 width:200px;
 height:200px;
 
-display:flex;
-justify-content:center;
-align-items:center;
-
-border:1px solid rgba(0,0,0,0.06);
-
-text-decoration:none;
-color:#222;
-
-transition:box-shadow .25s ease;
-
-z-index:1;
-
-}
-/* ========================= */
-/* INNER CONTENT */
-/* ========================= */
-
-.circle-content{
+background:white;
+border-radius:50%;
 
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
 
-text-align:center;
-
 padding:25px;
 
-transition:transform .25s ease;
+border:1px solid rgba(0,0,0,0.06);
 
+text-align:center;
+
+transition:all .25s ease;
 }
 
-/* scale only content */
+/* main project */
 
-.project-circle:hover .circle-content{
-transform:scale(1.08);
-}
-
-/* hover shadow */
-
-.project-circle:hover{
-z-index:5;
-box-shadow:0 15px 35px rgba(0,0,0,0.15);
-}
-
-/* ========================= */
-/* MAIN PROJECT */
-/* ========================= */
-
-.project-circle.main{
+.main .circle-inner{
 
 width:300px;
 height:300px;
-
-z-index:2;
 
 box-shadow:
 0 0 0 6px rgba(124,58,237,0.05),
 0 0 40px rgba(124,58,237,0.15);
 
 }
+
 /* ========================= */
-/* RING LAYOUT */
+/* HOVER */
+/* ========================= */
+
+.project-circle:hover .circle-inner{
+
+transform:scale(1.08);
+
+box-shadow:
+0 20px 40px rgba(0,0,0,0.18);
+
+}
+
+/* ========================= */
+/* TOOLTIP */
+/* ========================= */
+
+.project-circle::after{
+
+content:attr(data-tech);
+
+position:absolute;
+
+bottom:-30px;
+left:50%;
+
+transform:translateX(-50%);
+
+font-size:11px;
+color:#777;
+
+opacity:0;
+transition:opacity .2s ease;
+
+}
+
+.project-circle:hover::after{
+opacity:1;
+}
+
+/* ========================= */
+/* TEXT */
+/* ========================= */
+
+.circle-inner h3{
+margin:0;
+font-size:18px;
+font-weight:600;
+}
+
+.circle-inner p{
+margin-top:6px;
+font-size:13px;
+color:#666;
+line-height:1.4;
+}
+
+/* ========================= */
+/* TAGS */
+/* ========================= */
+
+.project-tag{
+position:absolute;
+top:18px;
+font-size:11px;
+padding:5px 10px;
+border-radius:12px;
+font-weight:500;
+}
+
+.tag-research{
+background:#e0f2ff;
+color:#2563eb;
+}
+
+.tag-project{
+background:#ffe9e9;
+color:#b91c1c;
+}
+
+.tag-experiment{
+background:#f3ede3;
+color:#8b5e34;
+}
+
+/* ========================= */
+/* ORBIT POSITIONS */
 /* ========================= */
 
 .item{
@@ -1250,9 +1319,7 @@ left:50%;
 top:50%;
 }
 
-/* radius = 300px */
-
-/* radius = 340px */
+/* radius */
 
 .i1{
 transform:translate(-50%,-50%) rotate(0deg) translate(340px) rotate(0deg);
@@ -1272,55 +1339,4 @@ transform:translate(-50%,-50%) rotate(216deg) translate(340px) rotate(-216deg);
 
 .i5{
 transform:translate(-50%,-50%) rotate(288deg) translate(340px) rotate(-288deg);
-}
-
-/* ========================= */
-/* TEXT */
-/* ========================= */
-
-.project-circle h3{
-margin:0;
-font-size:17px;
-font-weight:600;
-}
-
-.project-circle p{
-margin-top:6px;
-font-size:12px;
-color:#666;
-}
-
-/* ========================= */
-/* TAGS */
-/* ========================= */
-
-.project-tag{
-
-position:absolute;
-top:18px;
-
-font-size:11px;
-padding:5px 10px;
-
-border-radius:12px;
-
-font-weight:500;
-
-}
-
-/* tag colors */
-
-.tag-research{
-background:#e0f2ff;
-color:#2563eb;
-}
-
-.tag-project{
-background:#ffe9e9;
-color:#b91c1c;
-}
-
-.tag-experiment{
-background:#f3ede3;
-color:#8b5e34;
 }

@@ -1152,22 +1152,22 @@ background:linear-gradient(
 
 
 
-/* ============================= */
-/* PROJECT MAP LAYOUT */
-/* ============================= */
+/* ============================ */
+/* PROJECT MAP */
+/* ============================ */
 
 .project-map{
 position:relative;
-height:800px;
-margin-top:120px;
+height:820px;
 display:flex;
 justify-content:center;
 align-items:center;
+margin-top:120px;
 }
 
-/* ============================= */
-/* BASE CIRCLE STYLE */
-/* ============================= */
+/* ============================ */
+/* BASE CIRCLE */
+/* ============================ */
 
 .project-circle{
 
@@ -1181,46 +1181,39 @@ border-radius:50%;
 
 display:flex;
 flex-direction:column;
-align-items:center;
 justify-content:center;
-
-text-align:center;
+align-items:center;
 
 padding:25px;
 
+text-align:center;
+
 border:1px solid rgba(0,0,0,0.06);
 
-transition:all .3s ease;
+transition:transform .25s ease, box-shadow .25s ease;
 
 text-decoration:none;
 color:#222;
 
+z-index:1;
 }
 
-/* title */
+/* hover (NO POSITION CHANGE) */
 
-.project-circle h3{
-margin:0;
-font-size:17px;
-font-weight:600;
+.project-circle:hover{
+transform:scale(1.07);
+z-index:5;
+box-shadow:0 15px 35px rgba(0,0,0,0.15);
 }
 
-/* description */
-
-.project-circle p{
-margin-top:6px;
-font-size:12px;
-color:#666;
-}
-
-/* ============================= */
+/* ============================ */
 /* MAIN PROJECT */
-/* ============================= */
+/* ============================ */
 
 .project-circle.main{
 
-width:250px;
-height:250px;
+width:260px;
+height:260px;
 
 z-index:2;
 
@@ -1230,39 +1223,89 @@ box-shadow:
 
 }
 
-/* ============================= */
-/* POSITIONING (NO OVERLAP) */
-/* ============================= */
+/* ============================ */
+/* POSITIONING */
+/* ============================ */
 
 .project-circle.top{
-transform:translate(0,-320px);
+top:60px;
+left:50%;
+transform:translateX(-50%);
 }
 
 .project-circle.left{
-transform:translate(-320px,0);
+left:18%;
+top:50%;
+transform:translateY(-50%);
 }
 
 .project-circle.right{
-transform:translate(320px,0);
+right:18%;
+top:50%;
+transform:translateY(-50%);
 }
 
 .project-circle.bottom-right{
-transform:translate(240px,240px);
+right:25%;
+bottom:80px;
 }
 
 .project-circle.bottom{
-transform:translate(0,340px);
+left:50%;
+bottom:60px;
+transform:translateX(-50%);
 }
 
-/* ============================= */
-/* HOVER EFFECT */
-/* ============================= */
+/* ============================ */
+/* TEXT */
+/* ============================ */
 
-.project-circle:hover{
+.project-circle h3{
+margin:0;
+font-size:17px;
+font-weight:600;
+}
 
-transform:scale(1.08) translate(var(--x,0),var(--y,0));
+.project-circle p{
+margin-top:6px;
+font-size:12px;
+color:#666;
+line-height:1.4;
+}
 
-box-shadow:
-0 10px 35px rgba(0,0,0,0.15);
+/* ============================ */
+/* TAGS */
+/* ============================ */
 
+.project-tag{
+
+position:absolute;
+top:18px;
+
+font-size:11px;
+padding:5px 10px;
+border-radius:12px;
+font-weight:500;
+
+}
+
+/* research tag */
+
+.tag-research{
+background:#e0f2ff;
+color:#2563eb;
+}
+
+/* project tag */
+
+.tag-project{
+background:#ffe9e9;
+color:#b91c1c;
+}
+
+/* experimental tag */
+
+.tag-experiment{
+background:#f3ede3;
+color:#8b5e34;
 }

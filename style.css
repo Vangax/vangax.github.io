@@ -740,3 +740,94 @@ position: absolute;
 .orbit3 { top: 70%; left: 75%; }
 .orbit4 { top: 80%; left: 35%; }
 .orbit5 { top: 30%; left: 5%; }
+
+
+/* PROJECT UNIVERSE */
+
+.project-universe{
+position:relative;
+width:800px;
+height:800px;
+margin:100px auto;
+}
+
+/* circles */
+
+.circle{
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+font-weight:600;
+color:#222;
+cursor:pointer;
+transition:all 0.3s ease;
+}
+
+/* center project */
+
+.big{
+width:220px;
+height:220px;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(12px);
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* surrounding projects */
+
+.small{
+width:120px;
+height:120px;
+background:rgba(255,255,255,0.6);
+backdrop-filter:blur(12px);
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* hover animation */
+
+.circle:hover{
+transform:scale(1.15);
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* center position */
+
+.project-center{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+}
+
+/* orbit positions */
+
+.orbit{
+position:absolute;
+}
+
+.orbit1{
+top:5%;
+left:45%;
+}
+
+.orbit2{
+top:30%;
+left:85%;
+}
+
+.orbit3{
+top:70%;
+left:80%;
+}
+
+.orbit4{
+top:85%;
+left:40%;
+}
+
+.orbit5{
+top:35%;
+left:5%;
+}

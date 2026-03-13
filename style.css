@@ -1176,8 +1176,8 @@ position:absolute;
 background:white;
 border-radius:50%;
 
-width:170px;
-height:170px;
+width:200px;
+height:200px;
 
 display:flex;
 justify-content:center;
@@ -1193,7 +1193,6 @@ transition:box-shadow .25s ease;
 z-index:1;
 
 }
-
 /* ========================= */
 /* INNER CONTENT */
 /* ========================= */
@@ -1232,8 +1231,8 @@ box-shadow:0 15px 35px rgba(0,0,0,0.15);
 
 .project-circle.main{
 
-width:260px;
-height:260px;
+width:300px;
+height:300px;
 
 z-index:2;
 
@@ -1242,7 +1241,6 @@ box-shadow:
 0 0 40px rgba(124,58,237,0.15);
 
 }
-
 /* ========================= */
 /* RING LAYOUT */
 /* ========================= */
@@ -1254,24 +1252,26 @@ top:50%;
 
 /* radius = 300px */
 
+/* radius = 340px */
+
 .i1{
-transform:translate(-50%,-50%) rotate(0deg) translate(300px) rotate(0deg);
+transform:translate(-50%,-50%) rotate(0deg) translate(340px) rotate(0deg);
 }
 
 .i2{
-transform:translate(-50%,-50%) rotate(72deg) translate(300px) rotate(-72deg);
+transform:translate(-50%,-50%) rotate(72deg) translate(340px) rotate(-72deg);
 }
 
 .i3{
-transform:translate(-50%,-50%) rotate(144deg) translate(300px) rotate(-144deg);
+transform:translate(-50%,-50%) rotate(144deg) translate(340px) rotate(-144deg);
 }
 
 .i4{
-transform:translate(-50%,-50%) rotate(216deg) translate(300px) rotate(-216deg);
+transform:translate(-50%,-50%) rotate(216deg) translate(340px) rotate(-216deg);
 }
 
 .i5{
-transform:translate(-50%,-50%) rotate(288deg) translate(300px) rotate(-288deg);
+transform:translate(-50%,-50%) rotate(288deg) translate(340px) rotate(-288deg);
 }
 
 /* ========================= */

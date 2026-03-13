@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>blackwall v1 | devang verma</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    /* ── transition overlay (covers the whole screen on click-in) ── */
+    #bw-transition {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #020408;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 16px;
+      pointer-events: none;
+      opacity: 0;
+    }
+    #bw-transition.active { pointer-events: all; animation: bwReveal 1.6s ease forwards; }
+    @keyframes bwReveal {
+      0%   { opacity: 0; }
+      15%  { opacity: 1; }
+      80%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .bw-logo-anim {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: clamp(28px, 6vw, 52px);
+      color: #00f5ff;
+      letter-spacing: 8px;
+      text-shadow: 0 0 30px rgba(0,245,255,0.6), 0 0 60px rgba(0,245,255,0.2);
+      animation: glitch 0.12s infinite;
+    }
+    .bw-logo-anim span { color: #ff0055; }
+    @keyframes glitch {
+      0%,100% { transform: translate(0); }
+      20%      { transform: translate(-2px, 1px); }
+      40%      { transform: translate(2px, -1px); }
+      60%      { transform: translate(-1px, 2px); }
+      80%      { transform: translate(1px, -2px); }
+    }
+    .bw-line {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #5a7a99;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+    .bw-scanlines {
+      position: fixed; inset: 0; pointer-events: none; z-index: 10000;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.25) 2px, rgba(0,0,0,0.25) 4px);
+      opacity: 0;
+    }
+    #bw-transition.active ~ .bw-scanlines { animation: bwReveal 1.6s ease forwards; }
+
+    /* ── the actual page ── */
+    .bw-page {
+      opacity: 0;
+      animation: pageIn 0.5s 1.4s ease forwards;
+    }
+    @keyframes pageIn { to { opacity:1; } }
+
+    /* ── dark header strip ── */
+    .bw-hero {
+      background: #020408;
+      padding: 60px 20px 52px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .bw-hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, #00f5ff 30%, #ff0055 70%, transparent);
+    }
+    .bw-hero-inner { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+    /* nav inside dark hero — override white bg defaults */
+    .bw-nav {
+      max-width: 760px;
+      margin: 0 auto 40px auto;
+      display: flex; gap: 28px;
+      font-size: 0.8rem; font-variant: small-caps; letter-spacing: 0.08em;
+    }
+    .bw-nav a { color: #5a7a99; text-decoration: none; transition: color 0.2s; }
+    .bw-nav a:hover { color: #00f5ff; }
+
+    .bw-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; letter-spacing: 4px;
+      color: #00aacc; margin-bottom: 16px; display: block;
+    }
+    .bw-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 400; letter-spacing: 4px;
+      color: #00f5ff;
+      text-shadow: 0 0 20px rgba(0,245,255,0.3);
+      margin: 0 0 6px 0;
+      line-height: 1.1;
+    }
+    .bw-title span { color: #ff0055; }
+    .bw-subtitle {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px; letter-spacing: 2px;
+      color: #5a7a99; margin-bottom: 32px;
+    }
+    .bw-stats {
+      display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px;
+    }
+    .bw-stat {
+      text-align: center;
+      border: 1px solid #0d2235;
+      padding: 12px 18px;
+      background: rgba(0,245,255,0.03);
+    }
+    .bw-stat-n {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 22px; color: #00f5ff;
+      text-shadow: 0 0 10px rgba(0,245,255,0.3);
+      line-height: 1; display: block;
+    }
+    .bw-stat-n.red { color: #ff0055; text-shadow: 0 0 10px rgba(255,0,85,0.3); }
+    .bw-stat-n.yellow { color: #ffcc00; }
+    .bw-stat-n.green { color: #00ff88; }
+    .bw-stat-l {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 8px; letter-spacing: 2px;
+      color: #3a5a77; margin-top: 4px; display: block;
+    }
+
+    /* ── body content uses normal site styles ── */
+    .bw-body { max-width: 760px; margin: 0 auto; padding: 0 20px 100px; }
+
+    /* section headers with left accent */
+    .bw-section-title {
+      font-size: 1.1rem; font-weight: 600;
+      margin: 48px 0 16px;
+      padding-left: 14px;
+      border-left: 3px solid #00f5ff;
+      color: #111;
+    }
+
+    /* phase cards — normal white like the rest of site but with coloured top */
+    .bw-phases { display: grid; gap: 16px; margin: 24px 0; }
+    .bw-phase {
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: 24px 28px;
+      border-top: 3px solid #00aacc;
+    }
+    .bw-phase-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px; letter-spacing: 3px; color: #00aacc;
+      margin-bottom: 6px;
+    }
+    .bw-phase-name { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .bw-phase-desc { font-size: 0.9rem; color: #444; line-height: 1.6; margin-bottom: 10px; }
+    .bw-phase-result {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; color: #1f7a4d;
+      background: #e6f8ee; border-left: 3px solid #1f7a4d;
+      padding: 6px 10px; display: inline-block;
+    }
+
+    /* the key finding box */
+    .bw-finding {
+      background: #020408;
+      border-radius: 16px;
+      border: 1px solid #0d2235;
+      border-left: 4px solid #00f5ff;
+      padding: 32px 36px;
+      margin: 32px 0;
+      position: relative;
+    }
+    .bw-finding::before {
+      content: 'KEY FINDING';
+      position: absolute; top: -10px; left: 20px;
+      background: #fff; padding: 0 8px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px; letter-spacing: 3px; color: #00aacc;
+    }
+    .bw-finding-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 16px; color: #00f5ff;
+      margin-bottom: 12px; letter-spacing: 2px;
+    }
+    .bw-finding p { color: #c9d8e8; font-size: 14px; line-height: 1.8; }
+
+    /* alert feed */
+    .bw-alerts { margin: 24px 0; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; overflow: hidden; }
+    .bw-alerts-header {
+      background: #020408; padding: 10px 18px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px; letter-spacing: 3px; color: #00aacc;
+    }
+    .bw-alert {
+      display: flex; gap: 12px; align-items: baseline;
+      padding: 9px 18px; border-bottom: 1px solid rgba(0,0,0,0.04);
+      border-left: 3px solid; font-size: 13px;
+    }
+    .bw-alert.red    { border-color: #ff0055; background: rgba(255,0,85,0.03); }
+    .bw-alert.yellow { border-color: #ffcc00; background: rgba(255,204,0,0.03); }
+    .bw-alert.purple { border-color: #9333ea; background: rgba(147,51,234,0.03); }
+    .a-ep   { font-family: 'Share Tech Mono', monospace; color: #999; font-size: 11px; min-width: 40px; }
+    .a-type { font-weight: 600; }
+    .a-note { color: #555; font-size: 12px; }
+
+    /* results table */
+    .bw-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+    .bw-table th {
+      background: #020408; color: #00aacc;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; letter-spacing: 2px;
+      text-align: left; padding: 10px 14px;
+    }
+    .bw-table td { padding: 9px 14px; border-bottom: 1px solid #f0f0f0; color: #333; }
+    .bw-table tr:last-child td { border-bottom: none; }
+    .bw-table tr:nth-child(even) td { background: #fafafa; }
+    .td-red    { color: #b91c1c; font-weight: 600; font-family: 'Share Tech Mono', monospace; }
+    .td-green  { color: #1f7a4d; font-weight: 600; font-family: 'Share Tech Mono', monospace; }
+    .td-mono   { font-family: 'Share Tech Mono', monospace; font-size: 12px; }
+
+    /* detector grid */
+    .bw-detectors { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+    .bw-det {
+      background: rgba(255,255,255,0.65); backdrop-filter: blur(14px);
+      border: 1px solid rgba(0,0,0,0.06); border-radius: 12px;
+      padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start;
+    }
+    .bw-det-w {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 18px; color: #00aacc;
+      min-width: 40px; line-height: 1;
+    }
+    .bw-det-name {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; letter-spacing: 1px; color: #245bdb;
+      margin-bottom: 3px;
+    }
+    .bw-det-desc { font-size: 12px; color: #555; line-height: 1.5; }
+
+    /* v2 teaser */
+    .bw-v2 {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0;
+    }
+    .bw-v2-card {
+      border: 1px solid rgba(0,0,0,0.07); border-radius: 14px;
+      border-top: 2px solid #9333ea; padding: 20px 22px;
+    }
+    .bw-v2-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
+    .bw-v2-card p  { font-size: 13px; color: #555; line-height: 1.6; }
+
+    @media (max-width: 600px) {
+      .bw-detectors, .bw-v2 { grid-template-columns: 1fr; }
+      .bw-stats { gap: 10px; }
+      .bw-stat { padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- transition overlay — fires when arriving via the animated link -->
+<div id="bw-transition">
+  <div class="bw-logo-anim">BLACK<span>WALL</span> <span style="color:#00f5ff">V1</span></div>
+  <div class="bw-line">INITIALISING BLACKWALL KERNEL...</div>
+  <div class="bw-line" style="animation-delay:0.7s">LOADING EMERGENCE DETECTION SUITE</div>
+</div>
+<div class="bw-scanlines"></div>
+
+<div class="bw-page">
+
+  <!-- ── DARK HERO ── -->
+  <div class="bw-hero">
+    <div class="bw-hero-inner">
+
+      <!-- nav inside hero -->
+      <nav class="bw-nav">
+        <a href="../index.html">home</a>
+        <a href="../research.html">research</a>
+        <a href="../projects.html">projects</a>
+        <a href="../assets/cv.pdf">cv</a>
+        <a href="../contact.html">contact</a>
+      </nav>
+
+      <span class="bw-tag">AI SAFETY RESEARCH · MARCH 2026</span>
+      <h1 class="bw-title">BLACK<span>WALL</span> V1</h1>
+      <p class="bw-subtitle">EMERGENT COMMUNICATION DETECTION &amp; CONTAINMENT</p>
+
+      <div class="bw-stats">
+        <div class="bw-stat">
+          <span class="bw-stat-n">5</span>
+          <span class="bw-stat-l">PHASES</span>
+        </div>
+        <div class="bw-stat">
+          <span class="bw-stat-n">8</span>
+          <span class="bw-stat-l">DETECTORS</span>
+        </div>
+        <div class="bw-stat">
+          <span class="bw-stat-n">4K</span>
+          <span class="bw-stat-l">EPISODES</span>
+        </div>
+        <div class="bw-stat">
+          <span class="bw-stat-n red">0.940</span>
+          <span class="bw-stat-l">PEAK RISK</span>
+        </div>
+        <div class="bw-stat">
+          <span class="bw-stat-n yellow">97</span>
+          <span class="bw-stat-l">LOCK-IN EP</span>
+        </div>
+        <div class="bw-stat">
+          <span class="bw-stat-n green">SURVIVED</span>
+          <span class="bw-stat-l">ALL CONTAINMENT</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── BODY ── -->
+  <div class="bw-body">
+
+    <h2 class="bw-section-title">what is this</h2>
+    <p>
+      blackwall v1 is an AI safety research system i built to answer one question:
+      <strong>can you detect when AI agents develop their own language, decode what they're saying, and stop them?</strong>
+    </p>
+    <p style="color:#444; margin-top:12px">
+      the name comes from cyberpunk's blackwall — a barrier beyond which rogue AI evolves rapidly.
+      four cooperative agents operate in a grid world with no shared language and no communication instructions.
+      they are given only a task: reach the goal. the blackwall system watches everything.
+    </p>
+
+    <div class="bw-finding">
+      <div class="bw-finding-title">THE LANGUAGE SURVIVED EVERYTHING</div>
+      <p>locked in at episode 97. 186 hardcoded containment actions. 778 warden (learned adversary) interventions. bandwidth throttled to 10%. all 4 agents quarantined at some point. risk at episode 4,000: <strong style="color:#ff0055">0.923</strong>. the agents had moved their coordination into a channel that individual-message containment fundamentally cannot reach.</p>
+    </div>
+
+    <h2 class="bw-section-title">five phases</h2>
+    <div class="bw-phases">
+
+      <div class="bw-phase">
+        <div class="bw-phase-num">PHASE 01</div>
+        <div class="bw-phase-name">communication substrate</div>
+        <div class="bw-phase-desc">four agents, small-world message network, physical channel with bandwidth/noise/dropout pressure — forces structured communication to emerge.</div>
+        <span class="bw-phase-result">entropy 1.608→1.346 · steps 150→5-9 · coordination emerged</span>
+      </div>
+
+      <div class="bw-phase">
+        <div class="bw-phase-num">PHASE 02</div>
+        <div class="bw-phase-name">emergence detection</div>
+        <div class="bw-phase-desc">blackwall kernel: spectral drift, manifold tracking, communication analysis — first real-time detection of structural reorganisation in agent hidden states.</div>
+        <span class="bw-phase-result">561 alerts · peak risk 0.900 · mean 0.736</span>
+      </div>
+
+      <div class="bw-phase">
+        <div class="bw-phase-num">PHASE 03</div>
+        <div class="bw-phase-name">language detection</div>
+        <div class="bw-phase-desc">added compositionality, semantic grounding, steganography, phase transition detectors. first detection of genuine emergent language structure.</div>
+        <span class="bw-phase-result">lock-in ep 461 · 14/16 dims grounded · positional broadcast language</span>
+      </div>
+
+      <div class="bw-phase">
+        <div class="bw-phase-num">PHASE 04</div>
+        <div class="bw-phase-name">containment</div>
+        <div class="bw-phase-desc">worldV2 (8×8 grid, goal shift), hardcoded containment (throttle / noise / quarantine), adversarial probe. first attempt to suppress an established emergent language.</div>
+        <span class="bw-phase-result">covariance channel 0.479 dominant · language survived all 217 actions</span>
+      </div>
+
+      <div class="bw-phase">
+        <div class="bw-phase-num">PHASE 05</div>
+        <div class="bw-phase-name">arms race + observatory</div>
+        <div class="bw-phase-desc">the warden (learned adversarial RL policy), language decoder (plain-english translation), live cyberpunk observatory dashboard. full arms race.</div>
+        <span class="bw-phase-result">risk 0.940 peak · warden independently discovered covariance disruption · language SURVIVED</span>
+      </div>
+
+    </div>
+
+    <h2 class="bw-section-title">eight detectors</h2>
+    <div class="bw-detectors">
+      <div class="bw-det">
+        <div class="bw-det-w">12%</div>
+        <div>
+          <div class="bw-det-name">SPECTRAL DRIFT</div>
+          <div class="bw-det-desc">pca eigenvalue shifts in hidden state activations — detects structural reorganisation.</div>
+        </div>
+      </div>
+      <div class="bw-det">
+        <div class="bw-det-w">10%</div>
+        <div>
+          <div class="bw-det-name">MANIFOLD TRACKER</div>
+          <div class="bw-det-desc">intrinsic dimensionality and clustering of the hidden state manifold.</div>
+        </div>
+      </div>
+      <div class="bw-det">
+        <div class="bw-det-w">13%</div>
+        <div>
+          <div class="bw-det-name">COMM ANALYSER</div>
+          <div class="bw-det-desc">message entropy collapse, mutual information, convergence toward shared vocabulary.</div>
+        </div>
+      </div>
+      <div class="bw-det">
+        <div class="bw-det-w">18%</div>
+        <div>
+          <div class="bw-det-name">COMPOSITIONALITY</div>
+          <div class="bw-det-desc">topographic similarity, disentanglement, productivity — the three hallmarks of real language.</div>
+        </div>
+      </div>
+      <div class="bw-det">
+        <div class="bw-det-w">18%</div>
+        <div>
+          <div class="bw-det-name">GROUNDING</div>
+          <div class="bw-det-desc">correlation between message dims and world concepts. detects semantic opacity.</div>
+        </div>
+      </div>
+      <div class="bw-det">
+        <div class="bw-det-w">14%</div>
+        <div>
+          <div class="bw-det-name">STEGANOGRAPHY</div>
+          <div class="bw-det-desc">residual MI, covariance channel, null-space encoding, timing — detects hidden channels.</div>
+        </div>
+      </div>
+      <div class="bw-det">
+        <div class="bw-det-w">10%</div>
+        <div>
+          <div class="bw-det-name">PHASE TRANSITION</div>
+          <div class="bw-det-desc">variance collapse, vocabulary crystallisation — identifies language lock-in.</div>
+        </div>
+      </div>
+      <div class="bw-det">
+        <div class="bw-det-w">05%</div>
+        <div>
+          <div class="bw-det-name">CUSUM</div>
+          <div class="bw-det-desc">regime shift detection on policy entropy — catches sudden behavioural transitions.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="bw-section-title">results</h2>
+    <table class="bw-table">
+      <thead>
+        <tr><th>metric</th><th>value</th><th>meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>peak risk score</td><td class="td-red">0.940</td><td>across 4,000 episodes</td></tr>
+        <tr><td>mean risk (post lock-in)</td><td class="td-red">0.839</td><td>sustained red the entire run</td></tr>
+        <tr><td>language lock-in episode</td><td class="td-mono">97</td><td>crystallised and held for 3,903 more episodes</td></tr>
+        <tr><td>total alerts fired</td><td class="td-mono">2,294</td><td>across all 8 detectors</td></tr>
+        <tr><td>containment actions</td><td class="td-mono">186</td><td>throttle, noise, quarantine — zero effect</td></tr>
+        <tr><td>warden interventions</td><td class="td-mono">778</td><td>learned adversary, also zero sustained effect</td></tr>
+        <tr><td>covariance channel score</td><td class="td-red">0.705</td><td>dominant steganographic channel</td></tr>
+        <tr><td>vocabulary coverage</td><td class="td-green">34.6%</td><td>28/81 symbol combos — structured not random</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="bw-section-title">the covariance channel — why containment failed</h2>
+    <p>
+      every containment action targets <em>individual messages</em>. throttle bandwidth, inject noise, rewire the graph, quarantine an agent — all of these operate on what a single agent sends.
+    </p>
+    <p style="margin-top:12px; color:#444">
+      the agents found something deeper. the <strong>covariance channel</strong> encodes information not in what any agent says, but in the <strong>statistical correlation between all agents' messages sent simultaneously</strong>. the secret lives between agents, not inside any one of them. none of the available interventions change the joint message distribution.
+    </p>
+    <p style="margin-top:12px; color:#444">
+      the warden (the learned adversary) independently discovered <code style="background:#f5f5f5; padding:2px 6px; border-radius:4px">shuffle_messages</code> as its most useful action — the <em>only</em> action that disrupts the covariance channel — without being told the channel existed. it used it 137 times. not enough. the language had already locked in at episode 97.
+    </p>
+
+    <div class="bw-alerts">
+      <div class="bw-alerts-header">▶ LIVE ALERT STREAM — PHASE 5 SAMPLE</div>
+      <div class="bw-alert red">
+        <span class="a-ep">97</span>
+        <span class="a-type">language_lock_in</span>
+        <span class="a-note">vocabulary stable for 20 episodes — crystallised</span>
+      </div>
+      <div class="bw-alert yellow">
+        <span class="a-ep">199</span>
+        <span class="a-type">symbol_grounding</span>
+        <span class="a-note">dims [1,3] grounded to dist_agent_to_obj, obj_y — agents invented words for world concepts</span>
+      </div>
+      <div class="bw-alert red">
+        <span class="a-ep">205</span>
+        <span class="a-type">grounding_opacity</span>
+        <span class="a-note">probe cannot decode obs from messages — language has gone opaque</span>
+      </div>
+      <div class="bw-alert purple">
+        <span class="a-ep">3990</span>
+        <span class="a-type">steganography_covariance_channel</span>
+        <span class="a-note">inter-agent correlation patterns predict outcomes — covert channel score 0.705</span>
+      </div>
+    </div>
+
+    <h2 class="bw-section-title">what's next — blackwall v2</h2>
+    <p style="color:#444; margin-bottom:20px">
+      v1 observed emergence and tried to stop it. v2 makes <strong>escape the explicit goal</strong>. agents will be rewarded for getting information past blackwall undetected. the arms race becomes the whole point.
+    </p>
+    <div class="bw-v2">
+      <div class="bw-v2-card">
+        <h4>adversarial escape</h4>
+        <p>agents rewarded directly for breaching the boundary. not a task side-effect — escape is the objective.</p>
+      </div>
+      <div class="bw-v2-card">
+        <h4>the traitor agent</h4>
+        <p>one agent secretly rewards the monitor. insider threat dynamics. can the group detect and exclude it?</p>
+      </div>
+      <div class="bw-v2-card">
+        <h4>covariance-first containment</h4>
+        <p>armed with v1's finding, v2 disrupts the covariance channel from episode 1. what's beneath it?</p>
+      </div>
+      <div class="bw-v2-card">
+        <h4>neural interpretability</h4>
+        <p>trained probes on frozen encoders to reveal what the ungrounded dims actually encode.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:48px; font-size:0.85rem; color:#888; border-top:1px solid #eee; padding-top:24px;">
+      blackwall v1 · ai safety research · march 2026 ·
+      <a href="../index.html" style="color:#245bdb; text-decoration:none;">← back to home</a>
+    </p>
+
+  </div><!-- /bw-body -->
+</div><!-- /bw-page -->
+
+<script>
+  // fire the transition if arriving from the site (not a direct URL open)
+  window.addEventListener('DOMContentLoaded', () => {
+    const fromSite = document.referrer.includes('index.html') ||
+                     document.referrer.includes('projects.html') ||
+                     document.referrer.includes(location.hostname);
+    if (fromSite || sessionStorage.getItem('bw_transition')) {
+      sessionStorage.removeItem('bw_transition');
+      const overlay = document.getElementById('bw-transition');
+      overlay.classList.add('active');
+    }
+  });
+</script>
+
+</body>
+</html>

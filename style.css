@@ -1013,3 +1013,139 @@ background:linear-gradient(
 #06b6d4
 );
 }
+
+/* ========================= */
+/* PROJECT CIRCLES */
+/* ========================= */
+
+.circle{
+position:relative;
+border-radius:50%;
+background:white;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:25px;
+transition:all .35s ease;
+cursor:pointer;
+border:1px solid rgba(0,0,0,0.05);
+}
+
+/* project title */
+
+.circle h3{
+font-size:16px;
+margin:0;
+font-weight:600;
+}
+
+/* description */
+
+.circle p{
+font-size:12px;
+margin-top:6px;
+color:#666;
+line-height:1.3;
+}
+
+/* ========================= */
+/* SIZE */
+/* ========================= */
+
+.big{
+width:240px;
+height:240px;
+}
+
+.small{
+width:150px;
+height:150px;
+}
+
+/* ========================= */
+/* HOVER */
+/* ========================= */
+
+.circle:hover{
+transform:scale(1.08);
+}
+
+/* ========================= */
+/* GLOW BORDER */
+/* ========================= */
+
+.circle::after{
+content:"";
+position:absolute;
+inset:-6px;
+border-radius:50%;
+z-index:-1;
+opacity:0.8;
+filter:blur(12px);
+}
+
+/* ========================= */
+/* PROFESSIONAL COLORS */
+/* ========================= */
+
+/* main project */
+
+.big::after{
+background:linear-gradient(
+135deg,
+#4f46e5,
+#7c3aed
+);
+}
+
+/* BCI */
+
+.orbit1 .circle::after{
+background:linear-gradient(
+135deg,
+#0891b2,
+#3b82f6
+);
+}
+
+/* spectral */
+
+.orbit2 .circle::after{
+background:linear-gradient(
+135deg,
+#16a34a,
+#22c55e
+);
+}
+
+/* anomaly */
+
+.orbit3 .circle::after{
+background:linear-gradient(
+135deg,
+#f59e0b,
+#ef4444
+);
+}
+
+/* exoplanets */
+
+.orbit4 .circle::after{
+background:linear-gradient(
+135deg,
+#6366f1,
+#a855f7
+);
+}
+
+/* TARS */
+
+.orbit5 .circle::after{
+background:linear-gradient(
+135deg,
+#0ea5e9,
+#14b8a6
+);
+}

@@ -6,280 +6,7 @@
 <title>projects | devang verma</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-
-/* ========================= */
-/* GLOBAL */
-/* ========================= */
-
-body{
-font-family:Inter,sans-serif;
-margin:0;
-background:#f8f8f8;
-color:#222;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:60px 20px;
-}
-
-.page-title{
-text-align:center;
-font-size:36px;
-margin-bottom:20px;
-}
-
-/* ========================= */
-/* NAV */
-/* ========================= */
-
-.top-nav{
-display:flex;
-justify-content:center;
-gap:35px;
-margin-top:30px;
-}
-
-.top-nav a{
-text-decoration:none;
-color:#333;
-font-size:14px;
-}
-
-/* ========================= */
-/* INTRO */
-/* ========================= */
-
-.projects-intro{
-max-width:650px;
-margin:25px auto 60px auto;
-font-size:14px;
-line-height:1.7;
-text-align:center;
-color:#555;
-}
-
-/* ========================= */
-/* LEGEND */
-/* ========================= */
-
-.project-legend{
-display:flex;
-justify-content:center;
-gap:14px;
-margin-bottom:60px;
-}
-
-.legend-item{
-font-size:12px;
-padding:6px 12px;
-border-radius:20px;
-font-weight:500;
-}
-
-.legend-item.research{
-background:#e0f2ff;
-color:#2563eb;
-}
-
-.legend-item.project{
-background:#ffe9e9;
-color:#b91c1c;
-}
-
-.legend-item.experiment{
-background:#f3ede3;
-color:#8b5e34;
-}
-
-/* ========================= */
-/* COUNT */
-/* ========================= */
-
-.project-count{
-text-align:center;
-font-size:13px;
-color:#777;
-margin-bottom:80px;
-}
-
-/* ========================= */
-/* PROJECT MAP */
-/* ========================= */
-
-.project-map{
-position:relative;
-height:820px;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-/* orbit ring */
-
-.orbit-ring{
-position:absolute;
-width:720px;
-height:720px;
-border-radius:50%;
-border:1px dashed rgba(0,0,0,0.08);
-}
-
-/* ========================= */
-/* PROJECT CIRCLE */
-/* ========================= */
-
-.project-circle{
-
-position:absolute;
-background:white;
-border-radius:50%;
-
-width:200px;
-height:200px;
-
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-
-padding:25px;
-text-align:center;
-
-border:1px solid rgba(0,0,0,0.06);
-
-text-decoration:none;
-color:#222;
-
-transition:all .25s ease;
-
-}
-
-/* hover */
-
-.project-circle:hover{
-transform:scale(1.06);
-box-shadow:0 15px 35px rgba(0,0,0,0.15);
-z-index:5;
-}
-
-/* main */
-
-.project-circle.main{
-
-width:300px;
-height:300px;
-
-box-shadow:
-0 0 0 6px rgba(124,58,237,0.05),
-0 0 40px rgba(124,58,237,0.15);
-
-z-index:2;
-}
-
-/* ========================= */
-/* RING POSITIONING */
-/* ========================= */
-
-.item{
-left:50%;
-top:50%;
-}
-
-/* radius = 340px */
-
-.i1{
-transform:translate(-50%,-50%) rotate(0deg) translate(340px) rotate(0deg);
-}
-
-.i2{
-transform:translate(-50%,-50%) rotate(72deg) translate(340px) rotate(-72deg);
-}
-
-.i3{
-transform:translate(-50%,-50%) rotate(144deg) translate(340px) rotate(-144deg);
-}
-
-.i4{
-transform:translate(-50%,-50%) rotate(216deg) translate(340px) rotate(-216deg);
-}
-
-.i5{
-transform:translate(-50%,-50%) rotate(288deg) translate(340px) rotate(-288deg);
-}
-
-/* ========================= */
-/* TEXT */
-/* ========================= */
-
-.project-circle h3{
-margin:0;
-font-size:18px;
-font-weight:600;
-}
-
-.project-circle p{
-margin-top:6px;
-font-size:13px;
-color:#666;
-line-height:1.4;
-}
-
-/* ========================= */
-/* TAGS */
-/* ========================= */
-
-.project-tag{
-position:absolute;
-top:18px;
-font-size:11px;
-padding:5px 10px;
-border-radius:12px;
-font-weight:500;
-}
-
-.tag-research{
-background:#e0f2ff;
-color:#2563eb;
-}
-
-.tag-project{
-background:#ffe9e9;
-color:#b91c1c;
-}
-
-.tag-experiment{
-background:#f3ede3;
-color:#8b5e34;
-}
-
-/* ========================= */
-/* TOOLTIP */
-/* ========================= */
-
-.project-circle::after{
-
-content:attr(data-tech);
-
-position:absolute;
-bottom:-30px;
-
-font-size:11px;
-color:#777;
-
-opacity:0;
-transition:opacity .2s ease;
-
-}
-
-.project-circle:hover::after{
-opacity:1;
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -300,47 +27,43 @@ opacity:1;
 <p class="projects-intro">
 these projects represent my exploration of machine learning systems,
 stochastic modeling, neural interfaces, and computational science.
-the work ranges from theoretical research contributions to experimental
-ai systems and applied machine learning prototypes.
 </p>
 
 <div class="project-legend">
-<span class="legend-item research">research</span>
-<span class="legend-item project">project</span>
-<span class="legend-item experiment">experiment</span>
-</div>
 
-<p class="project-count">
-6 research and engineering projects
-</p>
+<span class="legend research">research</span>
+<span class="legend project">project</span>
+<span class="legend experiment">experiment</span>
+
+</div>
 
 <div class="project-map">
 
 <div class="orbit-ring"></div>
 
-<!-- MAIN -->
+<!-- MAIN PROJECT -->
 
-<a href="entries/bayesian.html"
-class="project-circle main"
-data-tech="bayesian ml · clinical ai · uncertainty">
+<a href="entries/bayesian.html" class="project-circle main">
 
-<span class="project-tag tag-research">research</span>
 <div class="circle-inner">
+
+<span class="project-tag research">research</span>
 
 <h3>bayesian icu</h3>
 <p>uncertainty-aware clinical risk prediction</p>
 
+</div>
+
 </a>
+
 
 <!-- BCI -->
 
-<a href="entries/neuro-reactor.html"
-class="project-circle item i1"
-data-tech="eeg · bci · neural embeddings">
+<a href="entries/neuro-reactor.html" class="project-circle item i1">
 
 <div class="circle-inner">
 
-<span class="project-tag tag-project">project</span>
+<span class="project-tag project">project</span>
 
 <h3>bci</h3>
 <p>eeg neural state decoding</p>
@@ -348,55 +71,68 @@ data-tech="eeg · bci · neural embeddings">
 </div>
 
 </a>
+
+
 <!-- TARS -->
 
-<a href="entries/tars.html"
-class="project-circle item i2"
-data-tech="llm · ai agents">
+<a href="entries/tars.html" class="project-circle item i2">
+
 <div class="circle-inner">
-<span class="project-tag tag-project">project</span>
+
+<span class="project-tag project">project</span>
 
 <h3>tars</h3>
 <p>autonomous ai assistant</p>
 
+</div>
+
 </a>
+
 
 <!-- SPECTRAL -->
 
-<a href="entries/spectral.html"
-class="project-circle item i3"
-data-tech="stochastic systems · theory">
+<a href="entries/spectral.html" class="project-circle item i3">
+
 <div class="circle-inner">
-<span class="project-tag tag-research">research</span>
+
+<span class="project-tag research">research</span>
 
 <h3>spectral ai</h3>
 <p>stochastic stability theorem</p>
 
+</div>
+
 </a>
+
 
 <!-- ANOMALY -->
 
-<a href="entries/anomaly.html"
-class="project-circle item i4"
-data-tech="time series · anomaly detection">
+<a href="entries/anomaly.html" class="project-circle item i4">
+
 <div class="circle-inner">
-<span class="project-tag tag-project">project</span>
+
+<span class="project-tag project">project</span>
 
 <h3>anomaly</h3>
 <p>time-series detection</p>
 
+</div>
+
 </a>
+
 
 <!-- EXOPLANETS -->
 
-<a href="entries/exoplanet.html"
-class="project-circle item i5"
-data-tech="astronomy · machine learning">
+<a href="entries/exoplanet.html" class="project-circle item i5">
+
 <div class="circle-inner">
-<span class="project-tag tag-experiment">experiment</span>
+
+<span class="project-tag experiment">experiment</span>
 
 <h3>exoplanets</h3>
 <p>ml for planet discovery</p>
+
+</div>
 
 </a>
 

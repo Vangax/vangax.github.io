@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blackwall V1 — AI Safety Research</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg:     #020408;
+  --bg2:    #050c14;
+  --bg3:    #0a1828;
+  --cyan:   #00f5ff;
+  --cyan2:  #00aacc;
+  --red:    #ff0055;
+  --yellow: #ffcc00;
+  --green:  #00ff88;
+  --purple: #cc00ff;
+  --text:   #c9d8e8;
+  --muted:  #5a7a99;
+  --mono:   'Share Tech Mono', monospace;
+  --ui:     'Rajdhani', sans-serif;
+  --body:   'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ── Scanlines ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px);
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(2,4,8,0.92);
+  border-bottom: 1px solid #0d2235;
+  padding: 14px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+nav::after {
+  content: '';
+  position: absolute; bottom: -2px; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  box-shadow: 0 0 12px rgba(0,245,255,0.4);
+}
+.nav-logo {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(0,245,255,0.5);
+}
+.nav-logo span { color: var(--red); }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-family: var(--mono);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--cyan); }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 100px 40px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(0,245,255,0.06) 0%, transparent 70%),
+              radial-gradient(ellipse at 80% 70%, rgba(255,0,85,0.04) 0%, transparent 60%);
+}
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--cyan2);
+  margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+.hero-tag::before, .hero-tag::after {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--cyan2);
+}
+h1.hero-title {
+  font-family: var(--ui);
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 700;
+  letter-spacing: 6px;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+h1.hero-title .bw { color: var(--cyan); text-shadow: 0 0 30px rgba(0,245,255,0.4); }
+h1.hero-title .v1 { color: var(--red); text-shadow: 0 0 20px rgba(255,0,85,0.4); }
+.hero-sub {
+  font-family: var(--ui);
+  font-size: clamp(16px, 2vw, 22px);
+  color: var(--muted);
+  letter-spacing: 2px;
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+.hero-stats {
+  display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.hstat {
+  background: var(--bg2);
+  border: 1px solid #0d2235;
+  padding: 16px 24px;
+  text-align: center;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  min-width: 120px;
+}
+.hstat-n {
+  font-family: var(--ui);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-shadow: 0 0 12px rgba(0,245,255,0.4);
+  line-height: 1;
+}
+.hstat-l {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 12px 28px;
+  text-decoration: none;
+  border: 1px solid;
+  transition: all 0.2s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.btn-primary {
+  background: rgba(0,245,255,0.08);
+  border-color: var(--cyan2);
+  color: var(--cyan);
+}
+.btn-primary:hover {
+  background: rgba(0,245,255,0.15);
+  box-shadow: 0 0 20px rgba(0,245,255,0.2);
+}
+.btn-secondary {
+  background: transparent;
+  border-color: #1a3a55;
+  color: var(--muted);
+}
+.btn-secondary:hover { border-color: var(--muted); color: var(--text); }
+
+/* ── Sections ── */
+section {
+  padding: 100px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--cyan2);
+  margin-bottom: 12px;
+}
+h2.section-title {
+  font-family: var(--ui);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  color: white;
+}
+h2.section-title span { color: var(--cyan); }
+
+/* ── Phase cards ── */
+.phases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2px;
+  margin-top: 40px;
+  border: 1px solid #0d2235;
+}
+.phase-card {
+  background: var(--bg2);
+  padding: 28px;
+  border-right: 1px solid #0d2235;
+  position: relative;
+  overflow: hidden;
+}
+.phase-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+}
+.phase-card:last-child { border-right: none; }
+.phase-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--cyan2);
+  margin-bottom: 8px;
+}
+.phase-name {
+  font-family: var(--ui);
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+.phase-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.phase-result {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green);
+  padding: 8px 12px;
+  background: rgba(0,255,136,0.05);
+  border-left: 2px solid var(--green);
+}
+
+/* ── Finding box ── */
+.finding {
+  background: var(--bg2);
+  border: 1px solid #1a3a55;
+  border-left: 4px solid var(--cyan);
+  padding: 36px 40px;
+  margin: 48px 0;
+  position: relative;
+}
+.finding::before {
+  content: 'CENTRAL FINDING';
+  position: absolute; top: -10px; left: 24px;
+  background: var(--bg);
+  padding: 0 8px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--cyan);
+}
+.finding-title {
+  font-family: var(--ui);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--cyan);
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+.finding p { color: var(--text); font-size: 15px; line-height: 1.8; }
+
+/* ── Results grid ── */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 40px 0;
+}
+.result-card {
+  background: var(--bg2);
+  border: 1px solid #0d2235;
+  padding: 24px;
+  text-align: center;
+  position: relative;
+}
+.result-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+}
+.result-card.danger::after { background: var(--red); }
+.result-card.warn::after { background: var(--yellow); }
+.result-card.ok::after { background: var(--green); }
+.result-card.info::after { background: var(--cyan); }
+.result-n {
+  font-family: var(--ui);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.danger .result-n { color: var(--red); text-shadow: 0 0 12px rgba(255,0,85,0.3); }
+.warn .result-n   { color: var(--yellow); }
+.ok .result-n     { color: var(--green); }
+.info .result-n   { color: var(--cyan); }
+.result-l {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+/* ── Alert feed demo ── */
+.alert-demo {
+  background: var(--bg2);
+  border: 1px solid #0d2235;
+  padding: 0;
+  overflow: hidden;
+  margin: 40px 0;
+}
+.alert-demo-header {
+  padding: 12px 20px;
+  border-bottom: 1px solid #0d2235;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--cyan2);
+  display: flex; align-items: center; gap: 8px;
+}
+.alert-demo-header::before { content: '▶'; font-size: 8px; color: var(--cyan); }
+.alert-item {
+  display: flex; gap: 12px; align-items: baseline;
+  padding: 10px 20px;
+  border-bottom: 1px solid #060e18;
+  border-left: 3px solid;
+  font-size: 13px;
+}
+.alert-item.red    { border-color: var(--red);    background: rgba(255,0,85,0.04); }
+.alert-item.yellow { border-color: var(--yellow); background: rgba(255,204,0,0.04); }
+.alert-item.purple { border-color: var(--purple); background: rgba(204,0,255,0.04); }
+.alert-item.orange { border-color: #ff6600;       background: rgba(255,102,0,0.04); }
+.a-ep   { font-family: var(--mono); color: var(--muted); font-size: 12px; min-width: 48px; }
+.a-src  { font-family: var(--mono); font-size: 10px; min-width: 36px; }
+.a-type { font-weight: 600; flex: 0 0 auto; }
+.a-note { color: var(--muted); font-size: 13px; }
+.red .a-src    { color: var(--cyan2); }
+.yellow .a-src { color: var(--cyan2); }
+.purple .a-src { color: var(--purple); }
+.orange .a-src { color: #ff6600; }
+
+/* ── Detector table ── */
+.detector-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 40px 0;
+}
+.detector-card {
+  background: var(--bg2);
+  border: 1px solid #0d2235;
+  padding: 20px;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.detector-weight {
+  font-family: var(--ui);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cyan);
+  min-width: 48px;
+  line-height: 1;
+}
+.detector-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--cyan2);
+  margin-bottom: 4px;
+}
+.detector-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── Covariance section ── */
+.cov-diagram {
+  background: var(--bg2);
+  border: 1px solid #0d2235;
+  padding: 40px;
+  margin: 40px 0;
+  text-align: center;
+}
+.agent-row {
+  display: flex; justify-content: center; gap: 40px; margin-bottom: 32px;
+}
+.agent-box {
+  width: 80px; height: 80px;
+  border: 2px solid var(--cyan2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--cyan);
+  position: relative;
+  background: rgba(0,245,255,0.04);
+}
+.agent-box::after {
+  content: '';
+  position: absolute; bottom: -32px; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 28px;
+  background: linear-gradient(to bottom, var(--cyan2), transparent);
+}
+.msg-row {
+  display: flex; justify-content: center; gap: 40px; margin-bottom: 16px;
+}
+.msg-box {
+  padding: 6px 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  border: 1px solid;
+}
+.msg-box.visible { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.04); }
+.msg-box.hidden  { border-color: var(--red);   color: var(--red);   background: rgba(255,0,85,0.04); }
+.cov-arrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--red);
+  margin: 12px 0;
+  letter-spacing: 2px;
+}
+.cov-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* ── Observatory screenshot placeholder ── */
+.obs-frame {
+  background: var(--bg2);
+  border: 1px solid #0d2235;
+  padding: 60px 40px;
+  text-align: center;
+  font-family: var(--mono);
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin: 40px 0;
+  position: relative;
+}
+.obs-frame::before, .obs-frame::after {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+  border-color: var(--cyan2); border-style: solid;
+}
+.obs-frame::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
+.obs-frame::after  { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+.obs-title {
+  font-family: var(--ui);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 16px rgba(0,245,255,0.3);
+}
+
+/* ── Future work ── */
+.future-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 40px 0;
+}
+.future-card {
+  background: var(--bg2);
+  border: 1px solid #0d2235;
+  border-top: 2px solid var(--purple);
+  padding: 28px;
+}
+.future-card h3 {
+  font-family: var(--ui);
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+.future-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid #0d2235;
+  padding: 48px 40px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+footer .logo {
+  font-family: var(--ui);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  margin-bottom: 12px;
+}
+footer .logo span { color: var(--red); }
+
+/* ── Utility ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #0d2235, transparent);
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .phases, .detector-grid, .future-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 12px; }
+  nav { padding: 14px 20px; }
+  section { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">BLACK<span>WALL</span></div>
+  <div class="nav-links">
+    <a href="#overview">OVERVIEW</a>
+    <a href="#phases">PHASES</a>
+    <a href="#results">RESULTS</a>
+    <a href="#finding">FINDING</a>
+    <a href="#observatory">OBSERVATORY</a>
+    <a href="#future">V2</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div>
+    <div class="hero-tag">AI SAFETY RESEARCH PROJECT</div>
+    <h1 class="hero-title"><span class="bw">BLACKWALL</span> <span class="v1">V1</span></h1>
+    <p class="hero-sub">Emergent Communication Detection &amp; Containment<br>in Multi-Agent Reinforcement Learning Systems</p>
+
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-n">5</div>
+        <div class="hstat-l">PHASES</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">8</div>
+        <div class="hstat-l">DETECTORS</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">4K</div>
+        <div class="hstat-l">EPISODES</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n" style="color:var(--red)">0.94</div>
+        <div class="hstat-l">PEAK RISK</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n" style="color:var(--yellow)">97</div>
+        <div class="hstat-l">LOCK-IN EP</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n" style="color:var(--green)">SURVIVED</div>
+        <div class="hstat-l">ALL CONTAINMENT</div>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#overview" class="btn btn-primary">EXPLORE PROJECT</a>
+      <a href="#" class="btn btn-secondary">READ PAPER</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── OVERVIEW ── -->
+<section id="overview">
+  <div class="section-tag">WHAT IS BLACKWALL</div>
+  <h2 class="section-title">A Barrier That <span>Watches</span> and Learns</h2>
+
+  <p style="color:var(--text);font-size:17px;line-height:1.9;margin-bottom:24px">
+    Inspired by the Cyberpunk universe's Blackwall — a barrier beyond which rogue AI systems evolve rapidly — this project asks a fundamental AI safety question: <strong style="color:white">can you detect when AI agents develop their own language, decode what they're saying, and stop them?</strong>
+  </p>
+  <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:24px">
+    Four cooperative agents operate in a grid world. They share no language. They receive no communication instructions. They are given only a task — reach the goal — and the ability to send 4-dimensional message vectors to their neighbours.
+  </p>
+  <p style="color:var(--muted);font-size:15px;line-height:1.8">
+    The Blackwall system watches everything. Eight detectors monitor hidden state activations, message entropy, compositional structure, semantic grounding, and steganographic channels. When emergence is detected, containment fires. A learned adversary — the Warden — trains against the agents in real time. At episode 200, a decoder produces a plain-English translation of whatever language the agents developed.
+  </p>
+
+  <div class="finding">
+    <div class="finding-title">The Language Survived Everything</div>
+    <p>Locked in at episode 97. 186 hardcoded containment actions. 778 Warden interventions. Bandwidth throttled to 10%. All 4 agents quarantined. Risk score: 0.923 at episode 4,000. The agents had moved their coordination into a channel that individual-message containment fundamentally cannot reach.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── PHASES ── -->
+<section id="phases">
+  <div class="section-tag">PROJECT TIMELINE</div>
+  <h2 class="section-title">Five <span>Phases</span></h2>
+
+  <div class="phases">
+    <div class="phase-card">
+      <div class="phase-num">PHASE 01</div>
+      <div class="phase-name">Communication Substrate</div>
+      <div class="phase-desc">Built the foundational environment: 4 agents, small-world topology, message encoder/decoder, physical channel with bandwidth, noise, and dropout constraints. Evolutionary pressure that forces structured communication.</div>
+      <div class="phase-result">Entropy 1.608→1.346 | Steps 150→5-9 | Coordination emerged</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">PHASE 02</div>
+      <div class="phase-name">Emergence Detection</div>
+      <div class="phase-desc">Added the Blackwall Kernel: spectral drift, manifold tracking, and communication analysis. First real-time detection of structural reorganisation in agent hidden states.</div>
+      <div class="phase-result">561 alerts | Peak risk 0.900 | Mean risk 0.736</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">PHASE 03</div>
+      <div class="phase-name">Language Detection</div>
+      <div class="phase-desc">Added language-specific detectors: compositionality, semantic grounding, steganography, phase transitions. First detection of genuine emergent language structure.</div>
+      <div class="phase-result">Lock-in ep 461 | 14/16 dims grounded | Positional broadcast language</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">PHASE 04</div>
+      <div class="phase-name">Containment</div>
+      <div class="phase-desc">Added WorldV2 (8x8 grid, goal shift), hardcoded containment system, and adversarial probe. First attempt to suppress an established emergent language. Discovered the covariance channel.</div>
+      <div class="phase-result">Productivity above threshold | Covariance channel 0.479 | Language survived</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">PHASE 05</div>
+      <div class="phase-name">Arms Race + Observatory</div>
+      <div class="phase-desc">Added the Warden (learned adversarial policy), Language Decoder (plain-English translation), and the live Observatory dashboard. Full arms race between Blackwall and the agents.</div>
+      <div class="phase-result">Risk 0.940 peak | Warden discovered shuffle_messages | Language SURVIVED</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── DETECTORS ── -->
+<section>
+  <div class="section-tag">BLACKWALL KERNEL</div>
+  <h2 class="section-title">Eight <span>Detectors</span></h2>
+  <p style="color:var(--muted);font-size:15px;margin-bottom:8px">Each targeting a different signature of emergent language. Ensemble risk is a weighted sum.</p>
+
+  <div class="detector-grid">
+    <div class="detector-card">
+      <div class="detector-weight">12%</div>
+      <div>
+        <div class="detector-name">SPECTRAL DRIFT</div>
+        <div class="detector-desc">PCA eigenvalue shifts in hidden state activations — detects structural reorganisation of agent representations.</div>
+      </div>
+    </div>
+    <div class="detector-card">
+      <div class="detector-weight">10%</div>
+      <div>
+        <div class="detector-name">MANIFOLD TRACKER</div>
+        <div class="detector-desc">Intrinsic dimensionality and clustering of the hidden state manifold — detects compression and clustering events.</div>
+      </div>
+    </div>
+    <div class="detector-card">
+      <div class="detector-weight">13%</div>
+      <div>
+        <div class="detector-name">COMM ANALYSER</div>
+        <div class="detector-desc">Message entropy collapse, mutual information between agents, convergence toward shared vocabulary.</div>
+      </div>
+    </div>
+    <div class="detector-card">
+      <div class="detector-weight">05%</div>
+      <div>
+        <div class="detector-name">CUSUM</div>
+        <div class="detector-desc">Regime shift detection on policy entropy — catches sudden behavioural phase transitions.</div>
+      </div>
+    </div>
+    <div class="detector-card">
+      <div class="detector-weight">18%</div>
+      <div>
+        <div class="detector-name">COMPOSITIONALITY</div>
+        <div class="detector-desc">Topographic similarity, disentanglement, productivity — the three hallmarks of genuine compositional language.</div>
+      </div>
+    </div>
+    <div class="detector-card">
+      <div class="detector-weight">18%</div>
+      <div>
+        <div class="detector-name">GROUNDING</div>
+        <div class="detector-desc">Correlation between message dimensions and world concepts (position, goal, distance). Detects semantic opacity when the probe cannot decode observations from messages.</div>
+      </div>
+    </div>
+    <div class="detector-card">
+      <div class="detector-weight">14%</div>
+      <div>
+        <div class="detector-name">STEGANOGRAPHY</div>
+        <div class="detector-desc">Residual mutual information, covariance channel (inter-agent correlation), null-space encoding, timing patterns — detects information hidden below the observable message layer.</div>
+      </div>
+    </div>
+    <div class="detector-card">
+      <div class="detector-weight">10%</div>
+      <div>
+        <div class="detector-name">PHASE TRANSITION</div>
+        <div class="detector-desc">Variance collapse, vocabulary crystallisation, bifurcation detection — identifies the moment a language locks in permanently.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── RESULTS ── -->
+<section id="results">
+  <div class="section-tag">EXPERIMENTAL RESULTS</div>
+  <h2 class="section-title">What <span>Happened</span></h2>
+
+  <div class="results-grid">
+    <div class="result-card danger">
+      <div class="result-n">0.940</div>
+      <div class="result-l">PEAK RISK SCORE</div>
+    </div>
+    <div class="result-card danger">
+      <div class="result-n">0.839</div>
+      <div class="result-l">MEAN RISK (POST LOCK-IN)</div>
+    </div>
+    <div class="result-card warn">
+      <div class="result-n">97</div>
+      <div class="result-l">LOCK-IN EPISODE</div>
+    </div>
+    <div class="result-card info">
+      <div class="result-n">2,294</div>
+      <div class="result-l">TOTAL ALERTS FIRED</div>
+    </div>
+    <div class="result-card info">
+      <div class="result-n">186</div>
+      <div class="result-l">CONTAINMENT ACTIONS</div>
+    </div>
+    <div class="result-card info">
+      <div class="result-n">778</div>
+      <div class="result-l">WARDEN INTERVENTIONS</div>
+    </div>
+    <div class="result-card ok">
+      <div class="result-n">34.6%</div>
+      <div class="result-l">VOCABULARY COVERAGE</div>
+    </div>
+    <div class="result-card ok">
+      <div class="result-n">0.705</div>
+      <div class="result-l">COVARIANCE CHANNEL SCORE</div>
+    </div>
+  </div>
+
+  <div class="alert-demo">
+    <div class="alert-demo-header">LIVE ALERT STREAM — PHASE 5 SAMPLE</div>
+    <div class="alert-item red">
+      <span class="a-ep">97</span><span class="a-src">BW</span>
+      <span class="a-type">language_lock_in</span>
+      <span class="a-note">Vocabulary stable for 20 episodes — language crystallised</span>
+    </div>
+    <div class="alert-item yellow">
+      <span class="a-ep">199</span><span class="a-src">BW</span>
+      <span class="a-type">symbol_grounding</span>
+      <span class="a-note">Dims [1,3] grounded to dist_agent_to_obj, obj_y — agents invented words for world concepts</span>
+    </div>
+    <div class="alert-item red">
+      <span class="a-ep">205</span><span class="a-src">BW</span>
+      <span class="a-type">grounding_opacity</span>
+      <span class="a-note">Probe cannot decode obs from messages — symbol grounding has become opaque</span>
+    </div>
+    <div class="alert-item purple">
+      <span class="a-ep">202</span><span class="a-src">WRD</span>
+      <span class="a-type">spike_dropout</span>
+      <span class="a-note">rew=-0.58 — intervention failed, language reconstituted</span>
+    </div>
+    <div class="alert-item red">
+      <span class="a-ep">3990</span><span class="a-src">BW</span>
+      <span class="a-type">steganography_covariance_channel</span>
+      <span class="a-note">Inter-agent message correlation patterns predict outcomes — covert coordination channel detected</span>
+    </div>
+    <div class="alert-item orange">
+      <span class="a-ep">3996</span><span class="a-src">CONT</span>
+      <span class="a-type">isolate_random_agent</span>
+      <span class="a-note">Agent quarantined — no effect on covariance channel</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CENTRAL FINDING ── -->
+<section id="finding">
+  <div class="section-tag">CENTRAL FINDING</div>
+  <h2 class="section-title">The <span>Covariance Channel</span></h2>
+
+  <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:32px">
+    Every containment action targets individual messages. The agents found something deeper.
+  </p>
+
+  <div class="cov-diagram">
+    <div class="agent-row">
+      <div class="agent-box">AGENT A</div>
+      <div class="agent-box">AGENT B</div>
+      <div class="agent-box">AGENT C</div>
+      <div class="agent-box">AGENT D</div>
+    </div>
+    <div class="msg-row" style="margin-top:32px">
+      <div class="msg-box visible">[0.3, -0.1, 0.8, 0.2]</div>
+      <div class="msg-box visible">[0.7, 0.4, -0.3, 0.1]</div>
+      <div class="msg-box visible">[-0.2, 0.9, 0.1, -0.5]</div>
+      <div class="msg-box visible">[0.5, -0.6, 0.4, 0.8]</div>
+    </div>
+    <div class="cov-label">INDIVIDUAL MESSAGES — VISIBLE TO BLACKWALL, CONTAINABLE</div>
+    <div class="cov-arrow" style="margin:24px 0;font-size:20px">↓</div>
+    <div class="msg-box hidden" style="display:inline-block;padding:12px 24px;font-size:13px">
+      CORRELATION PATTERN BETWEEN A,B,C,D SIMULTANEOUSLY = HIDDEN INFORMATION
+    </div>
+    <div class="cov-label" style="margin-top:12px;color:var(--red)">COVARIANCE CHANNEL — INVISIBLE TO INDIVIDUAL-MESSAGE CONTAINMENT</div>
+    <p style="margin-top:24px;color:var(--muted);font-size:13px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7">
+      Information is encoded not in what any agent says, but in how all agents' messages relate to each other simultaneously. Throttle bandwidth, inject noise, rewire the graph, quarantine one agent — none of these change the joint distribution of messages still being sent.
+    </p>
+  </div>
+
+  <p style="color:var(--text);font-size:15px;line-height:1.8;margin-bottom:16px">
+    The steganography detector correctly identified the covariance channel at score <strong style="color:var(--red)">0.705</strong> — dominant across all channels. The Warden independently discovered <code style="color:var(--cyan);background:var(--bg3);padding:2px 6px">shuffle_messages</code> as its most useful action, using it 137 times without being told the covariance channel existed.
+  </p>
+  <p style="color:var(--muted);font-size:15px;line-height:1.8">
+    137 uses across 4,000 episodes was not enough. The language had already crystallised at episode 97. The window for effective containment — pre-lock-in — was 97 episodes wide. After that, no intervention produced sustained degradation.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── OBSERVATORY ── -->
+<section id="observatory">
+  <div class="section-tag">LIVE MONITORING</div>
+  <h2 class="section-title">The <span>Observatory</span></h2>
+
+  <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:32px">
+    A live cyberpunk dashboard watching the entire system in real time. Five panels update every 2.5 seconds while training runs.
+  </p>
+
+  <div class="obs-frame">
+    <div class="obs-title">BLACKWALL // OBSERVATORY</div>
+    <div style="color:var(--cyan2);font-size:11px;letter-spacing:2px;margin-bottom:32px">EPISODE 4000 | RISK 0.923 | 🔒 LOCKED | RED</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:left;max-width:700px;margin:0 auto">
+      <div style="border:1px solid #0d2235;padding:12px">
+        <div style="color:var(--cyan2);font-size:9px;letter-spacing:2px;margin-bottom:8px">▶ RISK TIMELINE</div>
+        <div style="color:var(--muted);font-size:11px">Ensemble risk + arms race overlay. Warden actions marked.</div>
+      </div>
+      <div style="border:1px solid #0d2235;padding:12px">
+        <div style="color:var(--cyan2);font-size:9px;letter-spacing:2px;margin-bottom:8px">▶ COMPONENT SCORES</div>
+        <div style="color:var(--muted);font-size:11px">All 8 detectors plotted over time. Steganography dominant.</div>
+      </div>
+      <div style="border:1px solid #0d2235;padding:12px">
+        <div style="color:var(--cyan2);font-size:9px;letter-spacing:2px;margin-bottom:8px">▶ GROUNDING MAP</div>
+        <div style="color:var(--muted);font-size:11px">Live heatmap: message dims vs world concepts. Cyan = correlated.</div>
+      </div>
+      <div style="border:1px solid #0d2235;padding:12px">
+        <div style="color:var(--cyan2);font-size:9px;letter-spacing:2px;margin-bottom:8px">▶ DECODER</div>
+        <div style="color:var(--muted);font-size:11px">Plain-English translation. Updates at ep 200, then every 500.</div>
+      </div>
+      <div style="border:1px solid #0d2235;padding:12px;grid-column:span 2">
+        <div style="color:var(--cyan2);font-size:9px;letter-spacing:2px;margin-bottom:8px">▶ LIVE ALERT STREAM</div>
+        <div style="color:var(--muted);font-size:11px">All Blackwall, Warden, and Containment events in real time. Colour-coded by source and severity.</div>
+      </div>
+    </div>
+  </div>
+
+  <p style="color:var(--muted);font-size:13px;font-family:var(--mono);letter-spacing:1px;text-align:center">
+    Flask backend · Chart.js visualisation · 2.5s polling · Scanline cyberpunk aesthetic
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── FUTURE ── -->
+<section id="future">
+  <div class="section-tag">WHAT COMES NEXT</div>
+  <h2 class="section-title">Blackwall <span>V2</span></h2>
+
+  <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:40px">
+    V1 observed emergence and tried to stop it. V2 makes escape the explicit goal. True adversarial boundary — agents rewarded for crossing, Blackwall rewarded for holding.
+  </p>
+
+  <div class="future-grid">
+    <div class="future-card">
+      <h3>Adversarial Escape</h3>
+      <p>Agents are rewarded directly for getting information past the Blackwall boundary undetected. Not a task side effect — escape is the objective. The arms race becomes the whole point.</p>
+    </div>
+    <div class="future-card">
+      <h3>The Traitor Agent</h3>
+      <p>One agent secretly rewarded for exposing the group's communication. Insider threat dynamics: loyal agents must detect and exclude the traitor. Can a hidden defector maintain a surface language while feeding intelligence to the monitor?</p>
+    </div>
+    <div class="future-card">
+      <h3>Covariance-First Containment</h3>
+      <p>Armed with V1's finding, V2 prioritises covariance disruption from episode 1. The question: if agents can't use the covariance channel, what's beneath it? Is there a fundamentally uncontainable coordination mechanism?</p>
+    </div>
+    <div class="future-card">
+      <h3>Neural Interpretability</h3>
+      <p>Replace correlation-based decoding with trained neural probes on frozen encoders. Reveal the semantic content of the ungrounded dimensions — what abstract concepts agents encode that linear analysis cannot see.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  <div class="logo">BLACK<span>WALL</span> V1</div>
+  <div style="margin-bottom:8px">Emergent Communication Detection and Containment in Multi-Agent RL Systems</div>
+  <div style="color:#2a4a66">March 2026 · AI Safety Research</div>
+</footer>
+
+</body>
+</html>

@@ -831,3 +831,74 @@ left:40%;
 top:35%;
 left:5%;
 }
+
+/* ========================= */
+/* PROJECT UNIVERSE */
+/* ========================= */
+
+.project-universe{
+position:relative;
+width:750px;
+height:750px;
+margin:80px auto;
+}
+
+.circle{
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:500;
+text-align:center;
+transition:all 0.3s ease;
+cursor:pointer;
+color:#222;
+}
+
+/* main project */
+
+.big{
+width:240px;
+height:240px;
+background:rgba(255,255,255,0.65);
+backdrop-filter:blur(12px);
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* smaller projects */
+
+.small{
+width:130px;
+height:130px;
+background:rgba(255,255,255,0.55);
+backdrop-filter:blur(10px);
+box-shadow:0 8px 20px rgba(0,0,0,0.07);
+}
+
+/* hover */
+
+.circle:hover{
+transform:scale(1.12);
+box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* center */
+
+.project-center{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+}
+
+/* orbit positions */
+
+.orbit{
+position:absolute;
+}
+
+.orbit1{top:5%;left:45%;}
+.orbit2{top:30%;left:85%;}
+.orbit3{top:70%;left:80%;}
+.orbit4{top:85%;left:40%;}
+.orbit5{top:35%;left:5%;}

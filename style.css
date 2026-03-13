@@ -1149,3 +1149,125 @@ background:linear-gradient(
 #14b8a6
 );
 }
+
+/* ========================= */
+/* PROJECT MAP */
+/* ========================= */
+
+.project-map{
+position:relative;
+height:700px;
+margin-top:120px;
+}
+
+/* ========================= */
+/* PROJECT CIRCLES */
+/* ========================= */
+
+.project-circle{
+
+position:absolute;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+
+border-radius:50%;
+background:white;
+
+padding:25px;
+
+width:170px;
+height:170px;
+
+border:1px solid rgba(0,0,0,0.06);
+
+text-decoration:none;
+color:#222;
+
+transition:all .35s ease;
+
+}
+
+/* title */
+
+.project-circle h3{
+font-size:16px;
+margin:0;
+font-weight:600;
+}
+
+/* description */
+
+.project-circle p{
+font-size:12px;
+margin-top:6px;
+color:#666;
+}
+
+/* ========================= */
+/* MAIN PROJECT */
+/* ========================= */
+
+.project-circle.main{
+
+width:240px;
+height:240px;
+
+left:50%;
+top:50%;
+
+transform:translate(-50%,-50%);
+
+box-shadow:
+0 0 0 6px rgba(124,58,237,0.05),
+0 0 40px rgba(124,58,237,0.15);
+
+}
+
+/* ========================= */
+/* POSITIONING */
+/* ========================= */
+
+.project-circle.top{
+left:50%;
+top:50px;
+transform:translateX(-50%);
+}
+
+.project-circle.left{
+left:22%;
+top:50%;
+transform:translateY(-50%);
+}
+
+.project-circle.right{
+right:22%;
+top:50%;
+transform:translateY(-50%);
+}
+
+.project-circle.bottom-right{
+right:28%;
+bottom:40px;
+}
+
+.project-circle.bottom{
+left:50%;
+bottom:40px;
+transform:translateX(-50%);
+}
+
+/* ========================= */
+/* HOVER */
+/* ========================= */
+
+.project-circle:hover{
+
+transform:scale(1.07);
+box-shadow:
+0 0 0 6px rgba(59,130,246,0.08),
+0 15px 35px rgba(0,0,0,0.15);
+
+}

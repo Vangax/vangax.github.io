@@ -1,212 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ENGRAM — Devang Verma</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <title>spectral drift–diffusion stability criterion | devang verma</title>
 
-    body {
-      font-family: "Georgia", serif;
-      background: #ffffff;
-      color: #111111;
-      font-size: 17px;
-      line-height: 1.75;
-    }
-
-    /* ── NAV ── */
-    nav {
-      padding: 2.4rem 3rem 1.6rem;
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    nav a {
-      text-decoration: none;
-      color: #111;
-      font-family: "Georgia", serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      text-transform: capitalize;
-    }
-    nav a:hover { text-decoration: underline; }
-
-    /* ── LAYOUT ── */
-    main {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 2rem 2rem 6rem;
-    }
-
-    /* ── HEADER ── */
-    .page-tag {
-      display: inline-block;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      border: 1px solid #bbb;
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      color: #666;
-      margin-bottom: 1.8rem;
-    }
-
-    h1 {
-      font-size: 2.6rem;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      line-height: 1.15;
-    }
-
-    .subtitle {
-      color: #555;
-      font-size: 0.95rem;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.4rem;
-    }
-
-    .meta {
-      font-size: 0.82rem;
-      color: #888;
-      letter-spacing: 0.05em;
-      margin-bottom: 2.8rem;
-    }
-
-    /* ── PULL QUOTE ── */
-    blockquote {
-      border-left: 2px solid #ccc;
-      margin: 2rem 0;
-      padding: 0.4rem 0 0.4rem 1.4rem;
-      color: #444;
-      font-style: italic;
-      font-size: 1.05rem;
-      line-height: 1.65;
-    }
-
-    /* ── SECTION HEADINGS ── */
-    h2 {
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #888;
-      margin-top: 3.5rem;
-      margin-bottom: 1.2rem;
-      font-weight: 400;
-    }
-
-    h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      margin-top: 2.2rem;
-      margin-bottom: 0.7rem;
-    }
-
-    /* ── BODY TEXT ── */
-    p {
-      margin-bottom: 1.3rem;
-      color: #222;
-    }
-
-    /* ── FEATURE LIST ── */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.4rem;
-      margin: 1.8rem 0;
-    }
-
-    .feature-item {
-      border-left: 2px solid #e0e0e0;
-      padding-left: 1.2rem;
-    }
-
-    .feature-item strong {
-      display: block;
-      font-size: 0.88rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #333;
-      margin-bottom: 0.3rem;
-    }
-
-    .feature-item p {
-      font-size: 0.92rem;
-      color: #555;
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* ── HIGHLIGHT BOX ── */
-    .callout {
-      background: #f7f7f7;
-      border: 1px solid #e8e8e8;
-      padding: 1.4rem 1.6rem;
-      margin: 2rem 0;
-      font-size: 0.95rem;
-      color: #333;
-      font-style: italic;
-      line-height: 1.7;
-    }
-
-    /* ── STATUS ── */
-    .status-row {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-top: 3.5rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #4caf50;
-      flex-shrink: 0;
-    }
-
-    .status-label {
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #555;
-    }
-
-    /* ── FOOTER CREDIT ── */
-    .byline {
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid #e8e8e8;
-      font-size: 0.82rem;
-      letter-spacing: 0.1em;
-      color: #999;
-      text-transform: uppercase;
-    }
-
-    /* ── DIVIDER ── */
-    hr {
-      border: none;
-      border-top: 1px solid #ebebeb;
-      margin: 0.5rem 0 2rem;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
 
-  <nav>
-    <a href="https://vangax.github.io">Home</a>
-    <a href="https://vangax.github.io/#research">Research</a>
-    <a href="https://vangax.github.io/#projects">Projects</a>
-    <a href="https://vangax.github.io/cv">CV</a>
-    <a href="https://vangax.github.io/#contact">Contact</a>
-  </nav>
-
-  <main>
-
-    <span class="page-tag">Product</span>
+<nav class="top-nav">
+  <a href="../index.html">home</a>
+  <a href="../research.html">research</a>
+  <a href="../projects.html">projects</a>
+  <a href="../assets/cv.pdf">cv</a>
+  <a href="../contact.html">contact</a>
+</nav>
+</span>
 
     <h1>ENGRAM</h1>
     <p class="subtitle">A second brain for the new era</p>

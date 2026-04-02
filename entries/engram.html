@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>spectral drift–diffusion stability criterion | devang verma</title>
+  <title>engram | devang verma</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
@@ -275,7 +275,7 @@
       .screenshot-grid-2 { grid-template-columns: 1fr; }
     }
   </style>
-</head>
+
 <body>
 
 <nav class="top-nav">
@@ -341,7 +341,7 @@
   <p>
     the concept is a portable second brain. a usb drive you can plug into any machine.
     when it is in, your personal ai presence — v — wakes up with full memory of who you are,
-    what you have been working on and what patterns she has noticed in you. when you unplug it
+    what you have been working on and what patterns v has noticed in you. when you unplug it
     the machine forgets you were ever there. zero trace. full context. every time.
   </p>
 
@@ -379,7 +379,7 @@
   <p>
     the first version was embarrassing. a simple text interface where v was basically a wrapper
     around a chat api call with a system prompt that said "be direct." no memory. no personality.
-    no persistence. you could talk to it and it would respond and the next session it remembered nothing.
+    no persistence. you could talk to v and v would respond and the next session v remembered nothing.
     it was a chatbot with delusions of grandeur. but it was enough to see the shape of something real.
   </p>
 
@@ -391,30 +391,30 @@
   </p>
   <p>
     i spent weeks tuning what i call a soul prompt. dozens of iterations. the breakthrough came when
-    i stopped trying to define what v should say and started defining what she should never say.
+    i stopped trying to define what v should say and started defining what v should never say.
     the negative constraints — no therapist mode, no filler affirmations, never start with "i,"
     cap responses at three sentences for casual exchanges — created more personality than any
     positive instruction could.
   </p>
   <p>
-    v became street-smart. brief. dry but not cold. if she does not have a memory relevant
-    to your question she says "don't have that" and stops. that honesty is the feature.
+    v became street-smart. brief. dry but not cold. if v does not have a memory relevant
+    to your question v says "don't have that" and stops. that honesty is the feature.
     fabricating an answer would betray the whole premise.
   </p>
 
   <h3>the memory engine</h3>
   <p>
     if v is the voice then memory is the brain. the memory system runs on qdrant — a vector database
-    that stores memories not as plain text but as high-dimensional embeddings. when you talk to v
-    she does not search through a list of everything you have ever said. she searches for semantic
+    that stores memories not as plain text but as high-dimensional embeddings. when you talk to v,
+    v does not search through a list of everything you have ever said. v searches for semantic
     similarity: what memories are actually relevant to what you are asking right now.
   </p>
   <p>
     getting this right took months. the first versions had a fabrication problem: v would confidently
-    discuss things she did not actually remember because the retrieval was too loose. the solution
+    discuss things v did not actually remember because the retrieval was too loose. the solution
     was a memory gate — a piece of python code that intercepts the model before it can speak when
     memory is empty or irrelevant. if there is nothing stored about the topic you are asking about
-    v tells you that in plain terms. she does not invent. the gate kills hallucination at the source.
+    v tells you that in plain terms. v does not invent. the gate kills hallucination at the source.
   </p>
   <p>
     the memory system also handles importance scoring, deduplication, source filtering and recency
@@ -447,15 +447,15 @@
     </div>
     <div class="feature-item">
       <strong>life replay</strong>
-      <p>tell v a time period and she reconstructs what was happening in your life during that window.</p>
+      <p>tell v a time period and v reconstructs what was happening in your life during that window.</p>
     </div>
     <div class="feature-item">
       <strong>weekly letters</strong>
-      <p>v writes you a letter about who you are becoming. not a summary. a letter. in her voice.</p>
+      <p>v writes you a letter about who you are becoming. not a summary. a letter. in v's voice.</p>
     </div>
     <div class="feature-item">
       <strong>street intel</strong>
-      <p>situation reads and pre-game briefs. give v a situation and she reads it through everything she knows about you.</p>
+      <p>situation reads and pre-game briefs. give v a situation and v reads it through everything v knows about you.</p>
     </div>
   </div>
 
@@ -467,11 +467,11 @@
   <p>
     the single hardest problem has been hallucination. not in the dramatic sense of an ai claiming
     to be sentient — in the quiet insidious sense of an ai filling gaps with plausible fiction.
-    v is supposed to know you. if she makes things up about you the whole system breaks.
+    v is supposed to know you. if v makes things up about you the whole system breaks.
   </p>
   <p>
     the architecture tries to address this at every layer. the memory gate stops v from speaking
-    when she has nothing real to say. the soul prompt forbids speculation. a critic layer checks
+    when there is nothing real to say. the soul prompt forbids speculation. a critic layer checks
     responses for fabrication signals before they reach you. it is better than it was. it is not solved.
     when memory is sparse — in the first weeks of using engram — the risk is highest. this is the
     problem i am still actively working on.
@@ -514,11 +514,10 @@
     the inability to know yourself well enough to make good decisions consistently.
   </p>
   <p>
-    v is not a replacement for thinking. she is an amplifier. she remembers what you told her
-    three months ago when you have forgotten. she notices you have mentioned the same problem
-    seven times without resolving it. she tells you when you are overextended before you crash.
-    she writes you a letter about who you are becoming so you can decide whether that person
-    is who you want to be.
+    v is not a replacement for thinking. v is an amplifier. v remembers what you said three months
+    ago when you have forgotten. v notices you have mentioned the same problem seven times without
+    resolving it. v tells you when you are overextended before you crash. v writes you a letter
+    about who you are becoming so you can decide whether that person is who you want to be.
   </p>
 
   <div class="callout">
@@ -551,9 +550,7 @@
 
   <!-- hero: full width -->
   <div class="screenshot-slot wide">
-    <img src="../assets/assets/Screenshot 2026-04-02 130919.png" alt="engram main interface"> 
-    <span class="slot-icon">⊞</span>
-    <span class="slot-label">main interface / full hud</span>
+    <img src="../assets/assets/Screenshot 2026-04-02 130919.png" alt="engram main interface">
   </div>
   <p class="screenshot-caption">the main hud — full interface view</p>
 
@@ -561,37 +558,27 @@
   <div class="screenshot-grid-2">
     <div class="screenshot-slot">
       <img src="../assets/assets/Screenshot 2026-04-02 131016.png" alt="memory vault">
-      <span class="slot-icon">⊞</span>
-      <span class="slot-label">memory vault</span>
     </div>
     <div class="screenshot-slot">
       <img src="../assets/assets/Screenshot 2026-04-02 131028.png" alt="neural map">
-      <span class="slot-icon">⊞</span>
-      <span class="slot-label">neural map</span>
     </div>
   </div>
   <p class="screenshot-caption">memory vault (left) &nbsp;·&nbsp; neural map (right)</p>
 
-  <!-- row: people web + pattern radar -->
+  <!-- row: mind clusters + pattern radar -->
   <div class="screenshot-grid-2">
     <div class="screenshot-slot">
-      <img src="../assets/assets/Screenshot 2026-04-02 130446.png" alt="people web">
-      <span class="slot-icon">⊞</span>
-      <span class="slot-label">mind clusters</span>
+      <img src="../assets/assets/Screenshot 2026-04-02 130446.png" alt="mind clusters">
     </div>
     <div class="screenshot-slot">
       <img src="../assets/assets/Screenshot 2026-04-02 131037.png" alt="pattern radar">
-      <span class="slot-icon">⊞</span>
-      <span class="slot-label">pattern radar</span>
     </div>
   </div>
   <p class="screenshot-caption">mind clusters (left) &nbsp;·&nbsp; pattern radar (right)</p>
 
   <!-- compact mode: full width -->
   <div class="screenshot-slot wide">
-    <img src="../assets/assets/Screenshot (3045).png" alt="compact hud">
-    <span class="slot-icon">⊞</span>
-    <span class="slot-label">compact hud overlay</span>
+    <img src="../assets/assets/Screenshot (3045).png" alt="compact hud overlay">
   </div>
   <p class="screenshot-caption">compact overlay — sits in the corner of your screen while you work</p>
 
@@ -599,13 +586,9 @@
   <div class="screenshot-grid-2">
     <div class="screenshot-slot">
       <img src="../assets/assets/Screenshot 2026-04-02 131051.png" alt="weekly letter">
-      <span class="slot-icon">⊞</span>
-      <span class="slot-label">weekly letter</span>
     </div>
     <div class="screenshot-slot">
-       <img src="../assets/assets/Screenshot 2026-04-02 131116.png" alt="memory map">
-      <span class="slot-icon">⊞</span>
-      <span class="slot-label">memory map spiral</span>
+      <img src="../assets/assets/Screenshot 2026-04-02 131116.png" alt="memory map spiral">
     </div>
   </div>
   <p class="screenshot-caption">weekly letter (left) &nbsp;·&nbsp; memory map spiral (right)</p>
@@ -621,4 +604,5 @@
 
 </body>
 </html>
+
 

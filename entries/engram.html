@@ -367,13 +367,13 @@
 
   <h3>starting from nothing</h3>
   <p>
-    i want to be honest about where i started: basically nowhere. i had been coding for a couple of years
+    i want to be honest about where i started basically nowhere. i had been coding for a couple of years
     python, some web work, a lot of learning by breaking things and figuring out why.
-    i had never built anything close to this scale. no ai background. no pyqt experience.
+    i had never built anything close to this scale. no pyqt experience.
     no idea how vector databases worked.
   </p>
   <p>
-    what i had was the idea, a laptop with an rtx 2050 and 16gb of ram and an amount of stubbornness
+    what i had was the idea, a laptop and an amount of stubbornness
     that probably crosses into a personality flaw.
   </p>
   <p>
@@ -390,7 +390,7 @@
     it is too eager to help. too apologetic. too corporate. v needed to be none of those things.
   </p>
   <p>
-    i spent weeks tuning what i call a soul prompt. dozens of iterations. the breakthrough came when
+    i spent days tuning what i call a soul prompt. dozens of iterations. the breakthrough came when
     i stopped trying to define what v should say and started defining what v should never say.
     the negative constraints no therapist mode, no filler affirmations, never start with "i,"
     cap responses at three sentences for casual exchanges — created more personality than any
@@ -410,7 +410,7 @@
     similarity: what memories are actually relevant to what you are asking right now.
   </p>
   <p>
-    getting this right took months. the first versions had a fabrication problem: v would confidently
+    getting this right took many days. the first versions had a fabrication problem: v would confidently
     discuss things v did not actually remember because the retrieval was too loose. the solution
     was a memory gate a piece of python code that intercepts the model before it can speak when
     memory is empty or irrelevant. if there is nothing stored about the topic you are asking about
@@ -418,7 +418,7 @@
   </p>
   <p>
     the memory system also handles importance scoring, deduplication, source filtering and recency
-    weighting. a quick "ok" is not a memory. but "i want to launch the first version by march" is
+    weighting. a quick "ok" is not a memory. but "i want to launch the first version by april" is
     and engram scores and stores it at the right importance level automatically.
   </p>
 
@@ -480,14 +480,14 @@
   <h3>making it fully local</h3>
   <p>
     engram runs on ollama a local inference server that runs language models entirely on your machine.
-    the current model is mistral:7b running quantized at 4-bit precision. on my rtx 3050 with 4gb vram
+    the current model is mistral:7b running quantized at 4-bit precision. on my rtx 2050 with 4gb vram
     responses take 3 to 5 seconds. v uses filler responses and a streaming tts pipeline to mask
     some of the wait but it is a ceiling and i am aware of it.
   </p>
   <p>
     the usb portability is also partially implemented not fully. the memories and identity live on
     the drive. the model for now still requires the host machine's ollama installation. true full
-    portability model, runtime and memories all self-contained on a single drive — is the target.
+    portability model, runtime and memories all self-contained on a single drive is the target.
     it is achievable. it is not done yet.
   </p>
 
@@ -498,10 +498,10 @@
     the ui was rebuilt from scratch at least four times. the memory architecture changed fundamentally twice.
   </p>
   <p>
-    what that process produces is not clean code. it is code that works, with opinions baked in
+    what that process produces is not clean code. it is code that works (ive tried vibecoding a lot), with opinions baked in
     at every layer from lived experience rather than coursework. the best parts v's voice,
     the memory gate, the boot sequence came from spending hundreds of hours with the problem,
-    not from knowing the answer before i started.
+    not from knowing the answer before i started. 
   </p>
 
 
@@ -509,7 +509,7 @@
   <h2>5. what engram actually is</h2>
 
   <p>
-    engram is my attempt to give people a fighting chance in a world that rewards context.
+    engram is my attempt to give people a chance in a world that rewards context.
     most productivity tools address symptoms. engram tries to address the underlying condition:
     the inability to know yourself well enough to make good decisions consistently.
   </p>
@@ -532,7 +532,9 @@
   </div>
 
   <p>
-    v holds conversations, stores memories with importance scoring, detects patterns in behavior,
+   i made the first working prototype of engram in week because of me putting 16+ hours daily into it,
+    right now it has 4 themes , voice options, how you want v to be, v holds conversations, stores memories
+    with importance scoring, detects patterns in behavior,
     generates daily briefs and runs eight functional analysis spaces inside a custom pyqt6 interface.
     the boot sequence is fully animated. clipboard capture, trace wipe on exit and morning briefs are all functional.
   </p>

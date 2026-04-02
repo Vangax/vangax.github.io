@@ -1,1 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENGRAM — Devang Verma</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Georgia", serif;
+      background: #ffffff;
+      color: #111111;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    /* ── NAV ── */
+    nav {
+      padding: 2.4rem 3rem 1.6rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      text-decoration: none;
+      color: #111;
+      font-family: "Georgia", serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: capitalize;
+    }
+    nav a:hover { text-decoration: underline; }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem 2rem 6rem;
+    }
+
+    /* ── HEADER ── */
+    .page-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid #bbb;
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      color: #666;
+      margin-bottom: 1.8rem;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      color: #555;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+    }
+
+    .meta {
+      font-size: 0.82rem;
+      color: #888;
+      letter-spacing: 0.05em;
+      margin-bottom: 2.8rem;
+    }
+
+    /* ── PULL QUOTE ── */
+    blockquote {
+      border-left: 2px solid #ccc;
+      margin: 2rem 0;
+      padding: 0.4rem 0 0.4rem 1.4rem;
+      color: #444;
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    h2 {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 3.5rem;
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin-top: 2.2rem;
+      margin-bottom: 0.7rem;
+    }
+
+    /* ── BODY TEXT ── */
+    p {
+      margin-bottom: 1.3rem;
+      color: #222;
+    }
+
+    /* ── FEATURE LIST ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.4rem;
+      margin: 1.8rem 0;
+    }
+
+    .feature-item {
+      border-left: 2px solid #e0e0e0;
+      padding-left: 1.2rem;
+    }
+
+    .feature-item strong {
+      display: block;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-item p {
+      font-size: 0.92rem;
+      color: #555;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .callout {
+      background: #f7f7f7;
+      border: 1px solid #e8e8e8;
+      padding: 1.4rem 1.6rem;
+      margin: 2rem 0;
+      font-size: 0.95rem;
+      color: #333;
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    /* ── STATUS ── */
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 3.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4caf50;
+      flex-shrink: 0;
+    }
+
+    .status-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    /* ── FOOTER CREDIT ── */
+    .byline {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e8e8e8;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      color: #999;
+      text-transform: uppercase;
+    }
+
+    /* ── DIVIDER ── */
+    hr {
+      border: none;
+      border-top: 1px solid #ebebeb;
+      margin: 0.5rem 0 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://vangax.github.io">Home</a>
+    <a href="https://vangax.github.io/#research">Research</a>
+    <a href="https://vangax.github.io/#projects">Projects</a>
+    <a href="https://vangax.github.io/cv">CV</a>
+    <a href="https://vangax.github.io/#contact">Contact</a>
+  </nav>
+
+  <main>
+
+    <span class="page-tag">Product</span>
+
+    <h1>ENGRAM</h1>
+    <p class="subtitle">A second brain for the new era</p>
+    <p class="meta">Devang Verma &nbsp;·&nbsp; 2024 – 2025</p>
+
+    <blockquote>
+      The new era of technology is not forgiving. If you are left behind you are just gone. ENGRAM is my answer to that.
+    </blockquote>
+
+
+    <!-- PART I -->
+    <h2>Part I &nbsp;—&nbsp; The problem that would not leave me alone</h2>
+    <hr />
+
+    <p>There is a version of the future that keeps me up at night. Not a dystopia of robots taking jobs or governments tracking citizens — though those are real. The version that haunts me is simpler and more personal: a world moving so fast that the people who cannot keep up are simply left behind. No dramatic moment of exclusion. Just a slow quiet irrelevance.</p>
+
+    <p>I am seventeen. Self-taught. I grew up watching the gap between people who use technology as a tool and people who are used by it grow wider every year. The people on the right side of that gap are not necessarily smarter. They are more connected — to information, to context, to memory. They remember what matters. They see patterns in their own behavior. They make decisions with more data than anyone else in the room because they have been paying attention.</p>
+
+    <p>Most people have not. Most people are running their lives on incomplete information about themselves.</p>
+
+    <p>I started thinking about this problem the way you think about a splinter — constantly, involuntarily, even when you are trying to think about something else. What if there was a tool that closed that gap? Not an app that stores your notes. Not a calendar that reminds you of meetings. Something deeper. Something that actually knows you — your patterns, your blindspots, your momentum — and speaks to you like a partner who has been paying attention since day one.</p>
+
+    <p>That was the seed of ENGRAM.</p>
+
+
+    <!-- PART II -->
+    <h2>Part II &nbsp;—&nbsp; The idea</h2>
+    <hr />
+
+    <p>The core concept is a portable second brain. A USB drive you can plug into any machine. When it is in, your personal AI presence — V — wakes up with full memory of who you are, what you have been working on and what patterns she has noticed in you. When you unplug it the machine forgets you were ever there. Zero trace. Full context. Every time.</p>
+
+    <div class="callout">
+      Plug in. Identity boots. Unplug. Machine forgets. That is the promise.
+    </div>
+
+    <p>This is not a cloud product. It does not require an account or an internet connection or a subscription. It is yours. The model, the memories, the identity — all of it travels with you on the drive. There is no server that knows your name.</p>
+
+    <p>That design decision was not an accident. It was a statement. In a world where every piece of software wants your data, wants your attention, wants you logged in and trackable — ENGRAM goes the other direction. The data is yours because it physically lives on your hardware.</p>
+
+
+    <!-- PART III -->
+    <h2>Part III &nbsp;—&nbsp; Building it</h2>
+    <hr />
+
+    <h3>Starting from nothing</h3>
+    <p>I want to be honest about where I started: basically nowhere. I had been coding for a couple of years — Python, some web work, a lot of learning by breaking things and figuring out why. I had never built anything close to this scale. No AI background. No PyQt experience. No idea how vector databases worked.</p>
+
+    <p>What I had was the idea, a laptop with an RTX 2050 and 16GB of RAM and an amount of stubbornness that probably crosses into a personality flaw.</p>
+
+    <p>The first version was embarrassing. A simple text interface where V was basically a wrapper around a chat API call with a system prompt that said "be direct." There was no memory. No personality. No persistence. You could talk to it and it would respond and the next session it remembered nothing. It was a chatbot with delusions of grandeur. But it was enough to see the shape of something real.</p>
+
+    <h3>Finding V's voice</h3>
+    <p>The hardest problem in the early days was not the database or the UI. It was the personality.</p>
+
+    <p>V — the AI presence at the center of ENGRAM — needed to feel like a presence not a product. Every AI assistant in existence has the same problem: it is too eager to help. Too apologetic. Too corporate. V needed to be none of those things.</p>
+
+    <p>I spent weeks tuning what I call a soul prompt. Dozens of iterations. The breakthrough came when I stopped trying to define what V should say and started defining what she should never say. The negative constraints — no therapist mode, no filler affirmations, never start with "I," cap responses at three sentences for casual exchanges — created more personality than any positive instruction could.</p>
+
+    <p>V became street-smart. Brief. Dry but not cold. She speaks when she has something real to say. She does not pad responses to seem helpful. If she does not have a memory relevant to your question she says "don't have that" and stops. That honesty is the feature. Fabricating an answer would betray the whole premise.</p>
+
+    <h3>The memory engine</h3>
+    <p>If V is the voice then memory is the brain. This was the second major engineering challenge.</p>
+
+    <p>The memory system runs on Qdrant — a vector database that stores memories not as plain text but as high-dimensional embeddings. When you talk to V she does not search through a list of everything you have ever said. She searches for semantic similarity: what memories are actually relevant to what you are asking right now, not just what contains the same words.</p>
+
+    <p>Getting this right took months. The first versions had a fabrication problem: V would confidently discuss things she did not actually remember because the retrieval was too loose. The solution was a memory gate — a piece of Python code that intercepts the model before it can speak when memory is empty or irrelevant. If there is nothing in memory about the topic you are asking about V tells you that in plain terms. She does not invent. The gate kills hallucination at the source.</p>
+
+    <p>The memory system also handles importance scoring, deduplication, source filtering and recency weighting. Not every conversation turn is worth remembering. A quick "ok" is not a memory. But "I want to launch the first version by March" is — and ENGRAM scores and stores it at the right importance level automatically.</p>
+
+    <h3>Eight spaces inside the interface</h3>
+    <p>The full interface has eight functional spaces. Each one is there for a real reason not just a feature checkbox.</p>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <strong>Memory Vault</strong>
+        <p>Your life as a scrollable archive. Every stored memory as a row with importance rating, source and timestamp. Click any entry to read the full content.</p>
+      </div>
+      <div class="feature-item">
+        <strong>Neural Map</strong>
+        <p>A word-concept map built from your conversations. What you think about most becomes the largest nodes. Goals, urgent things, recurring topics — all interactive.</p>
+      </div>
+      <div class="feature-item">
+        <strong>Memory Map</strong>
+        <p>The full history of your mind on one canvas. Every stored memory as a node in a spiral layout. Zoom out to see your entire history at once. Zoom in to read individual memories.</p>
+      </div>
+      <div class="feature-item">
+        <strong>People Web</strong>
+        <p>Everyone you have mentioned assembled automatically into a network graph. V extracts names from conversations without you ever filling a form.</p>
+      </div>
+      <div class="feature-item">
+        <strong>Pattern Radar</strong>
+        <p>A circular visualization of behaviors V has detected in you. Things you keep coming back to. Emotional signals in your language.</p>
+      </div>
+      <div class="feature-item">
+        <strong>Life Replay</strong>
+        <p>Tell V a time period and she reconstructs what was happening in your life during that window, narrated in her voice from your memories.</p>
+      </div>
+      <div class="feature-item">
+        <strong>Weekly Letters</strong>
+        <p>V writes you a letter about who you are becoming. Not a summary. A letter. In her voice.</p>
+      </div>
+      <div class="feature-item">
+        <strong>Street Intel</strong>
+        <p>Situation reads, pre-game briefs, after-action debriefs. Give V a situation and she reads it through everything she knows about you.</p>
+      </div>
+    </div>
+
+
+    <!-- PART IV -->
+    <h2>Part IV &nbsp;—&nbsp; The obstacles</h2>
+    <hr />
+
+    <h3>Hallucination — the war that never ends</h3>
+    <p>The single hardest problem in building ENGRAM has been hallucination. Not in the dramatic sense of an AI claiming to be sentient — in the quiet insidious sense of an AI filling gaps with plausible fiction.</p>
+
+    <p>V is supposed to know you. If she makes things up about you the whole system breaks. Worse — it becomes dangerous. A tool you trust to help with decisions that invents the facts it bases those decisions on is worse than no tool at all.</p>
+
+    <p>The architecture tries to address this at every layer. The memory gate stops V from speaking when she has nothing real to say. The soul prompt forbids her from speculating. A critic layer checks responses for fabrication signals before they reach you. Confidence gating ensures that uncertainty is expressed not hidden.</p>
+
+    <p>It is better than it was. It is not solved. When memory is sparse — in the first weeks of using ENGRAM, when V does not know you well yet — the risk is highest. This is the problem I am still actively working on. Possibly the problem I will be working on for a long time.</p>
+
+    <h3>Making it fully local</h3>
+    <p>The other major obstacle is hardware. ENGRAM runs on Ollama — a local inference server that runs language models entirely on your machine. The current model is mistral:7b, a 7 billion parameter model that runs quantized at 4-bit precision.</p>
+
+    <p>On my RTX 2050 with 4GB VRAM, responses take 15 to 20 seconds. For a presence that is supposed to feel like talking to someone who knows you, that latency is a problem. The conversation does not flow the way it should. V uses filler responses and a streaming TTS pipeline to mask some of the wait — but it is a ceiling and I am aware of it.</p>
+
+    <p>The USB portability is also partially implemented, not fully. The memories and identity live on the drive. The model for now still requires the host machine's Ollama installation. True full portability — model, runtime, memories, all self-contained on a single drive — is the target. It is achievable. It is not done yet.</p>
+
+    <h3>Being self-taught</h3>
+    <p>There were no guardrails. No professor to tell me this was the wrong approach or a better library existed. Every decision was made by reading documentation, breaking things, reading error traces and trying again. The code went through more complete rewrites than I can count. The UI was rebuilt from scratch at least four times. The memory architecture changed fundamentally twice.</p>
+
+    <p>What that process produces is not clean code. It is code that works, with opinions baked in at every layer from lived experience rather than coursework. ENGRAM's architecture reflects what I learned from building it, not what I knew before I started. I think that matters. The best parts — V's voice, the memory gate, the boot sequence — came from spending hundreds of hours with the problem, not from knowing the answer before I started.</p>
+
+
+    <!-- PART V -->
+    <h2>Part V &nbsp;—&nbsp; What ENGRAM actually is</h2>
+    <hr />
+
+    <p>ENGRAM is my attempt to give people a fighting chance in a world that rewards context. The gap between people who are tracked, remembered and informed — by their tools, by their institutions, by their networks — and people who are not is already enormous and it is getting wider. Most productivity tools address symptoms. ENGRAM tries to address the underlying condition: the inability to know yourself well enough to make good decisions consistently.</p>
+
+    <p>V is not a replacement for thinking. She is an amplifier. She remembers what you told her three months ago when you have forgotten. She notices you have mentioned the same problem seven times without resolving it. She tells you when you are overextended before you crash. She writes you a letter about who you are becoming so you can decide whether that person is who you want to be.</p>
+
+    <p>The chip form factor is not just a product gimmick. It is a statement about ownership. In a world where every piece of your digital life is owned by someone else's servers, ENGRAM is yours. Physically yours. The AI that knows you best lives on a device you can hold in your hand.</p>
+
+    <div class="callout">
+      Plug it anywhere. Your second brain wakes up. Pull it out. The machine forgets you were ever there. That is what I am building toward. A tool that evolves with you, stays with you, travels with you and exists entirely for you. Not for the platform. Not for the advertiser. Not for the algorithm. For you.
+    </div>
+
+
+    <!-- STATUS -->
+    <div class="status-row">
+      <div class="status-dot"></div>
+      <span class="status-label">Working prototype &nbsp;·&nbsp; Early 2025</span>
+    </div>
+
+    <p>V holds conversations, stores memories with importance scoring, detects patterns in behavior, generates daily briefs and runs eight functional analysis spaces inside a custom PyQt6 interface. The boot sequence is fully animated. Clipboard capture, trace wipe on exit and morning briefs are all functional.</p>
+
+    <p>What remains: full portable deployment as a single-drive package, response latency reduction through model optimization, a more robust anti-hallucination architecture for early sessions and eventually a proper hardware form factor. Not a skull implant. Something you can wear. Something small. Something that feels like what it actually is.</p>
+
+    <p>I am seventeen. I am self-taught. I am building something that matters to me more than anything else I have worked on.</p>
+
+    <p>ENGRAM is not finished. It may never be finished in the way products get finished. It is a living system. It grows as I grow. That feels right.</p>
+
+
+    <div class="byline">
+      ENGRAM &nbsp;·&nbsp; Devang Verma &nbsp;·&nbsp; 2025
+    </div>
+
+  </main>
+
+</body>
+</html>
 

@@ -305,15 +305,15 @@
 
   <p>
     there is a version of the future that keeps me up at night. not a dystopia of robots taking jobs
-    or governments tracking citizens — though those are real. the version that haunts me is simpler
-    and more personal: a world moving so fast that the people who cannot keep up are simply left behind.
+    or governments tracking citizens though those are real. the version that haunts me is simpler
+    and more personal a world moving so fast that the people who cannot keep up are simply left behind.
     no dramatic moment of exclusion. just a slow quiet irrelevance.
   </p>
 
   <p>
     i am seventeen. self-taught. i grew up watching the gap between people who use technology
     as a tool and people who are used by it grow wider every year. the people on the right side
-    of that gap are not necessarily smarter. they are more connected — to information, to context,
+    of that gap are not necessarily smarter. they are more connected to information, to context,
     to memory. they remember what matters. they see patterns in their own behavior. they make
     decisions with more data than anyone else in the room because they have been paying attention.
   </p>
@@ -323,10 +323,10 @@
   </p>
 
   <p>
-    i started thinking about this the way you think about a splinter — constantly, involuntarily,
+    i started thinking about this the way you think about a splinter constantly, involuntarily,
     even when you are trying to think about something else. what if there was a tool that closed that gap?
     not an app that stores your notes. not a calendar that reminds you of meetings. something deeper.
-    something that actually knows you — your patterns, your blindspots, your momentum — and speaks to you
+    something that actually knows you ,your patterns, your blindspots, your momentum and speaks to you
     like a partner who has been paying attention since day one.
   </p>
 
@@ -340,7 +340,7 @@
 
   <p>
     the concept is a portable second brain. a usb drive you can plug into any machine.
-    when it is in, your personal ai presence — v — wakes up with full memory of who you are,
+    when it is in, your personal ai presence  v  wakes up with full memory of who you are,
     what you have been working on and what patterns v has noticed in you. when you unplug it
     the machine forgets you were ever there. zero trace. full context. every time.
   </p>
@@ -351,13 +351,13 @@
 
   <p>
     this is not a cloud product. it does not require an account or an internet connection
-    or a subscription. it is yours. the model, the memories, the identity — all of it
+    or a subscription. it is yours. the model, the memories, the identity all of it
     travels with you on the drive. there is no server that knows your name.
   </p>
 
   <p>
     that design decision was not an accident. it was a statement. in a world where every
-    piece of software wants your data, wants your attention, wants you logged in and trackable —
+    piece of software wants your data, wants your attention, wants you logged in and trackable
     engram goes the other direction. the data is yours because it physically lives on your hardware.
   </p>
 
@@ -367,7 +367,7 @@
 
   <h3>starting from nothing</h3>
   <p>
-    i want to be honest about where i started: basically nowhere. i had been coding for a couple of years —
+    i want to be honest about where i started: basically nowhere. i had been coding for a couple of years
     python, some web work, a lot of learning by breaking things and figuring out why.
     i had never built anything close to this scale. no ai background. no pyqt experience.
     no idea how vector databases worked.
@@ -392,7 +392,7 @@
   <p>
     i spent weeks tuning what i call a soul prompt. dozens of iterations. the breakthrough came when
     i stopped trying to define what v should say and started defining what v should never say.
-    the negative constraints — no therapist mode, no filler affirmations, never start with "i,"
+    the negative constraints no therapist mode, no filler affirmations, never start with "i,"
     cap responses at three sentences for casual exchanges — created more personality than any
     positive instruction could.
   </p>
@@ -404,7 +404,7 @@
 
   <h3>the memory engine</h3>
   <p>
-    if v is the voice then memory is the brain. the memory system runs on qdrant — a vector database
+    if v is the voice then memory is the brain. the memory system runs on qdrant a vector database
     that stores memories not as plain text but as high-dimensional embeddings. when you talk to v,
     v does not search through a list of everything you have ever said. v searches for semantic
     similarity: what memories are actually relevant to what you are asking right now.
@@ -412,13 +412,13 @@
   <p>
     getting this right took months. the first versions had a fabrication problem: v would confidently
     discuss things v did not actually remember because the retrieval was too loose. the solution
-    was a memory gate — a piece of python code that intercepts the model before it can speak when
+    was a memory gate a piece of python code that intercepts the model before it can speak when
     memory is empty or irrelevant. if there is nothing stored about the topic you are asking about
     v tells you that in plain terms. v does not invent. the gate kills hallucination at the source.
   </p>
   <p>
     the memory system also handles importance scoring, deduplication, source filtering and recency
-    weighting. a quick "ok" is not a memory. but "i want to launch the first version by march" is —
+    weighting. a quick "ok" is not a memory. but "i want to launch the first version by march" is
     and engram scores and stores it at the right importance level automatically.
   </p>
 
@@ -466,28 +466,28 @@
   <h3>hallucination — the war that never ends</h3>
   <p>
     the single hardest problem has been hallucination. not in the dramatic sense of an ai claiming
-    to be sentient — in the quiet insidious sense of an ai filling gaps with plausible fiction.
+    to be sentient in the quiet insidious sense of an ai filling gaps with plausible fiction.
     v is supposed to know you. if v makes things up about you the whole system breaks.
   </p>
   <p>
     the architecture tries to address this at every layer. the memory gate stops v from speaking
     when there is nothing real to say. the soul prompt forbids speculation. a critic layer checks
     responses for fabrication signals before they reach you. it is better than it was. it is not solved.
-    when memory is sparse — in the first weeks of using engram — the risk is highest. this is the
+    when memory is sparse in the first weeks of using engram the risk is highest. this is the
     problem i am still actively working on.
   </p>
 
   <h3>making it fully local</h3>
   <p>
-    engram runs on ollama — a local inference server that runs language models entirely on your machine.
-    the current model is mistral:7b running quantized at 4-bit precision. on my rtx 2050 with 4gb vram
-    responses take 15 to 20 seconds. v uses filler responses and a streaming tts pipeline to mask
+    engram runs on ollama a local inference server that runs language models entirely on your machine.
+    the current model is mistral:7b running quantized at 4-bit precision. on my rtx 3050 with 4gb vram
+    responses take 3 to 5 seconds. v uses filler responses and a streaming tts pipeline to mask
     some of the wait but it is a ceiling and i am aware of it.
   </p>
   <p>
     the usb portability is also partially implemented not fully. the memories and identity live on
     the drive. the model for now still requires the host machine's ollama installation. true full
-    portability — model, runtime and memories all self-contained on a single drive — is the target.
+    portability model, runtime and memories all self-contained on a single drive — is the target.
     it is achievable. it is not done yet.
   </p>
 
@@ -499,8 +499,8 @@
   </p>
   <p>
     what that process produces is not clean code. it is code that works, with opinions baked in
-    at every layer from lived experience rather than coursework. the best parts — v's voice,
-    the memory gate, the boot sequence — came from spending hundreds of hours with the problem,
+    at every layer from lived experience rather than coursework. the best parts v's voice,
+    the memory gate, the boot sequence came from spending hundreds of hours with the problem,
     not from knowing the answer before i started.
   </p>
 
@@ -528,7 +528,7 @@
 
   <div class="status-row">
     <div class="status-dot"></div>
-    <span class="status-label">working prototype &nbsp;·&nbsp; early 2025</span>
+    <span class="status-label">working prototype &nbsp;·&nbsp; march 2026</span>
   </div>
 
   <p>
@@ -537,7 +537,7 @@
     the boot sequence is fully animated. clipboard capture, trace wipe on exit and morning briefs are all functional.
   </p>
   <p>
-    i am seventeen. i am self-taught. i am building something that matters to me more than anything
+    i am nineteen. i am self-taught. i am building something that matters to me more than anything
     else i have worked on. engram is not finished. it may never be finished in the way products get
     finished. it is a living system. it grows as i grow. that feels right.
   </p>
@@ -596,7 +596,7 @@
   <hr>
 
   <div class="byline">
-    engram &nbsp;·&nbsp; devang verma &nbsp;·&nbsp; 2025
+    engram &nbsp;·&nbsp; devang verma &nbsp;·&nbsp; 2026
   </div>
 
 </div>

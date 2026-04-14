@@ -41,16 +41,25 @@
       color: #111;
     }
 
-    .reflection-tag { display: inline-block; font-size: 0.68rem; padding: 4px 10px; border-radius: 999px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; margin-bottom: 10px; }
-    .tag-life     { background: #fdf2e9; color: #b45309; }
-    .tag-research { background: #e7f1ff; color: #245bdb; }
-    .tag-building { background: #eef8ee; color: #1f7a4d; }
-    .tag-grad     { background: #f3eeff; color: #6d28d9; }
+    .reflection-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .tag-life          { background: #fdf2e9; color: #b45309; }
+    .tag-research      { background: #e7f1ff; color: #245bdb; }
+    .tag-building      { background: #eef8ee; color: #1f7a4d; }
+    .tag-transitioning { background: #f3eeff; color: #6d28d9; }
 
     .pull-quote {
       border-left: 2px solid #d0d0d0;
       padding: 2px 16px;
-      margin: 14px 0;
+      margin: 16px 0;
       font-style: italic;
       color: #555;
       font-size: 0.92rem;
@@ -61,33 +70,76 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      margin-top: 14px;
+      margin-top: 16px;
       font-size: 0.75rem;
       color: #999;
       letter-spacing: 0.04em;
     }
-
     .mood-dot {
-      width: 7px;
-      height: 7px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       display: inline-block;
       flex-shrink: 0;
     }
+    .m-honest      { background: #f97316; }
+    .m-reflective  { background: #8b5cf6; }
+    .m-resolved    { background: #22c55e; }
+    .m-uncertain   { background: #64748b; }
 
-    .m-honest     { background: #f97316; }
-    .m-reflective { background: #8b5cf6; }
-    .m-resolved   { background: #22c55e; }
-    .m-uncertain  { background: #64748b; }
+    .timeline-card.static { cursor: default; }
+    .timeline-card.static:hover { transform: none; box-shadow: none; }
 
-    /* make reflection cards non-clickable by default — add href when ready */
-    .timeline-card.static {
-      cursor: default;
+    /* ── MEDIA SYSTEM ─────────────────────────────── */
+
+    .media-block {
+      margin-top: 22px;
+      border-top: 1px solid #f0f0f0;
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .timeline-card.static:hover {
-      transform: none;
-      box-shadow: none;
+    /* image grids */
+    .media-images {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr; /* default: 1 image */
+    }
+    .media-images.two   { grid-template-columns: 1fr 1fr; }
+    .media-images.three { grid-template-columns: 1fr 1fr 1fr; }
+    .media-images.four  { grid-template-columns: 1fr 1fr; }
+
+    .media-images img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+      display: block;
+      background: #f2f2f2;
+    }
+
+    /* youtube / video embed */
+    .media-video {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f0f0f0;
+    }
+    .media-video iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .media-caption {
+      font-size: 0.78rem;
+      color: #bbb;
+      font-style: italic;
     }
 
     .hidden { display: none; }
@@ -107,48 +159,54 @@
 
   <h1 class="name" style="margin-bottom: 6px;">reflections</h1>
   <p class="reflections-intro">
-    not research. not projects. just things i've thought hard about
+    not research. not projects. just things i've thought hard about —
     failures, realizations, the slow shifts in how i see things.
     written when something settles enough to say.
   </p>
 
   <div class="filter-row">
     <button class="pill active" onclick="filterBy('all', this)">all</button>
-    <button class="pill" onclick="filterBy('research', this)">on research</button>
-    <button class="pill" onclick="filterBy('transitioning', this)">on transitioning</button>
-    <button class="pill" onclick="filterBy('life', this)">on life</button>
+    <button class="pill"        onclick="filterBy('research', this)">on research</button>
+    <button class="pill"        onclick="filterBy('transitioning', this)">on transitioning</button>
+    <button class="pill"        onclick="filterBy('life', this)">on life</button>
   </div>
 
   <section class="timeline">
 
-    <!-- ENTRY: why i'm applying abroad -->
-    <div class="timeline-item" data-tag="grad">
+    <!-- ═══════════════════════════════════════
+         1. shifting from core theory
+    ═══════════════════════════════════════ -->
+    <div class="timeline-item" data-tag="transitioning">
       <div class="timeline-left">
         <span class="timeline-date">April 2026</span>
         <span class="timeline-dot"></span>
         <span class="timeline-line"></span>
       </div>
       <div class="timeline-card static">
-        <span class="reflection-tag tag-grad">as im growing</span>
+        <span class="reflection-tag tag-transitioning">as i'm growing</span>
         <h3 class="entry-title">thinking to change my focus from core theory</h3>
-        <div class="pull-quote">
-          "it's not imposter syndrome. i've read enough about that."
-        </div>
-        <p class="entry-desc">
-          ive been learning physics deeply for the last 5 years and i genuinely love it like going into theories understanding why things happen thinking about the universe and all that. but recently as im growing i can feel something changing in my head my mind is not fully satisfied just thinking anymore its pushing me towards actually making things applying what ive been learning building stuff that actually uses that physics or reasons it in some way
 
-earlier i used to enjoy just sitting and learning trying to understand concepts again and again but now i get way more dopamine from building something even if its small even if it fails it just feels more real like im actually doing something instead of just thinking about doing it
+        <p class="entry-desc">ive been learning physics deeply for the last 5 years and i genuinely love it — going into theories, understanding why things happen, thinking about the universe and all that. but recently as im growing i can feel something changing in my head. my mind is not fully satisfied just thinking anymore. its pushing me towards actually making things, applying what ive been learning, building stuff that actually uses that physics or reasons it in some way.</p>
+        <p class="entry-desc">earlier i used to enjoy just sitting and learning, trying to understand concepts again and again. but now i get way more dopamine from building something, even if its small, even if it fails. it just feels more real. like im actually doing something instead of just thinking about doing it.</p>
+        <p class="entry-desc">and at the same time the world is moving very fast — ai agents, new tools, people building crazy stuff every day. and when im just stuck in learning theory for long periods it starts feeling like nothing is visible, and then fomo kicks in because i know that in the same time i could have shipped something, experimented more, instead of staying in that loop.</p>
+        <p class="entry-desc">so yeah. im slowly shifting from a thinking phase to a building phase — not because i stopped loving physics, but because i want to use it now. i want to turn all that thinking into something real. something that exists outside my head.</p>
 
-and at the same time the world is moving very fast like ai agents new tools people building crazy stuff every day and when im just stuck in learning theory for long periods it starts feeling like no one notices it nothing is visible and then fomo kicks in because i know that in the same time i could have built something shipped something experimented more instead of just staying in that loop of learning and thinking
-
-so yeah i feel like im slowly shifting from a thinking phase to a building phase not because i stopped loving physics but because i want to use it now i want to turn all that thinking into something real something that exists outside my head.
-
-        </p>
         <div class="mood-line"><span class="mood-dot m-honest"></span> honest</div>
+
+        <!-- ▼ ADD IMAGES HERE — copy images to assets/, update src values
+        <div class="media-block">
+          <div class="media-images">
+            <img src="assets/YOUR-IMAGE.jpg" alt="description">
+          </div>
+          <span class="media-caption">your caption</span>
+        </div>
+        ▲ END MEDIA -->
       </div>
     </div>
 
-    <!-- ENTRY: engram -->
+    <!-- ═══════════════════════════════════════
+         2. engram
+    ═══════════════════════════════════════ -->
     <div class="timeline-item" data-tag="research">
       <div class="timeline-left">
         <span class="timeline-date">March 2026</span>
@@ -158,136 +216,148 @@ so yeah i feel like im slowly shifting from a thinking phase to a building phase
       <div class="timeline-card static">
         <span class="reflection-tag tag-research">on research</span>
         <h3 class="entry-title">on engram</h3>
-        <p class="entry-desc">
-       engram was never something i planned it just came into my mind randomly one night while i was thinking and it hit really deep like not a normal idea it felt real and heavy. i was thinking about people who are going to be left behind in this fast moving world everything is speeding up ai tech everything and at the same time people are getting lonelier day by day. and i was reading bhagwadgita around that time and one idea stuck with me that once you find your true self you stop feeling suffering the same way you start observing it from a third perspective almost like supporting your own material body instead of being controlled by it
 
-that is where engram started forming in my head like what if there was something that reminds you of who you actually are but in a safe way not something addictive not something that replaces you but something that brings you back to yourself again and again
+        <p class="entry-desc">engram was never something i planned. it just came into my mind randomly one night while i was thinking and it hit really deep — not a normal idea, it felt real and heavy. i was thinking about people who are going to be left behind in this fast moving world. everything is speeding up and at the same time people are getting lonelier day by day.</p>
+        <p class="entry-desc">i was reading the bhagavad gita around that time and one idea stuck with me — that once you find your true self you stop feeling suffering the same way. you start observing it from a third perspective, almost like supporting your own material body instead of being controlled by it. that is where engram started forming. what if there was something that reminds you of who you actually are, but in a safe way. not addictive. not replacing you. just bringing you back to yourself again and again.</p>
+        <p class="entry-desc">i started very raw — testing llms, writing code manually, no proper structure. took some ui inspiration from cyberpunk because i wanted it to feel a certain way. something minimal but deep. after that i tested the llm with constraints around identity, local memory, soul identity. terms i didnt even fully understand at that time but i kept experimenting.</p>
+        <p class="entry-desc">the ui phase was honestly full of failures. things breaking, layouts not making sense, nothing feeling right. then i shifted to features — initially i had 19 in mind but as i started building i realised most were unnecessary. cut it down to 2 core things and focused only on them.</p>
+        <p class="entry-desc">i was working almost 18 hours a day. unhealthy, but it felt like i was getting closer to something real. then the biggest slowdown — hallucination problems with the llm, no proper solution, especially keeping everything local. limited context, constant constraints. it felt like i was fighting the system itself.</p>
+        <p class="entry-desc">still i kept going. built an 8-layer recall system, tried to structure memory better, worked on something like a soul system to maintain continuity of identity. experimented with a memory palace wing architecture in early april — sounded good in theory, didnt work practically.</p>
+        <p class="entry-desc">right now im still working on it, just slower. the idea never left. it still feels like something important. something that needs to exist. i just need to figure out how to make it real in the right way.</p>
 
-i started very raw just testing llms writing code manually no proper structure just trying things out taking some ui inspiration from cyberpunk because i wanted it to feel a certain way something minimal but deep something that doesnt feel like a normal app. after that i started testing the llm with constraints like identity local memory soul identity all these ideas that i didnt even fully understand at that time but i kept experimenting
+        <div class="pull-quote">"i was thinking of something way ahead for the current time."</div>
 
-then i moved to ui and that phase was honestly full of failures things breaking layouts not making sense nothing feeling right but i kept going. then i shifted towards features initially i had like 19 features in mind all felt important at that moment but as i started building i realised most of them were unnecessary so i cut it down to just 2 core things and focused only on them
-
-i was working almost 18 hours a day which was honestly very unhealthy but at that time i felt like i was getting closer to something real like this could actually become something people use something that helps them so i kept pushing. but then the biggest slowdown came from hallucination problems with the llm and not finding a proper solution especially because i wanted to keep everything local which made it way harder due to limited context size and constraints it felt like i was fighting the system itself at that point
-
-still i didnt stop i kept trying different approaches i built an 8 layer recall system tried to structure memory better worked on something like a soul system to maintain continuity of identity i even experimented with something like a memory palace wing architecture released in first week of april which sounded good in theory but didnt really work out practically
-
-right now im still working on it just at a slower pace along with other things its not as chaotic as before but the idea is still there it never left it still feels like something important something that needs to exist i just need to figure out how to make it real in the right way.
-
-        </p>
-        <div class="pull-quote">
-          "i was thinking of something way ahead for current time"
-        </div>
-
-        </p>
         <div class="mood-line"><span class="mood-dot m-reflective"></span> reflective</div>
+
+        <!-- ▼ ADD IMAGES HERE
+        <div class="media-block">
+          <div class="media-images two">
+            <img src="assets/engram-ui-1.jpg" alt="engram early ui">
+            <img src="assets/engram-ui-2.jpg" alt="engram iteration">
+          </div>
+          <span class="media-caption">early ui explorations, march 2026</span>
+        </div>
+        ▲ END MEDIA -->
       </div>
     </div>
 
-    <!-- ENTRY: on research process -->
-    <div class="timeline-item" data-tag="research">
+    <!-- ═══════════════════════════════════════
+         3. upcoming summer
+    ═══════════════════════════════════════ -->
+    <div class="timeline-item" data-tag="life">
       <div class="timeline-left">
         <span class="timeline-date">January 2026</span>
         <span class="timeline-dot"></span>
         <span class="timeline-line"></span>
       </div>
       <div class="timeline-card static">
-        <span class="reflection-tag tag-research">life</span>
+        <span class="reflection-tag tag-life">on life</span>
         <h3 class="entry-title">upcoming summer</h3>
-        <p class="entry-desc">
-        this year started and i came back home for winter holidays and something just felt different like a wave of nostalgia hit me out of nowhere. hometown just has that feeling that you cant really explain it just feels right. i went out to play football with my school friends after so long and it felt like nothing had changed at all and at the same time everything had changed. i was also spending a lot of time with my family just sitting talking being around them while also working on my nebulla project in between
 
-for a moment i genuinely felt like what if i just earn well and settle here like live a simple life around the same people same places because it felt peaceful in a way that i dont feel in my current city but then again i know i cant just become homesick and stop moving forward. there is more i want to do more i want to build more i want to explore
+        <p class="entry-desc">this year started and i came back home for winter holidays and something just felt different. a wave of nostalgia hit me out of nowhere. hometown just has that feeling you cant really explain — it just feels right. i went out to play football with my school friends after so long and it felt like nothing had changed, and at the same time everything had changed. i was also spending a lot of time with my family, just sitting, talking, being around them, while also working on nebula in between.</p>
+        <p class="entry-desc">for a moment i genuinely felt like — what if i just earn well and settle here. live a simple life around the same people, same places. it felt peaceful in a way i dont feel in my current city. but then again i know i cant just become homesick and stop moving forward. there is more i want to do, more i want to build, more i want to explore.</p>
+        <p class="entry-desc">so i made a decision for myself — this summer i want to do things differently. take up a remote job or internship so i can stay at home, wake up in my own space, go out everyday, meet people, play football, spend time with family, and still keep building at the same time. balance, not just work.</p>
+        <p class="entry-desc">also im genuinely excited for the world cup. watching matches with my family at home, that whole vibe just hits different. especially after last world cup when my idol finally won it — that moment was unreal. now i really want portugal or brazil to win this one. it just feels like it would complete something in a weird way.</p>
 
-so i kind of made a decision for myself that this summer i want to do things differently. i dont want to just stay stuck in one place mentally and physically i want to work but also live properly so im planning to take up a remote job or internship so i can stay at home during summers wake up in my own space go out everyday meet people play football spend time with family and still keep building and working at the same time
+        <div class="pull-quote">"i think the willingness to enjoy life while doing the karma is the best thing i can do to myself."</div>
 
-i dont really like the city im living in right now it never felt like mine and maybe thats okay but i dont want that feeling to take over my life. so this summer is more about balance for me not just work not just escaping but actually living properly while still doing what i need to do
-
-also im genuinely excited for the world cup this time like watching matches with my family at home that whole vibe just hits different it feels like one of those small things that actually matter a lot to me now especially after last world cup when my idol finally won it that moment was unreal and now i really want portugal or brazil to win this one it just feels like it would complete something for me in a weird way.
-
-
-        </p>
-        <div class="pull-quote">
-          "i think the willingness to enjoy life while doing the karma is the best thing i can do to myself"
-        </div>
         <div class="mood-line"><span class="mood-dot m-resolved"></span> uncertain → resolved</div>
+
+        <!-- ▼ ADD IMAGES HERE (home, family, football with friends)
+        <div class="media-block">
+          <div class="media-images three">
+            <img src="assets/home-1.jpg" alt="">
+            <img src="assets/home-2.jpg" alt="">
+            <img src="assets/home-3.jpg" alt="">
+          </div>
+          <span class="media-caption">home, january 2026</span>
+        </div>
+        ▲ END MEDIA -->
       </div>
     </div>
 
-    <!-- ENTRY: on building alone -->
-    <div class="timeline-item" data-tag="life">
+    <!-- ═══════════════════════════════════════
+         4. what just happened — transition
+    ═══════════════════════════════════════ -->
+    <div class="timeline-item" data-tag="transitioning">
       <div class="timeline-left">
-        <span class="timeline-date">2023-2025</span>
+        <span class="timeline-date">2023 – 2025</span>
         <span class="timeline-dot"></span>
         <span class="timeline-line"></span>
       </div>
       <div class="timeline-card static">
-        <span class="reflection-tag tag-building">transitioning</span>
+        <span class="reflection-tag tag-transitioning">transitioning</span>
         <h3 class="entry-title">what just happened?</h3>
-        <p class="entry-desc">
-         i was studying physics and preparing for medical with applied maths during my senior secondary and at that time i was fully into it like that was the only path i could see for myself. i used to spend hours just studying concepts, solving problems, thinking about how everything connects. i was really invested in it not just academically but mentally as well
 
-then in 2024 during my school farewell there was this one moment that stayed with me more than anything else. it was very emotional like everything was ending at once. after the whole ceremony when everyone had started leaving me and my bestfriend just stayed back on the ground
+        <p class="entry-desc">i was studying physics and preparing for medical with applied maths during my senior secondary. i was fully into it — that was the only path i could see for myself. hours of concepts, problem solving, thinking about how everything connects. mentally invested, not just academically.</p>
+        <p class="entry-desc">then in 2024 during my school farewell there was one moment that stayed with me more than anything else. very emotional — everything ending at once. after the whole ceremony when everyone had started leaving, me and my best friend just stayed back on the ground. we didnt really want to leave. so we picked up the ball and started playing football in our formal clothes — pants, shirts, everything. we played for more than an hour. talking in between, playing, laughing, but also feeling that heaviness that this is the last time we are here like this. it wasnt even about the game. it was about holding on to that moment a little longer. i never thought i would miss school this much. but that day made me realise it.</p>
+        <p class="entry-desc">but things didnt go the way i expected. i couldnt get into medical and that hit harder than i thought it would — not just about not getting in, but because the direction i had in my head just disappeared. during that time i also slowly phased out of physics without even realising it. like everything just paused and i didnt know what to hold on to.</p>
+        <p class="entry-desc">i ended up coming to symbiosis for college. first year was simple — learning programming basics from scratch, playing football whenever i could, enjoying small things. but there was a quiet shift happening in how i was thinking. towards the end of 2024 i started getting back into things on my own. not structured, just exploring whatever felt interesting. self-driven and a bit isolated, not really showing it to people, just going with the flow.</p>
+        <p class="entry-desc">then in 2025 i completed my internship at AIT GLOBAL. that experience changed a lot for me — exposed me to real systems, real workflows, real problems. mr ajeet singh, the delivery head, helped me understand how systems actually work and how to think practically, not just theoretically. after that i entered second year with a completely different mindset. fire to build, to experiment, to push — and keep going deeper into research, but now with action, not just thought.</p>
+        <p class="entry-desc" style="color:#888; font-style:italic;">i've learned to adapt. finally.</p>
 
-we didnt really want to leave so we just picked up the ball and started playing football in our formal clothes, pants, shirts everything. we played for more than an hour just talking in between, playing, laughing but also feeling that heaviness that this is the last time we are here like this
-
-it wasnt even about the game, it was about holding on to that moment for a little longer. we both knew things were about to change and we just didnt want it to end that quickly. i never really thought i would miss school this much but that day made me realise it
-
-but things didnt go the way i expected. i couldnt get into medical and that whole phase kind of hit me harder than i thought it would because it wasnt just about not getting in. it felt like the direction i had in my head just disappeared and during that time i also slowly phased out of physics without even realising it properly. it was like everything just paused and i didnt know what to hold on to
-
-then i ended up coming here for college at symbiosis mostly because someone told us its a nice place and at that point i wasnt overthinking too much. i just needed to move forward with something instead of staying stuck. but even after coming here there was this thought in the back of my mind like what if i had continued with physics, what if i had taken that route seriously
-
-but over time i started understanding that im not actually limited by the system or by the degree im doing right now. just because im studying programming doesnt mean i have to leave physics behind. i can still go as deep as i want into it on my own terms and at the same time apply that way of thinking into what im building with ai and systems
-
-my first year was pretty simple mostly learning the basics of programming, understanding things from scratch, playing football whenever i could and just enjoying small things like good food haha. but even in that phase there was a quiet shift happening in how i was thinking
-
-towards the end of 2024 i started getting back into things on my own not in a structured way, just exploring, researching whatever felt interesting. it was kind of self driven and a bit isolated i wasnt really showing it to people i was just going with the flow trying to understand things in my own way again and slowly that curiosity started coming back
-
-then in 2025 i completed my internship at AIT GLOBAL and that experience changed a lot for me. it exposed me to real systems, real workflows, real problems and at the same time mr ajeet singh, the delivery head there helped me a lot in understanding things better, how systems actually work and how to think more practically not just theoretically
-
-that whole experience made me realise that i dont just want to sit and think anymore i actually want to build things, create things and apply what i know
-
-after that i entered my second year with a completely different mindset. there was a fire in me to build, to experiment, to push forward and at the same time keep going deeper into my own research but now with action not just thought.
-
-        </p>
-        <p class="entry-desc">
-          i've learned to adapt finally!
-        </p>
         <div class="mood-line"><span class="mood-dot m-uncertain"></span> and still figuring it out</div>
+
+        <!-- ▼ ADD IMAGES HERE (school farewell, college early days)
+        <div class="media-block">
+          <div class="media-images two">
+            <img src="assets/farewell-2024.jpg" alt="school farewell 2024">
+            <img src="assets/college-early.jpg" alt="first days at symbiosis">
+          </div>
+          <span class="media-caption">farewell 2024 · early college</span>
+        </div>
+        ▲ END MEDIA -->
       </div>
     </div>
 
-    <!-- ENTRY: on life / college -->
+    <!-- ═══════════════════════════════════════
+         5. the football incident
+    ═══════════════════════════════════════ -->
     <div class="timeline-item" data-tag="life">
       <div class="timeline-left">
-        <span class="timeline-date">Nov-Dec 2022</span>
+        <span class="timeline-date">Nov – Dec 2022</span>
         <span class="timeline-dot"></span>
       </div>
       <div class="timeline-card static">
         <span class="reflection-tag tag-life">on life</span>
         <h3 class="entry-title">the football incident</h3>
-        <p class="entry-desc">
-         i was preparing very rigorously for my upcoming nationwide football tournament called clusters where schools from all over the west region of india come to compete. i was training hard but during one of the training sessions i pushed myself too much and ended up injuring my hip. i was very angry at myself because it could have been avoided but there was still time left for the tournament so i started treating it doing exercises trying to fix it and all that but it just wasnt getting better
 
-still i forced myself to go for the tournament i travelled with the team and when we reached it was the same venue we had for the same tournament back in 2019 the same school. i remembered how much fun we had there last time so i was really happy to be back and i had made a lot of friends during that stay in 2019 so i was hoping to experience that again
+        <p class="entry-desc">i was preparing very rigorously for my upcoming nationwide football tournament — clusters, where schools from all over the west region of india come to compete. i was training hard but during one session i pushed myself too much and injured my hip. angry at myself because it could have been avoided. still i forced myself to go.</p>
+        <p class="entry-desc">when we reached it was the same venue from 2019 — the same school. i remembered how much fun we had there last time. and somehow it actually happened again. day 1 itself i had already made a lot of new friends from different schools. we were staying in school classrooms. honestly how can it get more fun than that — being in a school at night. we were doing all kinds of random activities with students from other schools. we even celebrated my best friend nitin's birthday there which made it even more special.</p>
+        <p class="entry-desc">but then the next day we had our match. we gave everything. i played through a lot of pain but we still couldnt win and got knocked out. it hit hard — that was the last tournament i ever attended. i was really sad, felt like a complete loser at that moment. but we stayed for the finals and somewhere inside i told myself i wont give up ever.</p>
+        <p class="entry-desc">and in the meantime the 2022 world cup was going on and i was rooting for messi. after i came back home, me and my family watched every argentina game together. when messi finally won it something just shifted in me — genuinely changed my mood, gave me a different kind of energy. like things were not as bad as they felt in that moment.</p>
+        <p class="entry-desc" style="color:#888; font-style:italic;">this is me in 2026 writing this — i will play again. i will participate in more tournaments than i ever did. ive been busy with everything but i know i will come back to it.</p>
 
-and somehow it actually happened day 1 itself i had already made a lot of new friends from different schools. we were staying in school classrooms and it was a massive school with so many classrooms everywhere and honestly how can it get more fun than that being in a school at night is literally something every kid dreams of. we were doing all kinds of random fun activities with students from other schools just enjoying everything it was honestly such a good time. we even celebrated my best friend nitin's birthday there which made it even more special
+        <div class="pull-quote">"The only place that 'success' comes before 'work' is in the dictionary."</div>
 
-but then the next day we had our match we had to move to another football stadium nearby because we were playing against the home team on their ground. we gave it everything we had i played through a lot of pain but we still couldnt win that match and got knocked out. it hit hard because that meant we were out and that was the last tournament i ever attended
-
-i was really sad i couldnt process it properly it just felt like everything ended so quickly and i felt like a complete loser at that moment. but we stayed there for a few more days to watch the finals and somewhere inside i told myself that i wont give up ever
-
-and in the meantime the 2022 world cup was going on and i was rooting for messi a lot. after i came back home from the tournament me and my family watched every argentina game together and when messi finally won it something just shifted in me it genuinely changed my mood and gave me a different kind of energy like things were not as bad as they felt in that moment
-
-but after that i never really played another football tournament life got busy things changed and it just stayed like that
-
-this is me in 2026 writing this part i just want to say i will play again i will participate in more tournaments than i ever did during my childhood and teenage years ive been busy with everything lately but i know i will come back to it for sure
-
-
-        </p>
-        <div class="pull-quote">
-          "The only place that “success” comes before “work” is in the dictionary"
-        </div>
         <div class="mood-line"><span class="mood-dot m-honest"></span> honest</div>
+
+        <!-- ▼▼▼ FOOTBALL PHOTOS — replace src with your actual image filenames in assets/
+             Examples:  assets/clusters-2022.jpg   assets/team-photo.jpg   assets/nitin-bday.jpg
+             1 image  → remove class from .media-images
+             2 images → class="two"
+             3 images → class="three"
+             4 images → class="four"
+
+             FOR A VIDEO (YouTube) instead of images, use the .media-video block below.
+        -->
+        <div class="media-block">
+          <div class="media-images two">
+            <img src="assets/football-tournament-1.jpg" alt="clusters tournament 2022">
+            <img src="assets/football-tournament-2.jpg" alt="the team">
+          </div>
+          <span class="media-caption">clusters tournament, nov 2022 — last one i played</span>
+        </div>
+
+        <!-- FOR A YOUTUBE VIDEO instead of images, delete the block above and use this:
+        <div class="media-block">
+          <div class="media-video">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+          </div>
+          <span class="media-caption">your caption</span>
+        </div>
+        -->
+
       </div>
     </div>
 
@@ -299,7 +369,6 @@ this is me in 2026 writing this part i just want to say i will play again i will
   function filterBy(tag, btn) {
     document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
-
     document.querySelectorAll('.timeline-item[data-tag]').forEach(item => {
       if (tag === 'all' || item.dataset.tag === tag) {
         item.classList.remove('hidden');

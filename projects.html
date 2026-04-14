@@ -1,146 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <title>reflections | devang verma</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .reflections-intro {
+      max-width: 560px;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
 
-<meta charset="UTF-8">
-<title>projects | devang verma</title>
+    .filter-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    .pill {
+      border: 1px solid rgba(0,0,0,0.15);
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      color: #444;
+      background: none;
+      font-family: inherit;
+      transition: all 0.15s ease;
+    }
 
+    .pill.active,
+    .pill:hover {
+      background: rgba(0,0,0,0.05);
+      border-color: rgba(0,0,0,0.25);
+      color: #111;
+    }
+
+    .reflection-tag { display: inline-block; font-size: 0.68rem; padding: 4px 10px; border-radius: 999px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; margin-bottom: 10px; }
+    .tag-life     { background: #fdf2e9; color: #b45309; }
+    .tag-research { background: #e7f1ff; color: #245bdb; }
+    .tag-building { background: #eef8ee; color: #1f7a4d; }
+    .tag-grad     { background: #f3eeff; color: #6d28d9; }
+
+    .pull-quote {
+      border-left: 2px solid #d0d0d0;
+      padding: 2px 16px;
+      margin: 14px 0;
+      font-style: italic;
+      color: #555;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .mood-line {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: #999;
+      letter-spacing: 0.04em;
+    }
+
+    .mood-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .m-honest     { background: #f97316; }
+    .m-reflective { background: #8b5cf6; }
+    .m-resolved   { background: #22c55e; }
+    .m-uncertain  { background: #64748b; }
+
+    /* make reflection cards non-clickable by default — add href when ready */
+    .timeline-card.static {
+      cursor: default;
+    }
+
+    .timeline-card.static:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .hidden { display: none; }
+  </style>
 </head>
-
 <body>
 
 <nav class="top-nav">
-<a href="index.html">home</a>
-<a href="research.html">research</a>
-<a href="projects.html">projects</a>
-<a href="assets/devangs Resume.pdf">CV</a>
-<a href="contact.html">contact</a>
+  <a href="index.html">home</a>
+  <a href="research.html">research</a>
+  <a href="reflections.html">reflections</a>
+  <a href="assets/devangs Resume.pdf">cv</a>
+  <a href="contact.html">contact</a>
 </nav>
 
 <div class="container">
 
-<h1 class="page-title">projects</h1>
+  <h1 class="name" style="margin-bottom: 6px;">reflections</h1>
+  <p class="reflections-intro">
+    not research. not projects. just things i've thought hard about —
+    failures, realizations, the slow shifts in how i see things.
+    written when something settles enough to say.
+  </p>
 
-<p class="projects-intro">
-these projects represent my exploration of machine learning systems,
-stochastic modeling, neural interfaces, and computational science.
-</p>
-
-<div class="project-legend">
-
-<span class="legend research">research</span>
-<span class="legend project">project</span>
-<span class="legend experiment">experiment</span>
-
-</div>
-
-<div class="project-map">
-
-<div class="orbit-ring"></div>
-
-<!-- MAIN PROJECT -->
-
-<a href="entries/blackwall_v1.html"
-   class="project-circle main"
-   onclick="sessionStorage.setItem('bw_transition','1')">
-
-  <div class="circle-inner">
-    <span class="project-tag research">research project</span>
-    <h3>blackwall v1</h3>
-    <p>rogue ai? emergent language that survived everything. click to enter.</p>
+  <div class="filter-row">
+    <button class="pill active" onclick="filterBy('all', this)">all</button>
+    <button class="pill" onclick="filterBy('research', this)">on research</button>
+    <button class="pill" onclick="filterBy('building', this)">on building</button>
+    <button class="pill" onclick="filterBy('grad', this)">on grad school</button>
+    <button class="pill" onclick="filterBy('life', this)">on life</button>
   </div>
 
-</a>
+  <section class="timeline">
 
+    <!-- ENTRY: why i'm applying abroad -->
+    <div class="timeline-item" data-tag="grad">
+      <div class="timeline-left">
+        <span class="timeline-date">April 2026</span>
+        <span class="timeline-dot"></span>
+        <span class="timeline-line"></span>
+      </div>
+      <div class="timeline-card static">
+        <span class="reflection-tag tag-grad">on grad school</span>
+        <h3 class="entry-title">why i want to go abroad, and what i'm actually scared of</h3>
+        <div class="pull-quote">
+          "it's not imposter syndrome. i've read enough about that."
+        </div>
+        <p class="entry-desc">
+          it's something quieter — the fear that the version of me who got this far won't translate.
+          that i'll arrive somewhere and the context that made me make sense, the specific kind of
+          curiosity i have, the way i work, won't carry over.
+          i've been building things alone for most of this. i don't know what it looks like
+          to do that inside a lab with people who've been doing it longer.
+        </p>
+        <div class="mood-line"><span class="mood-dot m-honest"></span> honest</div>
+      </div>
+    </div>
 
-</a>
+    <!-- ENTRY: blackwall -->
+    <div class="timeline-item" data-tag="research">
+      <div class="timeline-left">
+        <span class="timeline-date">March 2026</span>
+        <span class="timeline-dot"></span>
+        <span class="timeline-line"></span>
+      </div>
+      <div class="timeline-card static">
+        <span class="reflection-tag tag-research">on research</span>
+        <h3 class="entry-title">what blackwall taught me about asking the wrong question</h3>
+        <p class="entry-desc">
+          i spent weeks designing containment actions. better quarantine. better noise injection.
+          better bandwidth throttling. and they all failed the same way, because they all assumed
+          the language was in the messages.
+          the covariance channel doesn't live in any single message.
+          it lives in the joint distribution across all agents simultaneously.
+          you can't contain something that isn't in any one place.
+        </p>
+        <div class="pull-quote">
+          "i was trying to solve the right problem in the wrong layer of abstraction."
+        </div>
+        <p class="entry-desc">
+          that failure is probably more useful than any clean result would have been.
+        </p>
+        <div class="mood-line"><span class="mood-dot m-reflective"></span> reflective</div>
+      </div>
+    </div>
 
+    <!-- ENTRY: on research process -->
+    <div class="timeline-item" data-tag="research">
+      <div class="timeline-left">
+        <span class="timeline-date">February 2026</span>
+        <span class="timeline-dot"></span>
+        <span class="timeline-line"></span>
+      </div>
+      <div class="timeline-card static">
+        <span class="reflection-tag tag-research">on research</span>
+        <h3 class="entry-title">the paper i almost gave up on</h3>
+        <p class="entry-desc">
+          around the sixth failed derivation of the spectral stability criterion, i stopped asking
+          whether the result was right and started asking whether the question was right.
+          that shift is probably the most useful thing i learned this year.
+          the math didn't care that i'd been at it for three weeks. it just kept being wrong.
+        </p>
+        <div class="pull-quote">
+          "i think the willingness to restart from the question, not the proof, is the actual skill."
+        </div>
+        <div class="mood-line"><span class="mood-dot m-resolved"></span> uncertain → resolved</div>
+      </div>
+    </div>
 
-<!-- BCI -->
+    <!-- ENTRY: on building alone -->
+    <div class="timeline-item" data-tag="building">
+      <div class="timeline-left">
+        <span class="timeline-date">January 2026</span>
+        <span class="timeline-dot"></span>
+        <span class="timeline-line"></span>
+      </div>
+      <div class="timeline-card static">
+        <span class="reflection-tag tag-building">on building</span>
+        <h3 class="entry-title">what it means to build things outside any structure</h3>
+        <p class="entry-desc">
+          none of this was assigned. no supervisor, no lab, no deadline except the ones i invented.
+          that sounds freeing and it mostly is, but there's also something uncomfortable about it —
+          no external validation until much later. you go long stretches not knowing
+          if what you're doing matters or if you've just convinced yourself it does.
+        </p>
+        <p class="entry-desc">
+          i've learned to sit with that. still not comfortable with it. just more used to it.
+        </p>
+        <div class="mood-line"><span class="mood-dot m-uncertain"></span> still figuring it out</div>
+      </div>
+    </div>
 
-<a href="entries/something.html" class="project-circle item i1">
+    <!-- ENTRY: on life / college -->
+    <div class="timeline-item" data-tag="life">
+      <div class="timeline-left">
+        <span class="timeline-date">mid 2025</span>
+        <span class="timeline-dot"></span>
+      </div>
+      <div class="timeline-card static">
+        <span class="reflection-tag tag-life">on life</span>
+        <h3 class="entry-title">somewhere between first and second year, the syllabus stopped being relevant</h3>
+        <p class="entry-desc">
+          i remember the exact feeling — reading a paper at 1am that was so far outside anything
+          we'd covered in class that i couldn't even tell what i didn't understand yet.
+          that gap between what college was teaching me and what i actually wanted to know
+          became the engine for everything that followed.
+        </p>
+        <div class="pull-quote">
+          "the most useful thing college gave me was the time to work around it."
+        </div>
+        <div class="mood-line"><span class="mood-dot m-honest"></span> honest</div>
+      </div>
+    </div>
 
-<div class="circle-inner">
-
-<span class="project-tag project">project</span>
-
-<h3>neuroreactor</h3>
-<p>eeg neural state decoding</p>
+  </section>
 
 </div>
 
-</a>
+<script>
+  function filterBy(tag, btn) {
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
 
-
-<!-- TARS -->
-
-<a href="entries/tars.html" class="project-circle item i2">
-
-<div class="circle-inner">
-
-<span class="project-tag project">project</span>
-
-<h3>archaeology of ai</h3>
-<p>to be updated</p>
-
-</div>
-
-</a>
-
-
-<!-- SPECTRAL -->
-
-<a href="entries/spectral-stability.html" class="project-circle item i3">
-
-<div class="circle-inner">
-
-<span class="project-tag research">research</span>
-
-<h3>spectral ai</h3>
-<p>stochastic stability theorem</p>
-
-</div>
-
-</a>
-
-
-<!-- ANOMALY -->
-
-<a href="entries/bayesian.html" class="project-circle item i4">
-
-<div class="circle-inner">
-
-<span class="project-tag project">project</span>
-
-<h3>bayesian icu</h3>
-<p>uncertainty-aware clinical risk system</p>
-
-</div>
-
-</a>
-
-
-<!-- EXOPLANETS -->
-
-<a href="entries/exoplanet.html" class="project-circle item i5">
-
-<div class="circle-inner">
-
-<span class="project-tag experiment">experiment</span>
-
-<h3>TARS</h3>
-<p>to be updated</p>
-
-</div>
-
-</a>
-
-</div>
-
-</div>
+    document.querySelectorAll('.timeline-item[data-tag]').forEach(item => {
+      if (tag === 'all' || item.dataset.tag === tag) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
+

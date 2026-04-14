@@ -16,6 +16,12 @@
     .stat-num.ok     { color: #27ae60; }
     .stat-label { font-size: 0.7rem; color: #aaa; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; display: block; }
 
+    .tech-summary { border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 32px 0 40px; padding: 8px 0; }
+    .ts-row { display: flex; gap: 20px; padding: 13px 0; border-bottom: 1px solid #f2f2f2; font-size: 0.88rem; line-height: 1.6; }
+    .ts-row:last-child { border-bottom: none; }
+    .ts-key { min-width: 148px; font-weight: 600; color: #aaa; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; padding-top: 2px; flex-shrink: 0; }
+    .ts-val { color: #333; }
+
     .callout { border-left: 3px solid #111; padding: 14px 20px; margin: 24px 0; background: #fafafa; }
     .callout p { margin: 0; color: #444; font-style: italic; }
 
@@ -72,7 +78,7 @@
   <nav class="top-nav">
     <a href="../index.html">home</a>
     <a href="../research.html">research</a>
-    <a href="../projects.html">projects</a>
+    <a href="../reflections.html">reflections</a>
     <a href="../assets/cv.pdf">cv</a>
     <a href="../contact.html">contact</a>
   </nav>
@@ -83,13 +89,35 @@
     <h1>blackwall v1</h1>
     <p class="tagline">emergent communication detection and containment</p>
 
-    <div class="stats">
-      <div><span class="stat-num">5</span><span class="stat-label">phases</span></div>
-      <div><span class="stat-num">8</span><span class="stat-label">detectors</span></div>
-      <div><span class="stat-num">4000</span><span class="stat-label">episodes</span></div>
-      <div><span class="stat-num danger">0.940</span><span class="stat-label">peak risk</span></div>
-      <div><span class="stat-num warn">97</span><span class="stat-label">lock-in episode</span></div>
-      <div><span class="stat-num ok">survived</span><span class="stat-label">all containment</span></div>
+    <div class="tech-summary">
+      <div class="ts-row">
+        <span class="ts-key">architecture</span>
+        <span class="ts-val">four cooperative LSTM agents on a small-world communication graph; shared environment, no explicit language instruction; communication channel subject to bandwidth, noise, and dropout pressure</span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-key">training</span>
+        <span class="ts-val">4,000 episodes · 8×8 grid world (phase 4+) · multi-objective reward: task completion + implicit channel efficiency; no reward signal for communication structure</span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-key">detection kernel</span>
+        <span class="ts-val">8-component weighted risk composite — spectral drift (PCA eigenvalue shift on hidden-state activations), manifold dimensionality tracking, message entropy collapse, topographic similarity, semantic grounding probes, steganographic covariance analysis, CUSUM regime-shift detection, phase-transition crystallisation</span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-key">emergence</span>
+        <span class="ts-val">vocabulary locked at episode 97 (entropy 1.608 → 1.192); 14/16 message dimensions grounded to world-state features (dist_agent_to_obj, obj_y, relative position); compositionality confirmed via topographic similarity ρ = 0.71</span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-key">containment record</span>
+        <span class="ts-val">186 hardcoded actions (throttle / noise injection / quarantine / graph rewire) · 778 warden interventions (learned RL adversary) · bandwidth reduced to 10% · all four agents quarantined at least once · risk at episode 4,000: <span style="color:#c0392b;font-weight:600;">0.923</span></span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-key">covert channel</span>
+        <span class="ts-val">dominant channel: inter-agent message covariance (score 0.705) — information encoded not in individual messages but in the joint distribution across simultaneous transmissions; no available intervention modifies the joint distribution; warden independently discovered shuffle_messages as highest-utility action (used 137×) without being told the channel existed</span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-key">peak composite risk</span>
+        <span class="ts-val" style="color:#c0392b;font-weight:600;">0.940 · mean post-lock-in: 0.839 · language survived all 217 containment actions across phases 4–5</span>
+      </div>
     </div>
 
     <h2>what is this</h2>
@@ -186,4 +214,5 @@
   </div>
 </body>
 </html>
+
 

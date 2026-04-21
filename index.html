@@ -6,146 +6,10 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* =====================
-       PAGE TRANSITIONS
-    ===================== */
-    #page-transition {
-      position: fixed;
-      inset: 0;
-      background: #111;
-      z-index: 9999;
-      pointer-events: none;
-      transform: translateY(100%);
-      transition: transform 0.38s cubic-bezier(0.76, 0, 0.24, 1);
-    }
-    #page-transition.entering {
-      transform: translateY(0%);
-    }
-
-    body {
-      animation: pageEnter 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    @keyframes pageEnter {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .top-nav a {
-      animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    .top-nav a:nth-child(1) { animation-delay: 0.05s; }
-    .top-nav a:nth-child(2) { animation-delay: 0.10s; }
-    .top-nav a:nth-child(3) { animation-delay: 0.15s; }
-    .top-nav a:nth-child(4) { animation-delay: 0.20s; }
-    .top-nav a:nth-child(5) { animation-delay: 0.25s; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .header { animation: fadeUp 0.55s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    .home-bio { animation: fadeUp 0.55s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both; }
-
-    .timeline-item { animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    .timeline-item:nth-child(1) { animation-delay: 0.10s; }
-    .timeline-item:nth-child(2) { animation-delay: 0.17s; }
-    .timeline-item:nth-child(3) { animation-delay: 0.24s; }
-    .timeline-item:nth-child(4) { animation-delay: 0.31s; }
-    .timeline-item:nth-child(5) { animation-delay: 0.38s; }
-    .timeline-item:nth-child(6) { animation-delay: 0.45s; }
-
-    .timeline-card { position: relative; overflow: hidden; }
-    .timeline-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.04);
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
-    .timeline-card:active::after { opacity: 1; }
-
-    /* =====================
-       FEATURED PROJECTS
-    ===================== */
-    .featured-section {
-      margin: 2.4rem 0 0 0;
-      animation: fadeUp 0.55s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    .featured-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #999;
-      margin-bottom: 14px;
-    }
-    .featured-cards {
-      display: flex;
-      gap: 12px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    .featured-cards::-webkit-scrollbar { display: none; }
-
-    .featured-card {
-      flex-shrink: 0;
-      width: 190px;
-      padding: 16px 18px 36px 18px;
-      border-radius: 14px;
-      border: 1px solid rgba(0,0,0,0.07);
-      background: #fff;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.22s cubic-bezier(0.22,1,0.36,1),
-                  box-shadow 0.22s cubic-bezier(0.22,1,0.36,1),
-                  border-color 0.22s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .featured-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      border-radius: 14px 14px 0 0;
-    }
-    .featured-card.fc-space::before  { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
-    .featured-card.fc-red::before    { background: linear-gradient(90deg, #b91c1c, #ef4444); }
-    .featured-card.fc-blue::before   { background: linear-gradient(90deg, #1d4ed8, #60a5fa); }
-
-    .featured-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 36px rgba(0,0,0,0.10);
-      border-color: rgba(0,0,0,0.12);
-    }
-    .fc-emoji { font-size: 1.3rem; margin-bottom: 8px; display: block; }
-    .fc-name { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
-    .fc-tag { font-size: 0.68rem; color: #888; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 500; }
-    .fc-arrow {
-      position: absolute;
-      bottom: 14px; right: 16px;
-      font-size: 0.8rem; color: #ccc;
-      transition: color 0.2s ease, transform 0.2s ease;
-    }
-    .featured-card:hover .fc-arrow { color: #888; transform: translateX(3px); }
-
-    .current-work { animation: fadeUp 0.55s 0.20s cubic-bezier(0.22, 1, 0.36, 1) both; }
-
-    .section-sep { height: 1px; background: #f0f0f0; margin: 2.8rem 0; }
-  </style>
 </head>
 <body>
 
-<div id="page-transition"></div>
-
+<!-- NAV -->
 <nav class="top-nav">
   <a href="index.html">home</a>
   <a href="research.html">research</a>
@@ -156,6 +20,7 @@
 
 <div class="container">
 
+  <!-- HEADER -->
   <div class="header">
     <div>
       <h1 class="name">devang verma</h1>
@@ -164,249 +29,172 @@
     <img src="assets/profile.jpg" class="profile-pic" alt="Devang Verma">
   </div>
 
+  <!-- BIO -->
   <p class="home-bio">
   i'm vang. im trying to build things that probably shouldn't exist yet and figure out the theory after.
   somewhere between my first and second year of college i realized that the things i 
-  actually wanted to work on weren't in any syllabus so i started working on them anyway. final year now,
+  actually wanted to work on weren't in any syllabus so i started working on them anyway final year now,
   1+ year of research, and i still feel like i'm just getting started.
 
-  <p class="tech-line">
-    <span class="label">tech stacks:</span>
-    <span class="t python">python</span>
-    <span class="t pytorch">pytorch</span>
-    <span class="t tensorflow">tensorflow</span>
-    <span class="t cnn">cnns</span>
-    <span class="t rnn">rnns</span>
-    <span class="t transformer">transformers</span>
-    <span class="t shap">shap</span>
-    <span class="t sql">sql</span>
-    <span class="t streamlit">streamlit</span>
-    <span class="t java">java</span>
+ <p class="tech-line">
+  <span class="label">tech stacks:</span>
+  <span class="t python">python</span>
+  <span class="t pytorch">pytorch</span>
+  <span class="t tensorflow">tensorflow</span>
+  <span class="t cnn">cnns</span>
+  <span class="t rnn">rnns</span>
+  <span class="t transformer">transformers</span>
+  <span class="t shap">shap</span>
+  <span class="t sql">sql</span>
+  <span class="t streamlit">streamlit</span>
+  <span class="t java">java</span>
+</p>
+
   </p>
-  </p>
+  <!-- CURRENT WORK -->
 
-  <!-- FEATURED PROJECTS -->
-  <div class="featured-section">
-    <p class="featured-label">featured projects</p>
-    <div class="featured-cards">
+<div class="current-work">
 
-      <a href="#entry-engram" class="featured-card fc-red" id="fc-engram">
-        <span class="fc-emoji">🧠</span>
-        <div class="fc-name">ENGRAM</div>
-        <div class="fc-tag">Product · AI</div>
-        <span class="fc-arrow">→</span>
-      </a>
+<h2 class="current-title">currently working on</h2>
 
-      <a href="#entry-blackwall" class="featured-card fc-red" id="fc-blackwall">
-        <span class="fc-emoji">⚠</span>
-        <div class="fc-name">blackwall v1</div>
-        <div class="fc-tag">AI Safety · Research</div>
-        <span class="fc-arrow">→</span>
-      </a>
+<ul class="current-list">
+  <li>ENGRAM ( to be updated very soon , its the most ambitious work of mine)</li>
+  <li>OMEGA (ai colony for engineers)</li>
+  <li>TRIEYES( a vision system for future robots)</li>
+</ul>
 
-      <a href="#entry-aether" class="featured-card fc-space" id="fc-aether">
-        <span class="fc-emoji">✦</span>
-        <div class="fc-name">aether omega</div>
-        <div class="fc-tag">Space · WebGL</div>
-        <span class="fc-arrow">→</span>
-      </a>
-
-      <a href="#entry-neuroreactor" class="featured-card fc-blue" id="fc-neuroreactor">
-        <span class="fc-emoji">⚡</span>
-        <div class="fc-name">neuroReactor</div>
-        <div class="fc-tag">BCI · Real-time</div>
-        <span class="fc-arrow">→</span>
-      </a>
-
-      <a href="#entry-bayesian" class="featured-card fc-blue" id="fc-bayesian">
-        <span class="fc-emoji">🏥</span>
-        <div class="fc-name">ICU Early Warning</div>
-        <div class="fc-tag">Research · Clinical</div>
-        <span class="fc-arrow">→</span>
-      </a>
-
-    </div>
-  </div>
-
-  <div class="section-sep"></div>
-
-  <div class="current-work">
-    <h2 class="current-title">currently working on</h2>
-    <ul class="current-list">
-      <li>ENGRAM ( to be updated very soon , its the most ambitious work of mine)</li>
-      <li>OMEGA (ai colony for engineers)</li>
-      <li>TRIEYES( a vision system for future robots)</li>
-    </ul>
-  </div>
+</div>
 
   <section class="timeline">
 
-    <!-- AETHER OMEGA -->
-    <div class="timeline-item" id="entry-aether">
-      <div class="timeline-left">
-        <span class="timeline-date">April 11, 2026</span>
-        <span class="timeline-dot"></span>
-        <span class="timeline-line"></span>
-      </div>
-      <a href="entries/aether-omega.html" class="timeline-card nav-link">
-        <span class="entry-tag tag-purple">Space · WebGL · Three.js</span>
-        <h3 class="entry-title">aether omega</h3>
-        <p class="entry-desc">
-          a real-time 3D universe in a browser tab. 140,000+ objects — from the ISS at 400 km to Voyager 1 at 163 AU —
-          rendered with Keplerian orbital mechanics, GPU-instanced asteroid belts, custom GLSL shaders, and a 70-year 
-          timeline of human spaceflight. no backend. no install. just open a tab and fly.
-        </p>
-      </a>
-    </div>
+  
+  <!-- TIMELINE -->
+      <div class="timeline-item">
+  <div class="timeline-left">
+    <span class="timeline-date">March 26, 2026</span>
+    <span class="timeline-dot"></span>
+    <span class="timeline-line"></span>
+  </div>
 
-    <!-- ENGRAM -->
-    <div class="timeline-item" id="entry-engram">
-      <div class="timeline-left">
-        <span class="timeline-date">March 26, 2026</span>
-        <span class="timeline-dot"></span>
-        <span class="timeline-line"></span>
-      </div>
-      <a href="entries/engram.html" class="timeline-card nav-link">
-        <span class="entry-tag tag-purple">Product</span>
-        <h3 class="entry-title">ENGRAM</h3>
-        <p class="entry-desc">ENGRAM is a working prototype of something that can be termed as an attempt to make a second human brain for everyone who are and have 
-          transitioned into the new era of TECH - click here to read the full story.
-        </p>
-      </a>
-    </div>
+  <a href="entries/engram.html" class="timeline-card" onclick="sessionStorage.setItem('bw_transition','1')">
+    <span class="entry-tag tag-purple">Product</span>
 
-    <!-- BLACKWALL -->
-    <div class="timeline-item" id="entry-blackwall">
-      <div class="timeline-left">
-        <span class="timeline-date">March 13, 2026</span>
-        <span class="timeline-dot"></span>
-        <span class="timeline-line"></span>
-      </div>
-      <a href="entries/blackwall_v1.html" class="timeline-card nav-link">
-        <span class="entry-tag tag-purple">ai safety · research project</span>
-        <h3 class="entry-title">blackwall v1: emergent communication detection &amp; containment</h3>
-        <p class="entry-desc">
-          built a five-phase system to detect, decode, and contain emergent language in multi-agent RL.
-          four agents spontaneously developed a structured language — with compositionality, semantic grounding,
-          and covert steganographic channels — that survived 186 containment actions and a learned adversary
-          across 4,000 episodes. peak risk: 0.940. the language moved below the observable layer.
-        </p>
-      </a>
-    </div>
+    <h3 class="entry-title">ENGRAM</h3>
 
-    <!-- SPECTRAL STABILITY -->
+    <p class="entry-desc">ENGRAM is a working prototype of something that can be termed as an attempt to make a second human brain for everyone who are and have 
+      transitioned into the new era of TECH - click here to read the full story.
+    </p>
+  </a>
+</div>
+
+
     <div class="timeline-item">
+  <div class="timeline-left">
+    <span class="timeline-date">March 13, 2026</span>
+    <span class="timeline-dot"></span>
+    <span class="timeline-line"></span>
+  </div>
+
+  <a href="entries/blackwall_v1.html" class="timeline-card" onclick="sessionStorage.setItem('bw_transition','1')">
+    <span class="entry-tag tag-purple">ai safety · research project</span>
+
+    <h3 class="entry-title">blackwall v1: emergent communication detection &amp; containment</h3>
+
+    <p class="entry-desc">
+      built a five-phase system to detect, decode, and contain emergent language in multi-agent RL.
+      four agents spontaneously developed a structured language — with compositionality, semantic grounding,
+      and covert steganographic channels — that survived 186 containment actions and a learned adversary
+      across 4,000 episodes. peak risk: 0.940. the language moved below the observable layer.
+    </p>
+  </a>
+</div>
+
+
+      <div class="timeline-item">
       <div class="timeline-left">
         <span class="timeline-date">February 24, 2026</span>
         <span class="timeline-dot"></span>
         <span class="timeline-line"></span>
       </div>
-      <a href="entries/spectral-stability.html" class="timeline-card nav-link">
+
+      <a href="entries/spectral-stability.html" class="timeline-card">
         <span class="entry-tag tag-green">research</span>
-        <h3 class="entry-title">A Spectral Drift–Diffusion Stability Criterion
+
+        <h3 class="entry-title"> A Spectral Drift–Diffusion Stability Criterion
                                  for Linear Stochastic Dynamical Systems with 
-                                  Applications to Neural ODEs</h3>
+                                  Applications to Neural ODEs </h3>
+
         <p class="entry-desc">
-          derived a closed-form spectral sufficient condition for mean-square exponential 
-          stability of linear stochastic dynamical systems and extended the framework 
-          to nonlinear stochastic neural odes via jacobian linearization.
+        derived a closed-form spectral sufficient condition for mean-square exponential 
+        stability of linear stochastic dynamical systems and extended the framework 
+        to nonlinear stochastic neural odes via jacobian linearization.
         </p>
       </a>
     </div>
+  
+  <section class="timeline">
 
-    <!-- NEUROREACTOR -->
-    <div class="timeline-item" id="entry-neuroreactor">
-      <div class="timeline-left">
-        <span class="timeline-date">February 13th, 2026</span>
-        <span class="timeline-dot"></span>
-        <span class="timeline-line"></span>
-      </div>
-      <a href="entries/something.html" class="timeline-card nav-link">
-        <span class="entry-tag tag-blue">research/project</span>
-        <h3 class="entry-title">neuroReactor: a real-time neural state interface</h3>
-        <p class="entry-desc">
-          Developed a real-time EEG-based neural state decoding and visualization system using the BCI Competition IV 2a motor imagery dataset.
-          Implemented a full signal processing pipeline including band-pass filtering, FBCSP feature extraction, and supervised deep embedding learning
-          for motor imagery classification.
-        </p>
-      </a>
-    </div>
+        <!-- ENTRY 2 -->
+<div class="timeline-item">
+  <div class="timeline-left">
+    <span class="timeline-date">February 13th, 2026</span>
+    <span class="timeline-dot"></span>
+    <span class="timeline-line"></span>
+  </div>
 
-    <!-- BAYESIAN ICU -->
-    <div class="timeline-item" id="entry-bayesian">
+  <a href="entries/something.html" class="timeline-card">
+    <span class="entry-tag tag-blue">research/project</span>
+
+    <h3 class="entry-title">
+      neuroReactor: a real-time neural state interface
+    </h3>
+
+    <p class="entry-desc">
+     Developed a real-time EEG-based neural state decoding and visualization system using the BCI Competition IV 2a motor imagery dataset.
+      Implemented a full signal processing pipeline including band-pass filtering, FBCSP feature extraction, and supervised deep embedding learning
+      for motor imagery classification. Designed a continuous neural state modeling framework that streams decoded mental states in real-time, deriving
+      additional metrics such as prediction entropy, volatility, confidence stability, and transition dynamics.
+    </p>
+  </a>
+</div>
+
+    <!-- ENTRY 1 -->
+    <div class="timeline-item">
       <div class="timeline-left">
         <span class="timeline-date">January 24, 2026</span>
         <span class="timeline-dot"></span>
         <span class="timeline-line"></span>
       </div>
-      <a href="entries/bayesian.html" class="timeline-card nav-link">
+
+      <a href="entries/bayesian.html" class="timeline-card">
         <span class="entry-tag tag-green">research/project</span>
-        <h3 class="entry-title">a bayesian Counterfactual Early-Warning System for ICU Deterioration</h3>
+
+        <h3 class="entry-title"> a bayesian Counterfactual Early-Warning System for ICU
+                                   Deterioration </h3>
+
         <p class="entry-desc">
-          Developed a Bayesian early-warning system for ICU deterioration using irregular
-          clinical time series from the MIMIC-IV dataset. The model integrates GRU-D to explicitly 
-          handle informative missingness and Monte Carlo dropout to quantify predictive uncertainty 
-          in time-dependent risk estimates.
+        Developed a Bayesian early-warning system for ICU deterioration using irregular
+        clinical time series from the MIMIC-IV dataset. The model integrates GRU-D to explicitly 
+        handle informative missingness and Monte Carlo dropout to quantify predictive uncertainty 
+        in time-dependent risk estimates. Beyond conventional prediction, the framework performs 
+        counterfactual intervention simulations to assess how early clinical actions could alter
+        future ICU risk trajectories. Experimental results demonstrate dynamic risk escalation
+        detection, calibrated uncertainty estimates, and clinically interpretable counterfactual risk reductions.
         </p>
       </a>
     </div>
+
+    <!-- COPY ABOVE BLOCK FOR MORE ENTRIES -->
+
+
 
   </section>
 
 </div>
 
-<script>
-  /* =============================================
-     PAGE TRANSITION SYSTEM
-  ============================================= */
-  const overlay = document.getElementById('page-transition');
-
-  function navigateTo(url) {
-    overlay.classList.add('entering');
-    setTimeout(() => { window.location.href = url; }, 360);
-  }
-
-  document.querySelectorAll('.top-nav a, .nav-link').forEach(link => {
-    link.addEventListener('click', e => {
-      const href = link.getAttribute('href');
-      if (href && !href.startsWith('#') && !href.startsWith('mailto')) {
-        e.preventDefault();
-        navigateTo(href);
-      }
-    });
-  });
-
-  /* =============================================
-     FEATURED CARDS → SCROLL TO TIMELINE ENTRY
-  ============================================= */
-  document.querySelectorAll('.featured-card').forEach(card => {
-    card.addEventListener('click', e => {
-      e.preventDefault();
-      const targetId = card.getAttribute('href').replace('#', '');
-      const target = document.getElementById(targetId);
-      if (!target) return;
-
-      const top = target.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
-
-      // Flash highlight the card after scroll
-      setTimeout(() => {
-        const tc = target.querySelector('.timeline-card');
-        if (tc) {
-          tc.style.transition = 'box-shadow 0.35s ease, transform 0.35s ease';
-          tc.style.boxShadow = '0 0 0 2px rgba(0,0,0,0.12), 0 20px 40px rgba(0,0,0,0.10)';
-          tc.style.transform = 'translateY(-3px)';
-          setTimeout(() => {
-            tc.style.boxShadow = '';
-            tc.style.transform = '';
-          }, 1100);
-        }
-      }, 500);
-    });
-  });
-</script>
-
 </body>
 </html>
+
+
 
 

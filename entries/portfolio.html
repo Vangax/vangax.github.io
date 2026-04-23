@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Two Worlds — Devang Verma</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f5f2ec;
+    --warm: #c8a96e;
+    --muted: #8a8278;
+    --faint: #e8e4db;
+    --cyber-green: #00ff9d;
+    --cyber-bg: #050d08;
+    --cyber-dim: #0a2015;
+    --accent-red: #c0392b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    border-bottom: 1px solid var(--faint);
+    padding: 28px 0 20px;
+    text-align: center;
+    position: relative;
+  }
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--muted);
+  }
+  .header-rule {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 18px;
+  }
+  .header-rule span {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--warm);
+  }
+  .header-rule::before,
+  .header-rule::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--warm);
+    opacity: 0.5;
+  }
+
+  /* ─── LAYOUT ─── */
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .wide-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 56px 0; }
+  section + section { border-top: 1px solid var(--faint); }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+  h2 em { font-style: italic; color: var(--muted); }
+
+  p { margin-bottom: 20px; color: #2a2520; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ─── PULL QUOTE ─── */
+  .pull-quote {
+    margin: 40px 0;
+    padding: 28px 32px;
+    border-left: 3px solid var(--warm);
+    background: rgba(200,169,110,0.07);
+  }
+  .pull-quote p {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+    font-style: italic;
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ─── PERSON CARD ─── */
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--faint);
+    margin: 36px 0;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .persona {
+    padding: 32px 28px;
+    position: relative;
+  }
+  .persona:first-child { border-right: 1px solid var(--faint); background: #fff; }
+  .persona:last-child { background: var(--cyber-bg); color: var(--cyber-green); }
+  .persona-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.55;
+  }
+  .persona:last-child .persona-label { color: var(--cyber-green); }
+  .persona h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .persona:last-child h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    color: var(--cyber-green);
+    text-shadow: 0 0 12px rgba(0,255,157,0.4);
+  }
+  .persona p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #555;
+    margin: 0;
+  }
+  .persona:last-child p {
+    color: rgba(0,255,157,0.7);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+  }
+  .persona-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-top: 14px;
+    text-transform: uppercase;
+  }
+  .persona:first-child .persona-tag {
+    background: var(--faint);
+    color: var(--muted);
+  }
+  .persona:last-child .persona-tag {
+    background: rgba(0,255,157,0.12);
+    color: var(--cyber-green);
+    border: 1px solid rgba(0,255,157,0.25);
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+    margin: 36px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--faint);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -33px;
+    top: 9px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--warm);
+  }
+  .tl-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 6px;
+  }
+  .tl-text { font-size: 0.97rem; color: #2a2520; line-height: 1.7; }
+
+  /* ─── MODE SHOWCASE ─── */
+  .mode-showcase {
+    background: var(--cyber-bg);
+    border-radius: 4px;
+    padding: 40px 36px;
+    margin: 40px 0;
+    border: 1px solid rgba(0,255,157,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .mode-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyber-green), transparent);
+    opacity: 0.4;
+  }
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,255,157,0.018) 3px,
+      rgba(0,255,157,0.018) 4px
+    );
+    pointer-events: none;
+  }
+  .mode-showcase h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cyber-green);
+    opacity: 0.6;
+    margin-bottom: 16px;
+  }
+  .terminal-line {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--cyber-green);
+    line-height: 2;
+    opacity: 0.85;
+  }
+  .terminal-line .prompt { color: rgba(0,255,157,0.4); }
+  .terminal-line .cmd { color: var(--cyber-green); }
+  .terminal-line .out { color: rgba(0,255,157,0.55); font-size: 11.5px; }
+  .cursor-blink {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--cyber-green);
+    vertical-align: middle;
+    animation: blink 1.1s step-end infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+  /* ─── IMAGE UPLOAD ZONE ─── */
+  .upload-section {
+    background: #fff;
+    border: 1px solid var(--faint);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 40px 0;
+  }
+  .upload-header {
+    padding: 20px 28px 16px;
+    border-bottom: 1px solid var(--faint);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .upload-header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .upload-header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+  .upload-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--faint);
+  }
+  .upload-slot {
+    background: #fff;
+    aspect-ratio: 16/10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.15s;
+  }
+  .upload-slot:hover { background: #faf8f5; }
+  .upload-slot input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+  .slot-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+  }
+  .slot-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px dashed var(--faint);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slot-icon svg { width: 14px; height: 14px; stroke: var(--muted); fill: none; }
+  .slot-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    padding: 0 12px;
+  }
+  .slot-preview {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  .slot-remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    background: rgba(0,0,0,0.55);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    border: none;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1;
+  }
+  .upload-slot.has-image .slot-preview { display: block; }
+  .upload-slot.has-image .slot-placeholder { display: none; }
+  .upload-slot.has-image .slot-remove { display: flex; }
+  .upload-caption-row {
+    padding: 14px 28px;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .upload-caption-row span {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .upload-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    color: var(--warm);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── MODE LABELS ─── */
+  .mode-label-pair {
+    display: flex;
+    gap: 0;
+    margin: 36px 0;
+    border: 1px solid var(--faint);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .mode-label {
+    flex: 1;
+    padding: 18px 22px;
+  }
+  .mode-label:first-child {
+    background: #fff;
+    border-right: 1px solid var(--faint);
+  }
+  .mode-label:last-child {
+    background: var(--cyber-bg);
+  }
+  .ml-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .mode-label:first-child .ml-tag { color: var(--muted); }
+  .mode-label:last-child .ml-tag { color: rgba(0,255,157,0.5); }
+  .ml-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+  .mode-label:first-child .ml-title { color: var(--ink); }
+  .mode-label:last-child .ml-title {
+    font-family: 'DM Mono', monospace;
+    color: var(--cyber-green);
+    font-size: 0.95rem;
+    text-shadow: 0 0 10px rgba(0,255,157,0.35);
+  }
+  .ml-desc {
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+  .mode-label:first-child .ml-desc { color: #666; }
+  .mode-label:last-child .ml-desc {
+    color: rgba(0,255,157,0.6);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.79rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--faint);
+    padding: 28px 0;
+    text-align: center;
+  }
+  .footer-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .persona-grid { grid-template-columns: 1fr; }
+    .persona:first-child { border-right: none; border-bottom: 1px solid rgba(0,255,157,0.2); }
+    .mode-label-pair { flex-direction: column; }
+    .mode-label:first-child { border-right: none; border-bottom: 1px solid var(--faint); }
+    .upload-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Devang Verma · Portfolio Philosophy · 2026</div>
+    <h1>Why I built two worlds<br><em>instead of one</em></h1>
+    <div class="header-rule"><span>a design decision, a personal story</span></div>
+  </div>
+</header>
+
+<!-- SECTION 1: THE MOMENT -->
+<section>
+  <div class="wrap">
+    <h2>The moment that made me think differently</h2>
+
+    <p>It was a Tuesday evening in February, around 11 PM. My aunt — a senior HR manager at a mid-sized manufacturing firm — had asked me to send her my portfolio link so she could pass it to a colleague in talent acquisition. I sent it without thinking. Twenty minutes later she called.</p>
+
+    <p>"Devang, what <em>is</em> this?" She wasn't angry. She sounded genuinely confused. She had landed on the Cyber OS view by accident — the one with the green text on a black screen, the fake boot sequence, the blinking cursor. "It looks like a computer from a hacker movie. I can't find anything."</p>
+
+    <p>I laughed. Then I stopped laughing, because she was right. I had built something I was deeply proud of, something that took weeks of obsessive engineering, and I had made it inaccessible to half the people who might ever care about it.</p>
+
+    <div class="pull-quote">
+      <p>"I had built something I was deeply proud of, and I had made it inaccessible to half the people who might ever care about it."</p>
+    </div>
+
+    <p>That phone call is the honest origin of the dual-mode design. Not a calculated UX strategy. Not a slide in a product spec. A nineteen-year-old sitting at his desk at 11 PM, realizing that the thing he built for himself was speaking a language only some people understood.</p>
+  </div>
+</section>
+
+<!-- SECTION 2: TWO VERY DIFFERENT PEOPLE -->
+<section>
+  <div class="wrap">
+    <h2>Two real people, <em>two completely different needs</em></h2>
+
+    <p>Once I started paying attention, I noticed the split everywhere. My college professor who reviewed my projects opened every link on a laptop, scanned for keywords like "Python" and "architecture," and formed an opinion in under ninety seconds. My friend who does backend at a fintech startup spent twenty minutes inside the Cyber OS view running fake shell commands just to see what would happen. He sent me three suggestions for new commands to add.</p>
+
+    <p>These are not the same person. They should not have the same experience.</p>
+
+    <div class="persona-grid">
+      <div class="persona">
+        <div class="persona-label">Visitor Type A</div>
+        <h3>The Evaluator</h3>
+        <p>A recruiter with forty tabs open. An admissions reviewer working through a stack. A professor scanning for signal. They need to understand who you are in sixty seconds. They do not want to be challenged by the interface. They want facts delivered cleanly.</p>
+        <span class="persona-tag">Standard View</span>
+      </div>
+      <div class="persona">
+        <div class="persona-label">Visitor Type B</div>
+        <h3>$ ./explorer --mode deep</h3>
+        <p>A developer who tabs through your source code before reading your name. A systems thinker who respects intentional complexity. Someone who will spend time inside a terminal if the terminal rewards curiosity.</p>
+        <span class="persona-tag">Cyber OS Mode</span>
+      </div>
+    </div>
+
+    <p>The honest version of this is not "I built two audiences." It's "I am both of these people, and I couldn't choose which one to speak to." The Standard View is how I'd present myself in a room with my professor. The Cyber OS view is how I think at 2 AM when a problem is unsolved and the only person watching is me.</p>
+  </div>
+</section>
+
+<!-- SECTION 3: HOW IT GREW -->
+<section>
+  <div class="wrap">
+    <h2>How the Cyber OS view actually <em>happened</em></h2>
+
+    <p>It didn't start as a "feature." It started as procrastination.</p>
+
+    <p>I was stuck on a memory retrieval bug in Engram — the local AI system I'd been building — and instead of sleeping, I started playing with terminal aesthetics in the browser. Just for myself. A fake boot sequence with green text. Scanline overlays. A command that typed back your name with artificial latency.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-label">Week 1</div>
+        <div class="tl-text">A late-night CSS experiment. Green text on black. A blinking cursor that serves no function. I leave it in a branch and forget about it.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-label">Week 3</div>
+        <div class="tl-text">I show my flatmate, who studies electrical engineering. He spends fifteen minutes typing commands into what is essentially a glorified text box. He's smiling the whole time. I realize there's something here.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-label">Week 5</div>
+        <div class="tl-text">The fake terminal becomes real. Commands that actually do things — navigate project sections, trigger data visualizations, run mock diagnostics on my stack. It stops being decoration and becomes a second layer of navigation.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-label">Week 8</div>
+        <div class="tl-text">The phone call with my aunt. I realize I cannot ship only this. The Standard View gets serious attention for the first time. The two modes become a deliberate architectural decision rather than an accident of late nights.</div>
+      </div>
+    </div>
+
+    <p>The CRT scanlines, the boot sequence animations, the simulated system processes — none of it was planned. It grew the way things grow when you're building for yourself first: organically, stubbornly, in the direction of what felt true rather than what looked professional.</p>
+  </div>
+</section>
+
+<!-- SECTION 4: CYBER OS MOCKUP -->
+<section>
+  <div class="wrap">
+    <h2>What Cyber OS mode <em>actually feels like</em></h2>
+
+    <div class="mode-showcase">
+      <div class="scanlines"></div>
+      <h3>// CYBER OS MODE · LIVE PREVIEW</h3>
+      <div class="terminal-line"><span class="prompt">system@devang-portfolio:~$ </span><span class="cmd">boot --identity devang.verma</span></div>
+      <div class="terminal-line"><span class="out">▶ loading identity manifest ... done</span></div>
+      <div class="terminal-line"><span class="out">▶ mounting project registry ... 4 entries found</span></div>
+      <div class="terminal-line"><span class="out">▶ initializing neural map ... ok</span></div>
+      <div class="terminal-line"><span class="out">▶ engram memory kernel ... active</span></div>
+      <div class="terminal-line" style="margin-top:12px;"><span class="prompt">system@devang-portfolio:~$ </span><span class="cmd">ls ./projects</span></div>
+      <div class="terminal-line"><span class="out">engram/&nbsp;&nbsp;&nbsp;portfolio-os/&nbsp;&nbsp;&nbsp;research/&nbsp;&nbsp;&nbsp;systems-lab/</span></div>
+      <div class="terminal-line" style="margin-top:12px;"><span class="prompt">system@devang-portfolio:~$ </span><span class="cmd">cat engram/README.md</span></div>
+      <div class="terminal-line"><span class="out">// portable second brain. plug in. identity boots. unplug. machine forgets.</span></div>
+      <div class="terminal-line"><span class="out">// status: working prototype · march 2026</span></div>
+      <div class="terminal-line" style="margin-top:12px;"><span class="prompt">system@devang-portfolio:~$ </span><span class="cursor-blink"></span></div>
+    </div>
+
+    <p>This is not decoration. The commands are real navigation. <code style="font-family:'DM Mono',monospace;font-size:0.85em;background:var(--faint);padding:2px 6px;border-radius:2px;">cd engram</code> takes you into the Engram project case study. <code style="font-family:'DM Mono',monospace;font-size:0.85em;background:var(--faint);padding:2px 6px;border-radius:2px;">whoami</code> returns my background. <code style="font-family:'DM Mono',monospace;font-size:0.85em;background:var(--faint);padding:2px 6px;border-radius:2px;">help</code> lists every available command. For someone who lives inside terminals, this is not a gimmick — it's the most natural way to explore.</p>
+
+    <div class="mode-label-pair">
+      <div class="mode-label">
+        <div class="ml-tag">Standard View</div>
+        <div class="ml-title">Clean. Readable. Human.</div>
+        <div class="ml-desc">Structured prose, project cards, visible navigation. Optimized for rapid comprehension. Designed for someone who has sixty seconds and needs to come away with a clear picture of who I am.</div>
+      </div>
+      <div class="mode-label">
+        <div class="ml-tag">Cyber OS Mode</div>
+        <div class="ml-title">$ ./explore --depth full</div>
+        <div class="ml-desc">CRT scanlines, boot sequences, interactive shell. Rewards curiosity. Hides easter eggs in the command history. Designed for someone who will stay for twenty minutes if the system gives them a reason to.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: IMAGE UPLOADS -->
+<section>
+  <div class="wide-wrap">
+    <div class="wrap">
+      <h2>Attach your <em>Cyber OS screenshots</em></h2>
+      <p>Drop in screenshots of the Cyber OS view — boot sequences, terminal states, data modules, anything that shows the mode in action. These will display as a visual showcase beneath the description.</p>
+    </div>
+
+    <div class="upload-section" id="uploadSection">
+      <div class="upload-header">
+        <div>
+          <div class="upload-header-label">Media · Cyber OS Mode</div>
+          <div class="upload-header-title">Portfolio Screenshots</div>
+        </div>
+      </div>
+
+      <div class="upload-grid" id="uploadGrid">
+        <!-- Slots injected by JS -->
+      </div>
+
+      <div class="upload-caption-row">
+        <span>Click any slot to upload · PNG, JPG, WEBP supported</span>
+        <span class="upload-count" id="countLabel">0 / 8 images</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: THE HONEST ANSWER -->
+<section>
+  <div class="wrap">
+    <h2>The honest answer to <em>"why bother?"</em></h2>
+
+    <p>Because I'm nineteen and self-taught and I don't have a prestigious institution or a famous internship to anchor my name to. What I have is the work itself, and the work needs to speak clearly to people who evaluate CVs, and it needs to speak honestly to people who read code.</p>
+
+    <p>The Standard View is how I prove I can communicate. The Cyber OS view is how I prove I actually care about this stuff beyond career strategy — that I stayed up until 3 AM refining a boot animation that no recruiter will ever see, because it felt right, because it was mine.</p>
+
+    <div class="pull-quote">
+      <p>"I stayed up until 3 AM refining a boot animation that no recruiter will ever see, because it felt right. Because it was mine."</p>
+    </div>
+
+    <p>That tension — between accessibility and authenticity, between what reads well on a CV and what's true — is something I suspect every self-taught engineer navigates constantly. The dual-mode portfolio is my answer to it. Not a compromise. A both/and.</p>
+
+    <p>My aunt can read it clearly. My engineer friends can get lost in it. I don't have to choose which person I'm building for, because the system holds both.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-text">Devang Verma · Portfolio · 2026 · Built with intention</div>
+  </div>
+</footer>
+
+<script>
+  const SLOT_LABELS = [
+    "Boot sequence",
+    "Terminal home",
+    "Project module",
+    "Data visualization",
+    "Command in action",
+    "CRT overlay detail",
+    "Easter egg",
+    "Free slot"
+  ];
+
+  const grid = document.getElementById('uploadGrid');
+  const countLabel = document.getElementById('countLabel');
+  const images = new Array(8).fill(null);
+
+  function updateCount() {
+    const n = images.filter(Boolean).length;
+    countLabel.textContent = `${n} / 8 images`;
+  }
+
+  function makeSlot(index) {
+    const slot = document.createElement('div');
+    slot.className = 'upload-slot';
+    slot.dataset.index = index;
+
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+
+    const placeholder = document.createElement('div');
+    placeholder.className = 'slot-placeholder';
+    placeholder.innerHTML = `
+      <div class="slot-icon">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 16V8m0 0-3 3m3-3 3 3"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+      </div>
+      <div class="slot-label">${SLOT_LABELS[index]}</div>
+    `;
+
+    const preview = document.createElement('img');
+    preview.className = 'slot-preview';
+    preview.alt = SLOT_LABELS[index];
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'slot-remove';
+    removeBtn.innerHTML = '×';
+    removeBtn.title = 'Remove image';
+
+    removeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      images[index] = null;
+      slot.classList.remove('has-image');
+      preview.src = '';
+      input.value = '';
+      updateCount();
+    });
+
+    input.addEventListener('change', () => {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        images[index] = e.target.result;
+        preview.src = e.target.result;
+        slot.classList.add('has-image');
+        updateCount();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    slot.appendChild(input);
+    slot.appendChild(placeholder);
+    slot.appendChild(preview);
+    slot.appendChild(removeBtn);
+    return slot;
+  }
+
+  for (let i = 0; i < 8; i++) {
+    grid.appendChild(makeSlot(i));
+  }
+  updateCount();
+</script>
+
+</body>
+</html>

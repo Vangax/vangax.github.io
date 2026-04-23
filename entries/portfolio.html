@@ -4,33 +4,8 @@
   <meta charset="UTF-8">
   <title>portfolio | devang verma</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
   <style>
-    /* Verbatim styles from Engram template */
-    body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #111; background: #fff; margin: 0; padding: 0; }
-    
-    .top-nav {
-      height: 52px;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid #eee;
-      padding: 0 20px;
-    }
-    .nav-inner {
-      max-width: 760px;
-      width: 100%;
-      margin: 0 auto;
-      display: flex;
-      gap: 32px;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-family: monospace;
-    }
-    .top-nav a { color: #888; text-decoration: none; }
-    .top-nav a:hover { color: #111; }
-
-    .container { max-width: 760px; margin: 0 auto; padding: 64px 40px 140px; }
-
     .meta     { font-size: 0.78rem; color: #aaa; margin-bottom: 10px; }
     .stack    { color: #aaa; margin-bottom: 40px; font-size: 0.88rem; }
 
@@ -48,18 +23,17 @@
     .status span { font-size: 0.78rem; color: #aaa; letter-spacing: 0.05em; text-transform: uppercase; }
 
     .img-wide { width: 100%; border-radius: 8px; display: block; border: 1px solid #eee; margin-bottom: 8px; }
+    .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+    .img-grid img { width: 100%; border-radius: 8px; display: block; border: 1px solid #eee; }
     .caption  { font-size: 0.78rem; color: #aaa; text-align: center; margin-bottom: 28px; }
 
     .page-footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.85rem; color: #aaa; display: flex; justify-content: space-between; }
     .page-footer a { color: #111; text-decoration: none; }
 
-    /* For Cyber OS display */
-    .mode-showcase { background: #0a0a0a; border-radius: 8px; padding: 32px; margin: 32px 0; color: #00ff9d; font-family: monospace; font-size: 0.85rem; position: relative; overflow: hidden; line-height: 1.8; }
-    .prompt { color: rgba(0, 255, 157, 0.4); }
-
     @media (max-width: 520px) {
       .feature-grid { grid-template-columns: 1fr; }
       .feature-item:nth-child(even) { padding-left: 0; border-left: none; }
+      .img-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -72,6 +46,7 @@
     <a href="../assets/cv.pdf">cv</a>
     <a href="../contact.html">contact</a>
   </nav>
+
   <div class="container">
 
     <div class="meta">design philosophy · march 2026</div>
@@ -83,80 +58,64 @@
     <p>"devang, what is this?" she wasn't angry. she sounded genuinely confused. she had landed on the cyber os view by accident — the one with the green text on a black screen, the fake boot sequence, the blinking cursor. "it looks like a computer from a hacker movie. i can't find anything."</p>
     <p>i laughed. then i stopped laughing, because she was right. i had built something i was deeply proud of, something that took weeks of obsessive engineering, and i had made it inaccessible to half the people who might ever care about it.</p>
 
-    <div class="callout"><p>i had built something i was deeply proud of, and i had made it inaccessible to half the people who might ever care about it.</p></div>
+    <div class="callout"><p>that was the origin of the dual-mode design.</p></div>
 
-    <p>that phone call is the honest origin of the dual-mode design. not a calculated ux strategy. not a slide in a product spec. a nineteen-year-old sitting at his desk at 11 pm, realizing that the thing he built for himself was speaking a language only some people understood.</p>
+    <h2>2. the idea</h2>
+    <p>once i started paying attention, i noticed the split everywhere. my college professor who reviewed my projects opened every link on a laptop, scanned for keywords like "python" and "architecture," and formed an opinion in under ninety seconds. my friend who does backend at a fintech startup spent twenty minutes inside the cyber os view just to see what would happen.</p>
 
-    <h2>2. two real people, two completely different needs</h2>
-    <p>once i started paying attention, i noticed the split everywhere. my college professor who reviewed my projects opened every link on a laptop, scanned for keywords like "python" and "architecture," and formed an opinion in under ninety seconds. my friend who does backend at a fintech startup spent twenty minutes inside the cyber os view running fake shell commands just to see what would happen. he sent me three suggestions for new commands to add.</p>
-    <p>these are not the same person. they should not have the same experience.</p>
+    <div class="callout"><p>two real people. two completely different needs. that is the reality.</p></div>
 
-    <div class="feature-grid">
-      <div class="feature-item">
-        <strong>the evaluator</strong>
-        <p>a recruiter with forty tabs open. they need to understand who you are in sixty seconds. they want facts delivered cleanly without interface challenges.</p>
-      </div>
-      <div class="feature-item">
-        <strong>the explorer</strong>
-        <p>a developer who tabs through your source code first. someone who respects intentional complexity and will stay if the system rewards curiosity.</p>
-      </div>
-    </div>
-
-    <p>the honest version of this is not "i built two audiences." it's "i am both of these people, and i couldn't choose which one to speak to." the standard view is how i'd present myself in a room with my professor. the cyber os view is how i think at 2 am when a problem is unsolved and the only person watching is me.</p>
+    <p>the standard view is how i'd present myself in a room with my professor. the cyber os view is how i think at 2 am when a problem is unsolved and the only person watching is me. i decided that i should not have to choose which person to speak to.</p>
 
     <h2>3. building it</h2>
-    
+
     <h3>starting from nothing</h3>
-    <p>it didn't start as a "feature." it started as procrastination. i was stuck on a memory retrieval bug in engram — the local ai system i'd been building — and instead of sleeping, i started playing with terminal aesthetics in the browser. just for myself. a fake boot sequence with green text. scanline overlays. a command that typed back your name with artificial latency.</p>
+    <p>it didn't start as a "feature." it started as procrastination. i was stuck on a memory retrieval bug in engram and instead of sleeping, i started playing with terminal aesthetics in the browser. just for myself. a fake boot sequence with green text. scanline overlays. a command that typed back your name with artificial latency.</p>
+    
+    <p>the hardest problem was not the code. it was the phone call with my aunt. i realize i cannot ship only a terminal. the standard view gets serious attention for the first time. the two modes become a deliberate architectural decision rather than an accident of late nights.</p>
 
-    <div class="callout"><p>the fake terminal became real. it stops being decoration and becomes a second layer of navigation.</p></div>
-
-    <p>the crt scanlines, the boot sequence animations, the simulated system processes — none of it was planned. it grew the way things grow when you're building for yourself first: organically, stubbornly, in the direction of what felt true rather than what looked professional.</p>
-
-    <h2>4. engram in action</h2>
-
-    <div class="mode-showcase">
-      <div><span class="prompt">system@devang-portfolio:~$</span> boot --identity devang.verma</div>
-      <div>▶ loading identity manifest ... done</div>
-      <div>▶ mounting project registry ... 4 entries found</div>
-      <div>▶ initializing neural map ... ok</div>
-      <div>▶ engram memory kernel ... active</div>
-      <br>
-      <div><span class="prompt">system@devang-portfolio:~$</span> ls ./projects</div>
-      <div>engram/&nbsp;&nbsp;&nbsp;portfolio-os/&nbsp;&nbsp;&nbsp;research/&nbsp;&nbsp;&nbsp;systems-lab/</div>
-      <br>
-      <div><span class="prompt">system@devang-portfolio:~$</span> cat engram/README.md</div>
-      <div>// portable second brain. plug in. identity boots. unplug. machine forgets.</div>
-      <div>// status: working prototype · march 2026</div>
+    <h3>the two personas</h3>
+    <div class="feature-grid">
+      <div class="feature-item"><strong>the evaluator</strong><p>a recruiter with forty tabs open. they need to understand who you are in sixty seconds. they want facts delivered cleanly.</p></div>
+      <div class="feature-item"><strong>the explorer</strong><p>a developer who tabs through your source code first. someone who respects intentional complexity and curiosity.</p></div>
+      <div class="feature-item"><strong>standard mode</strong><p>structured prose, project cards, visible navigation. optimized for rapid comprehension and professionalism.</p></div>
+      <div class="feature-item"><strong>cyber os mode</strong><p>crt scanlines, boot sequences, interactive shell. rewards curiosity and hides easter eggs in history.</p></div>
     </div>
 
-    <p>this is not decoration. the commands are real navigation. cd engram takes you into the engram project case study. whoami returns my background. help lists every available command. for someone who lives inside terminals, this is not a gimmick — it's the most natural way to explore.</p>
+    <h2>4. the obstacles</h2>
 
-    <h2>5. visual showcase</h2>
+    <h3>accessibility vs authenticity</h3>
+    <p>the single hardest problem was the tension between being professional and being authentic. i'm nineteen and self-taught. i don't have a prestigious institution to anchor my name to. what i have is the work itself, and the work needs to speak clearly to everyone.</p>
+    <p>the standard view is how i prove i can communicate. the cyber os view is how i prove i actually care about this stuff beyond career strategy — that i stayed up until 3 am refining a boot animation because it felt right.</p>
 
-    <div id="image-container">
-      <!-- One image after another, full width -->
-      <img class="img-wide" src="" alt="boot sequence screenshot" onerror="this.style.display='none'">
-      <p class="caption">the boot sequence in action</p>
+    <h2>5. why bother?</h2>
+    <p>because i suspect every self-taught engineer navigates this constantly. the dual-mode portfolio is my answer to it. not a compromise. a both/and. my aunt can read it clearly. my engineer friends can get lost in it. i don't have to choose.</p>
 
-      <img class="img-wide" src="" alt="terminal interface screenshot" onerror="this.style.display='none'">
-      <p class="caption">main terminal interface</p>
-
-      <img class="img-wide" src="" alt="data module screenshot" onerror="this.style.display='none'">
-      <p class="caption">data visualization modules</p>
-    </div>
+    <div class="callout"><p>i stayed up until 3 am refining a boot animation that no recruiter will ever see, because it felt right. because it was mine.</p></div>
 
     <div class="status">
       <div class="dot"></div>
       <span>published &nbsp;·&nbsp; march 2026</span>
     </div>
 
+    <hr>
+
+    <h2>6. portfolio in action</h2>
+
+    <img class="img-wide" src="../assets/Screenshot 2026-04-02 130919.png" alt="main interface" onerror="this.style.display='none'">
+    <p class="caption">the dual-mode interface</p>
+
+    <div class="img-grid">
+      <img src="../assets/Screenshot 2026-04-02 131016.png" alt="standard mode" onerror="this.style.display='none'">
+      <img src="../assets/Screenshot 2026-04-02 131028.png" alt="cyber os mode" onerror="this.style.display='none'">
+    </div>
+    <p class="caption">standard mode (left) &nbsp;·&nbsp; cyber os mode (right)</p>
+
     <div class="page-footer">
       <span>portfolio philosophy &nbsp;·&nbsp; devang verma &nbsp;·&nbsp; 2026</span>
-      <a href="index.html">back to home</a>
+      <a href="../index.html">back to home</a>
     </div>
 
   </div>
 </body>
 </html>
-

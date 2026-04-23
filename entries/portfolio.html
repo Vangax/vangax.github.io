@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>portfolio | devang verma</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #111; background: #fff; margin: 0; padding: 0; }
+    .container { max-width: 680px; margin: 0 auto; padding: 60px 20px 120px; }
+    
+    .top-nav { height: 50px; display: flex; align-items: center; gap: 24px; padding: 0 40px; border-bottom: 1px solid #eee; font-size: 0.82rem; }
+    .top-nav a { color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .top-nav a:hover { color: #111; }
+
+    .meta     { font-size: 0.78rem; color: #aaa; margin-bottom: 10px; text-transform: lowercase; }
+    .stack    { color: #aaa; margin-bottom: 40px; font-size: 0.88rem; }
+
+    h1 { font-size: 2.2rem; font-weight: 600; margin-bottom: 32px; letter-spacing: -0.02em; }
+    h2 { font-size: 1.25rem; font-weight: 600; margin: 48px 0 16px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+    h3 { font-size: 1rem; font-weight: 600; margin: 24px 0 12px; }
+    p { margin-bottom: 20px; color: #444; font-size: 0.95rem; }
+
+    .callout  { border-left: 3px solid #111; padding: 14px 20px; margin: 24px 0; background: #fafafa; }
+    .callout p { margin: 0; color: #444; font-style: italic; font-size: 0.95rem; }
+
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid #eee; margin: 16px 0 32px; }
+    .feature-item { padding: 18px 18px 18px 0; border-bottom: 1px solid #eee; }
+    .feature-item:nth-child(even) { padding-left: 18px; border-left: 1px solid #eee; }
+    .feature-item strong { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #111; }
+    .feature-item p { font-size: 0.88rem; color: #666; margin: 0; line-height: 1.6; }
+
+    .timeline { position: relative; margin: 32px 0; padding-left: 20px; border-left: 1px solid #eee; }
+    .timeline-item { margin-bottom: 24px; position: relative; }
+    .timeline-item::before { content: ''; position: absolute; left: -24px; top: 8px; width: 7px; height: 7px; border-radius: 50%; background: #111; }
+    .timeline-date { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #aaa; margin-bottom: 4px; display: block; }
+
+    .mode-showcase { background: #0a0a0a; border-radius: 8px; padding: 32px; margin: 32px 0; color: #00ff9d; font-family: monospace; font-size: 0.85rem; position: relative; overflow: hidden; }
+    .mode-showcase::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 157, 0.03) 2px, rgba(0, 255, 157, 0.03) 4px); pointer-events: none; }
+    .prompt { color: rgba(0, 255, 157, 0.4); }
+    .cursor { display: inline-block; width: 8px; height: 15px; background: #00ff9d; animation: blink 1s step-end infinite; vertical-align: middle; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .img-wide { width: 100%; border-radius: 8px; display: block; border: 1px solid #eee; margin-bottom: 8px; }
+    .caption  { font-size: 0.78rem; color: #aaa; text-align: center; margin-bottom: 28px; }
+
+    .upload-zone { border: 2px dashed #eee; border-radius: 8px; padding: 40px; text-align: center; color: #aaa; font-size: 0.88rem; margin: 32px 0; transition: border-color 0.2s; cursor: pointer; }
+    .upload-zone:hover { border-color: #111; color: #111; }
+    .upload-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 20px; }
+    .upload-slot { aspect-ratio: 1; border: 1px solid #eee; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #ddd; background: #fafafa; position: relative; overflow: hidden; }
+    .upload-slot img { width: 100%; height: 100%; object-fit: cover; }
+    .upload-slot input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+    .status   { display: flex; align-items: center; gap: 8px; margin: 32px 0 16px; }
+    .dot      { width: 7px; height: 7px; border-radius: 50%; background: #111; flex-shrink: 0; }
+    .status span { font-size: 0.78rem; color: #aaa; letter-spacing: 0.05em; text-transform: uppercase; }
+
+    .page-footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.85rem; color: #aaa; display: flex; justify-content: space-between; }
+    .page-footer a { color: #111; text-decoration: none; }
+
+    @media (max-width: 520px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-item:nth-child(even) { padding-left: 0; border-left: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a href="index.html">home</a>
+    <a href="research.html">research</a>
+    <a href="reflections.html">reflections</a>
+    <a href="assets/cv.pdf">cv</a>
+    <a href="contact.html">contact</a>
+  </nav>
+
+  <div class="container">
+
+    <div class="meta">design philosophy · april 2026</div>
+    <h1>why i built two worlds instead of one</h1>
+    <p class="stack">ui design &nbsp;·&nbsp; ux strategy &nbsp;·&nbsp; portfolio &nbsp;·&nbsp; cyber os &nbsp;·&nbsp; minimal design</p>
+
+    <h2>1. the moment that made me think differently</h2>
+    <p>it was a tuesday evening in february, around 11 pm. my aunt — a senior hr manager at a mid-sized manufacturing firm — had asked me to send her my portfolio link so she could pass it to a colleague in talent acquisition. i sent it without thinking. twenty minutes later she called.</p>
+    <p>"devang, what is this?" she wasn't angry. she sounded genuinely confused. she had landed on the cyber os view by accident — the one with the green text on a black screen, the fake boot sequence, the blinking cursor. "it looks like a computer from a hacker movie. i can't find anything."</p>
+    <p>i laughed. then i stopped laughing, because she was right. i had built something i was deeply proud of, something that took weeks of obsessive engineering, and i had made it inaccessible to half the people who might ever care about it.</p>
+
+    <div class="callout"><p>i had built something i was deeply proud of, and i had made it inaccessible to half the people who might ever care about it.</p></div>
+
+    <p>that phone call is the honest origin of the dual-mode design. not a calculated ux strategy. not a slide in a product spec. a nineteen-year-old sitting at his desk at 11 pm, realizing that the thing he built for himself was speaking a language only some people understood.</p>
+
+    <h2>2. two real people, two completely different needs</h2>
+    <p>once i started paying attention, i noticed the split everywhere. my college professor who reviewed my projects opened every link on a laptop, scanned for keywords like "python" and "architecture," and formed an opinion in under ninety seconds. my friend who does backend at a fintech startup spent twenty minutes inside the cyber os view running fake shell commands just to see what would happen. he sent me three suggestions for new commands to add.</p>
+    <p>these are not the same person. they should not have the same experience.</p>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <strong>the evaluator</strong>
+        <p>a recruiter with forty tabs open. they need to understand who you are in sixty seconds. they want facts delivered cleanly without interface challenges.</p>
+      </div>
+      <div class="feature-item">
+        <strong>the explorer</strong>
+        <p>a developer who tabs through your source code first. someone who respects intentional complexity and will stay if the system rewards curiosity.</p>
+      </div>
+    </div>
+
+    <p>the honest version of this is not "i built two audiences." it's "i am both of these people, and i couldn't choose which one to speak to." the standard view is how i'd present myself in a room with my professor. the cyber os view is how i think at 2 am when a problem is unsolved and the only person watching is me.</p>
+
+    <h2>3. how it grew</h2>
+    <p>it didn't start as a "feature." it started as procrastination. i was stuck on a memory retrieval bug in engram and instead of sleeping, i started playing with terminal aesthetics in the browser. just for myself.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-date">week 1</span>
+        <p>a late-night css experiment. green text on black. a blinking cursor that serves no function. i leave it in a branch and forget about it.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">week 3</span>
+        <p>i show my flatmate. he spends fifteen minutes typing commands into what is essentially a glorified text box. i realize there's something here.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">week 5</span>
+        <p>the fake terminal becomes real. commands that actually navigate projects and trigger data visualizations. it becomes a second layer of navigation.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">week 8</span>
+        <p>the phone call with my aunt. i realize i cannot ship only this. the standard view gets serious attention. the two modes become a deliberate architectural decision.</p>
+      </div>
+    </div>
+
+    <h2>4. what cyber os mode actually feels like</h2>
+    <div class="mode-showcase">
+      <div><span class="prompt">system@devang-portfolio:~$</span> boot --identity devang.verma</div>
+      <div>▶ loading identity manifest ... done</div>
+      <div>▶ mounting project registry ... 4 entries found</div>
+      <div>▶ engram memory kernel ... active</div>
+      <br>
+      <div><span class="prompt">system@devang-portfolio:~$</span> ls ./projects</div>
+      <div>engram/&nbsp;&nbsp;&nbsp;portfolio-os/&nbsp;&nbsp;&nbsp;research/&nbsp;&nbsp;&nbsp;systems-lab/</div>
+      <br>
+      <div><span class="prompt">system@devang-portfolio:~$</span> cat engram/README.md</div>
+      <div>// portable second brain. plug in. identity boots. unplug. machine forgets.</div>
+      <br>
+      <div><span class="prompt">system@devang-portfolio:~$</span> <span class="cursor"></span></div>
+    </div>
+
+    <p>this is not decoration. the commands are real navigation. cd engram takes you into the project case study. whoami returns my background. help lists every available command. for someone who lives inside terminals, this is the most natural way to explore.</p>
+
+    <h2>5. cyber os screenshots</h2>
+    <p>drop in screenshots of the cyber os view — boot sequences, terminal states, data modules. these will display as a visual showcase.</p>
+
+    <div class="upload-grid" id="uploadGrid">
+      <!-- Slots will be filled by JS if needed, but for now just placeholders -->
+      <div class="upload-slot"><span>slot 1</span><input type="file" onchange="handleUpload(this, 0)"></div>
+      <div class="upload-slot"><span>slot 2</span><input type="file" onchange="handleUpload(this, 1)"></div>
+      <div class="upload-slot"><span>slot 3</span><input type="file" onchange="handleUpload(this, 2)"></div>
+      <div class="upload-slot"><span>slot 4</span><input type="file" onchange="handleUpload(this, 3)"></div>
+    </div>
+    <p class="caption">visual gallery of the dual-mode interface</p>
+
+    <h2>6. the honest answer to "why bother?"</h2>
+    <p>because i'm nineteen and self-taught and i don't have a prestigious institution or a famous internship to anchor my name to. what i have is the work itself, and the work needs to speak clearly to people who evaluate cvs, and it needs to speak honestly to people who read code.</p>
+    <p>the standard view is how i prove i can communicate. the cyber os view is how i prove i actually care about this stuff beyond career strategy — that i stayed up until 3 am refining a boot animation that no recruiter will ever see, because it felt right, because it was mine.</p>
+
+    <div class="callout"><p>i stayed up until 3 am refining a boot animation that no recruiter will ever see, because it felt right. because it was mine.</p></div>
+
+    <p>that tension — between accessibility and authenticity — is something i suspect every self-taught engineer navigates. the dual-mode portfolio is my answer to it. not a compromise. a both/and.</p>
+
+    <div class="status">
+      <div class="dot"></div>
+      <span>published &nbsp;·&nbsp; april 2026</span>
+    </div>
+
+    <div class="page-footer">
+      <span>portfolio philosophy &nbsp;·&nbsp; devang verma &nbsp;·&nbsp; 2026</span>
+      <a href="index.html">back to home</a>
+    </div>
+
+  </div>
+
+  <script>
+    function handleUpload(input, index) {
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const slot = input.parentElement;
+          slot.innerHTML = `<img src="${e.target.result}">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+</body>
+</html>

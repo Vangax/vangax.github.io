@@ -473,31 +473,31 @@ python amalgam_realistic_sim.py</code></pre>
 
     <h2>10. in action</h2>
 
-    <img class="img-wide" src="..assets/fig1_silicon_vs_biological.png" alt="silicon weights vs biological weights" onerror="this.style.display='none'">
+    <img class="img-wide" src="../assets/fig1_silicon_vs_biological.png" alt="silicon weights vs biological weights" onerror="this.style.display='none'">
     <p class="caption">fig 1 — the same numerical values, different physical substrate. left: PyTorch Conv2d 7×7 weight matrix in GPU VRAM, updated by gradient descent. right: Physarum polycephalum 7×7 vein network on agar, updated by oat placement (reward) and UV exposure (punishment).</p>
 
-    <img class="img-wide" src="..assets/fig2_growth_timeline.png" alt="physarum forward pass growth timeline" onerror="this.style.display='none'">
+    <img class="img-wide" src="../assets/fig2_growth_timeline.png" alt="physarum forward pass growth timeline" onerror="this.style.display='none'">
     <p class="caption">fig 2 — forward pass growth timeline (t=0h → t=4h). the slime grows toward projected light, concentrating vein mass at high-activation cells. right: 7×7 capture read back as weight tensor. prediction: 3, confidence: 0.89.</p>
 
-    <img class="img-wide" src="..assets/amalgam_rig_diagram.png" alt="amalgam rig cross-section and top-view" onerror="this.style.display='none'">
+    <img class="img-wide" src="../assets/amalgam_rig_diagram.png" alt="amalgam rig cross-section and top-view" onerror="this.style.display='none'">
     <p class="caption">rig cross-section (left): phone screen → agar → webcam. top-view (right): what the slime "sees" as a 7×7 nutrient gradient.</p>
 
     <div class="img-grid">
-      <img src="..assets/e1_growth_monitor.png" alt="E1: post-growth state" onerror="this.style.display='none'">
-      <img src="..assets/e2_bio_dashboard.png" alt="E2: training dashboard" onerror="this.style.display='none'">
+      <img src="../assets/e1_growth_monitor.png" alt="E1: post-growth state" onerror="this.style.display='none'">
+      <img src="../assets/e2_bio_dashboard.png" alt="E2: training dashboard" onerror="this.style.display='none'">
     </div>
     <p class="caption">E1: post-growth biological state (vein network, LTP memory, pH field) &nbsp;·&nbsp; E2: AMALGAM training dashboard over 10 hours</p>
 
-    <img class="img-wide" src="..assets/fig3_reliability_diagram.png" alt="uncertainty calibration MC dropout vs biological noise" onerror="this.style.display='none'">
+    <img class="img-wide" src="../assets/fig3_reliability_diagram.png" alt="uncertainty calibration MC dropout vs biological noise" onerror="this.style.display='none'">
     <p class="caption">fig 3 — uncertainty calibration: MC dropout (ECE=0.067) vs biological uncertainty from AMALGAM (ECE=0.084). structured biological noise acts as a regularizer — better calibrated at mid-confidence bins despite higher overall ECE.</p>
 
     <div class="img-grid">
-      <img src="..assets/e3_reliability.png" alt="E3: reliability diagram" onerror="this.style.display='none'">
-      <img src="..assets/e3_uncertainty.png" alt="E3: biological uncertainty quantification" onerror="this.style.display='none'">
+      <img src="../assets/e3_reliability.png" alt="E3: reliability diagram" onerror="this.style.display='none'">
+      <img src="../assets/e3_uncertainty.png" alt="E3: biological uncertainty quantification" onerror="this.style.display='none'">
     </div>
     <p class="caption">E3: reliability diagram (ECE=0.119) &nbsp;·&nbsp; epistemic + aleatoric uncertainty maps from 15 forward passes</p>
 
-    <img class="img-wide" src="..assets/e4_lifecycle.png" alt="E4: freeze-dry lifecycle" onerror="this.style.display='none'">
+    <img class="img-wide" src="../assets/e4_lifecycle.png" alt="E4: freeze-dry lifecycle" onerror="this.style.display='none'">
     <p class="caption">E4: vein network and memory trace pre-freeze vs. post-rehydrate. thick veins (strong memories) survive. fine veins are lost.</p>
 
     <div class="page-footer">

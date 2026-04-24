@@ -82,7 +82,7 @@
 
     <h2>1. the idea that started as a joke</h2>
 
-    <p>a few months ago i was reading about physarum polycephalum — slime mold — for unrelated reasons. it solves mazes. in a famous experiment (nakagaki et al., 2000), researchers placed oat flakes at positions corresponding to tokyo-area cities on a map and let the slime grow. it found a network connecting them with efficiency comparable to the actual rail system — not identical, and not accounting for geography or politics, but a striking steiner-tree approximation that no one designed. it has no brain. no neurons. it is a single cell the size of a dinner plate, and it does spatial optimization that would take a graph algorithm several seconds to compute.</p>
+    <p>a few months ago i was reading about physarum polycephalum slime mold for unrelated reasons. it solves mazes. in a famous experiment (nakagaki et al., 2000), researchers placed oat flakes at positions corresponding to tokyo-area cities on a map and let the slime grow. it found a network connecting them with efficiency comparable to the actual rail system not identical, and not accounting for geography or politics, but a striking steiner-tree approximation that no one designed. it has no brain. no neurons. it is a single cell the size of a dinner plate, and it does spatial optimization that would take a graph algorithm several seconds to compute.</p>
 
     <p>then i thought: a neural network layer is just a function that takes a vector in and returns a different vector out. the slime does that. it takes a spatial nutrient pattern in, runs some biological optimization for a few hours, and returns a vein density pattern out. those two things are isomorphic. so what happens if you actually plug one into the other?</p>
 
@@ -94,17 +94,17 @@
 
     <h2>2. why slime mold specifically</h2>
 
-    <p>physarum polycephalum is a plasmodial slime mold, which means the whole organism is a single giant cell with thousands of nuclei sharing one cytoplasm. it is not really an animal, not really a fungus — it belongs to the amoebozoa, a lineage of eukaryotes that split from animals and fungi over a billion years ago. the amoebozoan lineage is genuinely ancient; myxogastrids like physarum appear in the cretaceous fossil record (~100 million years ago), and their deeper ancestors predate complex animal life by hundreds of millions of years.</p>
+    <p>physarum polycephalum is a plasmodial slime mold, which means the whole organism is a single giant cell with thousands of nuclei sharing one cytoplasm. it is not really an animal, not really a fungus it belongs to the amoebozoa, a lineage of eukaryotes that split from animals and fungi over a billion years ago. the amoebozoan lineage is genuinely ancient; myxogastrids like physarum appear in the cretaceous fossil record (~100 million years ago), and their deeper ancestors predate complex animal life by hundreds of millions of years.</p>
 
     <p>here's what makes it useful for this experiment:</p>
 
     <p><strong>it does gradient descent.</strong> not metaphorically. when you place nutrients at multiple points on its surface, it grows veins connecting them along paths that minimize total tube length and maximize flow. this is exactly the steiner tree problem, which is NP-hard, and the slime solves it using chemical gradients and cytoplasmic pressure. it is running a distributed optimization algorithm encoded in its physiology.</p>
 
-    <p><strong>it has memory.</strong> if you subject physarum to adverse conditions (cold, drought) at regular intervals, it will begin to slow its growth preemptively before the next occurrence (saigusa et al., 2008). this is habituation or entrainment — the organism's oscillation period synchronises to the external rhythm. it is not "learning" in the animal cognitive sense, and there is no nervous system involved. but it is a genuine form of non-neural anticipatory behaviour, documented and replicated, and that is the property being exploited here.</p>
+    <p><strong>it has memory.</strong> if you subject physarum to adverse conditions (cold, drought) at regular intervals, it will begin to slow its growth preemptively before the next occurrence (saigusa et al., 2008). this is habituation or entrainment the organism's oscillation period synchronises to the external rhythm. it is not "learning" in the animal cognitive sense, and there is no nervous system involved. but it is a genuine form of non-neural anticipatory behaviour, documented and replicated, and that is the property being exploited here.</p>
 
     <p><strong>it is naturally stochastic.</strong> two identical slimes given identical environments will produce slightly different vein networks. this is not a bug. this is the biological equivalent of dropout. you get monte carlo uncertainty quantification for free, just by photographing the dish twice.</p>
 
-    <p><strong>it is robust.</strong> you can freeze it, dry it, grind it up, rehydrate it, and it comes back. the organism enters dormancy as a sclerotium — a dried, hardened form that can survive years and revive when water returns. i am using this as the checkpoint mechanism. model.save() is a ziploc bag in the freezer.</p>
+    <p><strong>it is robust.</strong> you can freeze it, dry it, grind it up, rehydrate it, and it comes back. the organism enters dormancy as a sclerotium a dried, hardened form that can survive years and revive when water returns. i am using this as the checkpoint mechanism. model.save() is a ziploc bag in the freezer.</p>
 
     <div class="callout"><p>physarum is not doing anything clever. it is doing something ancient and simple: finding food while avoiding danger. the cleverness comes from the fact that this ancient simple optimization is mathematically equivalent to what a convolutional layer does, except wetter and slower and alive.</p></div>
 
@@ -195,12 +195,12 @@ prediction</code></pre>
       </tr>
       <tr>
         <td>camera</td>
-        <td>laptop webcam directly above. or a phone camera on a gooseneck stand. you want consistent positioning — i taped the laptop lid open at a fixed angle.</td>
+        <td>laptop webcam directly above. or a phone camera on a gooseneck stand. you want consistent positioning i taped the laptop lid open at a fixed angle.</td>
         <td>$0</td>
       </tr>
       <tr>
         <td>enclosure</td>
-        <td>a cardboard box with a hole cut for the webcam cable. blocks ambient light, which matters because physarum is photophobic — it retreats from bright light.</td>
+        <td>a cardboard box with a hole cut for the webcam cable. blocks ambient light, which matters because physarum is photophobic it retreats from bright light.</td>
         <td>$0</td>
       </tr>
       <tr>
@@ -210,7 +210,7 @@ prediction</code></pre>
       </tr>
       <tr>
         <td>reward delivery</td>
-        <td>ground rolled oats in a small container. a toothpick to place tiny amounts at specific grid coordinates. do not use instant oats — too much sugar.</td>
+        <td>ground rolled oats in a small container. a toothpick to place tiny amounts at specific grid coordinates. do not use instant oats too much sugar.</td>
         <td>$0</td>
       </tr>
       <tr>
@@ -225,18 +225,18 @@ prediction</code></pre>
     <p>the physical setup matters more than it sounds. here's what i learned the hard way:</p>
 
     <div class="note">
-      <strong>the 5mm gap is not optional.</strong> if the dish sits directly on the phone screen, the slime gets hot (phone screens run at 35–40°C), which stresses it. the gap also lets the light diffuse slightly, which softens the hard pixel boundaries and creates a more gradual nutrient gradient on the agar — closer to what the organism would experience with real diffuse chemical gradients.
+      <strong>the 5mm gap is not optional.</strong> if the dish sits directly on the phone screen, the slime gets hot (phone screens run at 35–40°C), which stresses it. the gap also lets the light diffuse slightly, which softens the hard pixel boundaries and creates a more gradual nutrient gradient on the agar closer to what the organism would experience with real diffuse chemical gradients.
     </div>
 
     <p>pour the agar when it is around 50°C (hot but not scalding). too hot and you bubble it. too cool and it gels before you can spread it. you want a smooth, flat 4mm layer. let it set fully (30 minutes at room temp) before adding the slime.</p>
 
-    <p>to wake the sclerotia: cut a small piece of the dried spore card (~5mm square), place it in the center of the agar. add a small oat flake nearby. keep the dish in darkness at 22–25°C. in 24–48 hours the plasmodium will emerge — a bright yellow network of threads starting to explore the surface. do not disturb it during this phase.</p>
+    <p>to wake the sclerotia: cut a small piece of the dried spore card (~5mm square), place it in the center of the agar. add a small oat flake nearby. keep the dish in darkness at 22–25°C. in 24–48 hours the plasmodium will emerge a bright yellow network of threads starting to explore the surface. do not disturb it during this phase.</p>
 
     <div class="warn">
-      <strong>humidity is critical.</strong> physarum will die if the dish dries out. i taped the lid on with a single small strip of micropore tape — enough to let CO₂ escape but enough to keep humidity above 80%. if the agar surface looks glossy, you're fine. if it looks matte or cracked, it's drying out.
+      <strong>humidity is critical.</strong> physarum will die if the dish dries out. i taped the lid on with a single small strip of micropore tape enough to let CO₂ escape but enough to keep humidity above 80%. if the agar surface looks glossy, you're fine. if it looks matte or cracked, it's drying out.
     </div>
 
-    <p>once the slime is covering roughly 60–70% of the dish, it is ready for training. this takes 3–5 days from initial wake-up. the first training pattern you project should be at low contrast — oat/salt ratio roughly 60/40 — to avoid shocking the organism. you can increase contrast once it has adapted to the projection environment.</p>
+    <p>once the slime is covering roughly 60–70% of the dish, it is ready for training. this takes 3–5 days from initial wake-up. the first training pattern you project should be at low contrast — oat/salt ratio roughly 60/40 to avoid shocking the organism. you can increase contrast once it has adapted to the projection environment.</p>
 
     <h3>the projection/capture pipeline in code</h3>
 
@@ -277,14 +277,14 @@ def capture_vein_image(webcam):
 
     <h2>5. the simulation: when you can't wait 4 hours</h2>
 
-    <p>running this experiment on a real organism takes days per training cycle. so i built a full biophysics simulation that runs the same experiment in seconds. the simulation is grounded in peer-reviewed literature at every parameter — not hand-wavy "the slime grows toward food" but actual poiseuille flow equations, weber-fechner chemotaxis, alim et al. (2013) oscillation dynamics.</p>
+    <p>running this experiment on a real organism takes days per training cycle. so i built a full biophysics simulation that runs the same experiment in seconds. the simulation is grounded in peer-reviewed literature at every parameter not hand-wavy "the slime grows toward food" but actual poiseuille flow equations, weber-fechner chemotaxis, alim et al. (2013) oscillation dynamics.</p>
 
     <p>here's what the simulation models:</p>
 
     <div class="feature-grid">
       <div class="feature-item">
         <strong>cytoplasmic streaming</strong>
-        <p>oscillatory flow φ(t) = A·sin(2πt/T + φ₀) where T = 2 min. the streaming phase shifts slightly each cycle, which is why two forward passes on the same input give different outputs — the source of biological uncertainty.</p>
+        <p>oscillatory flow φ(t) = A·sin(2πt/T + φ₀) where T = 2 min. the streaming phase shifts slightly each cycle, which is why two forward passes on the same input give different outputs the source of biological uncertainty.</p>
       </div>
       <div class="feature-item">
         <strong>vein dynamics (tero et al. 2010)</strong>
@@ -292,7 +292,7 @@ def capture_vein_image(webcam):
       </div>
       <div class="feature-item">
         <strong>chemotaxis (nakagaki et al. 2000)</strong>
-        <p>the organism follows a weber-fechner gradient: sensitivity scales logarithmically with nutrient concentration. it adapts — after 2.5 hours of constant food exposure, the response diminishes. same as sensory adaptation in your own neurons.</p>
+        <p>the organism follows a weber-fechner gradient: sensitivity scales logarithmically with nutrient concentration. it adapts after 2.5 hours of constant food exposure, the response diminishes. same as sensory adaptation in your own neurons.</p>
       </div>
       <div class="feature-item">
         <strong>optical system</strong>
@@ -304,7 +304,7 @@ def capture_vein_image(webcam):
       </div>
       <div class="feature-item">
         <strong>long-term potentiation</strong>
-        <p>cells that encounter food while actively vascularized build up a memory trace — a potentiation field that biases future growth toward previously rewarded regions. hebbian learning in a cell.</p>
+        <p>cells that encounter food while actively vascularized build up a memory trace a potentiation field that biases future growth toward previously rewarded regions. hebbian learning in a cell.</p>
       </div>
     </div>
 
@@ -333,19 +333,19 @@ def capture_vein_image(webcam):
       </div>
     </div>
 
-    <p>the accuracy result is 20% on 10 training samples across 2 epochs. random chance on 10 classes is 10%, so the hybrid network is learning something — but this is not a meaningful ML benchmark. it is a feasibility proof that the biological layer can participate in a classification pipeline without breaking gradient flow. to get a real accuracy number, you need more samples, more epochs, and physical hardware.</p>
+    <p>the accuracy result is 20% on 10 training samples across 2 epochs. random chance on 10 classes is 10%, so the hybrid network is learning something but this is not a meaningful ML benchmark. it is a feasibility proof that the biological layer can participate in a classification pipeline without breaking gradient flow. to get a real accuracy number, you need more samples, more epochs, and physical hardware.</p>
 
-    <p>the calibration number (ECE = 0.1185) comes from the simulation's uncertainty quantification experiment: 10 forward passes with different streaming phases, comparing predicted confidence to simulated accuracy across bins. it is a simulation result, not a result measured from a real camera looking at a real petri dish. the reliability diagram shows what you would expect from a model with structured stochastic noise — imperfect but not chaotic.</p>
+    <p>the calibration number (ECE = 0.1185) comes from the simulation's uncertainty quantification experiment: 10 forward passes with different streaming phases, comparing predicted confidence to simulated accuracy across bins. it is a simulation result, not a result measured from a real camera looking at a real petri dish. the reliability diagram shows what you would expect from a model with structured stochastic noise imperfect but not chaotic.</p>
 
     <p>the freeze-dry retention (86.8%) is the fraction of simulated memory trace preserved after a desiccant freeze-dry cycle and 14 days of simulated storage aging. the simulation models this as stochastic loss concentrated in fine veins (under 0.1mm), which matches the known biology of sclerotia formation. it is not a number measured from a real freeze-drying experiment.</p>
 
-    <div class="callout"><p>the calibration result surprised me the most. i expected a biological noise source to ruin calibration. instead the stochasticity seems to act like a regularizer — the model doesn't overfit to confident wrong answers the way a purely digital model might, because the biological layer is always slightly different each run.</p></div>
+    <div class="callout"><p>the calibration result surprised me the most. i expected a biological noise source to ruin calibration. instead the stochasticity seems to act like a regularizer the model doesn't overfit to confident wrong answers the way a purely digital model might, because the biological layer is always slightly different each run.</p></div>
 
     <h3>what didn't work</h3>
 
-    <p>i never actually ran the physical experiment. i had the rig designed, the simulation done, and the concept clear — but i ran out of time and didn't have reliable access to the lab environment i needed. the first two petri dishes i attempted were lost to contamination before i could even begin training. the third is alive but i haven't been able to continue.</p>
+    <p>i never actually ran the physical experiment. i had the rig designed, the simulation done, and the concept clear but i ran out of time and didn't have reliable access to the lab environment i needed. the first two petri dishes i attempted were lost to contamination before i could even begin training. the third is alive but i haven't been able to continue.</p>
 
-    <p>the simulation exists because i built it to validate the concept while waiting to run the real thing. it is grounded in literature at every parameter, but it is still a simulation. if you have a lab, a clean workspace, and the patience for 4-hour forward passes — the concept is here, the code is here, and i would genuinely like to know if it works.</p>
+    <p>the simulation exists because i built it to validate the concept while waiting to run the real thing. it is grounded in literature at every parameter, but it is still a simulation. if you have a lab, a clean workspace, and the patience for 4-hour forward passes the concept is here, the code is here, and i would genuinely like to know if it works.</p>
 
     <h2>7. if you want to actually build this</h2>
 
@@ -358,7 +358,7 @@ def capture_vein_image(webcam):
         <span class="step-num">week 1</span>
         <div>
           <strong>order materials and prepare agar</strong>
-          <p>order physarum sclerotia (amazon, search "slime mold starter"). buy agar powder (available at asian grocery stores as "kanten" — it is the same thing). dissolve 2g agar per 100ml distilled water, heat until clear, pour into petri dishes, let set for 30 minutes. do not use tap water — chlorine inhibits growth.</p>
+          <p>order physarum sclerotia (amazon, search "slime mold starter"). buy agar powder (available at asian grocery stores as "kanten" it is the same thing). dissolve 2g agar per 100ml distilled water, heat until clear, pour into petri dishes, let set for 30 minutes. do not use tap water chlorine inhibits growth.</p>
         </div>
       </li>
       <li>
@@ -386,7 +386,7 @@ def capture_vein_image(webcam):
         <span class="step-num">week 2–3</span>
         <div>
           <strong>run your first projection</strong>
-          <p>write a simple script that displays a 7×7 grid of pixels on your phone at full screen. start with a very low-contrast pattern — mostly gray with one or two bright cells. let the slime sit in darkness with this pattern for 4 hours. do not project for the first few sessions — just let the slime sit in the box with the screen off to acclimate. then start with short projections (1 hour) before going to full 4-hour forward passes.</p>
+          <p>write a simple script that displays a 7×7 grid of pixels on your phone at full screen. start with a very low-contrast pattern mostly gray with one or two bright cells. let the slime sit in darkness with this pattern for 4 hours. do not project for the first few sessions just let the slime sit in the box with the screen off to acclimate. then start with short projections (1 hour) before going to full 4-hour forward passes.</p>
         </div>
       </li>
       <li>
@@ -417,15 +417,15 @@ def capture_vein_image(webcam):
 
     <h3>checkpointing (saving your weights)</h3>
 
-    <p>to freeze-dry the organism: remove the agar plate from the dish. let it sit uncovered in front of a gentle fan at room temperature for 2–4 hours. the organism will form a sclerotium — a hard, papery structure in a pale cream/gray color. place this in a small ziploc bag and store in the fridge (4°C). do not freeze — ice crystals damage the cellular structure. the sclerotium is viable for months stored this way.</p>
+    <p>to freeze-dry the organism: remove the agar plate from the dish. let it sit uncovered in front of a gentle fan at room temperature for 2–4 hours. the organism will form a sclerotium a hard, papery structure in a pale cream/gray color. place this in a small ziploc bag and store in the fridge (4°C). do not freeze ice crystals damage the cellular structure. the sclerotium is viable for months stored this way.</p>
 
-    <p>to rehydrate: place the sclerotium on fresh agar in a new dish. add a small oat flake. seal. put in darkness. the organism will re-emerge in 24–48 hours. the vein network it rebuilds will reflect the memory traces that survived desiccation — primarily the thick, strongly-reinforced connections. fine veins are lost on drying (the simulation models this as ~9.9% immediate loss plus ~3.8% from 14-day storage aging, totalling ~86.8% retention — consistent with the known biology of sclerotia but not yet physically validated).</p>
+    <p>to rehydrate: place the sclerotium on fresh agar in a new dish. add a small oat flake. seal. put in darkness. the organism will re-emerge in 24–48 hours. the vein network it rebuilds will reflect the memory traces that survived desiccation primarily the thick, strongly-reinforced connections. fine veins are lost on drying (the simulation models this as ~9.9% immediate loss plus ~3.8% from 14-day storage aging, totalling ~86.8% retention consistent with the known biology of sclerotia but not yet physically validated).</p>
 
     <div class="callout"><p>the checkpoint ritual is genuinely strange. you take your weight file out of the freezer, peel it apart, drop it on a piece of gelatin, and wait two days. but it works. the slime wakes up and it remembers.</p></div>
 
     <h2>8. the simulation, the code, everything</h2>
 
-    <p>the core file is <strong>amalgam_realistic_sim.py</strong> — the full biophysics simulation and neural network. it contains four main classes:</p>
+    <p>the core file is <strong>amalgam_realistic_sim.py</strong> the full biophysics simulation and neural network. it contains four main classes:</p>
 
     <p><code>PhysarumBiophysics</code> — the 256×256 physical simulation. runs cytoplasmic streaming, chemotaxis, vein dynamics, photophobia, long-term potentiation, pH drift, and optical capture. every parameter has a citation comment. runs standalone without pytorch.</p>
 
@@ -445,14 +445,14 @@ python amalgam_realistic_sim.py</code></pre>
     <p>output goes to <code>amalgam_output/</code>. the full experiment takes 5–10 minutes on CPU. every biological parameter has a citation comment inline. every equation is physically justified. ~1750 lines total.</p>
 
     <div class="note">
-      <strong>what happens next.</strong> amalgam is a discriminative model — it classifies. there is a separate project, oneiric, that extends this into a generative system: the slime enters a dream state, replays its memories, and hallucinates novel patterns that become synthetic training data. that is documented separately.
+      <strong>what happens next.</strong> amalgam is a discriminative model it classifies. there is a separate project, oneiric, that extends this into a generative system: the slime enters a dream state, replays its memories, and hallucinates novel patterns that become synthetic training data. that is documented separately.
     </div>
 
     <h2>9. what this is actually about</h2>
 
-    <p>the straightforward answer is: i wanted to see if a living organism could function as a neural network layer. in simulation, it can, with major caveats. the gradient descent analogy is a useful intuition but not a formal equivalence — physarum runs reaction-diffusion dynamics and network flow optimisation, which are mathematically related to but not identical to gradient descent. the stochasticity is real and useful. the memory and checkpoint mechanism work in simulation. the whole thing is very slow and currently impractical for anything beyond a proof of concept.</p>
+    <p>the straightforward answer is: i wanted to see if a living organism could function as a neural network layer. in simulation, it can, with major caveats. the gradient descent analogy is a useful intuition but not a formal equivalence physarum runs reaction-diffusion dynamics and network flow optimisation, which are mathematically related to but not identical to gradient descent. the stochasticity is real and useful. the memory and checkpoint mechanism work in simulation. the whole thing is very slow and currently impractical for anything beyond a proof of concept.</p>
 
-    <p>but the less straightforward answer is that i find the underlying question genuinely interesting. intelligence in silicon is built on the assumption that computation requires a specific substrate — transistors, gates, binary logic. physarum is evidence that this assumption is wrong. the same mathematical operation (finding minimal spanning trees, running optimization over a cost function) can be performed by an organism that has no nervous system, no brain, and has been running the same algorithm for half a billion years.</p>
+    <p>but the less straightforward answer is that i find the underlying question genuinely interesting. intelligence in silicon is built on the assumption that computation requires a specific substrate transistors, gates, binary logic. physarum is evidence that this assumption is wrong. the same mathematical operation (finding minimal spanning trees, running optimization over a cost function) can be performed by an organism that has no nervous system, no brain, and has been running the same algorithm for half a billion years.</p>
 
     <p>this doesn't mean slime mold is going to replace GPUs. it won't. it means the thing we are building when we build a neural network is not as unique and silicon-specific as we sometimes think it is. the math doesn't care what runs it. the optimization is real regardless of whether it happens in copper traces or in a protoplasmic vein.</p>
 
@@ -465,7 +465,7 @@ python amalgam_realistic_sim.py</code></pre>
       <span>simulation complete &nbsp;·&nbsp; physical rig ongoing &nbsp;·&nbsp; april 2026</span>
     </div>
 
-    <p>the simulation is done and produces all four experimental outputs. the physical rig is ongoing — i am on my third petri dish. the first two were lost to contamination. the third is alive and establishing. i feed it every two days and try not to think about it too much between sessions.</p>
+    <p>the simulation is done and produces all four experimental outputs. the physical rig is ongoing i am on my third petri dish. the first two were lost to contamination. the third is alive and establishing. i feed it every two days and try not to think about it too much between sessions.</p>
 
     <p>if you are a biologist, an ML researcher, or just someone who finds this weird and interesting, i would genuinely like to hear from you. this was built alone and i have no idea what i'm missing.</p>
 

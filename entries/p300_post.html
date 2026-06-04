@@ -25,7 +25,6 @@
     .img-wide { width: 100%; border-radius: 8px; display: block; border: 1px solid #eee; margin-bottom: 8px; }
     .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
     .img-grid img { width: 100%; border-radius: 8px; display: block; border: 1px solid #eee; }
-    .img-single { width: 100%; border-radius: 8px; display: block; border: 1px solid #eee; margin-bottom: 8px; }
     .caption  { font-size: 0.78rem; color: #aaa; text-align: center; margin-bottom: 28px; }
 
     .note { border: 1px solid #e8e8e8; border-radius: 6px; padding: 14px 18px; margin: 20px 0; background: #fdfdfd; font-size: 0.85rem; color: #555; }
@@ -40,11 +39,6 @@
 
     .page-footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.85rem; color: #aaa; display: flex; justify-content: space-between; }
     .page-footer a { color: #111; text-decoration: none; }
-
-    /* image upload placeholders */
-    .img-placeholder { width: 100%; border-radius: 8px; border: 1.5px dashed #ddd; background: #fafafa;
-                        display: flex; align-items: center; justify-content: center;
-                        min-height: 220px; margin-bottom: 8px; color: #bbb; font-size: 0.82rem; }
 
     @media (max-width: 520px) {
       .feature-grid { grid-template-columns: 1fr; }
@@ -192,23 +186,19 @@
 
     <h2>8. in action</h2>
 
-    <!-- IMAGE SLOT 1: replace src with your actual image path -->
-    <img class="img-wide" src="../assets/Screenshot 2026-06-04 114303.png" alt="p300 erp explorer main window"> -->
-     
-    </div>
+    <img class="img-wide" src="../assets/Screenshot 2026-06-04 114303.png" alt="p300 erp explorer main window">
     <p class="caption">the full explorer window: scalp topography (left) and ERP waveform at Pz for SE001. the P300 peak is visible at approximately 230 ms in the target (purple) waveform.</p>
 
-    <!-- IMAGE SLOT 2: replace src with your actual image path -->
-    <img class="img-wide" src="../assets/Screenshot 2026-06-04 114337.png" alt="scalp topography at 300ms"
-
+    <div class="img-grid">
+      <div>
+        <img src="../assets/Screenshot 2026-06-04 114337.png" alt="scalp topography at 230ms">
+        <p class="caption">scalp topography at 230 ms showing the posterior positive field concentrated at Pz and surrounding parietal electrodes. red = positive voltage relative to pre-stimulus baseline.</p>
+      </div>
+      <div>
+        <img src="../assets/Screenshot 2026-06-04 114412.png" alt="preprocessing pipeline output">
+        <p class="caption">preprocessing pipeline output: 840 total flash onsets detected, 68 target and 751 non-target epochs surviving artifact rejection at the 100 µV threshold.</p>
+      </div>
     </div>
-    <p class="caption">scalp topography at 230 ms showing the posterior positive field concentrated at Pz and surrounding parietal electrodes. red = positive voltage relative to pre-stimulus baseline.</p>
-
-    <!-- IMAGE SLOT 3 (optional): replace src or delete this block entirely -->
-    <img class="img-wide" src="../assets/Screenshot 2026-06-04 114412.png" alt="preprocessing pipeline output"> -->
-    
-    </div>
-    <p class="caption">preprocessing pipeline output: 840 total flash onsets detected, 68 target and 751 non-target epochs surviving artifact rejection at the 100 µV threshold.</p>
 
     <div class="status">
       <div class="dot"></div>

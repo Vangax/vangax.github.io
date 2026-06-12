@@ -2170,6 +2170,7 @@ new forms of human–machine collaboration.
 
 
   const allEntries = [
+    { id: 'netrunner',  label: 'Netrunner.OS' },
     { id: 'p300',       label: 'ERP Explorer' },
     { id: 'oneiric',    label: 'Oneiric' },
     { id: 'amalgam',    label: 'Amalgam' },
@@ -2220,6 +2221,82 @@ new forms of human–machine collaboration.
   let currentDrawerIdx = 0;
 
   const projectData = {
+    netrunner: {
+      title: '++ netrunner.os ||',
+      breadcrumb: 'Netrunner.OS',
+      stack: 'rust · go · neo4j · cypher · graph database · network topology · 3d visualization · netrunning',
+      badge: 'cyberspace engine',
+      content: `
+        <h1>netrunner.os</h1>
+        <p class="proj-stack">rust · go · neo4j · cypher · graph database · network topology · 3d visualization · netrunning</p>
+        <p class="proj-meta">systems · visualization · june 2026</p>
+        <hr>
+        <p>ok so this one is kinda personal and im just gonna write it the way it actually happened in my head, not all clean and structured and proper like the other ones uk. so if it rambles a bit just bear with me lol, thats kind of the point, this whole project came out of a ramble in my head in the first place so it only feels right to write it the same way.</p>
+        <h2>how this even started</h2>
+        <p>so i was just sitting there one random day, not even trying to start a project or anything, and i saw that some of the people i follow are literally working at cern right now?? like actual cern. and idk man something about seeing that just sent my whole brain straight back to science. like the physics part of me that id kinda put to sleep just woke right back up. atoms and particles and fields and all that stuff i used to obsess over. i started thinking about how INSANE it is that theres all this real stuff happening around us every single second and we just... cant see any of it. the air is full of things. theres fields running through everything. theres particles doing whatever theyre doing and we will never see them with our own eyes, ever, they're just under the resolution of being a human uk.</p>
+        <p>and i was sitting with that thought, like just turning it over, how much of reality is invisible to us not because its hidden but just because we physically cant perceive it. and then it kinda just hit me out of nowhere — its the EXACT same thing with a network. like in the network sense?? we cant actually see the network. at all. when normal people hear "network" they think of the little wifi bars on their phone and thats it, thats the whole mental image. but the actual thing, the real object, the graph of all the machines and the routes and the ports and the services and which thing talks to which thing and the path a single packet takes to get from you to somewhere across the world — that has an actual SHAPE. it has a structure. its a real thing with a real geometry. and you live inside it every second of your life and you have absolutely no idea what it looks like :D hahah. you swim around in it like a fish that has no clue its even in water.</p>
+        <p>and that thought just would NOT leave me alone after that. like for days. i wanted to see it. thats it, thats the whole seed of this entire project. i just wanted to take this invisible thing i live inside and turn it into something i could actually look at and move around in. not attack it, not break anything, just SEE it. give it a shape with my own eyes.</p>
+        <h2>the cyberpunk part (im gonna get emotional here ngl, fair warning)</h2>
+        <p>so obviously, the second my brain landed on "what if the network was a place you could see and go into" it went straight to one thing. cyberpunk 2077. the cyberspace. the net. v jacking in. and... johnny silverhand. ahhh man. ok here we go.</p>
+        <p>i have to be honest about why this idea actually grabbed me and didnt let go, and its not really the cern thing on its own, the cern thing was just the spark. the real fuel was that game. the whole story of v going into the net, the idea that its not some abstract cloud thing, its a PLACE. theres architecture in there. theres people in there. theres stuff that can hurt you in there. and going in costs you something, you dont come out the same. i replayed those parts in my head so many times. like the feeling of it. the idea that you could jack into this invisible world and actually move through it and it would feel like somewhere real, somewhere you could get lost in.</p>
+        <p>and johnny man. i know hes not real. i KNOW its a game and hes a character and im a grown person getting emotional over a video game in a project writeup lol. but theres something about that whole arc, about going into the net, about leaving pieces of yourself in there, that just got under my skin and stayed. it made the invisible feel like a frontier. like an actual place at the edge of the map that nobody had walked into yet. and william gibson had already called cyberspace a "consensual hallucination" like decades before the game even existed, the game just made me FEEL the thing that gibson only let me read about, uk?</p>
+        <p>so at some point i just stopped admiring it. i was like ok, dont just sit here loving this idea and replaying cutscenes in your head. build it. build the closest honest version of it you possibly can, with a real network, on a real machine, where the thing youre flying through is actual real data and not a pre rendered scene. this entire project is me trying to build one tiny true little corner of that frontier instead of just wishing it existed. thats genuinely what it is. its a love letter to that feeling more than its a piece of software.</p>
+        <h2>so then i actually planned the whole thing out</h2>
+        <p>and then i did the thing i dont always do which is actually sit down and plan it properly instead of just diving in headfirst. i mapped out what it would even need to be. like ok, something has to go out and FIND the network, discover whats out there and how its all connected. then something has to STORE all that, hold the whole shape of it somewhere. then something has to take that stored shape and actually lay it out in 3d and let me move through it. and then theres the whole defenses thing, the walls and the guarded bits, which became the ice (more on that in a sec).</p>
+        <p>and just so its clear before anyone gets the wrong idea from the name — its a visualizer. its for networks you own or that youre allowed to map. its about SEEING the net, not getting into anything you shouldnt. the whole point was always to look at the shape of the thing, not to attack it. ok anyway.</p>
+        <h2>learning rust (rip me)</h2>
+        <p>so heres the kinda crazy part. i didnt know rust. like at all. but i wanted the core of this, the engine part that holds the whole graph in memory and figures out where every node goes in 3d space and keeps it all moving smooth, i wanted that to be FAST and i wanted it to not just fall over and die when the network got big. and everyone kept saying rust for that kind of thing so i was like alright, i guess im learning rust now.</p>
+        <p>and bro the borrow checker. if you know you know. the first like while of learning rust is just the compiler telling you no, over and over, in increasingly polite ways. it makes you actually be honest about who owns what and when things get cleaned up and it does NOT let you be lazy about it. and at first that was genuinely painful, like i wanted to throw my laptop. but then somewhere along the way it kind of clicked and i realised it was quietly forcing me to build the engine in a way that was actually solid instead of held together with tape. so. rust. painful, worth it, would cry again.</p>
+        <h2>and go too (for the networking side)</h2>
+        <p>and then i learned a bit of go as well, on top of rust, at the same time, which in hindsight was maybe a slightly insane thing to do but here we are. i picked up go because i had this feeling it would be really useful for the other sense of the project, specifically the networking and discovery side, the part that actually has to reach out and probe a bunch of stuff at once. and yeah it absolutely was. gos whole concurrency thing, being able to fire off a ton of little jobs all at once and gather the results back without the whole thing turning into a tangled mess, is honestly really nice for exactly that kind of work. so the split kind of naturally became: go for the going-out-and-finding part, rust for the holding-and-rendering part. and that division just held the whole way through, it felt right.</p>
+        <h2>building it (with ai obviously) and just grinding</h2>
+        <p>and ill be totally straight about this cuz i think its important to be honest — i built a lot of this with the help of ai. obviously. like i couldnt even IMAGINE picking up two whole new languages AND making something this big at the same time, that quickly, without it. thats just the truth. but and this is the part people skip, "with ai help" does not mean it wrote itself and i sat back. it was still a genuinely huge amount of work. like a LOT. i was the one writing code, then debugging it, then doing the follow up, then debugging the follow up, fixing one thing and immediately breaking two more things, going round and round.</p>
+        <p>and the reason i could even do it is honestly just that i had real interest in it, like real burning interest, and cuz i go properly hardcore when im actually into something. when something has its hooks in me i kind of lose the ability to do it halfway. and i wanted this thing to be BIG. like properly big, a real thing, not some half baked little demo that does one thing. so i just kept going. and going.</p>
+        <h2>the graph (neo4j is basically the brain of it)</h2>
+        <p>ok so for storing the whole network, using neo4j wasnt even some clever galaxy brain decision, it was honestly the most obvious thing in the world the second i said it out loud. a network IS a graph. like fundamentally. its nodes and connections. so why would you store it as anything other than a graph database, that just makes everything harder for no reason. so the machines and the services become nodes, and the routes and links and dependencies between them become the relationships, and then you ask the whole thing questions using cypher which is neo4js query language.</p>
+        <p>and the really nice thing, the thing that made it click for me, is that once the whole network is sitting there as a proper graph you can suddenly ask it actual real questions. like whats the shortest path between this machine and that one. or whats sitting in between me and some node over there. or what is this host actually exposing to the world. and the graph that answers all those questions is the SAME graph that the engine then lays out in 3d and lets me fly through. like its literally the same object. the thing i query and the thing i walk through are one and the same. and thats the moment it stopped feeling like a database to me and started feeling like an actual little world.</p>
+        <h2>oh also — the ice</h2>
+        <p>so ice. in the whole gibson / cyberpunk world ice means intrusion countermeasures, basically the stuff thats guarding a system, the defenses. and in netrunner.os, ice is the name i gave to the part that takes all the defensive stuff about the network — the firewalls, the closed or filtered ports, the nodes you just cant reach — and turns it into actual visible objects sitting there in the space. so the cyberspace doesnt just show you the network, it shows you where the WALLS are. where its guarded. very cyberpunk of me i know :D i couldnt help it, the name was right there.</p>
+        <p>so "running the ice" is literally just me starting up that service. it watches the graph and decorates the nodes with how defended they are. which sounds really cool and it IS really cool when it works. the problem is the part where it actually has to, you know, run. which brings me to the suffering.</p>
+        <h2>neo4j was fking UP (the genuine pain part)</h2>
+        <p>so here is the honest truth about where most of the hours on this project actually went. it was NOT the cool glowy 3d cyberpunk part. it was getting the whole thing to actually run, all the pieces, all at once, end to end, without one of them quietly refusing to talk to another one. deploying this thing was genuinely brutal. so many errors man. SO many. like an unreasonable amount.</p>
+        <p>and neo4j fought me the absolute hardest out of everything. neo4j was fking UP, constantly, in every way it possibly could. the auth just wouldnt take. connection refused, over and over. the bolt connection just dying. the whole thing flat out refusing to come up at all. the memory and heap config needing to be tuned before it would even start. plugin stuff. the database silently just... not saving the things i was sure it had saved. version mismatches between the driver and the actual server that made no sense until i found them. and the classic one that got me for ages — the engine trying to connect to neo4j before neo4j was actually ready to take connections, so everything looked completely broken when really it was just early by like two seconds.</p>
+        <p>and then around all of that you've got the normal tax of doing anything in systems land. installing all the toolchains. getting the rust crates to resolve. getting the go modules to resolve. wiring all the services up so they could actually find each other and talk. running the ice. running everything. and id fix one error feeling all proud of myself and then immediately three new ones would pop up to replace it. connection refused. auth failed. container wont come up. the deeply unglamorous reality that lives underneath literally anything that looks cool in a screenshot. nobody posts the logs. everybody posts the final glowy shot.</p>
+        <div class="xg-callout"><p>like genuinely nobody warns you that the cyberpunk dream is about 90% sitting there staring at "connection refused" and watching neo4j fk up for the hundredth time :D but that other 10%, the part where you FINALLY jack in and fly through your own actual network as this living glowing graph that you built from nothing?? worth every single hour of the other 90. easily. not even close.</p></div>
+        <h2>but yeah, where its at now</h2>
+        <p>anyway. it works now. like actually works, properly enough that i can point it at a network and map it and then move through the result like its a space instead of just a big boring pile of numbers in a terminal. i can fly around my own net. i can see the shape of it. the thing i couldnt see before, the invisible thing, i can look at it now. and idk man, im kind of proud of it?? like genuinely.</p>
+        <p>cuz think about where this even came from. it started with me just happening to see some people i follow working at cern, which sent me thinking about atoms and all the stuff we cant see, which somehow turned into thinking about networks being invisible the same way, which ran straight into a video game i love and a character that made me feel something, and then it somehow came out the other end as a REAL thing. a real piece of software that actually runs, written in two languages i did not know how to use like a month before i started. thats the part that genuinely gets me. not that its perfect, its not, theres a hundred things i still wanna fix. just that it exists. that i had a rambly thought in my head and now its a thing i can fly through. i made that. and theres more i wanna do with it, smarter ice, live updates as the network changes under you, a proper jack-in mode that leans all the way into the feeling. but for now it exists and its mine and honestly thats enough :D</p>
+        <img class="img-wide" src="assets/netos_02_netspace_main.png" alt="netrunner.os netspace — the whole network rendered as a glowing city" onerror="this.style.display='none'">
+        <p class="img-caption">[ the whole net rendered as a city — every building is a host, every line a connection ]</p>
+        <div class="img-grid">
+          <img src="assets/netos_08_self_core.png" alt="local core node selected in netspace" onerror="this.style.display='none'">
+          <img src="assets/netos_07_netspace_towers.png" alt="wide netspace view with ice towers" onerror="this.style.display='none'">
+        </div>
+        <p class="img-caption">[ flying up to my own local core (the green tower) &nbsp;·&nbsp; wide shot with the ice towers ]</p>
+        <div class="img-grid">
+          <img src="assets/netos_11_front_spire.png" alt="eye level flythrough of netspace" onerror="this.style.display='none'">
+          <img src="assets/netos_09_overhead.png" alt="top down view of network topology" onerror="this.style.display='none'">
+        </div>
+        <p class="img-caption">[ eye-level flythrough &nbsp;·&nbsp; top-down on the topology grid ]</p>
+        <img class="img-wide" src="assets/netos_10_dome.png" alt="low atmospheric angle of netspace with wireframe boundary" onerror="this.style.display='none'">
+        <p class="img-caption">[ low angle with the wireframe boundary — this is the part that feels like cyberpunk ]</p>
+        <div class="img-grid">
+          <img src="assets/netos_05_node_inspector.png" alt="node inspector with ice locked and breach prompt" onerror="this.style.display='none'">
+          <img src="assets/netos_03_breach_protocol.png" alt="breach protocol decode minigame" onerror="this.style.display='none'">
+        </div>
+        <p class="img-caption">[ clicking a host to inspect it — ice locked &nbsp;·&nbsp; the breach protocol decode screen ]</p>
+        <div class="img-grid">
+          <img src="assets/netos_04_evidence_vault.png" alt="decrypted evidence vault panel" onerror="this.style.display='none'">
+          <img src="assets/netos_12_threat_red.png" alt="live threat contact shown as a red node" onerror="this.style.display='none'">
+        </div>
+        <p class="img-caption">[ the decrypted evidence vault &nbsp;·&nbsp; a live threat contact (the red node) ]</p>
+        <div class="img-grid">
+          <img src="assets/netos_01_boot.png" alt="net/os boot sequence and jack in screen" onerror="this.style.display='none'">
+          <img src="assets/netos_06_controls_manual.png" alt="netrunner manual showing controls and keybinds" onerror="this.style.display='none'">
+        </div>
+        <p class="img-caption">[ the boot / jack-in screen &nbsp;·&nbsp; the netrunner manual (all the controls) ]</p>
+      `
+    },
     p300: {
       title: '++ erp explorer ||',
       breadcrumb: 'ERP Explorer',
@@ -3325,7 +3402,7 @@ prediction</pre>
     }
   };
 
-  const projectKeys = ['p300','oneiric','amalgam','engram','blackwall','spectral','neuroreactor','bayesian','aether','twoworlds'];
+  const projectKeys = ['netrunner','p300','oneiric','amalgam','engram','blackwall','spectral','neuroreactor','bayesian','aether','twoworlds'];
 
   function openDrawer(idx) {
     currentDrawerIdx = idx;

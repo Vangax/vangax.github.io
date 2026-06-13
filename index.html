@@ -3927,7 +3927,7 @@ prediction</pre>
       grid.innerHTML = list.map(function (m) {
         var dom = tlDomain(m.url);
         var isMe = (m.name === TL_ME);
-        var badge = isMe ? ' <span class="tl-badge">(you)</span>' : '';
+        var badge = isMe ? ' <span class="tl-badge">(me)</span>' : '';
         return '<a class="tl-card' + (isMe ? ' tl-me' : '') + '" href="' + tlEsc(m.url) + '" target="_blank" rel="noopener">'
           + '<img class="tl-av" loading="lazy" alt="' + tlEsc(m.name) + '" '
           + 'src="https://avatars.githubusercontent.com/' + tlEsc(m.gh) + '?size=96" '

@@ -1533,7 +1533,7 @@ rgba(216,218,221,0.5) 52%, rgba(200,202,206,0.5) 100%) !important;
     <button class="nav-link" onclick="showPage('reflections', this)">Reflections</button>
     <a class="nav-link" href="assets/devang new.pdf" target="_blank">CV</a>
     <button class="nav-link" onclick="showPage('contact', this)">Contact</button>
-    <button class="nav-link nav-threadlocked" onclick="showPage('threadlocked', this)" title="threadlocked webring — meet my friends" aria-label="threadlocked webring">
+    <button class="nav-link nav-threadlocked" onclick="showPage('threadlocked', this)" title="threadlocked webring — meet some cool people" aria-label="threadlocked webring">
       <svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" viewBox="0 0 88 31">
         <defs>
           <linearGradient id="tl_silver" x1="0" y1="0" x2="0" y2="1">
@@ -3861,8 +3861,7 @@ prediction</pre>
 </script>
 
 <script>
-  /* threadlocked webring — render members. Baked-in list guarantees it shows;
-     a live fetch refreshes it when the ring adds members. */
+  
   (function () {
     var TL_ME = 'devang';
     var TL_FALLBACK = [
@@ -3943,7 +3942,7 @@ prediction</pre>
     fetch('https://ring.seggs.lol/webring')
       .then(function (r) { if (!r.ok) throw new Error('no'); return r.json(); })
       .then(function (data) { if (Array.isArray(data) && data.length) tlRender(data); })
-      .catch(function () { /* offline / CORS — keep the baked list */ });
+      .catch(function () {  });
   })();
 </script>
 </body>

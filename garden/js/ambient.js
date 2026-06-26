@@ -1,5 +1,4 @@
-/* ambient.js: optional synthesized forest sound (wind, a warm pad, water
-   drops). Off by default, toggled from the header, never plays without a click. */
+
 (function (root) {
   "use strict";
   var A = { on: false, ctx: null, master: null, _nodes: [], _dropTimer: null, noise: null };

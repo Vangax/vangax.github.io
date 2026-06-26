@@ -1,6 +1,4 @@
-/* scene.js: the background world. Clouds, balloons, a plane, trees, fish,
-   butterflies, motes, click bubbles, the koi, day and night, idle bubbles.
-   Transform-only and reduced-motion aware. */
+
 (function (root) {
   "use strict";
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -62,7 +60,7 @@
     }
     if (!reduced) run(); else el.style.transform = "translate(" + (root.innerWidth * .6) + "px," + (root.innerHeight * .3) + "px)";
   }
-  function wanderer(el, dur) {   // butterflies: roam to random points
+  function wanderer(el, dur) {   // butterflies
     function run() {
       var vw = root.innerWidth, vh = root.innerHeight, fr = [], n = 7;
       for (var i = 0; i <= n; i++) fr.push({ transform: "translate(" + rand(30, vw - 70) + "px," + rand(vh * .12, vh * .8) + "px) rotate(" + rand(-16, 16) + "deg) scaleX(" + (Math.random() < .5 ? 1 : -1) + ")", offset: i / n });
@@ -131,7 +129,7 @@
     var n = reduced ? 4 : 9;
     for (var i = 0; i < n; i++) {
       var t = img("tree", pick(trees), floor);
-      var depth = Math.random();                  // 0 far(small,pale) .. 1 near(big)
+      var depth = Math.random();                  // 0 
       var hgt = 70 + depth * 120;
       t.style.height = hgt + "px"; t.style.left = (i / (n - 1) * 100 + rand(-6, 6)) + "%";
       t.style.opacity = (.55 + depth * .45).toFixed(2);
@@ -154,7 +152,7 @@
   }
 
   var bubbleSrc = ["assets/bubble1.png", "assets/bubble2.png", "assets/bubble3.png", "assets/bubble4.png"], liveBubbles = 0;
-  // click anywhere, get a bubble. simple pleasures.
+  // bubbly bunty bubbles
   function popBubble(x, y) {
     if (reduced || liveBubbles > 8) return; liveBubbles++;
     var b = img("clickbub", pick(bubbleSrc)); var s = rand(26, 64);
@@ -204,7 +202,7 @@
     return wrap;
   }
 
-  var phaseOverride = null;                 // null = follow real local time; else a fixed phase
+  var phaseOverride = null;                 
   try { phaseOverride = localStorage.getItem("vx_phase") || null; } catch (e) {}
   function autoPhase() { var h = new Date().getHours(); return (h >= 5 && h < 8) ? "dawn" : (h >= 8 && h < 17) ? "day" : (h >= 17 && h < 20) ? "dusk" : "night"; }
   function effectivePhase() { return phaseOverride || autoPhase(); }

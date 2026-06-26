@@ -37,7 +37,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 ::-webkit-scrollbar-thumb{ border-radius:999px; background:linear-gradient(180deg,var(--g-light),var(--g-forest)); border:3px solid transparent; background-clip:padding-box; }
 ::-webkit-scrollbar-track{ background:rgba(45,106,79,.1); }
 
-/* living background (scene.js targets these) */
 .bg{ position:fixed; inset:0; z-index:-3; pointer-events:none; }
 .bg-bliss{ background:url("../assets/bg_bliss.jpg") center 32%/cover no-repeat; transform:scale(1.08) translate(calc(var(--px)*-12px), calc(var(--py)*-8px)); transition:transform .5s ease-out; }
 .bg-bokeh{ z-index:-2; background:url("../assets/bokeh.jpg") center/cover no-repeat; mix-blend-mode:screen; opacity:.28; animation:drift 52s ease-in-out infinite alternate; }
@@ -58,7 +57,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .flit{ position:fixed; z-index:6; pointer-events:none; width:54px; will-change:transform; filter:drop-shadow(0 8px 10px rgba(16,52,46,.3)); }
 .clickbub{ position:fixed; z-index:6; pointer-events:none; will-change:transform,opacity; }
 
-/* shared glossy bits */
 .btn{ position:relative; display:inline-flex; align-items:center; gap:7px; cursor:pointer; font-family:var(--fdisp); font-weight:600; color:var(--white);
   border:1px solid rgba(255,255,255,.85); border-radius:999px; padding:.42em 1em; font-size:.85rem; background:var(--gel-green);
   box-shadow:var(--sh-2), inset 0 1px 0 rgba(255,255,255,.9), inset 0 -7px 11px rgba(16,52,46,.3); text-shadow:0 1px 1px rgba(16,52,46,.4);
@@ -76,7 +74,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
   background:radial-gradient(circle, rgba(255,255,255,.6), rgba(72,202,228,.25) 60%, transparent 72%); animation:ripple .6s var(--ease) forwards; }
 @keyframes ripple{ to{ transform:translate(-50%,-50%) scale(1); opacity:0; } }
 
-/* THE PORTAL (framed shell) */
 .portal{ position:relative; z-index:2; width:min(1160px, calc(100vw - 32px)); margin:54px auto 36px; border-radius:22px; overflow:hidden;
   background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(183,228,199,.16) 50%, rgba(0,119,182,.12));
   -webkit-backdrop-filter:blur(9px) saturate(160%) brightness(1.04); backdrop-filter:blur(9px) saturate(160%) brightness(1.04);
@@ -84,7 +81,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
   animation:portalin .7s var(--ease) both; }
 @keyframes portalin{ from{ opacity:0; transform:translateY(18px) scale(.99); } to{ opacity:1; transform:none; } }
 
-/* header banner */
 .portal-head{ position:relative; display:flex; align-items:center; gap:14px; padding:0 18px; height:94px; overflow:hidden;
   background:linear-gradient(180deg, rgba(255,255,255,.72) 0%, rgba(173,232,244,.5) 46%, rgba(0,119,182,.5) 51%, rgba(45,106,79,.55) 100%);
   border-bottom:1px solid rgba(255,255,255,.6); box-shadow:inset 0 1px 0 rgba(255,255,255,.95), inset 0 -2px 10px rgba(2,62,138,.25); }
@@ -108,12 +104,10 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .sound-toggle.on{ background:var(--gel-green); color:var(--white); }
 .sound-toggle.on::before{ background:#eafff3; box-shadow:0 0 7px #eafff3; }
 
-/* body grid */
 .portal-body{ display:grid; grid-template-columns:244px 1fr; gap:16px; padding:16px; align-items:start; }
 .portal-side{ display:flex; flex-direction:column; gap:13px; }
 .portal-main{ min-width:0; display:flex; flex-direction:column; gap:14px; }
 
-/* gadgets (sidebar modules) */
 .gad{ border-radius:13px; overflow:hidden; border:1px solid rgba(255,255,255,.7); box-shadow:var(--sh-2), inset 0 1px 0 rgba(255,255,255,.7); }
 .gad-h{ height:29px; display:flex; align-items:center; gap:7px; padding:0 11px; font-family:var(--fdisp); font-weight:700; font-size:.7rem; letter-spacing:.8px; text-transform:uppercase; color:var(--white);
   background:linear-gradient(180deg, rgba(255,255,255,.55) 0%, var(--g-leaf) 48%, var(--g-mid) 52%, var(--g-forest) 100%); text-shadow:0 1px 1px rgba(8,40,30,.4); border-bottom:1px solid rgba(255,255,255,.4); }
@@ -121,7 +115,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .gad-h .dot{ width:7px; height:7px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #fff, var(--g-mist)); box-shadow:0 0 5px rgba(255,255,255,.8); }
 .gad-b{ padding:9px 11px; background:linear-gradient(180deg, rgba(255,255,255,.46), rgba(183,228,199,.16)); }
 
-/* navigate module */
 .navrow{ display:flex; align-items:center; gap:9px; padding:6px 7px; border-radius:9px; cursor:pointer; transition:background .14s, transform .14s; }
 .navrow:hover{ background:rgba(255,255,255,.5); transform:translateX(2px); }
 .navrow.active{ background:linear-gradient(180deg, rgba(255,255,255,.7), var(--g-pale)); box-shadow:var(--sh-1), inset 0 1px 0 #fff; }
@@ -131,7 +124,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .navrow b{ font-family:var(--fdisp); font-weight:600; font-size:.84rem; color:var(--g-deep); }
 .navrow small{ margin-left:auto; font-family:var(--fdisp); font-weight:600; font-size:.64rem; color:var(--b-blue); }
 
-/* weather gadget */
 .wx{ display:flex; align-items:center; gap:11px; }
 .wx-orb{ width:58px; height:58px; border-radius:50%; position:relative; overflow:hidden; flex:0 0 auto;
   background:radial-gradient(circle at 50% 30%, var(--b-ice), var(--b-sky) 60%, var(--b-blue)); box-shadow:inset 0 -8px 14px rgba(2,62,138,.4), inset 0 6px 11px rgba(255,255,255,.7), var(--sh-1); }
@@ -142,32 +134,27 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .wx-temp{ font-family:var(--fdisp); font-weight:700; font-size:1.5rem; color:var(--g-deep); line-height:1; }
 .wx-meta{ font-size:.74rem; color:var(--ink-soft); }
 
-/* status / stats / guestbook small text */
 .gad-b p{ margin:.2em 0; font-size:.82rem; line-height:1.5; }
 .statline{ display:flex; justify-content:space-between; font-size:.8rem; padding:3px 0; border-bottom:1px dashed rgba(45,106,79,.2); }
 .statline:last-child{ border:0; } .statline b{ color:var(--g-forest); font-family:var(--fdisp); }
 .counter{ display:inline-flex; gap:2px; margin-top:6px; }
 .counter span{ font-family:var(--fdisp); font-weight:700; font-size:.95rem; color:#eafff3; background:linear-gradient(180deg,var(--g-forest),var(--g-deep)); padding:2px 6px; border-radius:5px; box-shadow:inset 0 1px 0 rgba(255,255,255,.3); }
 
-/* tag cloud */
 .tagcloud{ display:flex; flex-wrap:wrap; gap:5px; }
 .tagcloud button{ cursor:pointer; border:1px solid rgba(255,255,255,.7); border-radius:999px; padding:.16em .6em; font-family:var(--fdisp); font-weight:600; color:var(--g-deep);
   background:linear-gradient(180deg, rgba(255,255,255,.6), rgba(183,228,199,.4)); box-shadow:var(--sh-1), inset 0 1px 0 #fff; transition:filter .14s, transform .14s; }
 .tagcloud button:hover{ filter:brightness(1.05); transform:translateY(-1px); }
 .tagcloud button.on{ background:var(--gel-green); color:#fff; }
 
-/* mini gallery peek */
 .peek{ display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
 .peek button{ aspect-ratio:1/1; border-radius:8px; cursor:pointer; display:grid; place-items:center; padding:5px; overflow:hidden; border:1px solid rgba(255,255,255,.65);
   background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(183,228,199,.2)); box-shadow:var(--sh-1), inset 0 1px 0 #fff; transition:transform .15s var(--pop); }
 .peek button:hover{ transform:scale(1.08); box-shadow:var(--sh-2), var(--glow); }
 .peek img{ max-width:90%; max-height:90%; object-fit:contain; filter:drop-shadow(0 3px 4px rgba(16,52,46,.3)); }
 
-/* guestbook mini */
 .gbook .gmsg{ font-size:.78rem; padding:5px 0; border-bottom:1px dashed rgba(45,106,79,.2); line-height:1.4; }
 .gbook .gmsg b{ color:var(--b-blue); font-family:var(--fdisp); }
 
-/* main panels */
 .panel{ border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.72); box-shadow:var(--sh-2), inset 0 1px 0 rgba(255,255,255,.75); }
 .panel-h{ height:34px; display:flex; align-items:center; gap:8px; padding:0 14px; font-family:var(--fdisp); font-weight:700; font-size:.84rem; letter-spacing:.4px; color:var(--white);
   background:linear-gradient(180deg, rgba(255,255,255,.55) 0%, var(--b-aqua) 48%, var(--b-sky) 52%, var(--b-blue) 100%); text-shadow:0 1px 1px rgba(2,62,138,.4); border-bottom:1px solid rgba(255,255,255,.4); }
@@ -175,7 +162,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .panel-h .right{ margin-left:auto; font-weight:600; font-size:.72rem; opacity:.95; }
 .panel-b{ padding:14px 16px; background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(214,245,255,.2) 60%, rgba(0,119,182,.07)); }
 
-/* welcome strip */
 .welcome{ display:flex; align-items:center; gap:16px; }
 .welcome .w-text{ flex:1; min-width:0; }
 .welcome h2{ font-size:1.35rem; color:var(--g-deep); margin-bottom:2px;
@@ -183,7 +169,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .welcome p{ font-size:.9rem; color:var(--ink); line-height:1.5; margin:0; }
 .welcome .row{ display:flex; gap:8px; margin-top:9px; }
 
-/* exhibits strip (compact tiles) */
 .ex-strip{ display:grid; grid-template-columns:repeat(6,1fr); gap:9px; }
 .ex-tile{ position:relative; cursor:pointer; border-radius:11px; overflow:hidden; padding:10px 6px 8px; text-align:center; border:1px solid rgba(255,255,255,.7);
   background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(183,228,199,.18)); box-shadow:var(--sh-1), inset 0 1px 0 #fff; transition:transform .22s var(--pop), box-shadow .22s; }
@@ -195,7 +180,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .ex-tile b{ display:block; font-family:var(--fdisp); font-weight:600; font-size:.74rem; color:var(--g-deep); margin-top:6px; }
 .ex-tile small{ font-size:.6rem; color:var(--b-blue); font-family:var(--fdisp); font-weight:600; }
 
-/* entries feed */
 .feed{ display:flex; flex-direction:column; }
 .entry{ display:flex; gap:12px; padding:11px 6px; border-bottom:1px dashed rgba(45,106,79,.22); cursor:pointer; transition:background .14s; border-radius:8px; }
 .entry:last-child{ border-bottom:0; }
@@ -209,7 +193,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .entry .e-date{ margin-left:auto; font-family:var(--fdisp); font-weight:600; font-size:.68rem; color:var(--ink-soft); white-space:nowrap; }
 .entry p{ margin:0; font-size:.84rem; color:var(--ink-soft); line-height:1.45; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
 
-/* room view */
 .back{ display:inline-flex; align-items:center; gap:7px; cursor:pointer; font-family:var(--fdisp); font-weight:600; font-size:.82rem; color:var(--g-deep);
   padding:.4em .9em; border-radius:999px; background:linear-gradient(180deg, rgba(255,255,255,.6), rgba(183,228,199,.3)); border:1px solid rgba(255,255,255,.8); box-shadow:var(--sh-1), inset 0 1px 0 #fff; transition:transform .15s var(--pop), filter .15s; }
 .back:hover{ transform:translateX(-3px); filter:brightness(1.05); }
@@ -233,7 +216,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .post blockquote{ margin:.6em 0; padding:.5em 1em; border-left:3px solid var(--g-leaf); background:rgba(183,228,199,.25); border-radius:0 10px 10px 0; font-style:italic; color:var(--ink-soft); font-size:.9rem; }
 .post .tags{ margin-top:10px; display:flex; gap:5px; flex-wrap:wrap; }
 
-/* cabinet */
 .cabinet{ display:grid; grid-template-columns:repeat(auto-fill, minmax(96px,1fr)); gap:10px; }
 .relic{ position:relative; aspect-ratio:1/1; display:grid; place-items:center; padding:10px; cursor:pointer; border-radius:12px; overflow:hidden;
   background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(183,228,199,.18)); border:1px solid rgba(255,255,255,.72); box-shadow:var(--sh-1), inset 0 1px 0 #fff; transition:transform .22s var(--pop), box-shadow .22s; }
@@ -242,7 +224,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .relic:hover{ transform:translateY(-4px); box-shadow:var(--sh-3), var(--glow); }
 .relic:hover img{ transform:scale(1.12) rotate(-2deg); }
 
-/* footer */
 .portal-foot{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:10px 18px; border-top:1px solid rgba(255,255,255,.6);
   background:linear-gradient(180deg, rgba(255,255,255,.4), rgba(0,119,182,.22)); font-size:.76rem; color:var(--ink); }
 .portal-foot .badge{ font-family:var(--fdisp); font-weight:700; font-size:.6rem; letter-spacing:.5px; padding:3px 8px; border-radius:6px; color:#eafff3;
@@ -250,14 +231,12 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .portal-foot .badge.blue{ background:linear-gradient(180deg,var(--b-sky),var(--b-deep)); }
 .portal-foot .grow{ margin-left:auto; }
 
-/* view transitions */
 .view{ animation:viewin .42s var(--ease) both; }
 @keyframes viewin{ from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:none; } }
 ::view-transition-old(root){ animation:vto .3s var(--ease) both; }
 ::view-transition-new(root){ animation:vtn .4s var(--ease) both; }
 @keyframes vto{ to{ opacity:0; } } @keyframes vtn{ from{ opacity:0; transform:translateY(8px); } }
 
-/* ENTRY GATE */
 #gate{ position:fixed; inset:0; z-index:200; display:grid; place-items:center; overflow:hidden;
   background:radial-gradient(120% 90% at 70% -10%, rgba(144,224,239,.95), transparent 55%), radial-gradient(120% 120% at 10% 110%, rgba(45,106,79,.85), transparent 50%), linear-gradient(165deg, var(--b-aqua), var(--g-mid) 70%, var(--g-deep));
   transition:opacity .9s var(--ease), visibility .9s; }
@@ -276,7 +255,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .gate-skip{ margin-top:20px; cursor:pointer; font-family:var(--fdisp); font-weight:600; font-size:.95rem; color:var(--g-deep); border:1px solid rgba(255,255,255,.85); border-radius:999px; padding:.6em 1.6em; background:linear-gradient(180deg,#fff,var(--g-pale)); box-shadow:var(--sh-2), inset 0 1px 0 #fff; transition:transform .16s var(--pop), filter .16s; }
 .gate-skip:hover{ transform:translateY(-1px) scale(1.04); filter:brightness(1.05); }
 
-/* LIGHTBOX */
 #lightbox{ position:fixed; inset:0; z-index:120; display:grid; place-items:center; padding:28px; opacity:0; visibility:hidden;
   background:radial-gradient(120% 100% at 50% 0%, rgba(72,202,228,.32), rgba(12,46,40,.55)); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); transition:opacity .3s, visibility .3s; }
 #lightbox.on{ opacity:1; visibility:visible; }
@@ -293,7 +271,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .lb-prev{ left:-12px; } .lb-next{ right:-12px; }
 .lb-close{ top:-12px; right:-12px; width:34px; height:34px; border-radius:50%; font-size:14px; background:linear-gradient(180deg,#fff,var(--b-ice)); color:var(--b-deep); }
 
-/* RESPONSIVE */
 @media (max-width:820px){
   .portal{ margin:18px auto; width:calc(100vw - 18px); }
   .portal-body{ grid-template-columns:1fr; }
@@ -311,9 +288,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
   html{ scroll-behavior:auto; } .bg-bliss,#sky,#floor{ transform:none !important; }
 }
 
-/* v4 ADDITIONS, sun, visitor globe, the koi pond, day/night */
-
-/* weather: always sunny in my garden */
 .wx-orb.sunny{ background:radial-gradient(circle at 50% 26%, var(--b-ice), var(--b-aqua) 55%, var(--b-sky) 85%); }
 .wx-sun{ position:absolute; left:50%; top:54%; width:24px; height:24px; transform:translate(-50%,-50%); border-radius:50%;
   background:radial-gradient(circle at 38% 32%, #fffdf2, #ffe27a 52%, #ffb446 100%);
@@ -325,7 +299,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 @keyframes sunspin{ to{ transform:rotate(360deg); } }
 @keyframes sunpulse{ 0%,100%{ box-shadow:0 0 9px 2px rgba(255,206,82,.8), inset 0 -2px 4px rgba(206,128,0,.45), inset 0 2px 3px rgba(255,255,255,.8);} 50%{ box-shadow:0 0 15px 5px rgba(255,206,82,.95), inset 0 -2px 4px rgba(206,128,0,.45), inset 0 2px 3px rgba(255,255,255,.8);} }
 
-/* visitors gadget: a real, pinned globe */
 .visitors{ display:flex; align-items:center; gap:12px; }
 .vglobe{ position:relative; width:62px; height:62px; flex:0 0 auto; border-radius:50%; overflow:hidden;
   box-shadow:inset 0 -8px 14px rgba(2,62,138,.35), inset 0 6px 11px rgba(255,255,255,.5), var(--sh-1); }
@@ -345,7 +318,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .vloc{ font-size:.74rem; color:var(--ink-soft); line-height:1.32; margin-top:2px; }
 .vloc b{ color:var(--b-blue); font-family:var(--fdisp); }
 
-/* guestbook gadget */
 .gbtn{ margin-top:9px; width:100%; cursor:pointer; font-family:var(--fdisp); font-weight:600; font-size:.78rem; color:#fff;
   border:1px solid rgba(255,255,255,.85); border-radius:999px; padding:.5em 1em; background:var(--gel-blue);
   box-shadow:var(--sh-1), inset 0 1px 0 rgba(255,255,255,.8), inset 0 -5px 9px rgba(2,62,138,.3); text-shadow:0 1px 1px rgba(2,62,138,.4); transition:transform .15s var(--pop), filter .15s, box-shadow .15s; }
@@ -353,7 +325,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .gbook .gmsg.muted{ color:var(--ink-faint); font-style:italic; }
 .pond-nav small{ color:var(--b-sky); }
 
-/* KOI: swimming guestbook signatures (scene.js spawns these) */
 .koi{ position:fixed; left:0; top:0; z-index:1; pointer-events:none; will-change:transform; }
 .koi-fish{ display:block; pointer-events:auto; cursor:pointer; }
 .koi-tag{ position:absolute; left:50%; top:-4px; transform:translate(-50%,-100%); white-space:nowrap; pointer-events:none;
@@ -368,7 +339,6 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .koi.show .koi-bubble{ opacity:1; transform:translate(-50%,-8px) scale(1); }
 .koi.show .koi-tag{ opacity:0; }
 
-/* the Koi Pond view */
 .pond-view .pond-hero{ display:flex; align-items:center; gap:16px; padding:2px 2px 14px; }
 .pond-fish{ flex:0 0 auto; width:92px; display:grid; place-items:center; }
 .pond-fish img{ max-height:78px; filter:drop-shadow(0 9px 13px rgba(16,52,80,.32)); animation:bob 5s ease-in-out infinite; }
@@ -401,12 +371,12 @@ h1,h2,h3,h4{ font-family:var(--fdisp); font-weight:600; margin:0; color:var(--g-
 .pm-date{ margin-left:auto; font-family:var(--fdisp); font-weight:600; font-size:.66rem; color:var(--ink-soft); white-space:nowrap; }
 .pm-body p{ margin:2px 0 0; font-size:.88rem; line-height:1.5; color:var(--ink); overflow-wrap:anywhere; }
 
-/* real local-time day/night wash + stars + idle bubbles */
 #daynight{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0; mix-blend-mode:soft-light; transition:opacity 2.4s ease, background 2.4s ease; }
 body[data-phase="dawn"] #daynight{ opacity:.55; background:linear-gradient(180deg, rgba(255,196,138,.85), rgba(255,224,194,.25) 46%, transparent 76%); }
 body[data-phase="day"]  #daynight{ opacity:0; }
 body[data-phase="dusk"] #daynight{ opacity:.62; background:linear-gradient(180deg, rgba(255,150,86,.75), rgba(255,108,140,.4) 50%, rgba(86,64,128,.3)); }
 body[data-phase="night"] #daynight{ opacity:.82; mix-blend-mode:multiply; background:linear-gradient(180deg, rgba(18,28,66,.88), rgba(18,40,82,.7) 50%, rgba(10,40,62,.55)); }
+/* stars only show up at night. they have boundaries. */
 #stars{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity 2.6s ease; }
 body[data-phase="night"] #stars{ opacity:1; }
 #stars i{ position:absolute; display:block; aspect-ratio:1; border-radius:50%; background:#fff; box-shadow:0 0 4px 1px rgba(255,255,255,.85);
@@ -420,16 +390,12 @@ body[data-phase="night"] #stars{ opacity:1; }
   .pond-view .pond-hero{ flex-direction:column; text-align:center; }
 }
 
-/* v5 ADDITIONS, header pond link + day/night toggle + the LAKE */
-
-/* header: Koi Pond link */
 .pond-link{ display:inline-flex; align-items:center; gap:6px; height:34px; padding:0 14px; cursor:pointer; white-space:nowrap;
   font-family:var(--fdisp); font-weight:600; font-size:.78rem; color:#fff; border:1px solid rgba(255,255,255,.85); border-radius:999px; background:var(--gel-green);
   box-shadow:var(--sh-1), inset 0 1px 0 rgba(255,255,255,.8), inset 0 -5px 9px rgba(16,52,46,.3); text-shadow:0 1px 1px rgba(8,40,30,.4); transition:transform .15s var(--pop), filter .15s, box-shadow .15s; }
 .pond-link:hover{ transform:translateY(-1px); filter:brightness(1.06); box-shadow:var(--sh-2), var(--glow); }
 .pl-fish{ width:17px; height:17px; background:url("../assets/fish2.png") center/contain no-repeat; filter:drop-shadow(0 1px 1px rgba(8,40,30,.4)); }
 
-/* header: day / night toggle */
 .sky-toggle{ height:34px; cursor:pointer; display:flex; align-items:center; gap:7px; white-space:nowrap; font-family:var(--fdisp); font-weight:600; font-size:.74rem; color:var(--g-deep);
   border:1px solid rgba(255,255,255,.85); border-radius:999px; padding:0 12px; background:linear-gradient(180deg, rgba(255,255,255,.8), rgba(144,224,239,.4)); box-shadow:var(--sh-1), inset 0 1px 0 #fff; transition:background .35s, color .35s, border-color .35s, filter .15s; }
 .sky-toggle:hover{ filter:brightness(1.05); }
@@ -439,7 +405,7 @@ body[data-phase="night"] #stars{ opacity:1; }
 .sky-toggle.night .st-ico{ background:radial-gradient(circle at 64% 36%, #f6f8ff, #cdd9ff 60%, #9aabe2); box-shadow:0 0 8px 1px rgba(160,190,255,.75); }
 .sky-toggle.night .st-ico::after{ content:""; position:absolute; left:2px; top:-2px; width:12px; height:12px; border-radius:50%; background:#15265c; }
 
-/* THE LAKE */
+/* the actual pond. yes, the fish really swim. no, i could not stop adding fish. */
 .lake-wrap{ padding:10px; }
 .lake{ position:relative; height:clamp(380px,62vh,640px); border-radius:22px; overflow:hidden; cursor:crosshair;
   background:radial-gradient(120% 80% at 50% -20%, rgba(255,255,255,.55), transparent 50%), linear-gradient(180deg, #7fe0ef 0%, #43c4e6 30%, #1f93c8 62%, #0b5a93 100%);
@@ -474,7 +440,6 @@ body[data-phase="night"] #stars{ opacity:1; }
 .lk-bubble b{ display:block; font-family:var(--fdisp); color:var(--b-blue); font-size:.7rem; margin-bottom:2px; }
 .lk-bubble::after{ content:""; position:absolute; left:50%; top:100%; transform:translateX(-50%); border:6px solid transparent; border-top-color:rgba(255,255,255,.96); }
 .lkoi.show{ z-index:5; } .lkoi.show .lk-bubble{ opacity:1; transform:translate(-50%,-6px) scale(1); } .lkoi.show .lk-tag{ opacity:0; }
-/* your koi & the keeper get a ring */
 .lkoi.mine::before, .lkoi.host::before{ content:""; position:absolute; left:50%; top:46%; width:96%; height:96%; transform:translate(-50%,-50%); border-radius:50%; pointer-events:none; }
 .lkoi.mine::before{ box-shadow:0 0 0 2px rgba(255,213,84,.95), 0 0 13px 3px rgba(255,213,84,.6); }
 .lkoi.host::before{ box-shadow:0 0 0 2px rgba(130,224,170,.95), 0 0 13px 3px rgba(130,224,170,.55); }
@@ -484,20 +449,17 @@ body[data-phase="night"] #stars{ opacity:1; }
 .lake-ripple{ position:absolute; transform:translate(-50%,-50%); border-radius:50%; border:2px solid rgba(255,255,255,.85); pointer-events:none; animation:lripple .9s ease-out forwards; }
 @keyframes lripple{ from{ width:6px; height:6px; opacity:.9;} to{ width:96px; height:96px; opacity:0;} }
 
-/* rising bubbles inside the lake */
 .lake-bubbles{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
 .lake-bubbles span{ position:absolute; bottom:-22px; aspect-ratio:1; border-radius:50%;
   background:radial-gradient(circle at 34% 30%, rgba(255,255,255,.92), rgba(255,255,255,.28) 60%, transparent 74%);
   box-shadow:0 0 5px rgba(255,255,255,.4); animation-name:lbubrise; animation-timing-function:ease-in; animation-iteration-count:infinite; }
 @keyframes lbubrise{ 0%{ transform:translateY(0) scale(.5); opacity:0; } 12%{ opacity:.8; } 85%{ opacity:.45; } 100%{ transform:translateY(-640px) scale(1); opacity:0; } }
 
-/* share row (appears after you sign) */
 .gshare{ margin-top:14px; padding:12px 14px; border-radius:13px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;
   background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(144,224,239,.32)); border:1px solid rgba(255,255,255,.75); box-shadow:var(--sh-1), inset 0 1px 0 #fff; }
 .gshare span{ flex:1; min-width:200px; font-size:.84rem; line-height:1.45; color:var(--ink); }
 .gshare .btn{ flex:0 0 auto; }
 
-/* spotlight banner (someone shared a koi link) */
 .pond-banner{ padding:10px 14px; border-radius:12px; font-size:.86rem; color:var(--b-deep);
   background:linear-gradient(180deg, rgba(255,255,255,.72), rgba(144,224,239,.5)); border:1px solid rgba(255,255,255,.8); box-shadow:var(--sh-1), inset 0 1px 0 #fff; }
 .pond-banner b{ color:var(--b-blue); font-family:var(--fdisp); }

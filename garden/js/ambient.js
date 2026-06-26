@@ -19,16 +19,15 @@
   }
   function now() { return A.ctx.currentTime; }
 
+  // no audio files anywhere. this is just math pretending to be a forest.
   function startBed() {
     if (!A.ctx || A._nodes.length) return; var t = now();
-    // wind: filtered noise with a slowly sweeping cutoff
     var s = A.ctx.createBufferSource(), lp = A.ctx.createBiquadFilter(), wg = A.ctx.createGain();
     s.buffer = A.noise; s.loop = true; lp.type = "lowpass"; lp.frequency.value = 500; lp.Q.value = 2; wg.gain.value = 0.5;
     var lfo = A.ctx.createOscillator(), lg = A.ctx.createGain(); lfo.frequency.value = 0.06; lg.gain.value = 260;
     lfo.connect(lg); lg.connect(lp.frequency);
     s.connect(lp); lp.connect(wg); wg.connect(A.master); s.start(t); lfo.start(t);
     A._nodes.push(s, lfo);
-    // warm pad
     [130.8, 196, 261.6].forEach(function (f, i) {
       var o = A.ctx.createOscillator(), g = A.ctx.createGain(), pl = A.ctx.createBiquadFilter();
       o.type = i === 2 ? "sine" : "triangle"; o.frequency.value = f; o.detune.value = (i - 1) * 5;

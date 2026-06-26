@@ -9,7 +9,6 @@
   function pick(a) { return a[(Math.random() * a.length) | 0]; }
   function img(cls, src, parent) { var e = document.createElement("img"); e.className = cls; e.src = src; e.alt = ""; e.loading = "lazy"; e.decoding = "async"; (parent || document.body).appendChild(e); return e; }
 
-  /* canvas: pollen / light motes + small bubbles */
   var cv, ctx, w, h, dpr, motes = [], pointer = { x: -999, y: -999 };
   function Mote(init) {
     this.reset = function (top) {
@@ -47,7 +46,6 @@
     requestAnimationFrame(frame);
   }
 
-  /* helpers for WAAPI travellers */
   function crosser(el, opts) {  // travel left<->right, bob, reroll on finish
     function run() {
       var vw = root.innerWidth, vh = root.innerHeight;
@@ -73,7 +71,6 @@
     if (!reduced) run();
   }
 
-  /* builders */
   function buildSky() {
     var sky = document.getElementById("sky"); if (!sky) return;
     var clouds = ["assets/cloud1.png", "assets/cloud2.png", "assets/cloud3.png", "assets/cloud4.png", "assets/cloud6.png"];
@@ -82,7 +79,6 @@
       var c = img("cloud", clouds[i % clouds.length], sky);
       c.style.top = rand(2, 42) + "%"; c.dataset.i = i;
       crosser(c, { yMin: 0, yMax: 0, bob: [0, 0], scale: [.5 + i * .12, .7 + i * .12], dur: [70000, 130000], pad: 500, delay: -rand(0, 60000) });
-      // crosser sets translate(x,y) with y as top px; clouds use top% instead to override y to 0 by using a wrapper transform
       c.style.transform = "translateX(-600px)";
       driftCloud(c, .4 + i * .18);
     }
@@ -152,14 +148,13 @@
       var f = img("fish", fish[i % fish.length]);
       crosser(f, { yMin: .25, yMax: .82, bob: [16, 46], scale: [.5, .95], dur: [20000, 38000], pad: 140 });
     }
-    // butterflies (verified singles)
     ["assets/butterfly.png", "assets/bug2.png"].forEach(function (src, i) {
       var b = img("flit", src); b.style.width = (i ? 52 : 60) + "px"; wanderer(b, [22000, 36000]);
     });
   }
 
-  /* click to a real bubble rises */
   var bubbleSrc = ["assets/bubble1.png", "assets/bubble2.png", "assets/bubble3.png", "assets/bubble4.png"], liveBubbles = 0;
+  // click anywhere, get a bubble. simple pleasures.
   function popBubble(x, y) {
     if (reduced || liveBubbles > 8) return; liveBubbles++;
     var b = img("clickbub", pick(bubbleSrc)); var s = rand(26, 64);
@@ -172,7 +167,6 @@
     a.onfinish = function () { b.remove(); liveBubbles--; };
   }
 
-  /* THE KOI POND, guestbook brought to life */
   function escTxt(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function hueFor(s) { var h = 0; s = String(s || "koi"); for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h % 360; }
   var koiSrc = ["assets/fish1.png", "assets/fish2.png", "assets/fish3.png", "assets/fish4.png", "assets/fish6.png"];
@@ -210,7 +204,6 @@
     return wrap;
   }
 
-  /* atmosphere: real local-time day/night + manual override + stars */
   var phaseOverride = null;                 // null = follow real local time; else a fixed phase
   try { phaseOverride = localStorage.getItem("vx_phase") || null; } catch (e) {}
   function autoPhase() { var h = new Date().getHours(); return (h >= 5 && h < 8) ? "dawn" : (h >= 8 && h < 17) ? "day" : (h >= 17 && h < 20) ? "dusk" : "night"; }
@@ -224,7 +217,7 @@
     applyPhase(); setInterval(function () { if (!phaseOverride) applyPhase(); }, 300000);
   }
 
-  /* idle "Bubbles" easter egg (a wink at Windows 7) */
+  // leave the page alone for ~28s and the bubbles come out. windows 7 would be proud.
   function idleBubble() {
     var b = img("idlebub", pick(bubbleSrc)); var s = rand(70, 160), vh = root.innerHeight;
     b.style.width = s + "px"; b.style.left = rand(0, root.innerWidth - s) + "px"; b.style.top = (vh + s) + "px";
@@ -255,7 +248,6 @@
     buildSky(); buildFloor(); buildLife(); setupAtmosphere(); setupIdle();
   }
 
-  /* public API (the garden feeds koi in here) */
   root.Scene = {
     addKoi: function (msg) {
       if (reduced || !msg) return null;
@@ -263,9 +255,7 @@
       while (liveKoi.length > KOI_MAX) { var old = liveKoi.shift(); if (old && old.remove) old.remove(); }
       return w;
     },
-    // a little splash of bubbles when a new koi is born
     celebrate: function () { if (reduced) return; var n = 5; for (var i = 0; i < n; i++) (function (k) { setTimeout(function () { popBubble(root.innerWidth * rand(.35, .65), root.innerHeight - rand(20, 90)); }, k * 90); })(i); },
-    // day/night control, pass "day", "night", "dawn", "dusk", or "auto"
     setPhase: function (p) {
       if (!p || p === "auto") { phaseOverride = null; try { localStorage.removeItem("vx_phase"); } catch (e) {} }
       else { phaseOverride = p; try { localStorage.setItem("vx_phase", p); } catch (e) {} }

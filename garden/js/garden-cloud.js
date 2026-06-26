@@ -33,7 +33,6 @@ function clean(s, max) {
 }
 function emit(name, detail) { window.dispatchEvent(new CustomEvent(name, { detail: detail })); }
 
-/* Local mode: localStorage, per device, no setup. */
 function makeLocal() {
   var subs = [];
   function load() { try { return JSON.parse(localStorage.getItem("vx_guestbook") || "[]"); } catch (e) { return []; } }
@@ -53,6 +52,7 @@ function makeLocal() {
       var a = load(); a.push(msg); save(a); fan();
       return Promise.resolve(msg);
     },
+    // counts you once per session, were not animals
     registerVisit: function () {
       var counted = false; try { counted = sessionStorage.getItem("vx_counted") === "1"; } catch (e) {}
       var v = 1; try { v = parseInt(localStorage.getItem("vx_visits") || "0", 10) || 0; } catch (e) {}
@@ -62,7 +62,6 @@ function makeLocal() {
   };
 }
 
-/* Firebase mode: Firestore, real and shared across all visitors. */
 async function makeFirebase() {
   var base = "https://www.gstatic.com/firebasejs/" + FIREBASE_VER + "/";
   var appMod = await import(base + "firebase-app.js");
@@ -99,7 +98,6 @@ async function makeFirebase() {
   };
 }
 
-/* Visitor location for the globe pin. Key-less and best effort. */
 function locateVisitor() {
   function tryUrl(url, map) {
     var ctrl = new AbortController(); var to = setTimeout(function () { ctrl.abort(); }, 4500);
@@ -116,7 +114,6 @@ function locateVisitor() {
   }).catch(function () { return null; });
 }
 
-/* Pick a backend, expose window.GardenCloud, announce ready. */
 (async function boot() {
   var cloud;
   if (useFirebase) {

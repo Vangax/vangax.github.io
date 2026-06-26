@@ -4,87 +4,95 @@
   "use strict";
 
   var ROOMS = {
-    bench: { name: "The Bench", img: "assets/bench.png", accent: "green", tag: "Sit a while. The quiet moments live here.",
-      intro: "This is the bench at the edge of everything. Some days I share it; some days I keep it for myself and the view. Either way, it's where I do my best thinking.",
+    bench: { name: "The Bench", img: "assets/bench.png", accent: "green", tag: "sit a while. the long version of me lives here.",
+      intro: "this is the bench. its where i actually sit down and try to explain myself instead of building something and sprinting off. the first post is the big one, the whole who-am-i. grab a drink.",
       posts: [
-        { title: "The friends who feel like home", date: "May 12, 2026", tags: ["friends", "gratitude"], body: [
-          "There's a particular kind of quiet you only get with the right people, the kind where nobody feels the need to fill the silence. We just sat here, watching the light go gold, saying almost nothing.",
-          { q: "Good company never asks you to perform." }, "I want to remember this more often than I do. The people, not the plans." ] },
-        { title: "A view worth the climb", date: "Mar 2, 2026", tags: ["scenery", "slow"], body: [
-          "It took longer to get up here than I'd like to admit. But then the whole valley opened up, green folding into blue, and the climb stopped mattering.",
-          "I think that's the trick with most things. You don't get the view without the legs." ] },
-        { title: "On sitting alone (and liking it)", date: "Nov 20, 2025", tags: ["solitude"], body: [
-          "Being alone used to feel like waiting for someone to show up. Lately it feels more like company with myself.",
-          "Same bench. Same view. Just quieter, and somehow fuller." ] } ] },
-    world: { name: "The World", img: "assets/globe.png", accent: "blue", tag: "A small person on a big blue marble.",
-      intro: "Hi, I'm Vangax. This room is the wide-angle shot: who I am, what I care about, and the old, glossy internet I keep trying to bring back.",
+        { title: "who am i? (grab a drink, this one is long)", date: "Jun 24, 2026", tags: ["about", "start here", "engram", "football"], body: [
+          "okay so. hi. im devang. online im vang, or vangax when vang is already taken, which it always is. im 19, im a guy from india, and im interested in a genuinely unreasonable number of things. this little bench is where i finally sit down and try to explain myself. this is the long one.",
+          "the honest one-liner about me: i start things, i get them to about 90 percent, and then i vanish. like a magician, except the trick is just abandonment. ninety percent done. only the hardest, most boring ten percent left, and vang has already mentally relocated to a different country.",
+          { q: "i have a graveyard of projects that were almost amazing. every headstone reads the same thing: here lies a thing that was 90% done." },
+          "the single exception, the one project i actually dragged across the finish line, is engram. ill get to engram. engram is special and engram nearly killed me, lovingly.",
+          "i am fairly sure i have adhd. undiagnosed, self-awarded, but the symptoms are doing a lot of heavy lifting. i will be neck-deep in neuroscience for three weeks like my life depends on it, and then one random tuesday my brain goes, and what if we learned about, hmm, medieval lockpicking, and thats just the rest of the month gone.",
+          "building is the thing. building is my dopamine. making something, breaking it, learning exactly how it works, going SO deep i forget to eat, and then the second i finally understand it, losing all interest and not touching it for four months. then rediscovering it at 2am like an old friend and getting obsessed all over again. rinse, repeat, forever.",
+          "and the worst part is i never do this with one thing. its always five things at once. five tabs of my actual life, all open, all half loaded, all making that little spinning noise.",
+          { q: "oh god what am i. im not god, so why am i trying to do everything at once. honestly vang, youre pretty stupid. ...oh yeah i am. lol." },
+          "anyway. thats the disclaimer out of the way. now let me rewind, because this didnt come from nowhere.",
+          "as a kid i played everything. every sport you put in front of me. but football was THE one. football is still the one. if you ever cant find me, check the nearest ground, im the guy who definitely should not be playing on this hip but is playing anyway.",
+          "i also loved cricket, mostly because of steve smith. i liked steve smith to death. still do. the man bats like hes solving a completely different equation than everyone else on the field and i respect it on a spiritual level. fidgety, twitchy genius. my people.",
+          "swimming, games, anything that let me move or press buttons. i was not a calm child. i was a child with way too many tabs open even back then.",
+          "and the games. oh, the games. this is dangerous territory because i could write ten thousand words right here and not stop.",
+          "nfs carbon. i have to physically stop myself, because im going to write an entire separate post about nfs carbon, a love letter, possibly a tearful one. the canyon duels. the autosculpt. that menu music living rent-free in my skull twelve years later. (the full nfs carbon post is coming. treat this as the trailer.)",
+          "project igi. man. those times. one save slot, no mid-mission saves, getting spotted by a guard on the literal other side of the map who apparently had eagle vision. i lost years to that game and i would lose them again, gladly.",
+          "assassins creed. damn. this game HAD me. completely. climbing everything, the leap of faith, the feeling of a city you could actually disappear into. it rearranged something in my brain about what a game was even allowed to be.",
+          "and heres a concerning one: i learned what torrents were when i was six. SIX. i should have been learning to tie my shoes and instead i was figuring out seeders and leechers because i wanted a game that badly. six-year-old vang, hunched over a desktop, committing mild crimes for a racing game. iconic. slightly alarming. mostly iconic.",
+          "somewhere in there i got curious about how games were actually MADE. what is happening behind the screen. i went down that rabbit hole hard, learned a bunch about engines and how it all fit together, and then, classic vang, forgot all of it. i have no idea now. if you asked me today id just point at the screen and whisper, magic, probably.",
+          "so thats chapter one: games, sports, a bit of studying, full chaos, right up until about thirteen.",
+          "at 13 i started a youtube channel. and i didnt just dabble, i got seriously into editing. proper, professional-level editing, the kind where you sit for six hours nudging one clip three frames left because it FEELS wrong. i did that for two, three years. it taught me more about pacing and attention and finishing things than i realised at the time.",
+          { q: "editing is where i first learned the last 10 percent is where the magic lives. i then proceeded to ignore that lesson for the rest of my life." },
+          "then college happened. i came to symbiosis. first year was gentle, programming from scratch, football whenever i could, enjoying the small stuff. but something was quietly shifting in how i thought. i could feel the gears changing.",
+          "i got into programming properly. then data science. then the door blew off its hinges and everything behind it was interesting.",
+          "around then i also found my people online. theres this little community called dokidoki and its honestly one of my favourite corners of the internet. thats where kaye is, leeza, the og VA youtuber and valo streamer, genuinely one of the good ones. and my little circle there, belani, hjd, lakshay, and yes, sussy baka (you know who you are). the kind of online friends that feel very real.",
+          "and then i got serious. or more accurately, my chaos finally got a direction.",
+          "i started working in neuroscience and brain tech, building actual projects. this is where the real ones live, the ones that survived past 90 percent, or at least got far enough to scare me.",
+          "engram. okay, properly now. engram wasnt planned. it showed up in my head one night while i was just thinking, and it hit deep, not a normal idea, it felt heavy and real. i was thinking about everyone quietly getting left behind as the world speeds up, and how were all getting lonelier at the same time. i was reading the bhagavad gita around then and one idea lodged in me: that when you actually find your true self, you stop getting thrown around by your own suffering, you start watching it from a third seat, almost like youre supporting your own body instead of being dragged by it. and i thought, what if there was something that just gently reminds you who you actually are. not addictive. not replacing you. just bringing you back to yourself, again and again. thats engram.",
+          "the build was humbling. the ui phase was pure suffering, things breaking, nothing feeling right, layouts betraying me daily. i had 19 features planned. NINETEEN. then i started building and realised about 17 of them were ego, so i cut it to 2 core things and finally it breathed. engram v0.2 is alive. it is living proof that vang can, in fact, finish a thing.",
+          "then theres blackwall. blackwall v1 is 5-phase emergent language detection and containment in multi-agent reinforcement learning, which is a very fancy way of saying: what happens when ai agents start inventing their own private language to talk to each other, and can you catch it and box it before it gets weird. that question keeps me up at night in the good way.",
+          "and amalgam, the most unhinged one, a hybrid digital-biological neural net where layer 4 is, and im being completely serious, slime mold. actual slime mold. as a layer. in a neural network. i dont know what to tell you, the idea grabbed me and i was not strong enough to say no.",
+          "and nebula, the netrunner thing, my love letter to old computers and the cyberpunk idea of a network you can actually SEE and walk into. i went full neo4j on it, because a network literally IS a graph, nodes and connections, so you store it as a graph and ask it questions in cypher. that one started because i saw people i follow casually working at CERN and it yanked my physics brain straight out of its coma, atoms and fields and particles, all this insane invisible stuff happening every single second right under the resolution of being a human. johnny silverhand may also have been involved in the inspiration. no further questions.",
+          "oh, physics. i have to mention physics, because physics has been with me the longest. ive been learning it deeply for about five years and i genuinely love it, theories, the why of things, sitting and thinking about the universe like its a personal problem. astrophysics especially. for a long time, thinking about it was enough. lately its not, my brain wants to BUILD with it now, not just admire it. thinking phase to building phase. thats honestly the whole arc of me right now.",
+          "and the BCI research, the one im quieter about, brain-computer interface authentication using P300 signals, the little voltage spike your brain makes about 300ms after it notices something it cares about. using your brains own reaction as a password, basically. its under proper supervision, its ongoing, and ill write it up properly when im further along instead of fumbling it here.",
+          "now i have to back up and tell the part thats not all projects and jokes, because it shaped most of this.",
+          "before all of it i was studying physics and prepping for medical, applied maths on the side, fully committed, that was THE path, the only one i could see for myself. and then i didnt get in. and it hit so much harder than i expected, not even because of the result, but because the entire direction in my head just vanished. and somewhere in that fog i quietly drifted away from physics too, without even noticing. like everything paused and i didnt know what to hold onto.",
+          "the farewell got me though. 2024, school ending, everything ending at once. after the whole ceremony, when everyone had already started leaving, me and my best friend just didnt. we picked up a ball and played football on the ground in our formal clothes, full pants, shirts, shoes, for over an hour. talking, laughing, but also feeling that heavy thing, that this is the last time it looks like this. it was never about the game. it was about holding the moment a little longer. i did not think i would miss school that much. that day told me otherwise.",
+          { q: "we played football in our formal clothes until it got dark. thats the most accurate self-portrait i have." },
+          "college pulled me out of it slowly. then in 2025 i did an internship at AIT GLOBAL and it genuinely rewired me, real systems, real workflows, real problems instead of theory rattling around my head. ajeet singh, the delivery head, taught me how to think practically, how things actually work out there. i walked into second year a different person. less dreaming, more doing.",
+          "(theres also the time i trained so hard for a national football tournament that i injured my own hip, and then went and played anyway, and it somehow turned into one of the best trips of my life, classrooms turned into bedrooms, new friends from schools all over, celebrating nitins birthday at the venue. but thats its own post. remind me.)",
+          "which brings me to now. june 2026. vang is, on paper, doing great. i hunted for an internship for months and i finally landed one. should feel like a clean win. and it is. but its remote and it feels SLOW, and slow is the one thing my dopamine-shaped brain cannot metabolise. i know, logically, that slow IS the process, that real things take real time. my nervous system has simply not received the memo.",
+          "so i did what i always do when im overwhelmed and understimulated at the exact same time: i started a brand new thing. this thing. this entire glossy green frutiger-aero garden you are currently sitting inside. is it a slightly unhinged response to work stress? yes. is it also kind of beautiful? also yes. ahahaha.",
+          { q: "some people journal to cope. i build a koi pond with a real-time day-night cycle. were not the same. (we are exactly the same.)" },
+          "so thats me. devang. vang. 19, too many tabs, allergic to the last ten percent, hopelessly in love with football and steve smith and physics and games and building things that probably shouldnt exist yet. starting things, finishing some, abandoning more, and every so often, rarely, gloriously, seeing one all the way through.",
+          "if you sign the koi pond, your koi swims here next to mine. ill probably notice it at 2am mid hyperfocus and smile. welcome to the garden. make yourself at home, the bench is always free." ] } ] },
+    world: { name: "The World", img: "assets/globe.png", accent: "blue", tag: "who i am and the internet i want back.",
+      intro: "the wide-angle shot. who i am, what i care about, and the glossy old web im trying to revive. to be filled.",
       posts: [
-        { title: "Hello, I'm Vangax", date: "Jun 1, 2026", tags: ["about", "start here"], body: [
-          "I make things on the internet and get a little too attached to how they look. I like green hills, blue skies, glass that catches the light, and software that feels alive instead of flat.",
-          "If you found this garden, you probably like those things too. Make yourself at home." ] },
-        { title: "The internet I wish we kept", date: "Apr 18, 2026", tags: ["frutiger aero", "nostalgia"], body: [
-          "Somewhere around 2013 the web went flat and grey and we called it progress. But I remember when interfaces were wet, glossy, hopeful, bubbles and water and skies in every banner.",
-          { q: "Optimism was a design language, and we let it expire." }, "This whole place is my small attempt to renew the licence." ] },
-        { title: "Things I believe (this week)", date: "Feb 9, 2026", tags: ["notes"], body: [
-          "Beauty is not a waste of compute. Slow is often correct. A good background changes a whole room.",
-          "Ask me next week and the list will have grown a little." ] } ] },
-    travels: { name: "Departures", img: "assets/plane.png", accent: "blue", tag: "Window seat, always.",
-      intro: "The departures board. Places I've been, places still on the list, and the strange, weightless peace of an airport at 3am.",
+        { title: "to be filled", date: "soon", tags: [], body: [
+          "this room is still empty. vang got distracted, shocking i know. real words landing here soon." ] } ] },
+    travels: { name: "Departures", img: "assets/plane.png", accent: "blue", tag: "places ive been, places on the list.",
+      intro: "the departures board. trips, airports, the places that stuck. to be filled.",
       posts: [
-        { title: "Places that stayed with me", date: "May 3, 2026", tags: ["memory"], body: [
-          "Some cities you visit; some you keep. The ones I kept all had the same thing, a moment where I forgot to take a photo because I was too busy being there.",
-          "That's how I rank them now. By how little I documented." ] },
-        { title: "Still on the list", date: "Jan 22, 2026", tags: ["someday"], body: [
-          "Cold places with hot springs. A train that takes too long on purpose. One ocean I haven't met yet.", "No rush. The list is half the fun." ] },
-        { title: "Airports at 3am", date: "Oct 14, 2025", tags: ["liminal"], body: [
-          "Everything hums. The shops are shut, the floors are shining, and you belong to nowhere for a few hours.",
-          "I love it. It's the closest a building gets to feeling like a held breath." ] } ] },
-    dreams: { name: "Up & Away", img: "assets/balloon.png", accent: "green", tag: "Some things you don't rush. You just rise.",
-      intro: "The balloon never hurries. This room is for the long, drifting goals, the ones you measure in years, and the tiny adventures that keep you pointed upward.",
+        { title: "to be filled", date: "soon", tags: [], body: [
+          "no boarding pass yet. this one is coming." ] } ] },
+    dreams: { name: "Up & Away", img: "assets/balloon.png", accent: "green", tag: "the slow, long goals.",
+      intro: "the balloon never hurries. long-game goals and tiny adventures. to be filled.",
       posts: [
-        { title: "What I'm chasing", date: "Jun 8, 2026", tags: ["goals"], body: [
-          "To build one thing people genuinely love. To get good enough at something that it looks easy. To stay curious past the age when that's considered cute.", "Slow ascent. Steady burner." ] },
-        { title: "Tiny adventures", date: "Mar 30, 2026", tags: ["joy"], body: [
-          "A new route home. A recipe I had no business attempting. Saying yes to the smaller plan instead of the safer one.", "Adventures don't have to be expensive to count." ] },
-        { title: "A letter to future me", date: "Dec 31, 2025", tags: ["letter"], body: [
-          "Hey. If you're reading this, you made it another year. I hope you kept making things, and I hope at least one of them surprised you.",
-          { q: "Don't trade the wonder for the to-do list." } ] } ] },
-    city: { name: "The City", img: "assets/city.png", accent: "blue", tag: "I build things. Some of them even work.",
-      intro: "A skyline of everything I'm making, code, mostly half-finished, mostly held together with hope and console.log. This is the workshop with the lights on.",
+        { title: "to be filled", date: "soon", tags: [], body: [
+          "still rising. words incoming." ] } ] },
+    city: { name: "The City", img: "assets/city.png", accent: "blue", tag: "everything im building.",
+      intro: "the workshop with the lights on. engram, blackwall, amalgam, nebula, all of it gets written up here. to be filled.",
       posts: [
-        { title: "netrunner.os, a love letter to old computers", date: "Jun 15, 2026", tags: ["project", "code"], body: [
-          "It started as a joke and became the thing I think about in the shower. A little OS-flavoured playground for the kind of computing that felt like magic before everything became a login screen.",
-          "It's rough. It's mine. It's getting better." ] },
-        { title: "What I'm building now", date: "Apr 27, 2026", tags: ["wip"], body: [
-          "Glass interfaces. A few experiments that probably won't ship. Whatever this garden becomes next.", "If a build looks finished, I haven't looked closely enough yet." ] },
-        { title: "Lessons from broken code", date: "Sep 5, 2025", tags: ["lessons"], body: [
-          "Every bug I ever fixed taught me something I should've already known. The good ones taught me twice.",
-          { q: "The code is honest. It does exactly what you said, not what you meant." } ] } ] },
-    trinkets: { name: "Trinkets", img: "assets/ornament.png", accent: "green", tag: "Every object here has a story.",
-      intro: "The curiosity cabinet. Games that rewired me, albums on permanent repeat, the comfort media I keep returning to like a warm room.",
+        { title: "to be filled", date: "soon", tags: [], body: [
+          "the build logs go here, engram, blackwall, amalgam, nebula, all of them. give vang a minute, hes mid-hyperfocus on something else." ] } ] },
+    trinkets: { name: "Trinkets", img: "assets/ornament.png", accent: "green", tag: "games, music, the stuff that rewired me.",
+      intro: "the curiosity cabinet. games that rewired me, albums on repeat, comfort media. to be filled.",
       posts: [
-        { title: "Games that rewired me", date: "May 20, 2026", tags: ["games"], body: [
-          "Some games are toys; a few are arguments. The ones that stuck asked me to think while they entertained me, sneaking through a tanker in the rain, questioning who was even telling the story.",
-          "I still hear those codec beeps in my dreams." ] },
-        { title: "The albums on repeat", date: "Mar 11, 2026", tags: ["music"], body: [
-          "There's a small shelf of records that are basically load-bearing at this point. Put one on and the whole day re-centres.", "Skipping a track on these feels rude." ] },
-        { title: "Comfort media", date: "Nov 2, 2025", tags: ["cozy"], body: [
-          "The shows and sounds I reach for when the world is loud. Nothing to prove, nothing to solve, just a known, gentle place.", "Everyone should have a few. These are mine." ] } ],
+        { title: "nfs carbon: a love letter (to be filled)", date: "soon", tags: ["games"], body: [
+          "the big one. canyon duels, autosculpt, that menu music. its getting its own full post, i promised myself. to be filled." ] },
+        { title: "to be filled", date: "soon", tags: [], body: [
+          "more trinkets soon, igi, assassins creed, the albums, the comfort stuff." ] } ],
       gallery: [
-        { img: "assets/obj2.png", cap: "The future, circa 2003", note: "a laptop that felt like pure magic" },
-        { img: "assets/obj1.png", cap: "Kept because it's beautiful", note: "no other reason needed" },
-        { img: "assets/obj3.png", cap: "From a good day", note: "small souvenir, big memory" },
-        { img: "assets/obj4.png", cap: "Still works, somehow", note: "older than it has any right to be" },
-        { img: "assets/obj5.png", cap: "A little treasure", note: "found, not bought" },
-        { img: "assets/obj7.png", cap: "Pixel-perfect nostalgia", note: "glossy like the old web" },
-        { img: "assets/obj8.png", cap: "On permanent display", note: "the comfort object" },
-        { img: "assets/obj9.png", cap: "Tiny but mighty", note: "punches above its size" },
-        { img: "assets/obj10.png", cap: "Just because", note: "joy needs no justification" },
-        { img: "assets/obj6.png", cap: "The crown of the cabinet", note: "my favourite of them all" } ] }
+        { img: "assets/obj2.png", cap: "to be filled", note: "" },
+        { img: "assets/obj1.png", cap: "to be filled", note: "" },
+        { img: "assets/obj3.png", cap: "to be filled", note: "" },
+        { img: "assets/obj4.png", cap: "to be filled", note: "" },
+        { img: "assets/obj5.png", cap: "to be filled", note: "" },
+        { img: "assets/obj7.png", cap: "to be filled", note: "" },
+        { img: "assets/obj8.png", cap: "to be filled", note: "" },
+        { img: "assets/obj9.png", cap: "to be filled", note: "" },
+        { img: "assets/obj10.png", cap: "to be filled", note: "" },
+        { img: "assets/obj6.png", cap: "to be filled", note: "" } ] }
   };
   var ORDER = ["bench", "world", "travels", "dreams", "city", "trinkets"];
 
-  /* aggregates */
   function esc(s) { return String(s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
   function bodyHTML(b) { return b.map(function (x) { return typeof x === "string" ? "<p>" + esc(x) + "</p>" : (x && x.q ? "<blockquote>" + esc(x.q) + "</blockquote>" : ""); }).join(""); }
   function tagsHTML(t, a) { return (t || []).map(function (x) { return "<span class='pill" + (a === "blue" ? " sky" : "") + "'>" + esc(x) + "</span>"; }).join(""); }
@@ -96,7 +104,6 @@
 
   var current = null, query = "", pendingPost = null;
 
-  /* the real data layer (guestbook, visitors, koi) */
   var cloud = null, messages = [], spawnedKoi = {};
   function whenCloud(fn) { if (root.GardenCloud) fn(root.GardenCloud); else root.addEventListener("gardencloud-ready", function () { fn(root.GardenCloud); }, { once: true }); }
   function hueFor(s) { var h = 0; s = String(s || "koi"); for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h % 360; }
@@ -114,7 +121,6 @@
   function markMine(id) { try { var a = JSON.parse(localStorage.getItem("vx_mine") || "[]"); if (a.indexOf(id) < 0) { a.push(id); localStorage.setItem("vx_mine", JSON.stringify(a.slice(-50))); } } catch (e) {} }
   var pondTarget = null, lastSigned = null, lakeStop = null, lakeIds = "", pendingSpot = null;
 
-  /* feed the live world: each message becomes a koi (most-recent set) */
   function syncKoi() {
     if (!root.Scene || !root.Scene.addKoi || !cloud) return;
     var pool = [cloud.HOST_KOI].concat(messages).slice(0, 16);
@@ -163,6 +169,7 @@
     var msg = (msgEl.value || "").trim();
     if (!msg) { showNote(note, "write a message first.", true); msgEl.focus(); return; }
     var last = 0; try { last = +localStorage.getItem("vx_lastsign") || 0; } catch (err) {}
+    // 15s cooldown so nobody turns the pond into a koi stampede
     if (Date.now() - last < 15000) { showNote(note, "give it a few seconds between messages.", true); return; }
     if (!cloud) { showNote(note, "the pond is still loading, try again in a moment.", true); return; }
     btn.disabled = true; btn.classList.add("busy");
@@ -177,7 +184,6 @@
       .then(function () { btn.disabled = false; btn.classList.remove("busy"); });
   }
 
-  /* The lake: named koi from the guestbook, plus decorative fish, all swimming. */
   function buildLake(container) {
     var lake = container.querySelector(".lake"), layer = container.querySelector("#lakeKoi");
     if (!lake || !layer) return;
@@ -191,6 +197,7 @@
     var swimmers = [];
 
     function place(k) { k.el.style.transform = "translate(" + (k.cx - k.size / 2) + "px," + (k.cy - k.size / 2) + "px)"; }
+    // swim to a random spot, then do it again, forever. attention span of, well, me.
     function leg(k) {
       var w = layer.clientWidth || W, h = layer.clientHeight || H, pad = k.size * 0.7;
       var nx = rand(pad, Math.max(pad + 1, w - pad)), ny = rand(pad, Math.max(pad + 1, h - pad));
@@ -203,7 +210,6 @@
       k.cx = nx; k.cy = ny; k.anim = a; a.onfinish = function () { if (document.body.contains(k.el)) leg(k); };
     }
 
-    // named koi (guestbook signatures)
     list.forEach(function (m) {
       var el = document.createElement("div"); el.className = "lkoi" + (m.host ? " host" : "") + (mine[m.id] ? " mine" : "");
       el.dataset.id = m.id;
@@ -222,7 +228,7 @@
       swimmers.push(k);
     });
 
-    // decorative fish so the pond is always full and lively
+    // a few extra fish so the pond never looks lonely (deeply relatable)
     var FISH = ["assets/fish1.png", "assets/fish2.png", "assets/fish3.png", "assets/fish4.png", "assets/fish6.png"];
     var deco = Math.max(6, Math.min(11, Math.round(W / 95)));
     for (var i = 0; i < deco; i++) {
@@ -234,7 +240,6 @@
       place(k2); swimmers.push(k2);
     }
 
-    // rising bubbles
     var bubs = document.createElement("div"); bubs.className = "lake-bubbles"; bubs.setAttribute("aria-hidden", "true");
     var nb = Math.max(6, Math.min(12, Math.round(W / 80))), bh = "";
     for (var b = 0; b < nb; b++) bh += "<span style='left:" + rand(3, 97).toFixed(1) + "%;width:" + rand(5, 16).toFixed(0) + "px;animation-duration:" + rand(4, 9).toFixed(1) + "s;animation-delay:" + (-rand(0, 8)).toFixed(1) + "s'></span>";
@@ -242,7 +247,6 @@
 
     if (!reduced) swimmers.forEach(function (k) { setTimeout(function () { leg(k); }, rand(0, 1600)); });
 
-    // tap the water: ripple, and the nearest fish dart over to feed
     function feed(e) {
       if (e.target.closest(".lkoi")) return;
       var r = lake.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
@@ -275,7 +279,6 @@
     return true;
   }
 
-  /* Share your koi: copies a link that spotlights it for whoever opens it. */
   function koiLink(id) { return location.origin + location.pathname + "#/pond/" + encodeURIComponent(id); }
   function shareKoi(id, name) {
     if (!id) { go("#/pond"); return; }
@@ -287,7 +290,6 @@
     else prompt("Copy your koi link:", url);
   }
 
-  /* day / night toggle (overrides the auto sky) */
   function setupSkyToggle() {
     var btn = document.getElementById("sky-toggle"); if (!btn || !root.Scene || !root.Scene.getPhase) return;
     function isNight() { return root.Scene.getPhase() === "night"; }
@@ -296,7 +298,6 @@
     refresh();
   }
 
-  /* feed */
   function feedHTML(list) {
     if (!list.length) return "<p class='muted' style='padding:12px;color:var(--ink-soft)'>Nothing here yet.</p>";
     return "<div class='feed'>" + list.map(function (p) {
@@ -308,7 +309,6 @@
     }).join("") + "</div>";
   }
 
-  /* views */
   function renderHome() {
     var tiles = ORDER.map(function (id) {
       var r = ROOMS[id];
@@ -316,8 +316,8 @@
     }).join("");
     return "<section class='view'>" +
       "<div class='panel'><div class='panel-h green'>Welcome</div><div class='panel-b'><div class='welcome'>" +
-        "<div class='w-text'><h2>A little corner of the web</h2><p>I'm Vangax. This is my garden, part museum, part blog, part quiet afternoon outside. Browse the latest below, wander the rooms, or just watch the fish for a while.</p>" +
-        "<div class='row'><button class='btn' data-room='bench'><span>Start at the bench</span></button><button class='btn sky' data-room='world'><span>Who's Vangax?</span></button></div></div></div></div></div>" +
+        "<div class='w-text'><h2>hey, im vang</h2><p>welcome to my garden. its part blog, part museum, part what-happens-when-i-cant-sit-still. im 19, i build too many things at once, and this is where they live. start at the bench for the whole story, wander the rooms, sign the koi pond, or just watch the fish for a bit.</p>" +
+        "<div class='row'><button class='btn' data-room='bench'><span>start at the bench</span></button><button class='btn sky' data-room='world'><span>whos vang?</span></button></div></div></div></div></div>" +
       "<div class='panel'><div class='panel-h'>Latest entries<span class='right'>" + allPosts.length + " posts</span></div><div class='panel-b'>" + feedHTML(allPosts) + "</div></div>" +
       "<div class='panel'><div class='panel-h green'>The exhibits<span class='right'>" + ORDER.length + " rooms</span></div><div class='panel-b'><div class='ex-strip'>" + tiles + "</div></div></div>" +
     "</section>";
@@ -355,14 +355,12 @@
     return "<section class='view pond-view'>" +
       "<div><a class='back' href='#/'><img src='assets/leaf_swoosh.png' alt=''><span>Back to the garden</span></a></div>" +
       "<div class='pond-banner' id='pondBanner' hidden></div>" +
-      // the visible lake
       "<div class='panel'><div class='panel-h'>The Koi Pond<span class='right' id='pondCount'>…</span></div>" +
         "<div class='panel-b lake-wrap'><div class='lake' id='lake'>" +
           "<div class='lake-shimmer'></div><div class='lake-pads'><i></i><i></i><i></i><i></i></div>" +
           "<div class='lake-koi' id='lakeKoi'></div>" +
           "<div class='lake-cap'>hover a fish to read its message. tap the water to feed them.</div>" +
         "</div></div></div>" +
-      // step 1: sign (this CREATES your koi)
       "<div class='panel'><div class='panel-h green'>Sign the pond</div><div class='panel-b'>" +
         "<p class='pond-lead'>Write your name and a message, then press <b>Sign the pond</b>. A koi with your name starts swimming in the pond above and stays in the garden for good. One koi is already there for you: the keeper.</p>" +
         "<form class='gform' id='gform'>" +
@@ -371,18 +369,15 @@
           "<div class='gform-foot'>" + mode + "<button class='btn sky' type='submit'><span>Sign the pond</span></button></div>" +
           "<div class='gform-note' id='gNote' hidden></div>" +
         "</form>" +
-        // step 2: share (this only copies a link to the koi you already made)
         "<div class='gshare' id='gShareRow'" + shareHidden + ">" +
           "<span>Your koi is swimming above. Want friends to find it? This button copies a link that makes your koi light up for them.</span>" +
           "<button class='btn' type='button' id='gShare'><span>Copy my koi link</span></button>" +
         "</div>" +
       "</div></div>" +
-      // the full list
       "<div class='panel'><div class='panel-h green'>Every message<span class='right' id='pondNum'>…</span></div><div class='panel-b'><div class='pondlist' id='pondlist'><div class='gmsg muted'>loading the pond…</div></div></div></div>" +
     "</section>";
   }
 
-  /* sidebar gadgets */
   function gad(title, body, blue) { return "<div class='gad" + (blue ? " blue" : "") + "'><div class='gad-h'><span class='dot'></span>" + title + "</div><div class='gad-b'>" + body + "</div></div>"; }
   function buildSide() {
     var side = document.getElementById("side");
@@ -394,14 +389,13 @@
     side.innerHTML =
       gad("Navigate", nav) +
       gad("Weather", "<div class='wx'><div class='wx-orb sunny'><span class='wx-sun'></span></div><div><div class='wx-temp'>25°</div><div class='wx-meta'>Always sunny in my garden</div></div></div>", true) +
-      gad("Right now", "<div class='statline'><span>building</span><b>netrunner.os</b></div><div class='statline'><span>listening</span><b>lo-fi &amp; rain</b></div><div class='statline'><span>mood</span><b>optimistic</b></div>") +
+      gad("Right now", "<div class='statline'><span>building</span><b>engram + 4 other tabs</b></div><div class='statline'><span>fuelled by</span><b>football &amp; dopamine</b></div><div class='statline'><span>mood</span><b>overwhelmed (lovingly)</b></div>") +
       gad("Visitors", "<div class='visitors'><div class='vglobe'><img src='assets/globe2.png' alt=''><span class='vpin' id='vpin' hidden></span></div><div class='vinfo'><div class='vcount'><b id='visitsNum'>-</b><small>visitors</small></div><div class='vloc' id='vloc'>locating you…</div></div></div>", true) +
       gad("Tags", "<div class='tagcloud'>" + tags + "</div>") +
       gad("This garden", "<div class='statline'><span>entries</span><b>" + allPosts.length + "</b></div><div class='statline'><span>rooms</span><b>" + ORDER.length + "</b></div><div class='statline'><span>koi in the pond</span><b id='koiCount'>-</b></div><div class='statline'><span>growing since</span><b>2024</b></div>", true) +
       gad("From the cabinet", "<div class='peek'>" + peek + "</div>") +
       gad("Guestbook", "<div class='gbook' id='gbookMini'><div class='gmsg muted'>opening the pond…</div></div><button class='gbtn' id='gbSign' type='button'><span>Sign the guestbook</span></button>");
 
-    // wiring
     side.querySelectorAll(".navrow").forEach(function (el) { el.addEventListener("click", function () { go(el.dataset.pond ? "#/pond" : "#/" + el.dataset.room); }); });
     side.querySelectorAll(".tagcloud button").forEach(function (el) { el.addEventListener("click", function () { go("#/tag/" + encodeURIComponent(el.dataset.tag)); }); });
     side.querySelectorAll(".peek button").forEach(function (el) { el.addEventListener("click", function () { go("#/trinkets"); setTimeout(function () { openLB(ROOMS.trinkets.gallery, +el.dataset.relic); }, 420); }); });
@@ -412,7 +406,6 @@
     document.querySelectorAll(".navrow").forEach(function (el) { el.classList.toggle("active", el.dataset.pond ? onPond : el.dataset.room === current); });
   }
 
-  /* lightbox */
   var lb, lbImg, lbCap, lbList = [], lbIdx = 0;
   function buildLB() {
     lb = document.createElement("div"); lb.id = "lightbox"; lb.setAttribute("aria-hidden", "true");
@@ -429,7 +422,6 @@
   function closeLB() { lb.classList.remove("on"); lb.setAttribute("aria-hidden", "true"); }
   function stepLB(d) { if (!lbList.length) return; lbIdx = (lbIdx + d + lbList.length) % lbList.length; showLB(); if (root.Ambient) root.Ambient.tap(); }
 
-  /* enhance + filter */
   function rippleAt(el, e) { var r = el.getBoundingClientRect(), s = Math.max(r.width, r.height) * 1.3; var sp = document.createElement("span"); sp.className = "ripple"; sp.style.width = sp.style.height = s + "px"; sp.style.left = (e.clientX - r.left) + "px"; sp.style.top = (e.clientY - r.top) + "px"; el.appendChild(sp); setTimeout(function () { sp.remove(); }, 650); }
   function tap() { if (root.Ambient) root.Ambient.tap(); }
   function enhance(app) {
@@ -452,7 +444,6 @@
     var note = feed.parentNode.querySelector(".feed-empty"); if (query && !n) { if (!note) { note = document.createElement("p"); note.className = "feed-empty"; note.style.cssText = "padding:10px;color:var(--ink-soft)"; feed.parentNode.appendChild(note); } note.textContent = "Nothing matches “" + query + "”."; } else if (note) note.remove();
   }
 
-  /* router */
   function go(hash) { location.hash = hash; }
   function paint() {
     var h = location.hash.replace(/^#\/?/, ""), app = document.getElementById("app");
@@ -468,7 +459,6 @@
   }
   function route() { if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(paint); else paint(); }
 
-  /* entry gate */
   function runGate() {
     var gate = document.getElementById("gate"); if (!gate) return;
     var entered = false; try { entered = sessionStorage.getItem("vx_entered") === "1"; } catch (e) {}
@@ -481,14 +471,12 @@
     setTimeout(open, 2600);
   }
 
-  /* clock */
   function startClock() {
     var el = document.getElementById("clock"); if (!el) return;
     function tick() { var n = new Date(), h = n.getHours(), hh = (h % 12 || 12); el.innerHTML = "<b>" + hh + ":" + String(n.getMinutes()).padStart(2, "0") + " " + (h < 12 ? "AM" : "PM") + "</b><small>" + n.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }) + "</small>"; }
     tick(); setInterval(tick, 1000);
   }
 
-  /* init */
   function init() {
     document.getElementById("year").textContent = new Date().getFullYear();
     var brand = document.getElementById("brand");

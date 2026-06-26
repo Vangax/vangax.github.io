@@ -1,5 +1,4 @@
-/* garden.js: page content and behaviour. The rooms, routing, sidebar
-   gadgets, weather, and the koi pond. All writing lives in ROOMS below. */
+
 (function (root) {
   "use strict";
 
@@ -576,7 +575,7 @@
     var msg = (msgEl.value || "").trim();
     if (!msg) { showNote(note, "write a message first.", true); msgEl.focus(); return; }
     var last = 0; try { last = +localStorage.getItem("vx_lastsign") || 0; } catch (err) {}
-    // 15s cooldown so nobody turns the pond into a koi stampede
+
     if (Date.now() - last < 15000) { showNote(note, "give it a few seconds between messages.", true); return; }
     if (!cloud) { showNote(note, "the pond is still loading, try again in a moment.", true); return; }
     btn.disabled = true; btn.classList.add("busy");

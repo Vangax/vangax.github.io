@@ -1,5 +1,4 @@
-/* garden.js: page content and behaviour. The rooms, routing, sidebar
-   gadgets, weather, and the koi pond. All writing lives in ROOMS below. */
+
 (function (root) {
   "use strict";
 

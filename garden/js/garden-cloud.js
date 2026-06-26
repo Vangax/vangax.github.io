@@ -1,11 +1,4 @@
-/* garden-cloud.js
-   Data layer for the guestbook, the visitor counter, and visitor location.
-   Uses Firebase Firestore when a config is set below; otherwise saves to this
-   browser's localStorage so the site still works with no setup.
-   To go live and shared across everyone, see SETUP-firebase.md. */
 
-/* Paste your Firebase web config here (Firebase console > Project settings >
-   Your apps > Web app > Config). Leave it as-is to stay in local mode. */
 const firebaseConfig = {
   apiKey: "AIzaSyAjYQayZjwnFqf2_7Vur161mR07gVzNCxk",
   authDomain: "the-koi-pond.firebaseapp.com",
@@ -19,7 +12,7 @@ const firebaseConfig = {
 const FIREBASE_VER = "10.12.2";
 const useFirebase = firebaseConfig.apiKey && !/^PASTE/.test(firebaseConfig.apiKey);
 
-/* A koi that is always in the pond so it is never empty. Edit this freely. */
+
 const HOST_KOI = {
   id: "host-welcome", host: true, name: "vang",
   message: "welcome to my pond. leave a message and your koi joins the garden.",
@@ -52,7 +45,7 @@ function makeLocal() {
       var a = load(); a.push(msg); save(a); fan();
       return Promise.resolve(msg);
     },
-    // counts you once per session, were not animals
+   
     registerVisit: function () {
       var counted = false; try { counted = sessionStorage.getItem("vx_counted") === "1"; } catch (e) {}
       var v = 1; try { v = parseInt(localStorage.getItem("vx_visits") || "0", 10) || 0; } catch (e) {}

@@ -12,7 +12,7 @@
     try { localStorage.setItem("vx_theme", THEME); } catch (e) {}
     location.reload();
   }
-  // the roster: sign the pool and a face from raccoon city is assigned to you.
+  
   var RE_ROSTER = ["leon", "rebecca", "chris", "jill", "ada", "claire", "krauser", "wesker", "sherry", "hunk", "carlos", "ashley", "barry"]
     .map(function (n) { return "assets/re/roster/" + n + ".png"; });
 
@@ -485,7 +485,7 @@
   };
   var ORDER = ["bench", "world", "travels", "dreams", "city", "trinkets"];
 
-  // in the RE world the rooms are raccoon city locations. same purpose, different skin.
+
   var RE_ROOMS = {
     bench:    { name: "Save Room",       img: "assets/re/typewriter.png",      tag: "ink ribbon loaded. the long save file on me.",
       intro: "the save room. that one calm track, the typewriter, the green light under the door. nothing can reach you in here. this is where the long file on who i am gets written down. take a green herb, sit a while." },

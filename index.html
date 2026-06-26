@@ -373,6 +373,32 @@
       filter: drop-shadow(0 0 6px rgba(74,122,155,0.75));
     }
 
+    /* --- garden button: links out to the frutiger aero blog --- */
+    .nav-garden {
+      margin-left: 4px;
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 4px 13px 4px 8px; border-radius: 5px; text-decoration: none; white-space: nowrap;
+      font-family: 'Share Tech Mono', monospace; font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px; color: #2c5e3f;
+      background: linear-gradient(180deg, #fdfefe 0%, #e7ebee 45%, #d9dee2 50%, #ccd2d7 51%, #c1c8ce 100%);
+      border: 1px solid; border-color: #ffffff #8d959c #8d959c #ffffff;
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.22), 3px 3px 6px rgba(0,0,0,0.14),
+                  inset 1px 1px 0 rgba(255,255,255,0.95), inset -1px -1px 0 rgba(0,0,0,0.12);
+      position: relative; overflow: hidden;
+      transition: filter 0.12s, transform 0.08s, color 0.12s, box-shadow 0.12s;
+    }
+    .nav-garden svg { display: block; width: 22px; height: 22px; flex: 0 0 auto; }
+    .nav-garden::after { content: none; }
+    .nav-garden::before {
+      content: ''; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,0.85), transparent);
+      transform: skewX(-18deg); pointer-events: none; animation: ngSweep 5.5s ease-in-out infinite;
+    }
+    @keyframes ngSweep { 0%, 62% { left: -60%; } 82%, 100% { left: 150%; } }
+    .nav-garden:hover { transform: translateY(-1px); color: #15803d; filter: drop-shadow(0 0 6px rgba(84,173,95,0.65)); }
+    .nav-garden:active { transform: translateY(0); box-shadow: inset 2px 2px 4px rgba(0,0,0,0.25), inset -1px -1px 2px rgba(255,255,255,0.7); }
+    @media (prefers-reduced-motion: reduce) { .nav-garden::before { display: none; } }
+
     /* --- threadlocked page: webring widget + member grid --- */
     .tl-ring-nav { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
     .tl-ring-btn {
@@ -1533,6 +1559,24 @@ rgba(216,218,221,0.5) 52%, rgba(200,202,206,0.5) 100%) !important;
     <button class="nav-link" onclick="showPage('reflections', this)">Reflections</button>
     <a class="nav-link" href="assets/devang new.pdf" target="_blank">CV</a>
     <button class="nav-link" onclick="showPage('contact', this)">Contact</button>
+    <a class="nav-garden" href="garden/" title="step into the garden, a frutiger aero blog">
+      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="ngLeaf" cx="36%" cy="28%" r="82%">
+            <stop offset="0" stop-color="#eafff2"/><stop offset="0.45" stop-color="#5fce8a"/><stop offset="1" stop-color="#1f7a45"/>
+          </radialGradient>
+          <linearGradient id="ngGloss" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M16 3 C7 11 6 22 16 29 C26 22 25 11 16 3 Z" fill="url(#ngLeaf)" stroke="#15633a" stroke-width="1"/>
+        <path d="M16 6 V26" stroke="#eafff2" stroke-width="1.3" opacity="0.7"/>
+        <path d="M15.6 5.4 C10 11 9 18 13.6 24.6 C12 18 12.6 11.6 16 7 Z" fill="url(#ngGloss)"/>
+        <circle cx="22.4" cy="21.4" r="2.5" fill="#ff8a3d" stroke="#ffffff" stroke-width="0.6"/>
+        <circle cx="21.7" cy="20.7" r="0.6" fill="#7a2e00"/>
+      </svg>
+      the garden
+    </a>
     <button class="nav-link nav-threadlocked" onclick="showPage('threadlocked', this)" title="threadlocked webring — meet some cool people" aria-label="threadlocked webring">
       <svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" viewBox="0 0 88 31">
         <defs>

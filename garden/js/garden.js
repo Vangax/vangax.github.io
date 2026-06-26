@@ -54,7 +54,7 @@
           "so thats me. devang. vang. 19, too many tabs, allergic to the last ten percent, hopelessly in love with football and steve smith and resident evil and the wii and physics and building things that probably shouldnt exist yet. starting things, finishing some, abandoning more, and every so often, rarely, gloriously, seeing one all the way through.",
           "if you sign the koi pond, your koi swims here next to mine. ill probably notice it at 2am mid hyperfocus and smile. welcome to the garden. make yourself at home, the bench is always free." ] } ] },
     world: { name: "The World", img: "assets/globe.png", accent: "blue", tag: "the serious stuff i cant stop thinking about.",
-      intro: "the wide-angle shot. biology, biosecurity, climate, where tech is dragging us next, the things i actually lose sleep over. first up: a long investigation into a us biosecurity policy that was built over thirteen years and lived for exactly one day.",
+      intro: "the wide-angle shot. biology, neurotech, general science, where tech is dragging us next, the things i actually lose sleep over. first up: a long investigation into a us biosecurity policy that was built over thirteen years and lived for exactly one day.",
       posts: [
         { title: "the policy that lived one day", date: "Jun 27, 2026", tags: ["biosecurity", "essay", "policy", "long read"], body: [
           { sec: "section 1: the rescinded policy" },

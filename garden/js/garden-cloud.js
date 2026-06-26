@@ -21,7 +21,7 @@ const useFirebase = firebaseConfig.apiKey && !/^PASTE/.test(firebaseConfig.apiKe
 
 /* A koi that is always in the pond so it is never empty. Edit this freely. */
 const HOST_KOI = {
-  id: "host-welcome", host: true, name: "vangax",
+  id: "host-welcome", host: true, name: "vang",
   message: "welcome to my pond. leave a message and your koi joins the garden.",
   createdAt: 0
 };

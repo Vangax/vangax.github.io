@@ -1,4 +1,5 @@
-/* i definetly didnt write all this okay */
+/* garden.css: the whole look. Palette, glass, layout, gadgets, the lake,
+   day and night, transitions. */
 
 :root{
   --g-deep:#1B4332; --g-forest:#2D6A4F; --g-mid:#40916C; --g-leaf:#52B788; --g-light:#74C69D; --g-pale:#B7E4C7; --g-mist:#D8F3DC;

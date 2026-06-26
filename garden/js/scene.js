@@ -236,6 +236,7 @@
   }
 
   function init() {
+    if (document.documentElement.getAttribute("data-theme") === "re") return; // RE world has its own atmosphere, no aero scene
     cv = document.getElementById("motes"); if (cv) { ctx = cv.getContext("2d"); resize(); root.addEventListener("resize", resize); for (var i = 0; i < (reduced ? 12 : 40); i++) motes.push(new Mote(true)); requestAnimationFrame(frame); }
     root.addEventListener("pointermove", function (e) {
       pointer.x = e.clientX; pointer.y = e.clientY;
@@ -248,7 +249,7 @@
 
   root.Scene = {
     addKoi: function (msg) {
-      if (reduced || !msg) return null;
+      if (reduced || !msg || document.documentElement.getAttribute("data-theme") === "re") return null;
       var w = makeKoi(msg); liveKoi.push(w);
       while (liveKoi.length > KOI_MAX) { var old = liveKoi.shift(); if (old && old.remove) old.remove(); }
       return w;

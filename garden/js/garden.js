@@ -2,6 +2,20 @@
 (function (root) {
   "use strict";
 
+  var THEME = "aero";
+  try { THEME = localStorage.getItem("vx_theme") === "re" ? "re" : "aero"; } catch (e) {}
+  function isRE() { return THEME === "re"; }
+  function T(a, b) { return isRE() ? b : a; }
+  function applyTheme() { try { document.documentElement.setAttribute("data-theme", THEME); } catch (e) {} }
+  function switchTheme() {
+    THEME = isRE() ? "aero" : "re";
+    try { localStorage.setItem("vx_theme", THEME); } catch (e) {}
+    location.reload();
+  }
+  // the roster: sign the pool and a face from raccoon city is assigned to you.
+  var RE_ROSTER = ["leon", "rebecca", "chris", "jill", "ada", "claire", "krauser", "wesker", "sherry", "hunk", "carlos", "ashley", "barry"]
+    .map(function (n) { return "assets/re/roster/" + n + ".png"; });
+
   var ROOMS = {
     bench: { name: "The Bench", img: "assets/bench.png", accent: "green", tag: "sit a while. the long version of me lives here.",
       intro: "this is the bench. its where i actually sit down and try to explain myself instead of building something and sprinting off. the first post is the big one, the whole who-am-i. grab a drink.",
@@ -471,6 +485,24 @@
   };
   var ORDER = ["bench", "world", "travels", "dreams", "city", "trinkets"];
 
+  // in the RE world the rooms are raccoon city locations. same purpose, different skin.
+  var RE_ROOMS = {
+    bench:    { name: "Save Room",       img: "assets/re/typewriter.png",      tag: "ink ribbon loaded. the long save file on me.",
+      intro: "the save room. that one calm track, the typewriter, the green light under the door. nothing can reach you in here. this is where the long file on who i am gets written down. take a green herb, sit a while." },
+    world:    { name: "Classified Files", img: "assets/re/tvirus.png",          tag: "recovered documents nobody was meant to read.",
+      intro: "recovered case files. the serious things i could not stop digging into, biology, biosecurity, the places it all quietly goes wrong. first document pulled from the wreckage: the policy that lived for exactly one day." },
+    travels:  { name: "Extraction",       img: "assets/re/umbrella.png",        tag: "evac routes and the places that stuck.",
+      intro: "the extraction point. the trips, the airports, the places that made it out of the city with me. no chopper yet. to be filled." },
+    dreams:   { name: "Objectives",       img: "assets/re/herb-green.png",      tag: "primary objectives. the long game.",
+      intro: "mission objectives. the slow, long goals i have not reached yet, the ones still flashing on the map. to be filled." },
+    city:     { name: "Raccoon City",     img: "assets/re/zombie.png",          tag: "everything im building before it all goes wrong.",
+      intro: "downtown raccoon city. the labs with the lights still on, engram and blackwall and the rest, all of it built while the sirens go somewhere across town. to be filled." },
+    trinkets: { name: "Item Box",         img: "assets/re/inventory.png",       tag: "games, music, the relics in my case.",
+      intro: "the item box. the games, the albums, the comfort relics that rewired me, all stored in the same magic crate. combine at will." }
+  };
+  function applyReSkin() { ORDER.forEach(function (id) { var o = RE_ROOMS[id], r = ROOMS[id]; if (o && r) { r.name = o.name; r.img = o.img; r.tag = o.tag; r.intro = o.intro; } }); }
+  if (isRE()) applyReSkin();
+
   function esc(s) { return String(s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
   function inline(s) {
     s = esc(s);
@@ -522,7 +554,7 @@
   }
   function items() { return cloud ? [cloud.HOST_KOI].concat(messages) : messages.slice(); }
   var KOI_IMGS = ["assets/fish1.png", "assets/fish2.png", "assets/fish3.png", "assets/fish4.png", "assets/fish6.png"];
-  function koiImg(m) { return KOI_IMGS[hueFor((m && (m.id || m.name) || "k") + "f") % KOI_IMGS.length]; }
+  function koiImg(m) { if (isRE() && m && m.host) return "assets/re/rebecca-portrait.png"; var arr = isRE() ? RE_ROSTER : KOI_IMGS; return arr[hueFor((m && (m.id || m.name) || "k") + "f") % arr.length]; }
   function mineIds() { try { var a = JSON.parse(localStorage.getItem("vx_mine") || "[]"), o = {}; a.forEach(function (x) { o[x] = 1; }); return o; } catch (e) { return {}; } }
   function markMine(id) { try { var a = JSON.parse(localStorage.getItem("vx_mine") || "[]"); if (a.indexOf(id) < 0) { a.push(id); localStorage.setItem("vx_mine", JSON.stringify(a.slice(-50))); } } catch (e) {} }
   var pondTarget = null, lastSigned = null, lakeStop = null, lakeIds = "", pendingSpot = null;
@@ -547,7 +579,7 @@
         "<div class='pm-body'><div class='pm-top'><b>" + esc(m.name || "anonymous") + "</b><span class='pm-date'>" + esc(fmtWhen(m.createdAt)) + "</span></div><p>" + esc(m.message) + "</p></div></div>";
     }).join("");
     var pc = document.getElementById("pondCount"), pn = document.getElementById("pondNum");
-    if (pc) pc.textContent = messages.length + " koi";
+    if (pc) pc.textContent = messages.length + T(" koi", " specimens");
     if (pn) pn.textContent = String(messages.length);
   }
   function startGuestbook(c) {
@@ -620,11 +652,12 @@
       var el = document.createElement("div"); el.className = "lkoi" + (m.host ? " host" : "") + (mine[m.id] ? " mine" : "");
       el.dataset.id = m.id;
       var sz = Math.round(rand(48, 78)), hue = hueFor(m.name);
-      var who = m.host ? esc(m.name) + " (keeper)" : (mine[m.id] ? esc(m.name) + " (you)" : esc(m.name || "anonymous"));
+      var keeper = T("keeper", "handler");
+      var who = m.host ? esc(m.name) + " (" + keeper + ")" : (mine[m.id] ? esc(m.name) + " (you)" : esc(m.name || "anonymous"));
       el.innerHTML =
         "<div class='lk-bubble'><b>" + who + "</b>" + esc(m.message) + "</div>" +
         "<img class='lk-fish' src='" + koiImg(m) + "' alt='' style='width:" + sz + "px;filter:hue-rotate(" + hue + "deg) saturate(1.2) drop-shadow(0 6px 9px rgba(8,40,60,.34))'>" +
-        "<span class='lk-tag'>" + esc(m.name || "anon") + (m.host ? " (keeper)" : (mine[m.id] ? " (you)" : "")) + "</span>";
+        "<span class='lk-tag'>" + esc(m.name || "anon") + (m.host ? " (" + keeper + ")" : (mine[m.id] ? " (you)" : "")) + "</span>";
       layer.appendChild(el);
       var k = { el: el, fish: el.querySelector(".lk-fish"), size: sz, cx: rand(sz, W - sz), cy: rand(sz, H - sz), anim: null };
       place(k);
@@ -635,8 +668,8 @@
     });
 
     // a few extra fish so the pond never looks lonely (deeply relatable)
-    var FISH = ["assets/fish1.png", "assets/fish2.png", "assets/fish3.png", "assets/fish4.png", "assets/fish6.png"];
-    var deco = Math.max(6, Math.min(11, Math.round(W / 95)));
+    var FISH = isRE() ? RE_ROSTER : ["assets/fish1.png", "assets/fish2.png", "assets/fish3.png", "assets/fish4.png", "assets/fish6.png"];
+    var deco = isRE() ? Math.max(3, Math.min(6, Math.round(W / 170))) : Math.max(6, Math.min(11, Math.round(W / 95)));
     for (var i = 0; i < deco; i++) {
       var el2 = document.createElement("div"); el2.className = "lfish";
       var sz2 = Math.round(rand(30, 62)), op = rand(.5, .92);
@@ -680,7 +713,7 @@
     if (!el) return false;
     el.classList.add("spotlight", "show");
     var lake = el.closest(".lake"); if (lake) lake.scrollIntoView({ behavior: "smooth", block: "center" });
-    if (viaLink) { var b = document.getElementById("pondBanner"); if (b) { var nm = ((el.querySelector(".lk-bubble b") || {}).textContent || "this").replace(/ \(.*\)$/, ""); b.innerHTML = "You followed <b>" + esc(nm) + "</b>'s koi here. Sign below and yours will swim next to it."; b.hidden = false; } }
+    if (viaLink) { var b = document.getElementById("pondBanner"); if (b) { var nm = ((el.querySelector(".lk-bubble b") || {}).textContent || "this").replace(/ \(.*\)$/, ""); b.innerHTML = T("You followed <b>" + esc(nm) + "</b>'s koi here. Sign below and yours will swim next to it.", "You tracked <b>" + esc(nm) + "</b>'s specimen here. Enter the pool and yours joins the tank."); b.hidden = false; } }
     setTimeout(function () { el.classList.remove("spotlight"); }, 5200);
     return true;
   }
@@ -689,7 +722,7 @@
   function shareKoi(id, name) {
     if (!id) { go("#/pond"); return; }
     var url = koiLink(id), note = document.getElementById("gNote");
-    var text = (name ? name + "'s koi" : "my koi") + " is swimming in the koi pond. come find it and leave your own.";
+    var text = T((name ? name + "'s koi" : "my koi") + " is swimming in the koi pond. come find it and leave your own.", (name ? name + "'s specimen" : "my specimen") + " is in the character pool. track it down and add your own.");
     if (navigator.share) { navigator.share({ title: "The Koi Pond", text: text, url: url }).catch(function () {}); return; }
     var done = function () { showNote(note, "link copied. paste it anywhere to show your koi.", false); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { prompt("Copy your koi link:", url); });
@@ -721,11 +754,12 @@
       return "<button class='ex-tile' data-room='" + id + "'><div class='th'><img src='" + r.img + "' alt='' loading='lazy'></div><b>" + esc(r.name) + "</b><small>" + r.posts.length + " " + (r.posts.length === 1 ? "entry" : "entries") + "</small></button>";
     }).join("");
     return "<section class='view'>" +
-      "<div class='panel'><div class='panel-h green'>Welcome</div><div class='panel-b'><div class='welcome'>" +
-        "<div class='w-text'><h2>hey, im vang</h2><p>welcome to my garden. its part blog, part museum, part what-happens-when-i-cant-sit-still. im 19, i build too many things at once, and this is where they live. start at the bench for the whole story, wander the rooms, sign the koi pond, or just watch the fish for a bit.</p>" +
-        "<div class='row'><button class='btn' data-room='bench'><span>start at the bench</span></button><button class='btn sky' data-room='world'><span>whos vang?</span></button></div></div></div></div></div>" +
-      "<div class='panel'><div class='panel-h'>Latest entries<span class='right'>" + allPosts.length + " posts</span></div><div class='panel-b'>" + feedHTML(allPosts) + "</div></div>" +
-      "<div class='panel'><div class='panel-h green'>The exhibits<span class='right'>" + ORDER.length + " rooms</span></div><div class='panel-b'><div class='ex-strip'>" + tiles + "</div></div></div>" +
+      "<div class='panel'><div class='panel-h green'>" + T("Welcome", "Mission briefing") + "</div><div class='panel-b'><div class='welcome" + (isRE() ? " re-welcome" : "") + "'>" +
+        (isRE() ? "<div class='w-becca'><img src='assets/re/rebecca-full.png' alt='Rebecca Chambers'><span class='wb-tag'>Rebecca Chambers</span></div>" : "") +
+        "<div class='w-text'><h2>" + T("hey, im vang", "this is vang. stay close.") + "</h2><p>" + T("welcome to my garden. its part blog, part museum, part what-happens-when-i-cant-sit-still. im 19, i build too many things at once, and this is where they live. start at the bench for the whole story, wander the rooms, sign the koi pond, or just watch the fish for a bit.", "welcome to the garden, raccoon city cut. same me, part blog, part case file, part what-happens-when-i-cant-sit-still. im 19 and i build too many things at once. duck into the save room for the whole story, sweep the locations, or step up to the character pool. rebeccas got your six.") + "</p>" +
+        "<div class='row'><button class='btn' data-room='bench'><span>" + T("start at the bench", "open the save room") + "</span></button><button class='btn sky' data-room='world'><span>" + T("whos vang?", "the case files") + "</span></button></div></div></div></div></div>" +
+      "<div class='panel'><div class='panel-h'>" + T("Latest entries", "Recovered files") + "<span class='right'>" + allPosts.length + T(" posts", " files") + "</span></div><div class='panel-b'>" + feedHTML(allPosts) + "</div></div>" +
+      "<div class='panel'><div class='panel-h green'>" + T("The exhibits", "Locations") + "<span class='right'>" + ORDER.length + T(" rooms", " locations") + "</span></div><div class='panel-b'><div class='ex-strip'>" + tiles + "</div></div></div>" +
     "</section>";
   }
   function renderRoom(id) {
@@ -755,32 +789,32 @@
   function renderPond() {
     var shared = cloud && cloud.mode === "firebase";
     var mode = shared
-      ? "<span class='gform-mode live'>shared and live. everyone sees your fish.</span>"
-      : "<span class='gform-mode'>saving on this device only. add Firebase to share with everyone.</span>";
+      ? "<span class='gform-mode live'>" + T("shared and live. everyone sees your fish.", "online. every survivor in the pool is real.") + "</span>"
+      : "<span class='gform-mode'>" + T("saving on this device only. add Firebase to share with everyone.", "saving on this terminal only. connect Firebase to sync the pool.") + "</span>";
     var shareHidden = lastSigned ? "" : " hidden";
     return "<section class='view pond-view'>" +
-      "<div><a class='back' href='#/'><img src='assets/leaf_swoosh.png' alt=''><span>Back to the garden</span></a></div>" +
+      "<div><a class='back' href='#/'><img src='assets/leaf_swoosh.png' alt=''><span>" + T("Back to the garden", "Back to the garden") + "</span></a></div>" +
       "<div class='pond-banner' id='pondBanner' hidden></div>" +
-      "<div class='panel'><div class='panel-h'>The Koi Pond<span class='right' id='pondCount'>…</span></div>" +
+      "<div class='panel'><div class='panel-h'>" + T("The Koi Pond", "The Character Pool") + "<span class='right' id='pondCount'>…</span></div>" +
         "<div class='panel-b lake-wrap'><div class='lake' id='lake'>" +
           "<div class='lake-shimmer'></div><div class='lake-pads'><i></i><i></i><i></i><i></i></div>" +
           "<div class='lake-koi' id='lakeKoi'></div>" +
-          "<div class='lake-cap'>hover a fish to read its message. tap the water to feed them.</div>" +
+          "<div class='lake-cap'>" + T("hover a fish to read its message. tap the water to feed them.", "hover a specimen to read its file. tap the glass to disturb the tank.") + "</div>" +
         "</div></div></div>" +
-      "<div class='panel'><div class='panel-h green'>Sign the pond</div><div class='panel-b'>" +
-        "<p class='pond-lead'>Write your name and a message, then press <b>Sign the pond</b>. A koi with your name starts swimming in the pond above and stays in the garden for good. One koi is already there for you: the keeper.</p>" +
+      "<div class='panel'><div class='panel-h green'>" + T("Sign the pond", "Enter the pool") + "</div><div class='panel-b'>" +
+        "<p class='pond-lead'>" + T("Write your name and a message, then press <b>Sign the pond</b>. A koi with your name starts swimming in the pond above and stays in the garden for good. One koi is already there for you: the keeper.", "Write your name and a message, then press <b>Enter the pool</b>. A face from raccoon city is assigned to you and starts drifting in the tank above, logged in the garden for good. One specimen is already in there: the handler.") + "</p>" +
         "<form class='gform' id='gform'>" +
-          "<div class='gform-row'><input id='gName' maxlength='40' placeholder='your name' autocomplete='nickname' spellcheck='false'>" +
-            "<input id='gMsg' maxlength='280' placeholder='your message' autocomplete='off'></div>" +
-          "<div class='gform-foot'>" + mode + "<button class='btn sky' type='submit'><span>Sign the pond</span></button></div>" +
+          "<div class='gform-row'><input id='gName' maxlength='40' placeholder='" + T("your name", "your codename") + "' autocomplete='nickname' spellcheck='false'>" +
+            "<input id='gMsg' maxlength='280' placeholder='" + T("your message", "your last transmission") + "' autocomplete='off'></div>" +
+          "<div class='gform-foot'>" + mode + "<button class='btn sky' type='submit'><span>" + T("Sign the pond", "Enter the pool") + "</span></button></div>" +
           "<div class='gform-note' id='gNote' hidden></div>" +
         "</form>" +
         "<div class='gshare' id='gShareRow'" + shareHidden + ">" +
-          "<span>Your koi is swimming above. Want friends to find it? This button copies a link that makes your koi light up for them.</span>" +
-          "<button class='btn' type='button' id='gShare'><span>Copy my koi link</span></button>" +
+          "<span>" + T("Your koi is swimming above. Want friends to find it? This button copies a link that makes your koi light up for them.", "Your specimen is drifting above. Want friends to find it? This copies a link that flags your specimen for them.") + "</span>" +
+          "<button class='btn' type='button' id='gShare'><span>" + T("Copy my koi link", "Copy my specimen link") + "</span></button>" +
         "</div>" +
       "</div></div>" +
-      "<div class='panel'><div class='panel-h green'>Every message<span class='right' id='pondNum'>…</span></div><div class='panel-b'><div class='pondlist' id='pondlist'><div class='gmsg muted'>loading the pond…</div></div></div></div>" +
+      "<div class='panel'><div class='panel-h green'>" + T("Every message", "Every file") + "<span class='right' id='pondNum'>…</span></div><div class='panel-b'><div class='pondlist' id='pondlist'><div class='gmsg muted'>" + T("loading the pond…", "loading the pool…") + "</div></div></div></div>" +
     "</section>";
   }
 
@@ -788,19 +822,27 @@
   function buildSide() {
     var side = document.getElementById("side");
     var nav = ORDER.map(function (id) { var r = ROOMS[id]; return "<div class='navrow' data-room='" + id + "'><span class='ico'><img src='" + r.img + "' alt=''></span><b>" + esc(r.name) + "</b><small>" + r.posts.length + "</small></div>"; }).join("");
-    nav += "<div class='navrow pond-nav' data-pond='1'><span class='ico'><img src='assets/fish2.png' alt=''></span><b>The Koi Pond</b><small>live</small></div>";
+    nav += "<div class='navrow pond-nav' data-pond='1'><span class='ico'><img src='" + T("assets/fish2.png", "assets/re/rebecca-portrait.png") + "' alt=''></span><b>" + T("The Koi Pond", "The Character Pool") + "</b><small>live</small></div>";
     var tags = Object.keys(tagCounts).sort(function (a, b) { return tagCounts[b] - tagCounts[a]; }).slice(0, 12)
       .map(function (t) { return "<button data-tag='" + esc(t) + "'>" + esc(t) + "</button>"; }).join("");
     var peek = (ROOMS.trinkets.gallery || []).slice(0, 4).map(function (g, i) { return "<button data-relic='" + i + "'><img src='" + g.img + "' alt=''></button>"; }).join("");
+    var partner = isRE() ? gad("Partner", "<div class='partner'><div class='pt-face'><img src='assets/re/rebecca-portrait.png' alt='Rebecca Chambers'></div><div class='pt-info'><b>Rebecca Chambers</b><small>field medic &middot; S.T.A.R.S. Bravo</small><span class='pt-quote'>\"ill patch you up. just dont die on me.\"</span></div></div>") : "";
+    var weatherGad = isRE()
+      ? gad("Condition", "<div class='vitals'><div class='ecg'><svg viewBox='0 0 200 40' preserveAspectRatio='none'><polyline points='0,20 40,20 52,20 58,8 64,32 70,20 96,20 104,20 110,4 118,36 124,20 160,20 200,20'/></svg></div><div class='vit-state'>FINE</div></div>", true)
+      : gad("Weather", "<div class='wx'><div class='wx-orb sunny'><span class='wx-sun'></span></div><div><div class='wx-temp'>25°</div><div class='wx-meta'>Always sunny in my garden</div></div></div>", true);
+    var nowGad = isRE()
+      ? gad("Status", "<div class='statline'><span>condition</span><b>infected (mildly)</b></div><div class='statline'><span>armed with</span><b>a knife &amp; bad ideas</b></div><div class='statline'><span>objective</span><b>finish one project</b></div>")
+      : gad("Right now", "<div class='statline'><span>building</span><b>engram + 4 other tabs</b></div><div class='statline'><span>fuelled by</span><b>football &amp; dopamine</b></div><div class='statline'><span>mood</span><b>overwhelmed (lovingly)</b></div>");
     side.innerHTML =
-      gad("Navigate", nav) +
-      gad("Weather", "<div class='wx'><div class='wx-orb sunny'><span class='wx-sun'></span></div><div><div class='wx-temp'>25°</div><div class='wx-meta'>Always sunny in my garden</div></div></div>", true) +
-      gad("Right now", "<div class='statline'><span>building</span><b>engram + 4 other tabs</b></div><div class='statline'><span>fuelled by</span><b>football &amp; dopamine</b></div><div class='statline'><span>mood</span><b>overwhelmed (lovingly)</b></div>") +
-      gad("Visitors", "<div class='visitors'><div class='vglobe'><img src='assets/globe2.png' alt=''><span class='vpin' id='vpin' hidden></span></div><div class='vinfo'><div class='vcount'><b id='visitsNum'>-</b><small>visitors</small></div><div class='vloc' id='vloc'>locating you…</div></div></div>", true) +
-      gad("Tags", "<div class='tagcloud'>" + tags + "</div>") +
-      gad("This garden", "<div class='statline'><span>entries</span><b>" + allPosts.length + "</b></div><div class='statline'><span>rooms</span><b>" + ORDER.length + "</b></div><div class='statline'><span>koi in the pond</span><b id='koiCount'>-</b></div><div class='statline'><span>growing since</span><b>2024</b></div>", true) +
-      gad("From the cabinet", "<div class='peek'>" + peek + "</div>") +
-      gad("Guestbook", "<div class='gbook' id='gbookMini'><div class='gmsg muted'>opening the pond…</div></div><button class='gbtn' id='gbSign' type='button'><span>Sign the guestbook</span></button>");
+      gad(T("Navigate", "Locations"), nav) +
+      partner +
+      weatherGad +
+      nowGad +
+      gad(T("Visitors", "Survivors"), "<div class='visitors'><div class='vglobe'><img src='" + T("assets/globe2.png", "assets/re/umbrella.png") + "' alt=''><span class='vpin' id='vpin' hidden></span></div><div class='vinfo'><div class='vcount'><b id='visitsNum'>-</b><small>" + T("visitors", "online") + "</small></div><div class='vloc' id='vloc'>" + T("locating you…", "tracing signal…") + "</div></div></div>", true) +
+      gad(T("Tags", "Evidence"), "<div class='tagcloud'>" + tags + "</div>") +
+      gad(T("This garden", "Case file"), "<div class='statline'><span>" + T("entries", "files") + "</span><b>" + allPosts.length + "</b></div><div class='statline'><span>" + T("rooms", "locations") + "</span><b>" + ORDER.length + "</b></div><div class='statline'><span>" + T("koi in the pond", "in the pool") + "</span><b id='koiCount'>-</b></div><div class='statline'><span>" + T("growing since", "outbreak") + "</span><b>2024</b></div>", true) +
+      gad(T("From the cabinet", "Item box"), "<div class='peek'>" + peek + "</div>") +
+      gad(T("Guestbook", "Radio"), "<div class='gbook' id='gbookMini'><div class='gmsg muted'>" + T("opening the pond…", "opening a channel…") + "</div></div><button class='gbtn' id='gbSign' type='button'><span>" + T("Sign the guestbook", "Send a transmission") + "</span></button>");
 
     side.querySelectorAll(".navrow").forEach(function (el) { el.addEventListener("click", function () { go(el.dataset.pond ? "#/pond" : "#/" + el.dataset.room); }); });
     side.querySelectorAll(".tagcloud button").forEach(function (el) { el.addEventListener("click", function () { go("#/tag/" + encodeURIComponent(el.dataset.tag)); }); });
@@ -855,7 +897,7 @@
     var h = location.hash.replace(/^#\/?/, ""), app = document.getElementById("app");
     var html, title;
     if (h.indexOf("tag/") === 0) { var t = decodeURIComponent(h.slice(4)); current = null; html = renderTag(t); title = "#" + t; }
-    else if (h === "pond" || h.indexOf("pond/") === 0) { current = null; pondTarget = h.indexOf("pond/") === 0 ? decodeURIComponent(h.slice(5)) : null; html = renderPond(); title = "The Koi Pond"; }
+    else if (h === "pond" || h.indexOf("pond/") === 0) { current = null; pondTarget = h.indexOf("pond/") === 0 ? decodeURIComponent(h.slice(5)) : null; html = renderPond(); title = T("The Koi Pond", "The Character Pool"); }
     else if (ROOMS[h]) { current = h; html = renderRoom(h); title = ROOMS[h].name; }
     else { current = null; html = renderHome(); title = "The Garden"; }
     app.innerHTML = html; document.title = "vang · " + title;
@@ -863,7 +905,20 @@
     if (current && pendingPost && pendingPost.roomId === current) { var ps = app.querySelectorAll(".post"); var el = ps[pendingPost.i]; if (el) setTimeout(function () { el.scrollIntoView({ behavior: "smooth", block: "center" }); el.style.transition = "background .3s"; el.style.background = "rgba(116,198,157,.22)"; setTimeout(function () { el.style.background = ""; }, 1300); }, 360); pendingPost = null; }
     else root.scrollTo({ top: 0, behavior: "auto" });
   }
-  function route() { if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(paint); else paint(); }
+  var doorBusy = false;
+  function playDoor(done) {
+    var d = document.getElementById("re-door");
+    if (!d || matchMedia("(prefers-reduced-motion: reduce)").matches) { done(); return; }
+    doorBusy = true;
+    d.hidden = false; d.classList.remove("opening"); void d.offsetWidth; d.classList.add("closing");
+    setTimeout(function () { done(); }, 380);
+    setTimeout(function () { d.classList.add("opening"); }, 430);
+    setTimeout(function () { d.hidden = true; d.classList.remove("closing", "opening"); doorBusy = false; }, 1180);
+  }
+  function route() {
+    if (isRE()) { playDoor(paint); return; }
+    if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(paint); else paint();
+  }
 
   function runGate() {
     var gate = document.getElementById("gate"); if (!gate) return;
@@ -872,9 +927,31 @@
     requestAnimationFrame(function () { var b = gate.querySelector(".gate-bar i"); if (b) b.style.width = "100%"; });
     var done = false;
     function open() { if (done) return; done = true; try { sessionStorage.setItem("vx_entered", "1"); } catch (e) {} gate.classList.add("open"); setTimeout(function () { gate.classList.add("gone"); gate.setAttribute("aria-hidden", "true"); }, 1000); }
+    function pick(theme) {
+      try { sessionStorage.setItem("vx_entered", "1"); } catch (e) {}
+      if (theme === "re") {
+        try { localStorage.setItem("vx_theme", "re"); } catch (e) {}
+        document.documentElement.setAttribute("data-theme", "re");
+        var d = document.getElementById("re-door");
+        if (d && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          gate.classList.add("open");
+          d.hidden = false; void d.offsetWidth; d.classList.add("closing");
+          setTimeout(function () { d.classList.add("opening"); }, 520);
+          setTimeout(function () { location.reload(); }, 1150);
+          return;
+        }
+        location.reload(); return;
+      }
+      if (theme === THEME) { open(); return; }
+      try { localStorage.setItem("vx_theme", theme); } catch (e) {}
+      gate.classList.add("open"); location.reload();
+    }
+    var choices = gate.querySelectorAll(".gate-choice");
+    for (var i = 0; i < choices.length; i++) {
+      (function (btn) { btn.addEventListener("click", function () { pick(btn.getAttribute("data-pick")); }); })(choices[i]);
+      if (choices[i].getAttribute("data-pick") === THEME) choices[i].classList.add("current");
+    }
     document.getElementById("gate-skip").addEventListener("click", open);
-    gate.addEventListener("click", function (e) { if (e.target === gate) open(); });
-    setTimeout(open, 2600);
   }
 
   function startClock() {
@@ -890,6 +967,26 @@
     brand.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go("#/"); } });
     var sound = document.getElementById("sound");
     sound.addEventListener("click", function () { var on = root.Ambient ? root.Ambient.toggle() : false; sound.classList.toggle("on", on); sound.setAttribute("aria-pressed", String(on)); });
+    applyTheme();
+    var tsw = document.getElementById("theme-switch");
+    if (tsw) { tsw.querySelector(".ts-label").textContent = T("Resident Evil", "Frutiger Aero"); tsw.addEventListener("click", switchTheme); }
+    var plink = document.getElementById("pond-link"); if (plink) plink.lastChild.textContent = T("Koi Pond", "The Pool");
+    if (isRE()) {
+      var plogo = document.querySelector(".ph-logo"); if (plogo) plogo.src = "assets/re/umbrella-gold.png";
+      var gleaf = document.querySelector(".gate-leaf"); if (gleaf) gleaf.src = "assets/re/umbrella-gold.png";
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        var rootEl = document.documentElement;
+        root.addEventListener("pointermove", function (e) { rootEl.style.setProperty("--mx", e.clientX + "px"); rootEl.style.setProperty("--my", e.clientY + "px"); }, { passive: true });
+      }
+      var foot = document.querySelector(".portal-foot");
+      if (foot) {
+        var fb = foot.querySelectorAll(".badge");
+        if (fb[0]) fb[0].textContent = "best played in the dark";
+        if (fb[1]) fb[1].textContent = "Property of Umbrella Corp.";
+        var byB = foot.querySelector("span b");
+        if (byB && byB.parentNode) byB.parentNode.innerHTML = "made in raccoon city by <b>vang</b>";
+      }
+    }
     var search = document.getElementById("search");
     search.addEventListener("input", function () { query = search.value.trim().toLowerCase(); if (current) { go("#/"); setTimeout(applyFilter, 60); } else applyFilter(); });
 

@@ -483,3 +483,310 @@ body[data-phase="night"] #stars{ opacity:1; }
 .pond-banner{ padding:10px 14px; border-radius:12px; font-size:.86rem; color:var(--b-deep);
   background:linear-gradient(180deg, rgba(255,255,255,.72), rgba(144,224,239,.5)); border:1px solid rgba(255,255,255,.8); box-shadow:var(--sh-1), inset 0 1px 0 #fff; }
 .pond-banner b{ color:var(--b-blue); font-family:var(--fdisp); }
+
+/* ---- the gate world chooser (renders in whichever theme is live) ---- */
+.gate-choices{ display:flex; gap:16px; justify-content:center; margin:24px auto 6px; flex-wrap:wrap; }
+.gate-choice{ position:relative; cursor:pointer; width:204px; max-width:42vw; padding:17px 14px; border-radius:14px;
+  display:flex; flex-direction:column; gap:5px; align-items:center; transition:transform .18s var(--pop), box-shadow .18s, filter .18s; }
+.gate-choice .gc-name{ font-family:var(--fdisp); font-weight:700; font-size:1.2rem; letter-spacing:.5px; }
+.gate-choice .gc-sub{ font-size:.66rem; letter-spacing:2px; text-transform:uppercase; opacity:.85; }
+.gate-choice:hover{ transform:translateY(-3px) scale(1.04); }
+.gate-choice.ch-aero{ color:#0d3a2a; background:linear-gradient(180deg,#fff,var(--g-pale)); border:1px solid #fff; box-shadow:var(--sh-2), inset 0 1px 0 #fff; }
+.gate-choice.ch-aero:hover{ box-shadow:var(--sh-3), 0 0 20px rgba(116,198,157,.55); }
+.gate-choice.ch-aero .gc-name{ color:var(--g-forest); }
+.gate-choice.ch-re{ color:#e9d6cf; background:linear-gradient(180deg,#1c0f0f,#2a0c0c 58%,#0b0708); border:1px solid #6a1414;
+  box-shadow:0 12px 32px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,90,70,.22); font-family:"Special Elite",var(--fdisp); }
+.gate-choice.ch-re .gc-name{ color:#ff3b30; font-family:"Special Elite",serif; text-shadow:0 0 14px rgba(255,40,30,.65); letter-spacing:1px; }
+.gate-choice.ch-re .gc-sub{ color:#b98; }
+.gate-choice.ch-re:hover{ box-shadow:0 16px 42px rgba(130,0,0,.6), inset 0 0 0 1px rgba(255,60,40,.5); filter:brightness(1.12); }
+.gate-choice.current::after{ content:"current"; position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:.52rem;
+  letter-spacing:2px; text-transform:uppercase; padding:2px 9px; border-radius:999px; background:#000a; color:#fff; }
+
+/* ================= RESIDENT EVIL THEME ================= */
+.re-fx{ display:none; }
+html[data-theme="re"]{
+  --white:#f2ece2; --paper:#121313; --ink:#cdc7bb; --ink-soft:#9b9589; --ink-faint:rgba(205,199,187,.5);
+  --g-deep:#ece6da; --ink-blue:#8fce4d;
+  --fdisp:"Oswald","Segoe UI",sans-serif;
+  background:#070809;
+}
+/* body MUST stay transparent or its opaque fill paints over the fixed .re-bg (z-index -3) and the bg looks black */
+html[data-theme="re"] body{ background:transparent; color:var(--ink); }
+html[data-theme="re"] .bg, html[data-theme="re"] #sky, html[data-theme="re"] #floor, html[data-theme="re"] #motes{ display:none !important; }
+html[data-theme="re"] a{ color:#8fce4d; }
+html[data-theme="re"] ::selection{ background:rgba(190,20,20,.5); color:#fff; }
+html[data-theme="re"] ::-webkit-scrollbar-thumb{ background:linear-gradient(180deg,#7a1414,#2a0a0a); }
+html[data-theme="re"] ::-webkit-scrollbar-track{ background:#0d0d0d; }
+
+/* atmosphere */
+html[data-theme="re"] .re-fx{ display:block; }
+.re-bg{ position:fixed; inset:0; z-index:-3; background:url("../assets/re/main-bg.png") center/cover no-repeat; filter:brightness(1.04) contrast(1.06) saturate(1.08); }
+.re-bg-grad{ position:fixed; inset:0; z-index:-3; background:
+  linear-gradient(180deg, rgba(8,9,10,.14) 0%, rgba(8,9,10,0) 30%, rgba(6,7,8,.26) 78%, rgba(4,5,6,.72) 100%); }
+.re-fog{ position:fixed; inset:-25%; z-index:-2; opacity:.7; pointer-events:none;
+  background:radial-gradient(38% 30% at 22% 28%, rgba(96,128,80,.10), transparent 62%), radial-gradient(46% 38% at 80% 72%, rgba(140,36,30,.12), transparent 62%);
+  animation:refog 28s ease-in-out infinite alternate; }
+@keyframes refog{ from{ transform:translate3d(-2%,-1%,0) scale(1.05); } to{ transform:translate3d(3%,2%,0) scale(1.14); } }
+.re-umbrella{ position:fixed; right:-58px; bottom:-46px; z-index:-2; width:min(520px,46vw); height:min(520px,46vw);
+  background:url("../assets/re/umbrella.png") center/contain no-repeat; opacity:.06; filter:grayscale(1) brightness(2.2); mix-blend-mode:screen; pointer-events:none; }
+.re-prop{ position:fixed; z-index:-1; background-size:cover; background-position:center; border:3px solid #161111;
+  box-shadow:0 10px 26px #000b, 0 0 0 1px #000; opacity:.42; filter:brightness(.72) contrast(1.05) saturate(.9); pointer-events:none; }
+.re-typewriter{ left:16px; bottom:16px; width:150px; height:108px; transform:rotate(-3deg); background-image:url("../assets/re/typewriter.png"); }
+.re-herb{ right:18px; bottom:120px; width:92px; height:92px; transform:rotate(4deg); background-image:url("../assets/re/herb-green.png"); }
+.re-mansion{ left:20px; top:90px; width:150px; height:96px; transform:rotate(-4deg); background-image:url("../assets/re/mansion.png"); }
+@media (max-width:1180px){ .re-prop{ display:none; } }
+.re-raccoon{ position:fixed; right:-6px; top:84px; z-index:-2; width:min(360px,30vw); height:120px; pointer-events:none;
+  background:url("../assets/re/raccoon.png") right center/contain no-repeat; opacity:.22; filter:brightness(.9) drop-shadow(0 4px 10px #000); }
+@media (max-width:1180px){ .re-raccoon{ display:none; } }
+.re-grain{ position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:regrain .22s steps(2) infinite, reflick 7s linear infinite; }
+@keyframes regrain{ 0%{ background-position:0 0; } 100%{ background-position:36px -22px; } }
+@keyframes reflick{ 0%,94%,100%{ opacity:.05; } 95%{ opacity:.13; } 97%{ opacity:.02; } 98%{ opacity:.1; } }
+.re-scan{ position:fixed; inset:0; z-index:59; pointer-events:none; opacity:.5;
+  background:repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 1px, transparent 1px 3px); }
+.re-vig{ position:fixed; inset:0; z-index:58; pointer-events:none; box-shadow:inset 0 0 200px 40px rgba(0,0,0,.7), inset 0 0 60px 10px rgba(60,0,0,.25); }
+@media (prefers-reduced-motion:reduce){ .re-fog,.re-grain{ animation:none; } }
+
+/* header */
+html[data-theme="re"] .portal-head{ background:linear-gradient(180deg, rgba(18,10,10,.92), rgba(10,8,8,.82)); border-bottom:1px solid #5a1212; box-shadow:0 6px 22px #000a; }
+html[data-theme="re"] .ph-title{ color:#f2ece2; font-family:"Special Elite",var(--fdisp); }
+html[data-theme="re"] .ph-title small{ color:#c0392b; letter-spacing:3px; }
+html[data-theme="re"] .ph-logo{ filter:drop-shadow(0 0 9px rgba(196,150,46,.6)); animation:umbraglow 4s ease-in-out infinite; }
+@keyframes umbraglow{ 0%,100%{ filter:drop-shadow(0 0 7px rgba(196,150,46,.5)); } 50%{ filter:drop-shadow(0 0 14px rgba(220,40,30,.55)); } }
+html[data-theme="re"] .ph-clock{ color:#cbb; }
+html[data-theme="re"] .ph-clock b{ color:#ff3b30; }
+html[data-theme="re"] .searchbox{ background:#0c0d0d; border:1px solid #4a1414; }
+html[data-theme="re"] .searchbox input{ color:#dcd; }
+html[data-theme="re"] .sky-toggle{ display:none; }
+html[data-theme="re"] .theme-switch, html[data-theme="re"] .sound-toggle{ color:#e9d6cf; background:linear-gradient(180deg,#241010,#140a0a); border:1px solid #5a1414; }
+html[data-theme="re"] .pond-link{ background:linear-gradient(180deg,#3a0e0e,#1a0808); border:1px solid #7a1414; color:#ffd9d2; }
+html[data-theme="re"] .pond-link .pl-fish{ filter:hue-rotate(120deg) saturate(.5) brightness(.85); }
+
+/* the theme-switch button (both themes) */
+.theme-switch{ height:34px; cursor:pointer; display:flex; align-items:center; gap:7px; white-space:nowrap; font-family:var(--fdisp); font-weight:600; font-size:.74rem;
+  color:var(--g-deep); border-radius:999px; padding:0 12px; background:linear-gradient(180deg,#fff,var(--g-pale)); border:1px solid rgba(255,255,255,.8); box-shadow:var(--sh-1); transition:transform .16s var(--pop), filter .16s; }
+.theme-switch:hover{ transform:translateY(-1px) scale(1.04); filter:brightness(1.05); }
+.theme-switch .ts-ico{ width:14px; height:14px; flex:0 0 auto; border-radius:50%; background:conic-gradient(#74C69D, #023E8A, #b01818, #74C69D); box-shadow:inset 0 0 0 2px rgba(255,255,255,.5); }
+html[data-theme="re"] .theme-switch .ts-ico{ background:conic-gradient(#b01818,#3a0a0a,#7bbf3a,#b01818); box-shadow:inset 0 0 0 2px rgba(0,0,0,.4); }
+
+/* panels */
+html[data-theme="re"] .panel{ border-radius:6px; border:1px solid #3a1414; background:rgba(10,11,11,.55); box-shadow:0 14px 36px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,80,60,.08); }
+html[data-theme="re"] .panel-h{ color:#f3e9e2; font-family:"Special Elite",var(--fdisp); letter-spacing:1px; text-transform:uppercase;
+  background:linear-gradient(180deg,#3a0f0f,#1b0909) !important; border-bottom:1px solid #6a1616; box-shadow:inset 0 0 0 1px rgba(255,60,40,.08); }
+html[data-theme="re"] .panel-h .right{ color:#cf6a5a; }
+html[data-theme="re"] .panel-b{ background:linear-gradient(180deg, rgba(13,14,15,.58), rgba(8,9,10,.66)); color:var(--ink); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px); }
+html[data-theme="re"] .gad-b{ background:linear-gradient(180deg, rgba(14,15,15,.62), rgba(9,10,10,.7)); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px); }
+html[data-theme="re"] .panel{ background:transparent; }
+/* the long essay keeps an extra opaque backing so reading stays easy on the eyes */
+html[data-theme="re"] .post{ background:linear-gradient(180deg, rgba(9,10,11,.55), rgba(7,8,9,.62)); border-radius:6px; margin:6px 0; padding:16px 18px; }
+html[data-theme="re"] h1,html[data-theme="re"] h2,html[data-theme="re"] h3,html[data-theme="re"] h4{ color:#ece6da; }
+
+/* buttons + pills + nav + gadgets */
+html[data-theme="re"] .btn{ background:linear-gradient(180deg,#7a1717,#3a0c0c) !important; color:#ffe7e2; border:1px solid #9a2020; box-shadow:0 6px 16px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,120,100,.3); border-radius:6px; }
+html[data-theme="re"] .btn::before{ opacity:.25; }
+html[data-theme="re"] .btn:hover{ box-shadow:0 8px 22px rgba(140,0,0,.55), 0 0 18px rgba(200,30,20,.5); }
+html[data-theme="re"] .pill{ background:#1a0e0e; color:#d99; border:1px solid #6a1c1c; }
+html[data-theme="re"] .pill.sky{ background:#10160a; color:#9bd24f; border-color:#3c5a1c; }
+html[data-theme="re"] .navrow b{ color:#ddd6ca; font-family:var(--fdisp); text-transform:uppercase; letter-spacing:.5px; font-size:.8rem; }
+html[data-theme="re"] .navrow small{ color:#cf6a5a; }
+html[data-theme="re"] .navrow:hover{ background:rgba(120,20,20,.22); }
+html[data-theme="re"] .navrow.active{ background:linear-gradient(180deg, rgba(90,16,16,.5), rgba(30,8,8,.5)); box-shadow:inset 0 0 0 1px #6a1616; }
+html[data-theme="re"] .navrow .ico{ background:#0c0c0c; border:1px solid #3a1414; }
+html[data-theme="re"] .gad{ background:rgba(12,12,12,.6); border:1px solid #3a1414; box-shadow:0 10px 26px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,80,60,.08); }
+html[data-theme="re"] .gad-h, html[data-theme="re"] .gad.blue .gad-h{ color:#e7d2cc; font-family:"Special Elite",var(--fdisp);
+  background:linear-gradient(180deg,#2e0d0d,#160808) !important; border-bottom:1px solid #5a1616; }
+html[data-theme="re"] .gad-b{ background:linear-gradient(180deg, rgba(16,17,17,.82), rgba(9,10,10,.85)); }
+html[data-theme="re"] .gad .dot{ background:#ff2a1f; box-shadow:0 0 8px #ff2a1f; }
+html[data-theme="re"] .wx-orb.sunny{ background:radial-gradient(circle at 50% 26%, #3a4a2a, #1c2a14 60%, #0c1408 90%); }
+html[data-theme="re"] .wx-sun{ background:#9bd24f; box-shadow:0 0 14px #7bbf3a; }
+html[data-theme="re"] .wx-temp{ color:#ece6da; }
+html[data-theme="re"] .wx-meta{ color:#9a8; }
+html[data-theme="re"] .gad-b p{ color:var(--ink); }
+html[data-theme="re"] .gad-b a{ color:#8fce4d; }
+
+/* RE room icons are already RE art (typewriter, herb, umbrella...), keep them crisp */
+html[data-theme="re"] .navrow .ico img, html[data-theme="re"] .ex-tile .th img{ filter:drop-shadow(0 2px 4px #000a); object-fit:contain; }
+html[data-theme="re"] .room-banner .obj img{ filter:drop-shadow(0 6px 14px #000c); }
+
+/* footer */
+html[data-theme="re"] .portal-foot{ background:linear-gradient(180deg, rgba(14,8,8,.9), rgba(8,6,6,.85)); border-top:1px solid #4a1212; color:#a99; }
+html[data-theme="re"] .portal-foot .badge{ background:#1a0e0e; color:#caa; border:1px solid #5a1818; }
+html[data-theme="re"] .portal-foot a{ color:#8fce4d; }
+html[data-theme="re"] .portal-foot b{ color:#ff3b30; }
+
+/* room banner + welcome + tiles */
+html[data-theme="re"] .room-banner{ filter:none; }
+html[data-theme="re"] .room-banner h1{ color:#ff3b30; font-family:"Special Elite",var(--fdisp); text-shadow:0 0 16px rgba(190,20,20,.5); }
+html[data-theme="re"] .room-banner .tag{ color:#cf6a5a; }
+html[data-theme="re"] .room-banner .intro{ color:var(--ink); }
+html[data-theme="re"] .ribbon{ display:none; }
+html[data-theme="re"] .welcome h2{ color:#ff3b30; font-family:"Special Elite",var(--fdisp); }
+html[data-theme="re"] .ex-tile{ background:rgba(14,14,14,.6); border:1px solid #3a1414; }
+html[data-theme="re"] .ex-tile b{ color:#ddd6ca; }
+html[data-theme="re"] .ex-tile small{ color:#cf6a5a; }
+html[data-theme="re"] .feed-item:hover{ background:rgba(120,20,20,.16); }
+html[data-theme="re"] .back{ color:#cf6a5a; }
+html[data-theme="re"] .back img{ filter:hue-rotate(120deg) saturate(.4) brightness(.85); }
+
+/* the essay body in RE: keep it readable, make it feel like a case file */
+html[data-theme="re"] .post + .post{ border-top:1px dashed #4a1818; }
+html[data-theme="re"] .post h3{ color:#ff3b30; font-family:"Special Elite",var(--fdisp); }
+html[data-theme="re"] .post .date{ color:#9a8; }
+html[data-theme="re"] .post .body{ color:#d3cdc1; }
+html[data-theme="re"] .post .body p:first-of-type::first-letter{ color:#c0392b; }
+html[data-theme="re"] .post .body .secnum{ background:linear-gradient(120deg,#7a1414,#3a0c0c 60%,#120808); color:#ffe7e2; font-family:"Special Elite",var(--fdisp); border-left:4px solid #ff2a1f; border-radius:4px; box-shadow:0 8px 22px rgba(0,0,0,.5); text-shadow:0 0 10px rgba(255,40,30,.4); }
+html[data-theme="re"] .post .body blockquote{ background:rgba(120,20,20,.12); border-left:3px solid #b01818; color:#c6beb0; }
+html[data-theme="re"] .post .body blockquote.lead{ background:linear-gradient(180deg, rgba(120,20,20,.2), rgba(40,10,10,.3)); border-left-color:#ff2a1f; color:#f0d9d2; }
+html[data-theme="re"] .post .body blockquote.lead strong{ color:#ff5a4a; }
+html[data-theme="re"] .post .body h4.sec{ color:#ff6a5a; border-bottom:1px dashed #5a1c1c; }
+html[data-theme="re"] .post .body h5.sub{ color:#9bd24f; }
+html[data-theme="re"] .post .body strong{ color:#ff6a5a; }
+html[data-theme="re"] .post .body a{ color:#8fce4d; text-decoration-color:rgba(123,191,58,.4); }
+html[data-theme="re"] .post .body hr.sec-rule{ border-top:1px dashed #5a1c1c; }
+html[data-theme="re"] .post .body .fig img{ border:1px solid #3a1414; box-shadow:0 10px 26px rgba(0,0,0,.6); background:#0c0c0c; }
+html[data-theme="re"] .post .body .fig figcaption{ color:#9a8; }
+html[data-theme="re"] .post .body .tbl-wrap{ border:1px solid #3a1414; }
+html[data-theme="re"] .post .body .tbl{ background:#0e0f0f; }
+html[data-theme="re"] .post .body .tbl th{ background:linear-gradient(180deg,#2a0c0c,#170808); color:#ffcfc8; font-family:"Special Elite",var(--fdisp); border-bottom:1px solid #5a1818; }
+html[data-theme="re"] .post .body .tbl td{ border-bottom:1px solid #241414; border-right:1px solid #1c1010; color:#cdc7bb; }
+html[data-theme="re"] .post .body .tbl tbody tr:nth-child(even){ background:rgba(120,20,20,.07); }
+
+/* inputs */
+html[data-theme="re"] .gform input{ background:#0c0d0d; border:1px solid #4a1414; color:#dcd6ca; }
+html[data-theme="re"] .gform input::placeholder{ color:#7a6; opacity:.6; }
+html[data-theme="re"] .gform input:focus{ border-color:#8fce4d; box-shadow:0 0 0 2px rgba(123,191,58,.2); }
+html[data-theme="re"] .gform-mode{ color:#9a8; }
+html[data-theme="re"] .gform-mode.live{ color:#9bd24f; }
+html[data-theme="re"] .gshare{ background:linear-gradient(180deg, rgba(20,10,10,.7), rgba(40,12,12,.5)); border:1px solid #4a1616; }
+html[data-theme="re"] .gshare span{ color:#cbc3b6; }
+html[data-theme="re"] .pond-banner{ background:linear-gradient(180deg, rgba(40,12,12,.85), rgba(20,8,8,.8)); border:1px solid #6a1616; color:#e7d2cc; }
+html[data-theme="re"] .pond-banner b{ color:#ff5a4a; }
+html[data-theme="re"] .pondmsg{ border-bottom:1px solid #241414; }
+html[data-theme="re"] .pondmsg .pm-koi{ display:none; }
+html[data-theme="re"] .pond-lead{ color:#cbc3b6; }
+html[data-theme="re"] .pond-lead b{ color:#ff6a5a; }
+
+/* the character pool: an Umbrella containment tank */
+html[data-theme="re"] .lake{ background:linear-gradient(180deg,#0b1410 0%,#0a1a12 40%,#06140d 100%); box-shadow:inset 0 0 80px 18px rgba(0,0,0,.7), inset 0 2px 0 rgba(123,191,58,.18); border:1px solid #1c3a26; }
+html[data-theme="re"] .lake::after{ content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0 1px, transparent 1px 4px); opacity:.4; }
+html[data-theme="re"] .lake-shimmer{ background:radial-gradient(60% 40% at 50% 0%, rgba(123,191,58,.18), transparent 70%); mix-blend-mode:screen; }
+html[data-theme="re"] .lake-pads{ display:none; }
+html[data-theme="re"] .lake-cap{ color:#9bd24f; font-family:"Special Elite",var(--fdisp); background:rgba(6,12,8,.6); border:1px solid #1c3a26; }
+html[data-theme="re"] .lake-bubbles span{ background:radial-gradient(circle at 35% 30%, rgba(170,230,120,.7), rgba(80,150,50,.18)); box-shadow:0 0 6px rgba(123,191,58,.4); }
+html[data-theme="re"] .lake-ripple{ border-color:rgba(123,191,58,.6); }
+/* specimens: framed portraits, no koi hue-shift */
+html[data-theme="re"] .lk-fish{ filter:none !important; aspect-ratio:3/4; height:auto; object-fit:cover; object-position:center top;
+  border-radius:5px; border:1px solid #2a3a22; box-shadow:0 6px 14px rgba(0,0,0,.7), 0 0 0 2px rgba(0,0,0,.4); }
+html[data-theme="re"] .lkoi .lk-fish{ border:1px solid #7bbf3a; box-shadow:0 0 12px rgba(123,191,58,.4), 0 6px 14px rgba(0,0,0,.7); }
+html[data-theme="re"] .lkoi.host .lk-fish{ border-color:#ff3b30; box-shadow:0 0 14px rgba(255,40,30,.55), 0 6px 14px rgba(0,0,0,.7); }
+html[data-theme="re"] .lkoi.mine .lk-fish{ border-color:#ffd54a; box-shadow:0 0 14px rgba(255,200,60,.6), 0 6px 14px rgba(0,0,0,.7); }
+html[data-theme="re"] .lfish{ opacity:.55; }
+html[data-theme="re"] .lk-bubble{ background:rgba(10,16,10,.95); color:#dfe9d2; border:1px solid #3c5a1c; font-family:var(--fbody); }
+html[data-theme="re"] .lk-bubble b{ color:#9bd24f; }
+html[data-theme="re"] .lk-tag{ background:rgba(8,14,8,.85); color:#bcd29a; border:1px solid #2c3a1c; }
+
+/* gate in RE */
+html[data-theme="re"] #gate::before, html[data-theme="re"] #gate::after{ background:#070809; }
+html[data-theme="re"] #gate{ background:#060708; }
+html[data-theme="re"] .gate-title{ color:#ff3b30; font-family:"Special Elite",var(--fdisp); text-shadow:0 0 20px rgba(190,20,20,.6); }
+html[data-theme="re"] .gate-sub{ color:#b98; }
+html[data-theme="re"] .gate-leaf{ filter:hue-rotate(110deg) saturate(.4) brightness(.85) drop-shadow(0 0 10px rgba(190,20,20,.6)); }
+html[data-theme="re"] .gate-bar i{ background:linear-gradient(90deg,#7a1414,#ff2a1f); box-shadow:0 0 10px #ff2a1f; }
+html[data-theme="re"] .gate-skip{ color:#e9d6cf; background:linear-gradient(180deg,#241010,#120808); border:1px solid #6a1616; }
+
+/* ---- the iconic RE door loading transition (between rooms) ---- */
+#re-door{ position:fixed; inset:0; z-index:130; display:grid; place-items:center; background:#000; opacity:0; perspective:1100px; pointer-events:none; }
+#re-door[hidden]{ display:none; }
+#re-door.closing{ animation:doorBlackIn .34s ease forwards; }
+@keyframes doorBlackIn{ from{ opacity:0; } to{ opacity:1; } }
+.door-room{ width:min(340px,62vw); height:min(520px,76vh); transform-style:preserve-3d; }
+.door-leaf{ position:relative; width:100%; height:100%; transform-origin:left center; transform:rotateY(0deg);
+  background:linear-gradient(100deg,#190f08,#2c1c10 46%,#140c06); border:4px solid #090503;
+  box-shadow:inset 0 0 60px rgba(0,0,0,.85), inset 0 0 0 2px #3a2614, 0 30px 70px #000; }
+#re-door.opening .door-leaf{ animation:doorSwing .74s cubic-bezier(.45,.05,.25,1) forwards; }
+@keyframes doorSwing{ from{ transform:rotateY(0deg); } to{ transform:rotateY(-119deg); } }
+#re-door.opening{ animation:doorBlackOut .5s ease .44s forwards; }
+@keyframes doorBlackOut{ to{ opacity:0; } }
+.door-grain{ position:absolute; inset:8px; border-radius:2px; opacity:.5; box-shadow:inset 0 0 0 1px #4a3018;
+  background:repeating-linear-gradient(92deg, rgba(0,0,0,.28) 0 7px, rgba(86,56,28,.12) 7px 15px); }
+.door-umb{ position:absolute; left:50%; top:42%; transform:translate(-50%,-50%); width:50%; height:34%;
+  background:url("../assets/re/umbrella-gold.png") center/contain no-repeat; opacity:.92; filter:drop-shadow(0 0 14px rgba(0,0,0,.8)); }
+.door-knob{ position:absolute; right:10%; top:50%; transform:translateY(-50%); width:15px; height:15px; border-radius:50%;
+  background:radial-gradient(circle at 34% 30%, #e8d199, #6a4f22); box-shadow:0 0 10px #000, 0 0 0 3px #2a1b0c; }
+@media (prefers-reduced-motion:reduce){ #re-door{ display:none !important; } }
+
+/* ---- the cracked RESIDENT EVIL wordmark on the gate ---- */
+.gate-re-logo{ display:none; }
+html[data-theme="re"] .gate-leaf{ display:none; }
+html[data-theme="re"] .gate-re-logo{ display:block; width:min(430px,74vw); margin:6px auto 0;
+  filter:brightness(0) invert(.93) drop-shadow(0 0 18px rgba(205,22,18,.65)); animation:relogoflick 5s linear infinite; }
+@keyframes relogoflick{ 0%,93%,100%{ opacity:1; } 94%{ opacity:.5; } 96%{ opacity:.9; } 97%{ opacity:.35; } }
+html[data-theme="re"] .gate-title{ font-size:clamp(1.1rem,3vw,1.5rem); opacity:.8; letter-spacing:7px; margin-top:2px; }
+
+/* ---- flashlight: the world darkens away from your cursor ---- */
+.re-flashlight{ position:fixed; inset:0; z-index:57; pointer-events:none;
+  background:radial-gradient(460px circle at var(--mx,50%) var(--my,42%), transparent 0%, transparent 42%, rgba(2,3,4,.12) 70%, rgba(1,2,3,.32) 100%); }
+@media (prefers-reduced-motion:reduce){ .re-flashlight{ display:none; } }
+
+/* ---- a zombie lurching in from the dark ---- */
+.re-zombie{ position:fixed; left:-28px; bottom:-8px; z-index:-1; width:min(270px,21vw); height:62vh; pointer-events:none;
+  background:url("../assets/re/zombie.png") left bottom/contain no-repeat; opacity:.55;
+  filter:brightness(.52) contrast(1.12) drop-shadow(8px 0 22px rgba(0,0,0,.7));
+  -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 16%); mask-image:linear-gradient(180deg, transparent 0, #000 16%); }
+@media (max-width:1280px){ .re-zombie{ opacity:.3; } }
+@media (max-width:1024px){ .re-zombie{ display:none; } }
+
+/* ---- Rebecca, your companion, standing at the edge of every screen ---- */
+.re-rebecca{ position:fixed; right:-12px; bottom:0; z-index:-1; width:min(320px,25vw); height:76vh; pointer-events:none;
+  background:url("../assets/re/rebecca-full.png") right bottom/contain no-repeat;
+  filter:brightness(.82) contrast(1.05) drop-shadow(-10px 0 26px rgba(0,0,0,.7)); opacity:.9;
+  -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 13%); mask-image:linear-gradient(180deg, transparent 0, #000 13%); }
+@media (max-width:1480px){ .re-rebecca{ opacity:.45; } }
+@media (max-width:1180px){ .re-rebecca{ display:none; } }
+
+/* ---- Rebecca standing in the home briefing ---- */
+.welcome.re-welcome{ display:flex; align-items:stretch; gap:20px; }
+.welcome.re-welcome .w-text{ flex:1; }
+.w-becca{ position:relative; flex:0 0 auto; align-self:flex-end; display:flex; align-items:flex-end; }
+.w-becca img{ height:240px; width:auto; display:block; filter:drop-shadow(0 10px 22px rgba(0,0,0,.75)); }
+.w-becca .wb-tag{ position:absolute; left:50%; bottom:8px; transform:translateX(-50%); white-space:nowrap;
+  font-family:"Special Elite",var(--fdisp); font-size:.62rem; letter-spacing:1px; color:#9bd24f; background:rgba(6,12,8,.82); border:1px solid #2c4a1c; padding:2px 9px; border-radius:3px; }
+@media (max-width:720px){ .w-becca{ display:none; } }
+
+/* ---- the Partner panel (Rebecca, my favourite) ---- */
+html[data-theme="re"] .partner{ display:flex; gap:11px; align-items:center; }
+.partner .pt-face{ width:56px; height:56px; flex:0 0 auto; border-radius:50%; overflow:hidden; border:2px solid #7bbf3a;
+  box-shadow:0 0 13px rgba(123,191,58,.5), inset 0 0 0 2px #000; background:#0c140a; }
+.partner .pt-face img{ width:100%; height:100%; object-fit:cover; object-position:50% 16%; }
+.partner .pt-info{ display:flex; flex-direction:column; gap:1px; min-width:0; }
+.partner .pt-info b{ font-family:"Special Elite",var(--fdisp); color:#efdcd5; font-size:.92rem; }
+.partner .pt-info small{ color:#9bd24f; font-size:.65rem; letter-spacing:.4px; }
+.partner .pt-quote{ color:#b6aea1; font-size:.74rem; font-style:italic; margin-top:3px; line-height:1.3; }
+
+/* ---- the CONDITION vitals monitor (replaces weather) ---- */
+html[data-theme="re"] .vitals{ display:flex; align-items:center; gap:12px; }
+.vitals .ecg{ position:relative; flex:1; height:42px; border:1px solid #1c3a26; border-radius:5px; background:#06120b; overflow:hidden; box-shadow:inset 0 0 18px #000; }
+.vitals .ecg svg{ width:100%; height:100%; display:block; }
+.vitals .ecg polyline{ fill:none; stroke:#7bdc4a; stroke-width:2.4; filter:drop-shadow(0 0 4px #7bdc4a); }
+.vitals .ecg::after{ content:""; position:absolute; top:0; bottom:0; width:38%; left:-38%;
+  background:linear-gradient(90deg, transparent, rgba(123,220,74,.22) 62%, rgba(190,255,130,.55)); animation:ecgsweep 2.1s linear infinite; }
+@keyframes ecgsweep{ from{ left:-38%; } to{ left:100%; } }
+.vitals .vit-state{ font-family:"Special Elite",var(--fdisp); font-size:1.22rem; letter-spacing:1px; color:#7bdc4a;
+  text-shadow:0 0 10px rgba(123,191,58,.6); animation:vitpulse 2.4s ease-in-out infinite; }
+@keyframes vitpulse{ 0%,100%{ opacity:1; } 50%{ opacity:.5; } }
+@media (prefers-reduced-motion:reduce){ .vitals .ecg::after, .vitals .vit-state{ animation:none; } }
+
+/* ---- item box: cabinet + peek slots like the RE inventory ---- */
+html[data-theme="re"] .peek button, html[data-theme="re"] .relic{ background:#0c0d0c; border:1px solid #3a4a22; border-radius:3px; box-shadow:inset 0 0 10px #000; }
+html[data-theme="re"] .peek button:hover, html[data-theme="re"] .relic:hover{ border-color:#7bbf3a; box-shadow:0 0 10px rgba(123,191,58,.4), inset 0 0 10px #000; }
+html[data-theme="re"] .room-banner .obj{ background:linear-gradient(180deg,#1a0e0e,#0c0808); border:1px solid #4a1616; box-shadow:inset 0 0 24px #000; }
+html[data-theme="re"] .tagcloud button{ background:#160c0c; color:#c99; border:1px solid #4a1c1c; }
+html[data-theme="re"] .tagcloud button:hover{ border-color:#8fce4d; color:#9bd24f; }
+html[data-theme="re"] .statline span{ color:#9a8f82; }
+html[data-theme="re"] .statline b{ color:#d8d0c2; }
+html[data-theme="re"] .vloc, html[data-theme="re"] .vcount small{ color:#9a8; }
+html[data-theme="re"] .vcount b{ color:#9bd24f; }
+html[data-theme="re"] .gbtn{ background:linear-gradient(180deg,#3a0e0e,#1a0808); color:#ffd9d2; border:1px solid #7a1414; }
+html[data-theme="re"] .gmsg{ color:#c9c1b4; border-color:#241414; }
+html[data-theme="re"] .gmsg b{ color:#9bd24f; }

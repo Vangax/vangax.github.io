@@ -1,4 +1,3 @@
-
 const firebaseConfig = {
   apiKey: "AIzaSyAjYQayZjwnFqf2_7Vur161mR07gVzNCxk",
   authDomain: "the-koi-pond.firebaseapp.com",
@@ -11,7 +10,6 @@ const firebaseConfig = {
 
 const FIREBASE_VER = "10.12.2";
 const useFirebase = firebaseConfig.apiKey && !/^PASTE/.test(firebaseConfig.apiKey);
-
 
 const HOST_KOI = {
   id: "host-welcome", host: true, name: "vang",
@@ -45,7 +43,7 @@ function makeLocal() {
       var a = load(); a.push(msg); save(a); fan();
       return Promise.resolve(msg);
     },
-   
+
     registerVisit: function () {
       var counted = false; try { counted = sessionStorage.getItem("vx_counted") === "1"; } catch (e) {}
       var v = 1; try { v = parseInt(localStorage.getItem("vx_visits") || "0", 10) || 0; } catch (e) {}

@@ -1,4 +1,3 @@
-
 (function (root) {
   "use strict";
 
@@ -12,7 +11,7 @@
     try { localStorage.setItem("vx_theme", THEME); } catch (e) {}
     location.reload();
   }
-  
+
   var RE_ROSTER = ["leon", "rebecca", "chris", "jill", "ada", "claire", "krauser", "wesker", "sherry", "hunk", "carlos", "ashley", "barry"]
     .map(function (n) { return "assets/re/roster/" + n + ".png"; });
 
@@ -68,7 +67,7 @@
           "so thats me. devang. vang. 19, too many tabs, allergic to the last ten percent, hopelessly in love with football and steve smith and resident evil and the wii and physics and building things that probably shouldnt exist yet. starting things, finishing some, abandoning more, and every so often, rarely, gloriously, seeing one all the way through.",
           "if you sign the koi pond, your koi swims here next to mine. ill probably notice it at 2am mid hyperfocus and smile. welcome to the garden. make yourself at home, the bench is always free." ] } ] },
     world: { name: "The World", img: "assets/globe.png", accent: "blue", tag: "the serious stuff i cant stop thinking about.",
-      intro: "the wide-angle shot. biology, neurotech, general science, where tech is dragging us next, the things i actually lose sleep over. first up: a long investigation into a us biosecurity policy that was built over thirteen years and lived for exactly one day.",
+      intro: "the wide-angle shot. biology, biosecurity, climate, where tech is dragging us next, the things i actually lose sleep over. first up: a long investigation into a us biosecurity policy that was built over thirteen years and lived for exactly one day.",
       posts: [
         { title: "the policy that lived one day", date: "Jun 27, 2026", tags: ["biosecurity", "essay", "policy", "long read"], body: [
           { sec: "section 1: the rescinded policy" },
@@ -485,7 +484,6 @@
   };
   var ORDER = ["bench", "world", "travels", "dreams", "city", "trinkets"];
 
-
   var RE_ROOMS = {
     bench:    { name: "Save Room",       img: "assets/re/typewriter.png",      tag: "ink ribbon loaded. the long save file on me.",
       intro: "the save room. that one calm track, the typewriter, the green light under the door. nothing can reach you in here. this is where the long file on who i am gets written down. take a green herb, sit a while." },
@@ -601,6 +599,14 @@
     });
   }
   function showNote(el, text, bad) { if (!el) return; el.textContent = text; el.classList.toggle("bad", !!bad); el.hidden = false; }
+
+  function reSaveToast(name) {
+    var t = document.getElementById("re-save-toast");
+    if (!t) { t = document.createElement("div"); t.id = "re-save-toast"; t.setAttribute("aria-hidden", "true"); document.body.appendChild(t); }
+    t.innerHTML = "<span class='rst-ico'></span><span class='rst-txt'><b>SPECIMEN LOGGED</b>" + esc(name || "survivor") + " joined the pool</span>";
+    t.classList.remove("show"); void t.offsetWidth; t.classList.add("show");
+    clearTimeout(reSaveToast._t); reSaveToast._t = setTimeout(function () { t.classList.remove("show"); }, 2800);
+  }
   function submitSign(e) {
     e.preventDefault();
     var nameEl = document.getElementById("gName"), msgEl = document.getElementById("gMsg"), note = document.getElementById("gNote"), btn = e.target.querySelector("button");
@@ -614,7 +620,8 @@
     cloud.addMessage(nameEl.value, msg).then(function (saved) {
       try { localStorage.setItem("vx_lastsign", String(Date.now())); } catch (err) {}
       markMine(saved.id); lastSigned = { id: saved.id, name: saved.name }; pendingSpot = saved.id;
-      msgEl.value = ""; showNote(note, "your koi is now swimming above, labelled (you). copy its link below to share it.", false);
+      msgEl.value = ""; showNote(note, T("your koi is now swimming above, labelled (you). copy its link below to share it.", "specimen logged. its drifting in the tank above, tagged (you). copy its link below to share it."), false);
+      if (isRE()) reSaveToast(saved.name);
       if (root.Scene) { if (!spawnedKoi[saved.id]) { spawnedKoi[saved.id] = 1; root.Scene.addKoi(saved); } root.Scene.celebrate(); }
       var sh = document.getElementById("gShareRow"); if (sh) sh.hidden = false;
       lakeIds = "*force*"; refreshLakeIfOpen();
@@ -635,7 +642,7 @@
     var swimmers = [];
 
     function place(k) { k.el.style.transform = "translate(" + (k.cx - k.size / 2) + "px," + (k.cy - k.size / 2) + "px)"; }
-    // swim to a random spot, then do it again, forever. attention span of, well, me.
+
     function leg(k) {
       var w = layer.clientWidth || W, h = layer.clientHeight || H, pad = k.size * 0.7;
       var nx = rand(pad, Math.max(pad + 1, w - pad)), ny = rand(pad, Math.max(pad + 1, h - pad));
@@ -667,7 +674,6 @@
       swimmers.push(k);
     });
 
-    // a few extra fish so the pond never looks lonely (deeply relatable)
     var FISH = isRE() ? RE_ROSTER : ["assets/fish1.png", "assets/fish2.png", "assets/fish3.png", "assets/fish4.png", "assets/fish6.png"];
     var deco = isRE() ? Math.max(3, Math.min(6, Math.round(W / 170))) : Math.max(6, Math.min(11, Math.round(W / 95)));
     for (var i = 0; i < deco; i++) {
@@ -902,7 +908,7 @@
     else { current = null; html = renderHome(); title = "The Garden"; }
     app.innerHTML = html; document.title = "vang · " + title;
     syncSideActive(); enhance(app);
-    if (current && pendingPost && pendingPost.roomId === current) { var ps = app.querySelectorAll(".post"); var el = ps[pendingPost.i]; if (el) setTimeout(function () { el.scrollIntoView({ behavior: "smooth", block: "center" }); el.style.transition = "background .3s"; el.style.background = "rgba(116,198,157,.22)"; setTimeout(function () { el.style.background = ""; }, 1300); }, 360); pendingPost = null; }
+    if (current && pendingPost && pendingPost.roomId === current) { var ps = app.querySelectorAll(".post"); var el = ps[pendingPost.i]; if (el) setTimeout(function () { var y = el.getBoundingClientRect().top + (root.pageYOffset || 0) - 70; root.scrollTo({ top: Math.max(0, y), behavior: "smooth" }); el.style.transition = "background .3s"; el.style.background = isRE() ? "rgba(190,30,24,.2)" : "rgba(116,198,157,.22)"; setTimeout(function () { el.style.background = ""; }, 1300); }, 360); pendingPost = null; }
     else root.scrollTo({ top: 0, behavior: "auto" });
   }
   var doorBusy = false;

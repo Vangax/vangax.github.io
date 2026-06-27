@@ -1,4 +1,3 @@
-
 (function (root) {
   "use strict";
   var A = { on: false, ctx: null, master: null, _nodes: [], _dropTimer: null, noise: null };
@@ -18,7 +17,6 @@
   }
   function now() { return A.ctx.currentTime; }
 
-  // no audio files anywhere. this is just math pretending to be a forest.
   function startBed() {
     if (!A.ctx || A._nodes.length) return; var t = now();
     var s = A.ctx.createBufferSource(), lp = A.ctx.createBiquadFilter(), wg = A.ctx.createGain();
@@ -58,7 +56,7 @@
     else { A.master.gain.setTargetAtTime(0, now(), 0.5); clearTimeout(A._dropTimer); }
     return A.on;
   };
-  A.tap = function () { if (A.on) drop(0.22); };   // soft cue on navigation
+  A.tap = function () { if (A.on) drop(0.22); };
 
   root.Ambient = A;
 })(window);

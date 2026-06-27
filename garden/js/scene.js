@@ -1,4 +1,3 @@
-
 (function (root) {
   "use strict";
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -44,7 +43,7 @@
     requestAnimationFrame(frame);
   }
 
-  function crosser(el, opts) {  
+  function crosser(el, opts) {
     function run() {
       var vw = root.innerWidth, vh = root.innerHeight;
       var ltr = Math.random() < .5, dir = ltr ? 1 : -1;
@@ -60,7 +59,7 @@
     }
     if (!reduced) run(); else el.style.transform = "translate(" + (root.innerWidth * .6) + "px," + (root.innerHeight * .3) + "px)";
   }
-  function wanderer(el, dur) {   // butterflies: roam to random points
+  function wanderer(el, dur) {
     function run() {
       var vw = root.innerWidth, vh = root.innerHeight, fr = [], n = 7;
       for (var i = 0; i <= n; i++) fr.push({ transform: "translate(" + rand(30, vw - 70) + "px," + rand(vh * .12, vh * .8) + "px) rotate(" + rand(-16, 16) + "deg) scaleX(" + (Math.random() < .5 ? 1 : -1) + ")", offset: i / n });
@@ -129,7 +128,7 @@
     var n = reduced ? 4 : 9;
     for (var i = 0; i < n; i++) {
       var t = img("tree", pick(trees), floor);
-      var depth = Math.random();                  
+      var depth = Math.random();
       var hgt = 70 + depth * 120;
       t.style.height = hgt + "px"; t.style.left = (i / (n - 1) * 100 + rand(-6, 6)) + "%";
       t.style.opacity = (.55 + depth * .45).toFixed(2);
@@ -152,7 +151,7 @@
   }
 
   var bubbleSrc = ["assets/bubble1.png", "assets/bubble2.png", "assets/bubble3.png", "assets/bubble4.png"], liveBubbles = 0;
-  // bubblyy
+
   function popBubble(x, y) {
     if (reduced || liveBubbles > 8) return; liveBubbles++;
     var b = img("clickbub", pick(bubbleSrc)); var s = rand(26, 64);
@@ -202,7 +201,7 @@
     return wrap;
   }
 
-  var phaseOverride = null;              
+  var phaseOverride = null;
   try { phaseOverride = localStorage.getItem("vx_phase") || null; } catch (e) {}
   function autoPhase() { var h = new Date().getHours(); return (h >= 5 && h < 8) ? "dawn" : (h >= 8 && h < 17) ? "day" : (h >= 17 && h < 20) ? "dusk" : "night"; }
   function effectivePhase() { return phaseOverride || autoPhase(); }
@@ -215,7 +214,6 @@
     applyPhase(); setInterval(function () { if (!phaseOverride) applyPhase(); }, 300000);
   }
 
-  // leave the page alone for ~28s and the bubbles come out. windows 7 would be proud.
   function idleBubble() {
     var b = img("idlebub", pick(bubbleSrc)); var s = rand(70, 160), vh = root.innerHeight;
     b.style.width = s + "px"; b.style.left = rand(0, root.innerWidth - s) + "px"; b.style.top = (vh + s) + "px";
@@ -236,7 +234,7 @@
   }
 
   function init() {
-    if (document.documentElement.getAttribute("data-theme") === "re") return; // RE world has its own atmosphere, no aero scene
+    if (document.documentElement.getAttribute("data-theme") === "re") return;
     cv = document.getElementById("motes"); if (cv) { ctx = cv.getContext("2d"); resize(); root.addEventListener("resize", resize); for (var i = 0; i < (reduced ? 12 : 40); i++) motes.push(new Mote(true)); requestAnimationFrame(frame); }
     root.addEventListener("pointermove", function (e) {
       pointer.x = e.clientX; pointer.y = e.clientY;

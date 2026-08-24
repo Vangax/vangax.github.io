@@ -160,6 +160,7 @@
     setTimeout(function () {
       PLT.done();
       body.dataset.stage = "face";
+      setURL("pyramid");
       MON.arrive(reduced ? 1 : 2200).then(function () {
         setStage("face");
         busy = false;
@@ -197,6 +198,7 @@
       busy = true;
       closeReader();
       wash(1300, 0.85);
+      setURL("pyramid");
       setTimeout(function () {
         MON.toFace(1300).then(function () {
           setStage("face");
@@ -208,6 +210,7 @@
       wash(1900, 0.95);
       MON.setMode("moving");
       MON.toGround(reduced ? 1 : 1100);
+      setURL("");
       setTimeout(function () {
         PLT.back();
         setStage("boot");
@@ -264,8 +267,43 @@
     try { localStorage.setItem("dg_sz", String(z)); } catch (e) {}
   }
 
+  function linkFor(item) {
+    return location.origin + location.pathname + location.search + "#/" + item.slug;
+  }
+  function setURL(hash) {
+    try {
+      history.replaceState(null, "",
+        location.pathname + location.search + (hash ? "#/" + hash : ""));
+    } catch (e) {}
+  }
+
+  function copyLink() {
+    if (!open) return;
+    var url = linkFor(open);
+    var btn = doc.getElementById("rdLink");
+    var lab = doc.getElementById("rdLinkT");
+    function done(ok) {
+      if (!btn) return;
+      btn.classList.toggle("done", ok);
+      if (lab) lab.textContent = ok ? "copied" : "press ctrl+c";
+      clearTimeout(copyLink._t);
+      copyLink._t = setTimeout(function () {
+        btn.classList.remove("done");
+        if (lab) lab.textContent = "copy link";
+      }, 2400);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function () { done(true); },
+                                             function () { prompt("copy this link:", url); done(false); });
+    } else {
+      prompt("copy this link:", url);
+      done(false);
+    }
+  }
+
   function openReader(item) {
     open = item;
+    setURL(item.slug);
     doc.getElementById("rdCell").textContent = item._cmp;
     doc.getElementById("rdRule").textContent = item.rule;
     doc.getElementById("rdKick").textContent = "compartment " + item._cmp.slice(4) + " · chapter " + item.roman;
@@ -532,6 +570,7 @@
 
     elBack.addEventListener("click", pullOut);
     doc.getElementById("rdClose").addEventListener("click", pullOut);
+    doc.getElementById("rdLink").addEventListener("click", copyLink);
 
     doc.querySelectorAll(".rd-size button").forEach(function (b) {
       b.addEventListener("click", function () {
@@ -585,7 +624,6 @@
     });
 
     var h = location.hash.replace(/^#\/?/, "");
-    if (h) { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} }
     if (h) {
       var target = CH.filter(function (c) { return c.slug === h; })[0];
       setTimeout(function () {

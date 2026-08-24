@@ -176,6 +176,13 @@ body:not([data-stage="boot"]) .lede{opacity:0;transform:translateY(14px)}
 .rd-size button:nth-child(2){font-size:13px}
 .rd-size button:nth-child(3){font-size:16px}
 .rd-size button:hover{background:var(--jade);color:#070C14}
+.rd-link{display:inline-flex;align-items:center;gap:7px;height:24px;padding:0 10px;
+  border:1px solid rgba(196,220,252,.28);color:var(--hud);
+  font-family:var(--f-mo);font-size:9px;letter-spacing:.2em;text-transform:uppercase;transition:.15s}
+.rd-link svg{width:14px;height:14px;flex:none}
+.rd-link:hover{border-color:var(--jade);color:var(--jade-hi);background:rgba(196,220,252,.12)}
+.rd-link.done{border-color:var(--jade);color:#04100F;background:var(--jade)}
+@media(max-width:760px){.rd-link span{display:none}.rd-link{padding:0 8px}}
 .rd-x{width:28px;height:26px;font-size:13px;color:var(--hud);transition:.15s}
 .rd-x:hover{background:var(--rose);color:#fff}
 @media(max-width:620px){.rd-rule,.rd-meta{display:none}}

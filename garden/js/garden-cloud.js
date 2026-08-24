@@ -11,9 +11,9 @@ const firebaseConfig = {
 const FIREBASE_VER = "10.12.2";
 const useFirebase = firebaseConfig.apiKey && !/^PASTE/.test(firebaseConfig.apiKey);
 
-const HOST_KOI = {
+const HOST_NODE = {
   id: "host-welcome", host: true, name: "vang",
-  message: "welcome to my pond. leave a message and your koi joins the garden.",
+  message: "you are on my node. leave a trace and yours stays lit next to mine.",
   createdAt: 0
 };
 
@@ -70,7 +70,7 @@ async function makeFirebase() {
       return fs.onSnapshot(q, function (snap) {
         var arr = snap.docs.map(function (d) { var x = d.data(); return { id: d.id, name: x.name, message: x.message, createdAt: toMs(x.createdAt) }; });
         cb(arr);
-      }, function (err) { console.warn("guestbook listen failed:", err); cb([]); });
+      }, function (err) { console.warn("[garden] lattice listen failed:", err); cb([]); });
     },
     addMessage: function (name, message) {
       var n = clean(name, 40) || "anonymous", m = clean(message, 280);
@@ -109,13 +109,14 @@ function locateVisitor() {
   var cloud;
   if (useFirebase) {
     try { cloud = await makeFirebase(); }
-    catch (e) { console.warn("Firebase init failed, using local mode.", e); cloud = makeLocal(); }
+    catch (e) { console.warn("[garden] firebase unreachable, falling back to this device only.", e); cloud = makeLocal(); }
   } else {
     cloud = makeLocal();
   }
-  cloud.HOST_KOI = HOST_KOI;
+  cloud.HOST_NODE = HOST_NODE;
+  cloud.HOST_KOI = HOST_NODE;
   cloud.locate = locateVisitor;
   window.GardenCloud = cloud;
   emit("gardencloud-ready", cloud);
-  console.info("data layer ready, mode = " + cloud.mode);
+  console.info("[garden] link layer up, mode = " + cloud.mode);
 })();

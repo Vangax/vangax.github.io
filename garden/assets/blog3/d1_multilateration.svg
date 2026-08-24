@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" width="720" height="360" font-family="ui-sans-serif,system-ui,sans-serif">
+<defs>
+<radialGradient id="g1"><stop offset="0" stop-color="#2a78d6" stop-opacity=".38"/><stop offset="1" stop-color="#2a78d6" stop-opacity="0"/></radialGradient>
+<radialGradient id="g2"><stop offset="0" stop-color="#eb6834" stop-opacity=".38"/><stop offset="1" stop-color="#eb6834" stop-opacity="0"/></radialGradient>
+<radialGradient id="g3"><stop offset="0" stop-color="#1baf7a" stop-opacity=".38"/><stop offset="1" stop-color="#1baf7a" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="720" height="360" fill="#fcfcfb"/>
+<text x="24" y="34" font-size="16" font-weight="600" fill="#1a1a19">Molecular multilateration: position from a ratio of signals</text>
+<rect x="70" y="58" width="420" height="266" rx="14" fill="none" stroke="#d8d7d1" stroke-width="1.5"/>
+<text x="80" y="78" font-size="11" fill="#6b6a63">brain tissue</text>
+<circle cx="140" cy="130" r="118" fill="url(#g1)"/><circle cx="410" cy="120" r="118" fill="url(#g2)"/><circle cx="265" cy="292" r="118" fill="url(#g3)"/>
+<g stroke="#9b9a92" stroke-width="1.2" stroke-dasharray="4 4">
+<line x1="140" y1="130" x2="272" y2="196"/><line x1="410" y1="120" x2="272" y2="196"/><line x1="265" y1="292" x2="272" y2="196"/></g>
+<g font-size="11" fill="#1a1a19">
+<circle cx="140" cy="130" r="9" fill="#2a78d6"/><text x="120" y="112" fill="#2a78d6" font-weight="600">beacon A</text>
+<circle cx="410" cy="120" r="9" fill="#eb6834"/><text x="392" y="102" fill="#eb6834" font-weight="600">beacon B</text>
+<circle cx="265" cy="292" r="9" fill="#1baf7a"/><text x="246" y="320" fill="#1baf7a" font-weight="600">beacon C</text>
+</g>
+<circle cx="272" cy="196" r="13" fill="#fcfcfb" stroke="#1a1a19" stroke-width="2.4"/>
+<circle cx="272" cy="196" r="5" fill="#1a1a19"/>
+<text x="292" y="192" font-size="12" font-weight="600" fill="#1a1a19">one neuron</text>
+<text x="292" y="208" font-size="10.5" fill="#6b6a63">soaks up all three</text>
+<g transform="translate(520,86)">
+<text x="0" y="0" font-size="12" font-weight="600" fill="#1a1a19">what you sequence</text>
+<g font-size="11">
+<rect x="0" y="16" width="96" height="17" rx="3" fill="#2a78d6" opacity=".85"/><text x="104" y="29" fill="#6b6a63">A: 5,100</text>
+<rect x="0" y="41" width="44" height="17" rx="3" fill="#eb6834" opacity=".85"/><text x="104" y="54" fill="#6b6a63">B: 2,350</text>
+<rect x="0" y="66" width="49" height="17" rx="3" fill="#1baf7a" opacity=".85"/><text x="104" y="79" fill="#6b6a63">C: 2,550</text>
+</g>
+<line x1="0" y1="104" x2="168" y2="104" stroke="#d8d7d1" stroke-width="1.4"/>
+<text x="0" y="126" font-size="11.5" fill="#1a1a19" font-weight="600">The ratio is the address.</text>
+<text x="0" y="145" font-size="10.5" fill="#6b6a63">Not how much — how much</text>
+<text x="0" y="160" font-size="10.5" fill="#6b6a63">of each, relative to the rest.</text>
+<text x="0" y="188" font-size="10.5" fill="#6b6a63">Move the neuron and the</text>
+<text x="0" y="203" font-size="10.5" fill="#6b6a63">three bars re-balance in a</text>
+<text x="0" y="218" font-size="10.5" fill="#6b6a63">way only one spot can give.</text>
+</g>
+</svg>

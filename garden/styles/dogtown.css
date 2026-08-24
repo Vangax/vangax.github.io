@@ -352,3 +352,50 @@ body[data-stage="read"] .scan{opacity:0;pointer-events:none}
   border-bottom:1px solid rgba(196,220,252,.12)}
 .ix-list button:last-child{border-bottom:0}
 .ix-list button:hover{background:var(--jade);color:#07101a}
+
+@media (max-width:760px){
+  :root{--pad:12px}
+
+  .hud-tl,.hud-tr{gap:8px}
+  .hb{min-width:0;padding-left:9px}
+  .hb.r{padding-right:9px}
+  .hb-k{font-size:8px;letter-spacing:.2em}
+  .hb-v{font-size:15px}
+  .hb-v.sm{font-size:11px;letter-spacing:.1em}
+  .hb-s{font-size:8px;letter-spacing:.1em}
+
+  .lede{bottom:96px;padding:0 14px}
+  .lede-hint{font-size:10px;letter-spacing:.18em;gap:9px;
+    max-width:100%;text-align:center;line-height:1.5}
+  .ring{width:7px;height:7px}
+
+  .scan{left:12px;right:12px;width:auto;max-width:none}
+  .scan input{width:100%}
+  .back{padding:8px 12px;font-size:9px;letter-spacing:.16em}
+  .probe{max-width:calc(100vw - 24px);padding:9px 12px}
+  .pr-n{font-size:20px}
+  .pr-b b{font-size:13px}
+  .pr-b i{font-size:12px;max-width:none}
+
+  .reader{padding:0}
+  .rd-sheet{width:100%;height:100%;max-height:none;border:0}
+  .rd-sheet::before{display:none}
+  .rd-bar{gap:8px;padding:9px 10px}
+  .rd-page{padding:22px 16px 56px}
+  .rd-body{font-size:calc(15.5px * var(--sz))}
+  #rdTitle{font-size:calc(26px * var(--sz))}
+}
+
+@media (max-width:420px){
+  .lede-hint{font-size:9px;letter-spacing:.14em}
+  .rd-rule{display:none}
+}
+
+/* a finger is not a mouse: give the controls a real target */
+@media (pointer:coarse){
+  .rd-size button{width:38px;height:34px}
+  .rd-x{width:38px;height:34px}
+  .rd-link{height:34px;padding:0 12px}
+  .back{padding:11px 15px}
+  #stage,#plate{touch-action:manipulation}
+}

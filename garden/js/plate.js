@@ -22,10 +22,23 @@
     var vw = root.innerWidth, vh = root.innerHeight;
     var s = Math.max(vw / natural.w, vh / natural.h);
     var w = natural.w * s, h = natural.h * s;
+    var cxf = 0, cyf = 0;
+    SHAPE.forEach(function (q) { cxf += q[0]; cyf += q[1]; });
+    cxf /= SHAPE.length; cyf /= SHAPE.length;
+
+    var left = (vw - w) / 2, top = (vh - h) / 2;
+    if (w > vw) {
+      var want = vw * 0.5 - cxf * w;
+      left = Math.max(vw - w, Math.min(0, left + (want - left) * 0.85));
+    }
+    if (h > vh) {
+      var wantY = vh * 0.46 - cyf * h;
+      top = Math.max(vh - h, Math.min(0, top + (wantY - top) * 0.85));
+    }
     elFit.style.width = w + "px";
     elFit.style.height = h + "px";
-    elFit.style.left = ((vw - w) / 2) + "px";
-    elFit.style.top = ((vh - h) / 2) + "px";
+    elFit.style.left = left + "px";
+    elFit.style.top = top + "px";
 
     var sx = 0, sy = 0;
     SHAPE.forEach(function (q) { sx += q[0]; sy += q[1]; });

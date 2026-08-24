@@ -545,11 +545,13 @@
         if (PLT.hit(e.clientX, e.clientY)) { body.style.cursor = ""; enterPyramid(); }
       } else if (stage === "face") {
         if (e.target.closest(".reader") || e.target.closest(".hud")) return;
-        if (MON.beamHot()) { enterBeam(MON.beamItem()); return; }
-        var cell = MON.hovered();
+        var cell = MON.pickAt(e.clientX, e.clientY) || MON.hovered();
         if (cell) {
           var item = MON.contentAt(cell);
-          if (item) enterCell(item);
+          if (item) { enterCell(item); return; }
+        }
+        if (MON.beamAt(e.clientX, e.clientY) || MON.beamHot()) {
+          enterBeam(MON.beamItem());
         }
       }
     });

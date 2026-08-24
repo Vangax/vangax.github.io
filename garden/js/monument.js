@@ -2,6 +2,17 @@
   "use strict";
 
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var coarse = matchMedia("(pointer: coarse)").matches;
+  var smallScreen = Math.min(screen.width, screen.height) < 820;
+  var fewCores = (navigator.hardwareConcurrency || 8) <= 4;
+  var LOW = coarse || smallScreen || fewCores;
+
+  var Q = LOW
+    ? { dpr: 1.25, bloom: [[6, 0.95], [26, 0.72]], wide: false, mirror: false,
+        rays: 0, motes: 26, cull: true, floor: 12 }
+    : { dpr: 2, bloom: [[3, 0.95], [11, 0.85], [30, 0.70], [78, 0.55]], wide: true,
+        mirror: true, rays: 22, motes: 90, cull: false, floor: 22 };
   var TAU = Math.PI * 2;
 
   function V(x, y, z) { return { x: x, y: y, z: z }; }
@@ -111,21 +122,42 @@
   }
 
   var bg = new Image(), bgOK = false;
-  bg.onload = function () { bgOK = true; };
+  bg.onload = function () { bgOK = true; bakePlate(); };
   bg.src = "assets/blackwall.jpg";
 
+  var plate = null;
+
+  function bakePlate() {
+    plate = null;
+    if (!bgOK || !bg.naturalWidth || !W || !H) return;
+    var pad = 60;
+    var c = document.createElement("canvas");
+    c.width = Math.max(1, Math.round(W + pad * 2));
+    c.height = Math.max(1, Math.round(H + pad * 2));
+    var g = c.getContext("2d");
+    var s = Math.max(c.width / bg.naturalWidth, c.height / bg.naturalHeight) * 1.10;
+    var dw = bg.naturalWidth * s, dh = bg.naturalHeight * s;
+    try { g.filter = "blur(7px) saturate(1.25) brightness(.72)"; } catch (e) {}
+    g.drawImage(bg, (c.width - dw) / 2, (c.height - dh) / 2, dw, dh);
+    g.filter = "none";
+    g.globalCompositeOperation = "lighter";
+    g.fillStyle = "rgba(96,150,178,.20)";
+    g.fillRect(0, 0, c.width, c.height);
+    plate = { cv: c, pad: pad };
+  }
+
   function drawBackplate(g, el) {
-    if (bgOK && bg.naturalWidth) {
-      var drift = 1.10;
-      var s = Math.max(W / bg.naturalWidth, H / bg.naturalHeight) * drift;
-      var dw = bg.naturalWidth * s, dh = bg.naturalHeight * s;
+    if (plate) {
       var m = P(V(0, Hh * 0.4, 0));
       var px = m ? (m.x - W * 0.5) * 0.06 : 0;
       var py = m ? (m.y - H * 0.5) * 0.04 : 0;
-      g.save();
-      try { g.filter = "blur(7px) saturate(1.25) brightness(.72)"; } catch (e) {}
-      g.drawImage(bg, (W - dw) / 2 - px - 14, (H - dh) / 2 - py - 14, dw + 28, dh + 28);
-      g.restore();
+      g.drawImage(plate.cv, -plate.pad - px, -plate.pad - py);
+      return;
+    }
+    if (bgOK && bg.naturalWidth) {
+      var s2 = Math.max(W / bg.naturalWidth, H / bg.naturalHeight) * 1.10;
+      g.drawImage(bg, (W - bg.naturalWidth * s2) / 2, (H - bg.naturalHeight * s2) / 2,
+                  bg.naturalWidth * s2, bg.naturalHeight * s2);
     } else {
       var f = g.createLinearGradient(0, 0, 0, H);
       f.addColorStop(0, "#0A2733");
@@ -143,7 +175,7 @@
   var MOTES = (function () {
     var out = [], sd = 20260824;
     function r() { sd = (sd * 1103515245 + 12345) & 0x7fffffff; return sd / 0x7fffffff; }
-    for (var i = 0; i < 90; i++) {
+    for (var i = 0; i < 120; i++) {
       out.push({ x: r(), y: r(), v: 0.006 + r() * 0.022,
                  s: 0.6 + r() * 2.0, a: 0.10 + r() * 0.45, w: r() * 6.28 });
     }
@@ -154,7 +186,8 @@
     if (reduced) return;
     g.save();
     g.globalCompositeOperation = "lighter";
-    for (var i = 0; i < MOTES.length; i++) {
+    var mn = Math.min(Q.motes, MOTES.length);
+    for (var i = 0; i < mn; i++) {
       var m = MOTES[i];
       var y = (m.y - el * m.v) % 1; if (y < 0) y += 1;
       var x = m.x + Math.sin(el * 0.25 + m.w) * 0.012;
@@ -184,10 +217,10 @@
     halo.addColorStop(1.00, "rgba(180,220,246,0)");
     g.fillStyle = halo; g.fillRect(0, 0, W, H);
 
-    var ap = P(APEX);
+    var ap = Q.rays ? P(APEX) : null;
     if (ap && !reduced) {
-      for (var i = 0; i < 22; i++) {
-        var a = (i / 22) * TAU + el * 0.010;
+      for (var i = 0; i < Q.rays; i++) {
+        var a = (i / Q.rays) * TAU + el * 0.010;
         var wd = 0.010 + ((i * 37) % 11) / 11 * 0.034;
         var ln = far * (0.60 + ((i * 53) % 7) / 7 * 0.80);
         var al = 0.030 + ((i * 29) % 5) / 5 * 0.055;
@@ -205,7 +238,7 @@
   }
 
   function drawFloor(g) {
-    var N = 22, S = 84, EX = N * S;
+    var N = Q.floor, S = 84 * (22 / Q.floor), EX = N * S;
     g.lineWidth = 1;
     for (var i = -N; i <= N; i++) {
       var far = Math.abs(i) / N, al = (1 - far * far) * 0.30;
@@ -400,7 +433,10 @@
   function drawStructure(g, glow, el, mirror) {
     var all = [];
     FACES.forEach(function (f) {
-      f.cells.forEach(function (c) { all.push(c); });
+      f.cells.forEach(function (c) {
+        if (Q.cull && dot(c.n, sub(cam.eye, c.c)) <= 0) return;
+        all.push(c);
+      });
     });
     all.sort(function (a, b) {
       return len(sub(b.c, cam.eye)) - len(sub(a.c, cam.eye));
@@ -555,6 +591,7 @@
   }
 
   var last = 0, running = false;
+  var slowT = 0, slowN = 0, downgraded = false;
   function frame(now) {
     requestAnimationFrame(frame);
     var dt = Math.min(64, now - last) || 16; last = now;
@@ -562,6 +599,20 @@
 
     stepFlight(dt);
     var el = (now - t0) / 1000;
+
+    if (!downgraded) {
+      slowT += dt; slowN++;
+      if (slowN >= 45) {
+        if (slowT / slowN > 34) {
+          Q.bloom = [[7, 0.95]];
+          Q.wide = false; Q.mirror = false; Q.rays = 0;
+          Q.motes = Math.min(Q.motes, 20); Q.cull = true; Q.floor = 10;
+          dpr = Math.min(dpr, 1);
+          resize();
+        }
+        downgraded = true;
+      }
+    }
 
     if (!flight && !reduced) {
       if (!rest) rest = cam.eye;
@@ -576,17 +627,19 @@
     drawVoid(ctx, el);
     ctx.globalAlpha = fade;
 
-    ctx.save();
-    ctx.globalAlpha = fade * 0.16;
-    drawStructure(ctx, false, el, true);
-    ctx.restore();
-    ctx.save();
-    ctx.globalCompositeOperation = "destination-out";
-    var fg = ctx.createLinearGradient(0, H * 0.50, 0, H);
-    fg.addColorStop(0, "rgba(0,0,0,0)");
-    fg.addColorStop(1, "rgba(0,0,0,.92)");
-    ctx.fillStyle = fg; ctx.fillRect(0, H * 0.50, W, H * 0.50);
-    ctx.restore();
+    if (Q.mirror) {
+      ctx.save();
+      ctx.globalAlpha = fade * 0.16;
+      drawStructure(ctx, false, el, true);
+      ctx.restore();
+      ctx.save();
+      ctx.globalCompositeOperation = "destination-out";
+      var fg = ctx.createLinearGradient(0, H * 0.50, 0, H);
+      fg.addColorStop(0, "rgba(0,0,0,0)");
+      fg.addColorStop(1, "rgba(0,0,0,.92)");
+      ctx.fillStyle = fg; ctx.fillRect(0, H * 0.50, W, H * 0.50);
+      ctx.restore();
+    }
 
     drawFloor(ctx);
 
@@ -599,15 +652,18 @@
 
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
-    var PASSES = [[3, 0.95], [11, 0.85], [30, 0.70], [78, 0.55]];
+    var PASSES = Q.bloom;
     for (var bp = 0; bp < PASSES.length; bp++) {
       try { ctx.filter = "blur(" + PASSES[bp][0] + "px)"; } catch (e) {}
       ctx.globalAlpha = fade * PASSES[bp][1];
       ctx.drawImage(gb, 0, 0, W, H);
     }
-    try { ctx.filter = "blur(150px) saturate(2.2) hue-rotate(-8deg)"; } catch (e) {}
-    ctx.globalAlpha = fade * 0.5;
-    ctx.drawImage(gb, 0, 0, W, H);
+    if (Q.wide) {
+      try { ctx.filter = "blur(150px) saturate(2.2) hue-rotate(-8deg)"; } catch (e) {}
+      ctx.globalAlpha = fade * 0.5;
+      ctx.drawImage(gb, 0, 0, W, H);
+    }
+    ctx.filter = "none";
     ctx.restore();
 
     ctx.globalAlpha = fade;
@@ -642,11 +698,12 @@
   }
 
   function resize() {
-    dpr = Math.min(root.devicePixelRatio || 1, 2);
+    dpr = Math.min(root.devicePixelRatio || 1, Q.dpr);
     W = cv.clientWidth; H = cv.clientHeight;
     cv.width = Math.max(1, (W * dpr) | 0);
     cv.height = Math.max(1, (H * dpr) | 0);
     gb.width = cv.width; gb.height = cv.height;
+    bakePlate();
     if (running && !flight && (mode === "ground" || mode === "face")) {
       var t = (mode === "ground") ? camGround() : camFace();
       cam.eye = t.eye; cam.at = t.at; cam.fov = t.fov; rest = cam.eye;
@@ -699,6 +756,13 @@
     },
 
     contentAt: function (c) { return c ? content[key(c)] : null; },
+    pickAt: function (x, y) {
+      var c = pick(x, y);
+      return (c && content[key(c)]) ? c : null;
+    },
+    beamAt: function (x, y) {
+      return !!beamItem && !!beamQuad && inQuad(x, y, beamQuad);
+    },
     setBeam: function (item) {
       beamItem = item || null;
       if (beamItem) beamItem._cmp = "RAY";
